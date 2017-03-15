@@ -22,7 +22,7 @@
 			<div class="l-topmenu-welcome">
 				<label> 皮肤切换：</label>
 				<select id="skinSelect">
-					<option value="aqua">默认</option> 
+					<option value="aqua">默认</option>
 					<option value="silvery">Silvery</option>
 					<option value="gray">Gray</option>
 					<option value="gray2014">Gray2014</option>

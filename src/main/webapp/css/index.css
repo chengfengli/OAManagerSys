@@ -1,0 +1,10 @@
+/*¶¥²¿*/
+.l-topmenu{margin:0;padding:0;height:31px;line-height:31px;background:url('../Source/lib/images/top.jpg') repeat-x bottom;position:relative;border-top:1px solid #1D438B;}
+.l-topmenu-logo{color:#E7E7E7;padding-left:35px;line-height:26px;background:url('../Source/lib/images/topicon.gif') no-repeat 10px 5px;}
+.l-topmenu-welcome{position:absolute;height:24px;line-height:24px;right:30px;top:2px;color:#070A0C;}
+.l-topmenu-welcome a{color:#E7E7E7;text-decoration:none} 
+.body-gray2014 #framecenter{margin-top:3px;}
+.viewsourcelink {background:#B3D9F7;display:block; position:absolute; right:10px; top:3px; padding:6px 4px; color:#333; text-decoration:underline;}
+.viewsourcelink-over {background:#81C0F2;}
+.l-topmenu-welcome label {color:white;}
+#skinSelect {margin-right: 6px;}

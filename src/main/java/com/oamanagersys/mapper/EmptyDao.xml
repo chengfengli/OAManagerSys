@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="" >
+	
+	<!-- <resultMap type="com.mybatis.ssm.entity.Empty" id="emptyMap">
+		<result column="empty_id" jdbcType="INTEGER" property="emptyId"/>
+		<result column="empty_name" jdbcType="VARCHAR" property="emptyName"/>
+		<result column="empty_pwd" jdbcType="VARCHAR" property="emptyPwd"/>
+		<result column="empty_email" jdbcType="VARCHAR" property="emptyEmail"/>
+		<result column="empty_no" jdbcType="VARCHAR" property="emptyNo"/>
+	</resultMap>
+
+
+	<select id="selectEmpty" parameterType="com.mybatis.ssm.entity.Empty" resultType="java.lang.Integer">
+		SELECT count(*) FROM empty WHERE empty_no=#{emptyNo} and empty_pwd=#{emptyPwd}
+	</select>
+	
+	<select id="selectEmptyByName" resultMap="emptyMap">
+		SELECT * FROM empty WHERE empty_no=#{0} and empty_pwd=#{1}
+	</select> -->
+</mapper>

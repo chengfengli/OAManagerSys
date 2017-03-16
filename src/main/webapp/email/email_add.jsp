@@ -14,9 +14,41 @@
 	</head>
 
 	<body>
-		<input type="text" name="account" id="account" class="liger-textbox" />
+		<div id="toolbar"></div>
+		<table id="email_table" border="1">
+			<tr>
+				<td id="receive">收件人</td>
+				<td><input type="text" name="account" id="account" class="liger-textbox" /></td>
+				<td rowspan="5">
+					<ul id="contactslist">
+						<li>dsafsd</li>
+						<li>dsafsd</li>
+						<li>dsafsd</li>
+						<li>dsafsd</li>
+						<li>dsafsd</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td>抄送</td>
+				<td><input type="text" name="account" id="account" class="liger-textbox" /></td>
+			</tr>
+			<tr>
+				<td>主题</td>
+				<td><input type="text" name="account" id="account" class="liger-textbox" /></td>
+			</tr>
+			<tr>
+				<td>内容</td>
+				<td><input type="text" name="account" id="account" class="liger-textbox" /></td>
+			</tr>
+			<tr>
+				<td>附件</td>
+				<td><input type="text" name="account" id="account" class="liger-textbox" /></td>
+			</tr>
+		</table>
+		
 		<input type="button" id="loginBtn" value="登录" class="liger-button" />
-		<a href="ftp://222.211.83.217">ftp</a>
+		
 	</body>
 	<script src="<%=context %>/js/jquery-1.9.0.min.js"></script>
 	<script src="<%=context %>/Source/lib/ligerUI/js/ligerui.all.js"></script>

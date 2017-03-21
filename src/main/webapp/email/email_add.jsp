@@ -9,41 +9,63 @@
 		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/Aqua/css/ligerui-all.css" />
 		<link rel="stylesheet" type="text/css" href="<%=context %>/css/email/email_add.css" />
 		<script>
-			var path = <%=context %>;
+			var path = '<%=context %>';
 		</script>
 	</head>
 
 	<body>
 		<div id="toolbar"></div>
-		<table id="email_table" border="1">
+		<table id="email_table">
 			<tr>
 				<td id="receive">收件人</td>
-				<td><input type="text" name="account" id="account" class="liger-textbox" /></td>
-				<td rowspan="5">
-					<ul id="contactslist">
-						<li>dsafsd</li>
-						<li>dsafsd</li>
-						<li>dsafsd</li>
-						<li>dsafsd</li>
-						<li>dsafsd</li>
-					</ul>
+				<td>
+					<input type="text" name="account" id="account" class="liger-textbox" />
+				</td>
+				<td rowspan="5" valign="top" style="width:150px;">
+					<div id="accordion1" class="l-accordion-panel" ligeruiid="accordion1"> 
+         				<div class="l-accordion-header l-accordion-header-hasicon">
+         					<div class="l-accordion-header-inner">联系人</div>
+         				</div>
+         				<div class="l-accordion-content">
+				        	<ul id="contacts_lsit">
+			                	<li>列表一</li>
+			                    <li>列表二</li>
+			                    <li>列表三</li>
+			                    <li>列表四</li>
+			                    <li>列表五</li>
+			                    <li>列表一</li>
+			                    <li>列表二</li>
+			                    <li>列表三</li>
+			                    <li>列表四</li>
+			                    <li>列表五</li>
+				        	</ul>
+				        </div>
+				    </div>
 				</td>
 			</tr>
 			<tr>
 				<td>抄送</td>
-				<td><input type="text" name="account" id="account" class="liger-textbox" /></td>
+				<td>
+					<input type="text" name="chaosong" id="chaosong" class="liger-textbox" />
+				</td>
 			</tr>
 			<tr>
 				<td>主题</td>
-				<td><input type="text" name="account" id="account" class="liger-textbox" /></td>
+				<td>
+					<input type="text" name="subject" id="subject" class="liger-textbox" />
+				</td>
 			</tr>
 			<tr>
 				<td>内容</td>
-				<td><input type="text" name="account" id="account" class="liger-textbox" /></td>
+				<td>
+					<input type="text" name="content" id="content" class="liger-textbox" />
+				</td>
 			</tr>
 			<tr>
 				<td>附件</td>
-				<td><input type="text" name="account" id="account" class="liger-textbox" /></td>
+				<td>
+					<input type="text" name="enclosure" id="enclosure" class="liger-textbox" />
+				</td>
 			</tr>
 		</table>
 		

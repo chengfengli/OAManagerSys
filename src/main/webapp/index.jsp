@@ -11,7 +11,7 @@
 		<link rel="stylesheet" type="text/css" href="<%=context %>/css/index.css" />
 		<script>
 			//子菜单
-			var childMenu = ${childMenu}
+			var childMenu = ${childMenu};
 		</script>
 	</head>
 

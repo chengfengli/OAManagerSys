@@ -1,6 +1,7 @@
 #email_table{margin-top:50px;width:100%;}
 #email_table td{padding:3px 10px;}
 #email_table td:nth-child(1){text-align:right;}
-#email_table td input{width:100%;}
-#receive{width:100px;}
-#contactslist{list-style:none;width:200px;}
+#email_table td input{width:800px;}
+#receive{width:100px;}/*收件人*/
+#contacts_lsit li{padding:3px 10px;cursor:pointer;}
+#contacts_lsit li:hover{background-color:#AECAF0;}

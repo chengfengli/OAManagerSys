@@ -181,26 +181,26 @@ public class AnnotationUtil {
 				Method[] methods = cls.getDeclaredMethods();
 				fieldslist.add(methods);
 			}
-
+			
 			for (Method[] fields : fieldslist) {
-				for (Method field : fields) {
-					if (field.isAnnotationPresent(ChildMenu.class) == true) {
-						List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
-						ChildMenu childMenu = field.getAnnotation(ChildMenu.class);
-						Map<String, Object> map = new HashMap<String, Object>();
+				List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
+				Map<String, Object> map = new HashMap<String, Object>();
+				List<Map<String, String>> childList = new ArrayList<Map<String, String>>();
+				for (int i=0;i<fields.length;i++) {
+					if (fields[i].isAnnotationPresent(ChildMenu.class) == true) {
+						ChildMenu childMenu = fields[i].getAnnotation(ChildMenu.class);
 						map.put("text", childMenu.title());
 						
-						List<Map<String, String>> childList = new ArrayList<Map<String, String>>();
 						Map<String, String> childMap = new HashMap<String, String>();
 						childMap.put("url", context+childMenu.url());
 						childMap.put("text", childMenu.text());
 						childList.add(childMap);
-						
+						if(i<fields.length-1){
+							continue;
+						}
 						map.put("children", childList);
 						result.add(map);
 						title.put(childMenu.id(), result);
-						
-						
 					}
 				}
 			}

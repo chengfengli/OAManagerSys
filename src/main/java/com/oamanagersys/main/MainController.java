@@ -26,7 +26,7 @@ public class MainController {
 		List<Map<String, String>> result = AnnotationUtil.getClassName(list);
 		mav.addObject("lists", result);
 		//获取子菜单
-		List<String> childlist = AnnotationUtil.getClasses("com.oamanagersys");
+		List<String> childlist = AnnotationUtil.getClasses("com.oamanagersys.model");
 		Map<String,Object> childMap = AnnotationUtil.getClassName(childlist, request);
 		String str = JSON.toJSONString(childMap);
 		mav.addObject("childMenu", str);

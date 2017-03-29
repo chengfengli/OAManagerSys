@@ -42,6 +42,16 @@ public class EmailController {
 	@ChildMenu(id="personalissue",title="电子邮件",text="已发送箱",url="email/sendboxEmail")
 	@RequestMapping("/sendboxEmail")
 	public String sendboxEmail(){
-		return "email/email_sendbox";
+		return "email/email_sended";
 	}
+	/**
+	 * 详情页面
+	 * @return
+	 */
+	@RequestMapping("/details")
+	public String detailsEmail(){
+		return "email/email_details";
+	}
+	
+	
 }

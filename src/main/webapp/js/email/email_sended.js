@@ -3,8 +3,7 @@ function toolbar() {
 	var items = [];
 	items.push({ type: 'button', text: "详情",click: function () {details();}});
 	items.push({ type: 'button', text: "删除",click: function () {del();}});
-	items.push({ type: 'button', text: "转发",click: function () {forward();}});
-	items.push({ type: 'button', text: "标记位已读",click: function () {signreaded();}});
+	items.push({ type: 'button', text: "编辑",click: function () {forward();}});
 	$("#toolbar").ligerToolBar({
 		items: items
 	});
@@ -40,12 +39,8 @@ function del(){
 	parent.$.ligerDialog.warn('删除!');
 }
 /*转发*/
-function forward(){
-	parent.$.ligerDialog.warn('转发!');
-}
-/*标记为已读*/
-function signreaded(){
-	parent.$.ligerDialog.warn('已读!');
+function edit(){
+	parent.$.ligerDialog.warn('编辑!');
 }
 $(function(){
 	/*工具栏方法*/
@@ -53,17 +48,17 @@ $(function(){
 	/*初始化邮件列表*/
 	var array = [];
 	for(var i=1;i<=100;i++){
-		array.push({id:i,sender:"张三"+i,status:"已读"+i,subject:"测试"+i,receiveTime:"2017-02-15"});
+		array.push({id:i,receiveposition:"张三"+i,status:"已读"+i,subject:"测试"+i,addTime:"2017-02-15 10:24"});
 	}
 	var data={Rows:array};
 	$("#email_list").ligerGrid({
 		checkbox: true,
         columns: [
 	        { display: 'id', name: 'id',hide : true, },
-	        { display: '发件人', name: 'sender', width: "10%" },
+	        { display: '收件人', name: 'receiveposition', width: "10%" },
 	        { display: '状态', name: 'status', width: "10%" },
 	        { display: '主题', name: 'subject', width:"50%" },
-	        { display: '时间', name: 'receiveTime', width:"30%", }
+	        { display: '时间', name: 'addTime', width:"30%", }
         ], pageSize:10,
         data:data,
         width: '100%',height:'97%'

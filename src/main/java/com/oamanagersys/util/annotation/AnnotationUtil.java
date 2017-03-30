@@ -172,7 +172,7 @@ public class AnnotationUtil {
 	 * @return
 	 */
 	public static Map<String, Object> getClassName(List<String> list,HttpServletRequest request) {
-		String context = request.getContextPath()+"/";
+		//String context = request.getContextPath()+"/";
 		Map<String, Object> title = new HashMap<String, Object>();
 		try {
 			List<Method[]> fieldslist = new ArrayList<Method[]>();
@@ -192,7 +192,7 @@ public class AnnotationUtil {
 						map.put("text", childMenu.title());
 						
 						Map<String, String> childMap = new HashMap<String, String>();
-						childMap.put("url", context+childMenu.url());
+						childMap.put("url", childMenu.url());
 						childMap.put("text", childMenu.text());
 						childList.add(childMap);
 						if(i<fields.length-1){

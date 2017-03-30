@@ -14,3 +14,11 @@
 #email_table{margin-top:0px;width:100%;}
 #email_table td{padding:3px 10px;}
 #email_table td:nth-child(1){text-align:right;min-width:100px;}
+
+#contacts_lsit{max-height:460px;overflow-y:auto;}
+#contacts_lsit li{min-width:150px;padding:3px 10px;cursor:pointer;}
+#contacts_lsit li:hover{background-color:#AECAF0;}
+#contacts_lsit li img{float:right;}
+#content{height:345px;}
+input[type=file]{display:none;}
+#file_list li{padding:3px;}

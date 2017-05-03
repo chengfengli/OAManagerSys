@@ -14,7 +14,9 @@
 		<mybatis.version>3.2.6</mybatis.version>  
 		<!-- log4j日志文件管理包版本 -->  
 		<slf4j.version>1.7.7</slf4j.version>  
-		<log4j.version>1.2.17</log4j.version> 
+		<log4j.version>1.2.17</log4j.version>
+		<!-- json --> 
+		<jsonlib.version>2.4</jsonlib.version>
 	</properties>
 	
 	<dependencies>
@@ -148,8 +150,14 @@
         <dependency>  
             <groupId>org.codehaus.jackson</groupId>  
             <artifactId>jackson-mapper-asl</artifactId>  
-            <version>1.9.13</version>  
-        </dependency>  
+            <version>1.9.13</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.json-lib</groupId>
+            <artifactId>json-lib</artifactId>
+            <version>${jsonlib.version}</version>
+            <classifier>jdk15</classifier>
+        </dependency>
         <!-- 上传组件包 -->  
         <dependency>  
             <groupId>commons-fileupload</groupId>  

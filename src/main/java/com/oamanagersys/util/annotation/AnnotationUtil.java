@@ -1,7 +1,9 @@
 package com.oamanagersys.util.annotation;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -17,6 +19,8 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 import javax.servlet.http.HttpServletRequest;
+
+import net.sf.json.JSONObject;
 
 public class AnnotationUtil {
 	/**
@@ -164,80 +168,48 @@ public class AnnotationUtil {
 		}
 		return result;
 	}
-	
 	/**
-	 * 用在方法上，获取注解的属性值，并组装成ligerui加载树的数据格式
-	 * @param list
-	 * @param request
+	 * 读取菜单子json文件
+	 * @param path
 	 * @return
 	 */
-	public static Map<String, Object> getClassName(List<String> list,HttpServletRequest request) {
-		//String context = request.getContextPath()+"/";
-		Map<String, Object> title = new HashMap<String, Object>();
-		try {
-			List<Method[]> fieldslist = new ArrayList<Method[]>();
-			for (String str : list) {
-				Class<?> cls = Class.forName(str);
-				Method[] methods = cls.getDeclaredMethods();
-				fieldslist.add(methods);
-			}
-			
-			for (Method[] fields : fieldslist) {
-				List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
-				Map<String, Object> map = new HashMap<String, Object>();
-				List<Map<String, String>> childList = new ArrayList<Map<String, String>>();
-				for (int i=0;i<fields.length;i++) {
-					if (fields[i].isAnnotationPresent(ChildMenu.class) == true) {
-						ChildMenu childMenu = fields[i].getAnnotation(ChildMenu.class);
-						map.put("text", childMenu.title());
-						
-						Map<String, String> childMap = new HashMap<String, String>();
-						childMap.put("url", childMenu.url());
-						childMap.put("text", childMenu.text());
-						childList.add(childMap);
-						if(i<fields.length-1){
-							continue;
-						}
-						map.put("children", childList);
-						result.add(map);
-						title.put(childMenu.id(), result);
-					}
-				}
-			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		return title;
-	}
-	
-	/**
-	 * 用在方法上，只获取注解的url和text属性的值
-	 * @param list
-	 * @return
-	 */
-	public static List<Map<String, String>> getClassNameOnMethod(List<String> list) {
-		List<Map<String, String>> result = new ArrayList<Map<String, String>>();
-		try {
-			List<Method[]> fieldslist = new ArrayList<Method[]>();
-			for (String str : list) {
-				Class<?> cls = Class.forName(str);
-				Method[] methods = cls.getDeclaredMethods();
-				fieldslist.add(methods);
-			}
-			for (Method[] fields : fieldslist) {
-				for (Method field : fields) {
-					if (field.isAnnotationPresent(ChildMenu.class) == true) {
-						ChildMenu name = field.getAnnotation(ChildMenu.class);
-						Map<String, String> map = new HashMap<String, String>();
-						map.put("text", name.text());
-						map.put("url", name.url());
-						result.add(map);
-					}
-				}
-			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
+	public static Map<String,Object> ReadJsonFile(String path,HttpServletRequest request) { 
+        File file = new File(request.getServletContext().getRealPath("/")+path);
+        BufferedReader reader = null;  
+        String jsonstr = "";
+        try {  
+            reader = new BufferedReader(new FileReader(file));  
+            String tempString = null;  
+            while ((tempString = reader.readLine()) != null) {  
+            	jsonstr = jsonstr + tempString;  
+            }  
+            reader.close();  
+        } catch (IOException e) {  
+            e.printStackTrace();  
+        } finally {  
+            if (reader != null) {  
+                try {  
+                    reader.close();  
+                } catch (IOException e) { 
+                	e.printStackTrace();
+                }  
+            }
+        }
+        jsonstr = jsonstr.replaceAll("\\s+", "");
+        StringBuffer sb = new StringBuffer();
+		String scheme = request.getScheme();
+		String servletNmae = request.getServerName();
+		String servletPort = Integer.toString(request.getServerPort());
+		sb.append(scheme);
+		sb.append("://");
+		sb.append(servletNmae);
+		sb.append(":");
+		sb.append(servletPort);
+		sb.append("/");
+		sb.append("OAManagerSys/");
+        jsonstr = jsonstr.replaceAll("url='", "url='"+sb.toString());
+        JSONObject jb = JSONObject.fromObject(jsonstr);
+        Map<String,Object> map = (Map<String, Object>)jb;
+        return map;
+    }
 }

@@ -64,7 +64,7 @@ $(function(){
 			attribute: ['nodename', 'url'],
 			render : function(a){
 				if (!a.isnew) return a.text;
-				return '<a href="' + a.url + '" target="_blank">' + a.text + '</a>';
+				return '<a href="' + hostURL+a.url + '" target="_blank">' + a.text + '</a>';
 			},
 			onSelect: function (node)
 			{
@@ -88,18 +88,5 @@ $(function(){
 	tree = liger.get("tree1");
 	$("#pageloading").hide();
 	
-	var menus = [
-		{text:'个人事务',id:'personalissue',children:[
-			{text:'电子邮件',isexpand:false, children:[
-				{url:'demos/base/resizable.htm',text:'写信'},
-				{url:'demos/base/resizable.htm',text:'收件箱'},
-			]}
-		]}
-	];
-	//$("#menu").append('');
-	for(var i=0;i<menus.length;i++){
-		var html='<div title="'+menus[i].text+'" class="l-scroll"><ul id="'+menus[i].id+'" style="margin-top:3px;"></ul></div>';
-		
-	}
 });
 

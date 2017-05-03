@@ -7,7 +7,7 @@
 		<meta http-equiv="content-type" content="text/html;charset=utf-8">
 		<title>写短信</title>
 		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/Aqua/css/ligerui-all.css" />
-		<link rel="stylesheet" type="text/css" href="<%=context %>/css/msg/msg_add.css" />
+		<link rel="stylesheet" type="text/css" href="<%=context %>/css/interiormsg/msg_add.css" />
 		<link rel="stylesheet" type="text/css" href="<%=context %>/wangEditor/dist/css/wangEditor.min.css">
 		<script>
 			var path = '<%=context %>';
@@ -18,9 +18,9 @@
 		<div id="toolbar"></div>
 		<table id="email_table">
 			<tr>
-				<td id="receive">收件人</td>
+				<td id="receive">接收人</td>
 				<td>
-					<input type="text" name="account" id="account" class="liger-textbox" />
+					<input type="text" name="account" id="account" placeholder="输入接收人的内部短号" class="liger-textbox" />
 				</td>
 				<td rowspan="5" valign="top" style="width:150px;">
 					<div id="accordion1" class="l-accordion-panel" ligeruiid="accordion1"> 
@@ -122,35 +122,15 @@
 				</td>
 			</tr>
 			<tr>
-				<td>抄送</td>
-				<td>
-					<input type="text" name="chaosong" id="chaosong" class="liger-textbox" />
-				</td>
-			</tr>
-			<tr>
-				<td>主题</td>
-				<td>
-					<input type="text" name="subject" id="subject" class="liger-textbox" />
-				</td>
-			</tr>
-			<tr>
 				<td valign="top">内容</td>
 				<td valign="top">
 					<textarea name="content" id="content" class="l-textarea"></textarea>
-				</td>
-			</tr>
-			<tr>
-				<td valign="top">附件</td>
-				<td>
-					<input type="file" multiple="true" id="file" name="file" id="enclosure"/>
-					<input type="button" id="browse" value="选择..." class="liger-button" /><span id="file_count"></span>
-					<ul id="file_list"></ul>
 				</td>
 			</tr>
 		</table>
 	</body>
 	<script src="<%=context %>/js/jquery-1.9.0.min.js"></script>
 	<script src="<%=context %>/Source/lib/ligerUI/js/ligerui.all.js"></script>
-	<script src="<%=context %>/js/msg/msg_add.js"></script>
+	<script src="<%=context %>/js/interiormsg/msg_add.js"></script>
 	<script src="<%=context %>/wangEditor/dist/js/wangEditor.js"></script>
 </html>

@@ -1,3 +1,10 @@
+::-webkit-scrollbar{
+	width:5px;
+}
+::-webkit-scrollbar-thumb {
+	border-radius:5px;
+	background:#496FA0;
+}
 
 .l-topmenu{margin:0;padding:0;height:31px;line-height:31px;background:url('../Source/lib/images/top.jpg') repeat-x bottom;position:relative;border-top:1px solid #1D438B;}
 .l-topmenu-logo{color:#E7E7E7;padding-left:35px;line-height:26px;background:url('../Source/lib/images/topicon.gif') no-repeat 10px 5px;}

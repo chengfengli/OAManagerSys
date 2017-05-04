@@ -1,8 +1,7 @@
 ﻿/*工具栏*/
 function toolbar() {
 	var items = [];
-	items.push({text: "请假",icon:'add',click: function () {leave();}});
-	items.push({text: "销假",icon:'delete',click: function () {}});
+	items.push({text: "申请加班",icon:'add',click: function () {chuchai();}});
 	items.push({text: "撤销",icon:'candle',click: function () {}});
 	$("#toolbar").ligerToolBar({
 		items: items
@@ -10,13 +9,13 @@ function toolbar() {
 }
 
 /*请假*/
-function leave(){
+function chuchai(){
 	parent.$.ligerDialog.open({
-		title : '请假申请',
+		title : '加班申请',
 		width : 450,
 		height : 350,
 		allowClose : false,
-		url : path+'/leave/leave',
+		url : path+'/overtime/overtime',
 		buttons : [ 
 		    {
 				text : '申请',
@@ -45,7 +44,6 @@ $(function(){
 			startTime:"2017-05-15 09:00",
 			endTime:"2017-05-15 18:00",
 			longHours:8,
-			leaveType:"事假",
 			reason:"山东人大大大",
 			approve:"张三",
 			status:"同意"
@@ -59,7 +57,6 @@ $(function(){
 	        { display: '开始时间', name: 'startTime', width: "15%" },
 	        { display: '结束时间', name: 'endTime', width: "15%" },
 	        { display: '时长', name: 'longHours', width:"5%", },
-	        { display: '类型', name: 'leaveType', width:"10%", },
 	        { display: '事由', name: 'reason', width:"34%", },
 	        { display: '审批人', name: 'approve', width:"10%", },
 	        { display: '状态', name: 'status', width:"10%", }

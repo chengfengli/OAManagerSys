@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * 内部短信
+ * 内部短信 controller
  * 创建人： 李明
  * 时    间：2017年3月30日
  * 联    系：17310545652
@@ -21,7 +21,7 @@ public class MsgController {
 	@RequestMapping("/writerMsg")
 	public ModelAndView writerMsg(){
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("interiormsg/msg_add");
+		mav.setViewName("pages/interior_msg/interiormsg_add");
 		return mav;
 	}
 	
@@ -32,7 +32,29 @@ public class MsgController {
 	@RequestMapping("/sendedMsg")
 	public ModelAndView sendedMsg(){
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("interiormsg/msg_sended");
+		mav.setViewName("pages/interior_msg/interiormsg_sended");
+		return mav;
+	}
+	
+	/**
+	 * 已接收短息页面
+	 * @return
+	 */
+	@RequestMapping("/inboxMsg")
+	public ModelAndView inboxMsg(){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("pages/interior_msg/interiormsg_inbox");
+		return mav;
+	}
+	
+	/**
+	 * 草稿页面
+	 * @return
+	 */
+	@RequestMapping("/draftMsg")
+	public ModelAndView draftMsg(){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("pages/interior_msg/interiormsg_draft");
 		return mav;
 	}
 }

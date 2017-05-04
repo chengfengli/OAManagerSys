@@ -1,10 +1,10 @@
 ﻿/*工具栏*/
 function toolbar() {
 	var items = [];
-	items.push({ type: 'button', text: "详情",click: function () {details();}});
-	items.push({ type: 'button', text: "删除",click: function () {del();}});
-	items.push({ type: 'button', text: "转发",click: function () {forward();}});
-	items.push({ type: 'button', text: "标记位已读",click: function () {signreaded();}});
+	items.push({text: "详情",icon:'view',click: function () {details();}});
+	items.push({text: "删除",icon:'delete',click: function () {del();}});
+	items.push({text: "转发",icon:'outbox',click: function () {forward();}});
+	items.push({text: "标记为已读",icon:'ok',click: function () {signreaded();}});
 	$("#toolbar").ligerToolBar({
 		items: items
 	});
@@ -66,7 +66,7 @@ $(function(){
 	        { display: '时间', name: 'receiveTime', width:"30%", }
         ], pageSize:10,
         data:data,
-        width: '100%',height:'97%'
+        width: '100%',height:'99%'
 	});
 });
 

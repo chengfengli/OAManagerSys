@@ -1,7 +1,7 @@
 ﻿/*工具栏*/
 function toolbar() {
 	var items = [];
-	items.push({ type: 'button', text: "返回",click: function () {back()}});
+	items.push({text: "返回",icon:'back',click: function () {back()}});
 	$("#toolbar").ligerToolBar({
 		items: items
 	});

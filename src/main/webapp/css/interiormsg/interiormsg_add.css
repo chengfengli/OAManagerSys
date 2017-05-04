@@ -1,0 +1,31 @@
+@media(min-width:768px) {
+    #email_table td input{width:400px;}
+}
+@media(max-width:768px) {
+    #email_table td input{width:400px;}
+}
+@media(min-width:1000px) {
+    #email_table td input{width:800px;}
+}
+@media(min-width:1360px) {
+    #email_table td input{width:1020px;}
+}
+html,body,#email_table{
+	height:99%;
+}
+#email_table{margin-top:0px;width:100%;}
+#email_table tr:nth-child(1){
+	height:40px;
+}
+#email_table td{padding:3px 10px;}
+#email_table td:nth-child(1){text-align:right;min-width:100px;}
+
+#contacts_lsit{max-height:460px;overflow-y:auto;}
+#contacts_lsit li{min-width:150px;padding:3px 10px;cursor:pointer;}
+#contacts_lsit li:hover{background-color:#AECAF0;}
+#contacts_lsit li img{float:right;}
+#content{height:345px;}
+.shortNo{
+	margin-left:10px;
+}
+

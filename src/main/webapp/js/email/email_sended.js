@@ -1,9 +1,9 @@
 ﻿/*工具栏*/
 function toolbar() {
 	var items = [];
-	items.push({ type: 'button', text: "详情",click: function () {details();}});
-	items.push({ type: 'button', text: "删除",click: function () {del();}});
-	items.push({ type: 'button', text: "编辑",click: function () {forward();}});
+	items.push({text: "详情",icon:'view',click: function () {details();}});
+	items.push({text: "删除",icon:'delete',click: function () {del();}});
+	items.push({text: "编辑",icon:'edit',click: function () {forward();}});
 	$("#toolbar").ligerToolBar({
 		items: items
 	});
@@ -61,7 +61,7 @@ $(function(){
 	        { display: '时间', name: 'addTime', width:"30%", }
         ], pageSize:10,
         data:data,
-        width: '100%',height:'97%'
+        width: '100%',height:'99%'
 	});
 });
 

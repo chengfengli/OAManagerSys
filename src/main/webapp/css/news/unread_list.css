@@ -1,0 +1,13 @@
+@media(min-width:768px) {
+    #email_table td input{width:400px;}
+}
+@media(max-width:768px) {
+    #email_table td input{width:400px;}
+}
+@media(min-width:1000px) {
+    #email_table td input{width:800px;}
+}
+@media(min-width:1360px) {
+    #email_table td input{width:1020px;}
+}
+

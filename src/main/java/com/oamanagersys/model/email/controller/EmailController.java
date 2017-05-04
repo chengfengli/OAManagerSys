@@ -13,7 +13,7 @@ public class EmailController {
 	 */
 	@RequestMapping("/writerEmail")
 	public String writerEmail(){
-		return "email/email_add";
+		return "pages/email/email_add";
 	}
 	/**
 	 * 收件箱
@@ -21,7 +21,7 @@ public class EmailController {
 	 */
 	@RequestMapping("/InboxEmail")
 	public String InboxEmail(){
-		return "email/email_inbox";
+		return "pages/email/email_inbox";
 	}
 	/**
 	 * 草稿箱
@@ -29,7 +29,7 @@ public class EmailController {
 	 */
 	@RequestMapping("/draftboxEmail")
 	public String draftboxEmail(){
-		return "email/email_draft";
+		return "pages/email/email_draft";
 	}
 	/**
 	 * 已发送
@@ -37,7 +37,7 @@ public class EmailController {
 	 */
 	@RequestMapping("/sendboxEmail")
 	public String sendboxEmail(){
-		return "email/email_sended";
+		return "pages/email/email_sended";
 	}
 	/**
 	 * 详情页面
@@ -45,7 +45,7 @@ public class EmailController {
 	 */
 	@RequestMapping("/details")
 	public String detailsEmail(){
-		return "email/email_details";
+		return "pages/email/email_details";
 	}
 	
 	

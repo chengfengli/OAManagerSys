@@ -8,7 +8,7 @@
 		<title>分组列表</title>
 		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/Aqua/css/ligerui-all.css" />
 		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/ligerui-icons.css" />
-		<link rel="stylesheet" type="text/css" href="<%=context %>/css/communicate/grouplist.css" />
+		<link rel="stylesheet" type="text/css" href="<%=context %>/css/commons/commons.css" />
 		<script src="<%=context %>/js/jquery-1.9.0.min.js"></script>
 		<script src="<%=context %>/Source/lib/ligerUI/js/ligerui.all.js"></script>
 		<script>
@@ -19,6 +19,16 @@
 	<body>
 		<!-- 工具栏 -->
 		<div id="toolbar"></div>
+		<table id="querybar">
+			<tr>
+				<td class="title">组名</td>
+				<td><input type="text" name="name" id="name" class="liger-textbox" /></td>
+				<td class="title">创建时间</td>
+				<td><input type="text" name="startTime" id="startTime" placeholder="开始时间" /></td>
+				<td class="title"><input type="text" name="endTime" id="endTime" placeholder="结束时间" /></td>
+				<td><input type="button" value="查询" class="liger-button" /></td>
+			</tr>
+		</table>
 		<!-- 列表 -->
 		<div id="list"></div>
 	</body>

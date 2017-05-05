@@ -1,0 +1,9 @@
+#querybar{
+	position: absolute;
+    z-index: 10;
+    top: 0;
+    right: 50px;
+}
+.title{
+	padding:0 10px;
+}

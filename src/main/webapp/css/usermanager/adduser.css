@@ -1,5 +1,4 @@
 #table{margin:10px auto;}
 #table td{padding:5px 10px;}
+#table td input{width:300px;}
 #table td:nth-child(1){text-align:right;}
-textarea{min-height:150px;max-height:150px;min-width:300px;max-width:300px;}
-

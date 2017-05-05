@@ -8,7 +8,6 @@
 		<title>内部短信——收信箱</title>
 		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/Aqua/css/ligerui-all.css" />
 		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/ligerui-icons.css" />
-		<link rel="stylesheet" type="text/css" href="<%=context %>/css/interiormsg/interiormsg_inbox.css" />
 		<script>
 			var path = '<%=context %>';
 		</script>

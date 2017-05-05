@@ -8,7 +8,6 @@
 		<title>未读新闻</title>
 		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/Aqua/css/ligerui-all.css" />
 		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/ligerui-icons.css" />
-		<link rel="stylesheet" type="text/css" href="<%=context %>/css/news/unread_list.css" />
 		<script>
 			var path = '<%=context %>';
 		</script>

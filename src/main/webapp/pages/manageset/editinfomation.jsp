@@ -99,6 +99,19 @@
 					</td>
 				</tr>
 				<tr>
+					<td>婚姻状况</td>
+					<td>
+						<input type="text" name="marry" id="marry" placeholder="已婚、未婚、离异" class="liger-textbox" />
+					</td>
+					<td>有无子女</td>
+					<td>
+						<select name="child" id="child" class="liger-combobox">
+							<option value="1" selected="selected">有</option>
+							<option value="0">无</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
 					<td valign="top">个性签名</td>
 					<td>
 						<textarea name="signature" id="signature"></textarea>
@@ -106,6 +119,16 @@
 					<td valign="top">个人说明</td>
 					<td>
 						<textarea name="state" id="state"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td valign="top">兴趣爱好</td>
+					<td>
+						<textarea name="love" id="love"></textarea>
+					</td>
+					<td valign="top">禁忌</td>
+					<td>
+						<textarea name="taboo" id="taboo"></textarea>
 					</td>
 				</tr>
 			</table>

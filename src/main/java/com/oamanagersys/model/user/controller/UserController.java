@@ -15,16 +15,17 @@ public class UserController {
 	/**
 	 * 添加员工页面
 	 */
-	@RequestMapping("/addstaff")
-	public void addUser(){
-		
+	@RequestMapping("/adduser")
+	public ModelAndView addUser(){
+		ModelAndView mav = new ModelAndView("pages/usermanager/adduser");
+		return mav;
 	}
 	/**
 	 * 员工信息管理
 	 */
-	@RequestMapping("/staffInfor")
-	public void staffInfor(){
-		
+	@RequestMapping("/userlist")
+	public String staffInfor(){
+		return "pages/usermanager/userlist";
 	}
 	
 	/**

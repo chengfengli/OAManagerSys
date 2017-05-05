@@ -3,13 +3,18 @@ function toolbar() {
 	var items = [];
 	items.push({text:'保存',icon:'save',click: function () {}});
 	items.push({text:'重置',icon:'reset',click: function () {edit();}});
+	items.push({text:'返回',icon:'back',click: function () {back();}});
 	$("#toolbar").ligerToolBar({
 		items: items
 	});
 }
+/*返回*/
+function back(){
+	history.go(-1);
+}
 $(function(){
 	toolbar();
-	$("#birthDay").ligerDateEditor({width:200});
-	$("#politicsStatus,#sex,#child").ligerComboBox({width:200});
+	$("#entryTime").ligerDateEditor({width:300 });
+	$("#department,#onTrialTime").ligerComboBox({width:300});
 });
 

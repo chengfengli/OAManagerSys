@@ -5,7 +5,7 @@
 <html>
 	<head>
 		<meta http-equiv="content-type" content="text/html;charset=utf-8">
-		<title>请假登记</title>
+		<title>添加任务</title>
 		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/Aqua/css/ligerui-all.css" />
 		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/ligerui-icons.css" />
 		<link rel="stylesheet" type="text/css" href="<%=context %>/css/schedule/addtask.css" />
@@ -21,7 +21,7 @@
 			<tr>
 				<td>工作日期</td>
 				<td>
-					<input type="text" name="workDate" id="workDate" />
+					<input type="text" name="workDate" id="workDate" class="liger-textbox" />
 				</td>
 			</tr>
 			<tr>

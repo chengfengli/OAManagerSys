@@ -63,6 +63,7 @@ function del(){
 $(function(){
 	/*工具栏方法*/
 	toolbar();
+	$("#startTime,#endTime").ligerDateEditor();
 	/*初始数据*/
 	var array = [];
 	for(var i=1;i<=100;i++){

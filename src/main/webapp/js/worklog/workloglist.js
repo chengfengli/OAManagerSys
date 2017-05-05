@@ -2,7 +2,9 @@
 function toolbar() {
 	var items = [];
 	items.push({text:'新建日志',icon:'add',click: function () {addWorkLog();}});
+	items.push({ line:true });
 	items.push({text:'编辑',icon:'edit',click: function () {edit();}});
+	items.push({ line:true });
 	items.push({text:'删除',icon:'delete',click: function () {del();}});
 	$("#toolbar").ligerToolBar({
 		items: items
@@ -61,6 +63,7 @@ function del(){
 	parent.$.ligerDialog.warn('删除!');
 }
 $(function(){
+	$("#workDate").ligerDateEditor();
 	/*工具栏方法*/
 	toolbar();
 	/*初始数据*/

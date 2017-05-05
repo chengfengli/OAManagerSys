@@ -5,10 +5,10 @@
 <html>
 	<head>
 		<meta http-equiv="content-type" content="text/html;charset=utf-8">
-		<title>员工信息</title>
+		<title>请假登记</title>
 		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/Aqua/css/ligerui-all.css" />
 		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/ligerui-icons.css" />
-		<link rel="stylesheet" type="text/css" href="<%=context %>/css/commons/commons.css" />
+		<link rel="stylesheet" type="text/css" href="<%=context %>/css/usermanager/adduser.css" />
 		<script src="<%=context %>/js/jquery-1.9.0.min.js"></script>
 		<script src="<%=context %>/Source/lib/ligerUI/js/ligerui.all.js"></script>
 		<script>
@@ -17,19 +17,43 @@
 	</head>
 
 	<body>
-		<!-- 工具栏 -->
 		<div id="toolbar"></div>
-		<table id="querybar">
+		<table id="table">
 			<tr>
-				<td class="title">姓名</td>
-				<td><input type="text" name="name" id="name" class="liger-textbox" /></td>
-				<td class="title">入职时间</td>
-				<td><input type="text" name="entryTime" id="entryTime" /></td>
-				<td class="title">试用期</td>
+				<td>姓名</td>
+				<td>
+					<input type="text" name="name" id="name" class="liger-textbox" />
+				</td>
+			</tr>
+			<tr>
+				<td>入职时间</td>
+				<td>
+					<input type="text" name="entryTime" id="entryTime" />
+				</td>
+			</tr>
+			<tr>
+				<td>部门</td>
+				<td>
+					<select name="department" id="department" class="liger-combobox">
+						<option value="0" selected="selected">请选择</option>
+						<option value="1">研发部</option>
+						<option value="2">人事部</option>
+						<option value="3">销售部</option>
+						<option value="4">行政部</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>职位</td>
+				<td>
+					<input type="text" name="position" id="position" class="liger-textbox" />
+				</td>
+			</tr>
+			<tr>
+				<td>试用时间</td>
 				<td>
 					<select name="onTrialTime" id="onTrialTime" class="liger-combobox">
-						<option value="0" selected="selected">请选择</option>
-						<option value="1">一个月</option>
+						<option value="1" selected="selected">一个月</option>
 						<option value="2">二个月</option>
 						<option value="3">三个月</option>
 						<option value="4">四个月</option>
@@ -37,11 +61,8 @@
 						<option value="4">六个月</option>
 					</select>
 				</td>
-				<td class="title"><input type="button" value="查询" class="liger-button" /></td>
 			</tr>
 		</table>
-		<!-- 列表 -->
-		<div id="list"></div>
 	</body>
-	<script src="<%=context %>/js/usermanager/userlist.js"></script>
+	<script src="<%=context %>/js/usermanager/adduser.js"></script>
 </html>

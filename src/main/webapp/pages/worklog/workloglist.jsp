@@ -8,7 +8,7 @@
 		<title>工作日志</title>
 		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/Aqua/css/ligerui-all.css" />
 		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/ligerui-icons.css" />
-		<link rel="stylesheet" type="text/css" href="<%=context %>/css/worklog/workloglist.css" />
+		<link rel="stylesheet" type="text/css" href="<%=context %>/css/commons/commons.css" />
 		<script src="<%=context %>/js/jquery-1.9.0.min.js"></script>
 		<script src="<%=context %>/Source/lib/ligerUI/js/ligerui.all.js"></script>
 		<script>
@@ -19,6 +19,23 @@
 	<body>
 		<!-- 工具栏 -->
 		<div id="toolbar"></div>
+		<table id="querybar">
+			<tr>
+				<td class="title">日期</td>
+				<td><input type="text" name="workDate" id="workDate" /></td>
+				<td class="title">优先级</td>
+				<td>
+					<select id="priority" class="liger-combobox">
+						<option value="0" selected="selected">请选择</option>
+						<option value="1">一级</option>
+						<option value="2">二级</option>
+						<option value="3">三级</option>
+						<option value="4">四级</option>
+					</select>
+				</td>
+				<td class="title"><input type="button" value="查询" class="liger-button" /></td>
+			</tr>
+		</table>
 		<!-- 列表 -->
 		<div id="list"></div>
 	</body>

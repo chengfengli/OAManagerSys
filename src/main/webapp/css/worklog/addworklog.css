@@ -1,0 +1,6 @@
+#table{margin:10px auto;}
+#table td{padding:5px 10px;}
+#table td:nth-child(1){text-align:right;}
+#content{min-height:150px;max-height:150px;min-width:300px;max-width:300px;}
+input[type=file]{display:none;}
+#file_list li{padding:3px;}

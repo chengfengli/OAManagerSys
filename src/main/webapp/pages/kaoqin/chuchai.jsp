@@ -9,10 +9,8 @@
 		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/Aqua/css/ligerui-all.css" />
 		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/ligerui-icons.css" />
 		<link rel="stylesheet" type="text/css" href="<%=context %>/css/kaoqin/chuchai.css" />
-		<link rel="stylesheet" type="text/css" href="<%=context %>/wangEditor/dist/css/wangEditor.min.css">
 		<script src="<%=context %>/js/jquery-1.9.0.min.js"></script>
 		<script src="<%=context %>/Source/lib/ligerUI/js/ligerui.all.js"></script>
-		<script src="<%=context %>/wangEditor/dist/js/wangEditor.js"></script>
 		<script>
 			var path = '<%=context %>';
 		</script>
@@ -56,14 +54,6 @@
 					<textarea name="reason" id="reason" class="l-textarea"></textarea>
 				</td>
 			</tr>
-			<!-- <tr>
-				<td valign="top">附件</td>
-				<td>
-					<input type="file" multiple="true" id="file" name="file" id="enclosure"/>
-					<input type="button" id="browse" value="选择..." class="liger-button" /><span id="file_count"></span>
-					<ul id="file_list"></ul>
-				</td>
-			</tr> -->
 		</table>
 	</body>
 	<script src="<%=context %>/js/kaoqin/chuchai.js"></script>

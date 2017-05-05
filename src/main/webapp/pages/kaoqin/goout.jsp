@@ -9,21 +9,25 @@
 		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/Aqua/css/ligerui-all.css" />
 		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/ligerui-icons.css" />
 		<link rel="stylesheet" type="text/css" href="<%=context %>/css/kaoqin/goout.css" />
-		<link rel="stylesheet" type="text/css" href="<%=context %>/wangEditor/dist/css/wangEditor.min.css">
 		<script src="<%=context %>/js/jquery-1.9.0.min.js"></script>
 		<script src="<%=context %>/Source/lib/ligerUI/js/ligerui.all.js"></script>
-		<script src="<%=context %>/wangEditor/dist/js/wangEditor.js"></script>
 		<script>
 			var path = '<%=context %>';
 		</script>
 	</head>
 
 	<body>
-		<table id="email_table">
+		<table id="table">
 			<tr>
-				<td>外出时间</td>
+				<td>开始时间</td>
 				<td>
-					<input type="text" name="goouttime" id="goouttime" />
+					<input type="text" name="startTime" id="startTime" />
+				</td>
+			</tr>
+			<tr>
+				<td>结束时间</td>
+				<td>
+					<input type="text" name="endTime" id="endTime" />
 				</td>
 			</tr>
 			<tr>
@@ -42,19 +46,6 @@
 				<td valign="top">外出原因</td>
 				<td valign="top">
 					<textarea name="reason" id="reason" class="l-textarea"></textarea>
-				</td>
-			</tr>
-			<tr>
-				<td valign="top">附件</td>
-				<td>
-					<input type="file" multiple="true" id="file" name="file" id="enclosure"/>
-					<input type="button" id="browse" value="选择..." class="liger-button" /><span id="file_count"></span>
-					<ul id="file_list"></ul>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2" style="text-align:center;">
-					<input type="button" id="submit" value="申请外出" class="liger-button" />
 				</td>
 			</tr>
 		</table>

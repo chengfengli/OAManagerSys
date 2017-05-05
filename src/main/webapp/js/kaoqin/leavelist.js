@@ -14,7 +14,7 @@ function leave(){
 	parent.$.ligerDialog.open({
 		title : '请假申请',
 		width : 450,
-		height : 350,
+		height : 400,
 		allowClose : false,
 		url : path+'/leave/leave',
 		buttons : [ 

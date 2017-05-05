@@ -1,0 +1,5 @@
+#table tr td input{width:300px;}
+#table{margin:10px auto;}
+#table td{padding:5px 10px;}
+#table td:nth-child(1){text-align:right;}
+#address{min-height:50px;max-height:50px;min-width:300px;max-width:300px;}

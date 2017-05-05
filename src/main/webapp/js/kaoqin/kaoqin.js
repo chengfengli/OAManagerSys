@@ -24,7 +24,7 @@ $(function(){
 	for(var i=1;i<=31;i++){
 		array.push({
 			id:i,
-			date:"2017-01-02",
+			date:"2017-01-"+i,
 			week:"六",
 			officetime:"08:55",
 			closingtime:"18:10",
@@ -40,7 +40,6 @@ $(function(){
 	}
 	var data={Rows:array};
 	$("#list").ligerGrid({
-		checkbox: true,
         columns: [
 	        { display: 'id', name: 'id',hide : true, },
 	        { display: '日期', name: 'date', width: "9%" },
@@ -54,7 +53,7 @@ $(function(){
 	        { display: '早退时数', name: 'leaveearlyhours', width:"6%", },
 	        { display: '打卡记录', name: 'clockin', width:"9%", },
 	        { display: '缺勤描述', name: 'absenteeism', width:"27%", }
-        ], pageSize:10,
+        ], pageSize:31,
         data:data,
         width: '100%',height:'99%'
 	});

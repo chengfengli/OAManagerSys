@@ -23,4 +23,13 @@ public class GooutController {
 		mav.setViewName("pages/kaoqin/goout");
 		return mav;
 	}
+	
+	/**
+	 * 外出登记列表页面
+	 * @return
+	 */
+	@RequestMapping("/gooutlist")
+	public String GooutListPage(){
+		return "pages/kaoqin/gooutlist";
+	}
 }

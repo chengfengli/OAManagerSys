@@ -1,20 +1,6 @@
-@media(min-width:768px) {
-    #email_table td textarea{width:400px;}
-}
-@media(max-width:768px) {
-    #email_table td textarea{width:400px;}
-}
-@media(min-width:1000px) {
-    #email_table td textarea{width:800px;}
-}
-@media(min-width:1360px) {
-    #email_table td textarea{width:1020px;}
-}
-
-#email_table{margin-left:100px;margin-top:50px;}
-#email_table td{padding:5px 10px;}
-#email_table td:nth-child(1){text-align:right;min-width:80px;}
-
-#reason{height:345px;}
+#table{margin:10px auto;}
+#table td{padding:5px 10px;}
+#table td:nth-child(1){text-align:right;}
+#reason{min-height:150px;max-height:150px;min-width:300px;max-width:300px;}
 input[type=file]{display:none;}
 #file_list li{padding:3px;}

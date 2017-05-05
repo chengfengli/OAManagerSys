@@ -1,5 +1,7 @@
 ﻿$(function(){
-	$("#leavetime").ligerDateEditor({ showTime: true,labelAlign: 'left' });
+	$("#startTime").ligerDateEditor({ showTime: true,labelAlign: 'left',width:300 });
+	$("#endTime").ligerDateEditor({ showTime: true,labelAlign: 'left',width:300 });
+	$("#approve,#leaveType").ligerComboBox({width:300});
 	/*选择附件*/
 	$("#browse").click(function(){
 		$("#file").click();

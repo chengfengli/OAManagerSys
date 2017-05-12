@@ -8,6 +8,7 @@
 		<title>草稿箱</title>
 		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/Aqua/css/ligerui-all.css" />
 		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/ligerui-icons.css" />
+		<link rel="stylesheet" type="text/css" href="<%=context %>/css/commons/commons.css" />
 		<script>
 			var path = '<%=context %>';
 		</script>
@@ -16,6 +17,16 @@
 	<body>
 		<!-- 工具栏 -->
 		<div id="toolbar"></div>
+		<!-- 搜索栏 -->
+		<table id="querybar">
+			<tr>
+				<td class="title">发件人</td>
+				<td><input type="text" name="sender" id="sender" /></td>
+				<td class="title">时间</td>
+				<td><input type="text" name="time" id="time" /></td>
+				<td class="title"><input type="button" value="查询" class="liger-button" /></td>
+			</tr>
+		</table>
 		<!-- 邮件列表 -->
 		<div id="email_list"></div>
 		

@@ -1,4 +1,5 @@
-﻿/*工具栏*/
+﻿var manager;
+/*工具栏*/
 function toolbar() {
 	var items = [];
 	items.push({text: "详情",icon:'view',click: function () {details();}});
@@ -48,6 +49,7 @@ function signreaded(){
 	parent.$.ligerDialog.warn('已读!');
 }
 $(function(){
+	$("#time").ligerDateEditor();
 	/*工具栏方法*/
 	toolbar();
 	/*初始化邮件列表*/
@@ -56,11 +58,11 @@ $(function(){
 		array.push({id:i,sender:"张三"+i,status:"已读"+i,subject:"测试"+i,receiveTime:"2017-02-15"});
 	}
 	var data={Rows:array};
-	$("#email_list").ligerGrid({
+	var manager = $("#email_list").ligerGrid({
 		checkbox: true,
         columns: [
 	        { display: 'id', name: 'id',hide : true, },
-	        { display: '发件人', name: 'sender', width: "10%" },
+	        { display: '发件人', name: 'sender', width: "9%" },
 	        { display: '状态', name: 'status', width: "10%" },
 	        { display: '主题', name: 'subject', width:"50%" },
 	        { display: '时间', name: 'receiveTime', width:"30%", }

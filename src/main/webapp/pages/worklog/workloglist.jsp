@@ -19,6 +19,7 @@
 	<body>
 		<!-- 工具栏 -->
 		<div id="toolbar"></div>
+		<!-- 搜索栏 -->
 		<table id="querybar">
 			<tr>
 				<td class="title">日期</td>

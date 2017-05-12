@@ -12,7 +12,6 @@ function toolbar() {
 function details(){
 	location.href=path+"/email/details";
 	return;
-	var manager = $("#email_list").ligerGetGridManager();
 	var rows = manager.getCheckedRows();
 	if (rows && rows.length == 1) {
 		var ids = [];
@@ -31,6 +30,7 @@ function edit(){
 	parent.$.ligerDialog.warn('编辑!');
 }
 $(function(){
+	$("#time").ligerDateEditor();
 	/*工具栏方法*/
 	toolbar();
 	/*初始化邮件列表*/
@@ -39,12 +39,11 @@ $(function(){
 		array.push({id:i,receiveposition:"张三"+i,status:"已读"+i,subject:"测试"+i,addTime:"2017-02-15 10:24"});
 	}
 	var data={Rows:array};
-	$("#email_list").ligerGrid({
+	var manager=$("#email_list").ligerGrid({
 		checkbox: true,
         columns: [
 	        { display: 'id', name: 'id',hide : true, },
-	        { display: '收件人', name: 'receiveposition', width: "10%" },
-	        { display: '状态', name: 'status', width: "10%" },
+	        { display: '收件人', name: 'receiveposition', width: "9%" },
 	        { display: '主题', name: 'subject', width:"50%" },
 	        { display: '时间', name: 'addTime', width:"30%", }
         ], pageSize:10,

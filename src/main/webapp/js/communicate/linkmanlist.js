@@ -74,7 +74,7 @@ $(function(){
         columns: [
 	        { display: 'id', name: 'id',hide : true, },
 	        { display: '姓名', name: 'name', width: "5%" },
-	        { display: '分组', name: 'group', width: "10%" },
+	        { display: '分组', name: 'group', width: "9%" },
 	        { display: '住址', name: 'address', width:"35%" },
 	        { display: '手机', name: 'mobile', width:"10%", },
 	        { display: '电话', name: 'telephone', width:"10%", },

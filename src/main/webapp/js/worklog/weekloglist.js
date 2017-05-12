@@ -2,23 +2,21 @@
 /*工具栏*/
 function toolbar() {
 	var items = [];
-	items.push({text:'新建日报',icon:'add',click: function () {addWorkLog();}});
-	items.push({ line:true });
+	items.push({text:'新建周报',icon:'add',click: function () {addWorkLog();}});
 	items.push({text:'编辑',icon:'edit',click: function () {edit();}});
-	items.push({ line:true });
 	items.push({text:'删除',icon:'delete',click: function () {del();}});
 	$("#toolbar").ligerToolBar({
 		items: items
 	});
 }
-/*新建日志*/
+/*新建周报*/
 function addWorkLog(){
 	parent.$.ligerDialog.open({
-		title : '新建工作日报',
+		title : '新建工作日志',
 		width : 450,
 		height : 350,
 		allowClose : false,
-		url : path+'/worklog/addworklog',
+		url : path+'/worklog/addweeklog',
 		buttons : [ 
 		    {
 				text : '保存',
@@ -35,14 +33,14 @@ function addWorkLog(){
 		]
 	});
 }
-/*编辑日志*/
+/*编辑周报*/
 function edit(){
 	parent.$.ligerDialog.open({
-		title : '新建工作日报',
+		title : '编辑周报',
 		width : 450,
 		height : 350,
 		allowClose : false,
-		url : path+'/worklog/addworklog',
+		url : path+'/worklog/addweeklog',
 		buttons : [ 
 		    {
 				text : '保存',
@@ -69,9 +67,9 @@ function beginEdit(rowindex){
 	alert(data[rowindex].performance);
 }
 $(function(){
-	$("#workDate").ligerDateEditor({showTime:true});
 	/*工具栏方法*/
 	toolbar();
+	$("#weekDate").ligerDateEditor();
 	/*初始数据*/
 	var array = [];
 	for(var i=1;i<=100;i++){
@@ -84,16 +82,16 @@ $(function(){
 	        { display: 'id', name: 'id',hide : true, },
 	        { display: '工作内容', name: 'content', width:"45%" },
 	        { display: '优先级', name: 'priority', width:"10%", },
-	        { display: '完成时间', name: 'workDate', width: "19%" },
+	        { display: '完成日期', name: 'workDate', width: "19%" },
 	        { display: '完成情况', name: 'performance',editor: { type: 'text' }, width:"20%", },
 	        { display: '操作',isSort: false, width:"5%",render: function (rowdata, rowindex, value){
-	                var h = "";
-	                if (!rowdata._editing){
-	                    h += "<a href='javascript:beginEdit(" + rowindex + ")'>保存</a> ";
-	                }
-	                return h;
-	            }
-	        }
+                var h = "";
+                if (!rowdata._editing){
+                    h += "<a href='javascript:beginEdit(" + rowindex + ")'>保存</a> ";
+                }
+                return h;
+            }
+        }
         ], pageSize:10,
         enabledEdit: true,
         data:data,

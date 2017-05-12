@@ -34,6 +34,7 @@ function chuchai(){
 }
 
 $(function(){
+	$("#startTime,#endTime").ligerDateEditor();
 	/*工具栏方法*/
 	toolbar();
 	/*初始数据*/

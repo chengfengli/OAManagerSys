@@ -5,7 +5,7 @@
 <html>
 	<head>
 		<meta http-equiv="content-type" content="text/html;charset=utf-8">
-		<title>工作日志</title>
+		<title>工作日报</title>
 		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/Aqua/css/ligerui-all.css" />
 		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/ligerui-icons.css" />
 		<link rel="stylesheet" type="text/css" href="<%=context %>/css/commons/commons.css" />

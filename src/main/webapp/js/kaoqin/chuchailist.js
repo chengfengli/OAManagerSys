@@ -9,7 +9,7 @@ function toolbar() {
 	});
 }
 
-/*请假*/
+/*出差申请*/
 function chuchai(){
 	parent.$.ligerDialog.open({
 		title : '出差申请',
@@ -35,6 +35,7 @@ function chuchai(){
 }
 
 $(function(){
+	$("#startTime,#endTime").ligerDateEditor();
 	/*工具栏方法*/
 	toolbar();
 	/*初始数据*/

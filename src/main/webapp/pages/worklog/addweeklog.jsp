@@ -5,10 +5,10 @@
 <html>
 	<head>
 		<meta http-equiv="content-type" content="text/html;charset=utf-8">
-		<title>请假登记</title>
+		<title>添加工作周报</title>
 		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/Aqua/css/ligerui-all.css" />
 		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/ligerui-icons.css" />
-		<link rel="stylesheet" type="text/css" href="<%=context %>/css/commons/commons.css" />
+		<link rel="stylesheet" type="text/css" href="<%=context %>/css/worklog/addweeklog.css" />
 		<script src="<%=context %>/js/jquery-1.9.0.min.js"></script>
 		<script src="<%=context %>/Source/lib/ligerUI/js/ligerui.all.js"></script>
 		<script>
@@ -17,19 +17,32 @@
 	</head>
 
 	<body>
-		<!-- 工具栏 -->
-		<div id="toolbar"></div>
-		<!-- 搜索栏 -->
-		<table id="querybar">
+		<table id="table">
 			<tr>
-				<td class="title">时间:</td>
-				<td><input type="text" name="startTime" id="startTime" placeholder="开始时间" /></td>
-				<td class="title"><input type="text" name="endTime" id="endTime" placeholder="结束时间" /></td>
-				<td class="title"><input type="button" value="查询" class="liger-button" /></td>
+				<td>完成日期</td>
+				<td>
+					<input type="text" name="workDate" id="workDate" />
+				</td>
+			</tr>
+			<tr>
+				<td>优先等级</td>
+				<td>
+					<select id="priority" class="liger-combobox">
+						<option value="0" selected="selected">请选择</option>
+						<option value="1">一级</option>
+						<option value="2">二级</option>
+						<option value="3">三级</option>
+						<option value="4">四级</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td valign="top">工作内容</td>
+				<td valign="top">
+					<textarea name="content" id="content" class="l-textarea"></textarea>
+				</td>
 			</tr>
 		</table>
-		<!-- 请假等级列表 -->
-		<div id="list"></div>
 	</body>
-	<script src="<%=context %>/js/kaoqin/leavelist.js"></script>
+	<script src="<%=context %>/js/worklog/addweeklog.js"></script>
 </html>

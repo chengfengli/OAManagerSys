@@ -20,8 +20,9 @@
                 http://www.springframework.org/schema/aop/spring-aop.xsd
                 http://www.springframework.org/schema/util
                 http://www.springframework.org/schema/util/spring-util.xsd">
-	<!-- 自动扫描包 -->
-	<context:component-scan base-package="com.oamanagersys"/>
+	
+    <!-- 自动扫描包 -->
+	<context:component-scan base-package="com.oamanagersys.model.user"/>
 	
 	<!-- 引入数据连接配置文件 -->
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -62,7 +63,7 @@
 	
 	<!-- DAO接口所在的包 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.mybatis.ssm.dao"></property>
+		<property name="basePackage" value="com.oamanagersys.model"></property>
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
 	</bean>
 	

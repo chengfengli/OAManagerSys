@@ -43,6 +43,7 @@ function edit(){
 	parent.$.ligerDialog.warn('编辑!');
 }
 $(function(){
+	$("#issueTime").ligerDateEditor();
 	/*工具栏方法*/
 	toolbar();
 	/*模拟数据*/

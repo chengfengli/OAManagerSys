@@ -61,6 +61,7 @@ function del(){
 	parent.$.ligerDialog.warn('删除!');
 }
 $(function(){
+	$("#workDate").ligerDateEditor();
 	/*工具栏方法*/
 	toolbar();
 	/*初始数据*/

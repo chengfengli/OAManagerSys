@@ -5,7 +5,7 @@
 <html>
 	<head>
 		<meta http-equiv="content-type" content="text/html;charset=utf-8">
-		<title>请假登记</title>
+		<title>工作周报</title>
 		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/Aqua/css/ligerui-all.css" />
 		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/ligerui-icons.css" />
 		<link rel="stylesheet" type="text/css" href="<%=context %>/css/commons/commons.css" />
@@ -22,14 +22,23 @@
 		<!-- 搜索栏 -->
 		<table id="querybar">
 			<tr>
-				<td class="title">时间:</td>
-				<td><input type="text" name="startTime" id="startTime" placeholder="开始时间" /></td>
-				<td class="title"><input type="text" name="endTime" id="endTime" placeholder="结束时间" /></td>
+				<td class="title">日期:</td>
+				<td><input type="text" name="weekDate" id="weekDate" /></td>
+				<td class="title">优先级:</td>
+				<td>
+					<select id="priority" class="liger-combobox">
+						<option value="0" selected="selected">请选择</option>
+						<option value="1">一级</option>
+						<option value="2">二级</option>
+						<option value="3">三级</option>
+						<option value="4">四级</option>
+					</select>
+				</td>
 				<td class="title"><input type="button" value="查询" class="liger-button" /></td>
 			</tr>
 		</table>
-		<!-- 请假等级列表 -->
+		<!-- 列表 -->
 		<div id="list"></div>
 	</body>
-	<script src="<%=context %>/js/kaoqin/leavelist.js"></script>
+	<script src="<%=context %>/js/worklog/weekloglist.js"></script>
 </html>

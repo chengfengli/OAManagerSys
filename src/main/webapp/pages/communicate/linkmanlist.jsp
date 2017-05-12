@@ -8,6 +8,7 @@
 		<title>联系人</title>
 		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/Aqua/css/ligerui-all.css" />
 		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/ligerui-icons.css" />
+		<link rel="stylesheet" type="text/css" href="<%=context %>/css/commons/commons.css" />
 		<script src="<%=context %>/js/jquery-1.9.0.min.js"></script>
 		<script src="<%=context %>/Source/lib/ligerUI/js/ligerui.all.js"></script>
 		<script>
@@ -18,6 +19,26 @@
 	<body>
 		<!-- 工具栏 -->
 		<div id="toolbar"></div>
+		<!-- 搜索栏 -->
+		<table id="querybar">
+			<tr>
+				<td class="title">姓名:</td>
+				<td><input type="text" name="name" id="name" /></td>
+				<td class="title">组:</td>
+				<td>
+					<select id="group" class="liger-combobox">
+						<option value="0" selected="selected">请选择</option>
+						<option value="1">公司一</option>
+						<option value="2">公司二</option>
+						<option value="3">公司三</option>
+						<option value="4">公司四</option>
+					</select>
+				</td>
+				<td class="title">手机:</td>
+				<td><input type="text" name="phone" id="phone" /></td>
+				<td class="title"><input type="button" value="查询" class="liger-button" /></td>
+			</tr>
+		</table>
 		<!-- 列表 -->
 		<div id="list"></div>
 	</body>

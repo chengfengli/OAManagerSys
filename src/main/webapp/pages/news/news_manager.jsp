@@ -5,7 +5,7 @@
 <html>
 	<head>
 		<meta http-equiv="content-type" content="text/html;charset=utf-8">
-		<title>已发送箱</title>
+		<title>新闻管理</title>
 		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/Aqua/css/ligerui-all.css" />
 		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/ligerui-icons.css" />
 		<link rel="stylesheet" type="text/css" href="<%=context %>/css/commons/commons.css" />
@@ -20,18 +20,30 @@
 		<!-- 搜索栏 -->
 		<table id="querybar">
 			<tr>
-				<td class="title">发件人</td>
-				<td><input type="text" name="sender" id="sender" class="liger-textbox" /></td>
-				<td class="title">时间</td>
-				<td><input type="text" name="time" id="time" /></td>
+				<td class="title">格式</td>
+				<td>
+					<select id="format" name="format" class="liger-combobox">
+						<option value="common" selected="selected">普通</option>
+						<option value="MHT">MHT</option>
+					</select>
+				</td>
+				<td class="title">类型</td>
+				<td>
+					<select id="type" name="type" class="liger-combobox">
+						<option value="common" selected="selected">类型一</option>
+						<option value="MHT">类型二</option>
+						<option value="MHT">类型三</option>
+						<option value="MHT">类型四</option>
+					</select>
+				</td>
 				<td class="title"><input type="button" value="查询" class="liger-button" /></td>
 			</tr>
 		</table>
 		<!-- 已发邮件列表 -->
-		<div id="email_list"></div>
+		<div id="list"></div>
 		
 	</body>
 	<script src="<%=context %>/js/jquery-1.9.0.min.js"></script>
 	<script src="<%=context %>/Source/lib/ligerUI/js/ligerui.all.js"></script>
-	<script src="<%=context %>/js/email/email_sended.js"></script>
+	<script src="<%=context %>/js/news/news_manager.js"></script>
 </html>

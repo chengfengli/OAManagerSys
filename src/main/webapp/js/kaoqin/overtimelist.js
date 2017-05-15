@@ -2,6 +2,7 @@
 function toolbar() {
 	var items = [];
 	items.push({text: "申请加班",icon:'add',click: function () {chuchai();}});
+	items.push({ line:true });
 	items.push({text: "撤销",icon:'candle',click: function () {}});
 	$("#toolbar").ligerToolBar({
 		items: items

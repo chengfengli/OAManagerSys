@@ -21,7 +21,7 @@
 		<table id="querybar">
 			<tr>
 				<td class="title">发件人</td>
-				<td><input type="text" name="sender" id="sender" /></td>
+				<td><input type="text" name="sender" id="sender" class="liger-textbox" /></td>
 				<td class="title">时间</td>
 				<td><input type="text" name="time" id="time" /></td>
 				<td class="title"><input type="button" value="查询" class="liger-button" /></td>

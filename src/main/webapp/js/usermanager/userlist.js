@@ -2,20 +2,49 @@
 function toolbar() {
 	var items = [];
 	items.push({text:'设置权限',icon:'settings',click: function () {setting();}});
+	items.push({ line:true });
 	items.push({text:'编辑',icon:'edit',click: function () {edit();}});
+	items.push({ line:true });
 	items.push({text:'个人信息',icon:'information_personal',click: function () {}});
-	items.push({text:'删除',icon:'delete',click: function () {del();}});
+	items.push({ line:true });
+	items.push({text:'离职',icon:'delete',click: function () {leaveOffice();}});
+	items.push({ line:true });
+	items.push({text:'删除',icon:'delete1',click: function () {del();}});
 	$("#toolbar").ligerToolBar({
 		items: items
 	});
 }
 /*设置权限*/
 function setting(){
-	
+	$.ligerDialog.open({
+		title : '添加菜单',
+		width : 300,
+		height :300,
+		allowClose : false,
+		url : path+"/user/setpermission",
+		buttons : [
+			{
+				text : '保存',
+				onclick : function(item, dialog) {
+					dialog.close();
+				}
+			},
+		    {
+				text : '返回',
+				onclick : function(item, dialog) {
+					dialog.close();
+				}
+			}
+		]
+	});
 }
 /*编辑*/
 function edit(){
 	location.href=path+"/user/adduser";
+}
+/*leaveOffice*/
+function leaveOffice(){
+	
 }
 /*删除*/
 function del(){

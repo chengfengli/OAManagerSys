@@ -21,7 +21,7 @@
 		<table id="querybar">
 			<tr>
 				<td class="title">标题</td>
-				<td><input type="text" name="title" id="title" /></td>
+				<td><input type="text" name="title" id="title" class="liger-textbox" /></td>
 				<td class="title">格式</td>
 				<td>
 					<select id="format" name="format" class="liger-combobox">
@@ -43,7 +43,7 @@
 					</select>
 				</td>
 				<td class="title">发布人</td>
-				<td><input type="text" name="issueUser" id="issueUser" /></td>
+				<td><input type="text" name="issueUser" id="issueUser" class="liger-textbox" /></td>
 				<td class="title">发布时间:</td>
 				<td><input type="text" name="issueTime" id="issueTime" /></td>
 				<td class="title"><input type="button" value="查询" class="liger-button" /></td>

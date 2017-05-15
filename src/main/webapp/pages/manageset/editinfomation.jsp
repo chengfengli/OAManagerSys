@@ -101,13 +101,13 @@
 				<tr>
 					<td>婚姻状况</td>
 					<td>
-						<input type="text" name="marry" id="marry" placeholder="已婚、未婚、离异" class="liger-textbox" />
+						<input type="text" name="marry" id="marry" placeholder="已婚、未婚、离异、丧偶" class="liger-textbox" />
 					</td>
 					<td>有无子女</td>
 					<td>
 						<select name="child" id="child" class="liger-combobox">
-							<option value="1" selected="selected">有</option>
-							<option value="0">无</option>
+							<option value="1">有</option>
+							<option value="0" selected="selected">无</option>
 						</select>
 					</td>
 				</tr>

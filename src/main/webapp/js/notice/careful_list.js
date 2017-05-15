@@ -3,9 +3,9 @@ function toolbar() {
 	var items = [];
 	items.push({text: "详情",icon:'view',click: function () {details();}});
 	items.push({ line:true });
-	items.push({text: "删除",icon:'delete',click: function () {del();}});
+	items.push({text: "同意",icon:'ok',click: function () {ok();}});
 	items.push({ line:true });
-	items.push({text: "编辑",icon:'edit',click: function () {forward();}});
+	items.push({text: "拒绝",icon:'delete1',click: function () {delete1();}});
 	$("#toolbar").ligerToolBar({
 		items: items
 	});
@@ -27,43 +27,55 @@ function details(){
 					height : 500,
 					allowClose : false,
 					url : '${_ctx}/bap/message/detailedMessage?url=replyPage&messageId='+ ids[0],
-					buttons : [ {
-						text : '返回',
-						onclick : function(item, dialog) {
-							dialog.close();
+					buttons : [ 
+					    {
+							text : '同意',
+							onclick : function(item, dialog) {
+								dialog.close();
+							}
+						},
+						{
+							text : '拒绝',
+							onclick : function(item, dialog) {
+								dialog.close();
+							}
+						},
+						{
+							text : '关闭',
+							onclick : function(item, dialog) {
+								dialog.close();
+							}
 						}
-					} ]
+					  ]
 				});
 	}
 }
-/*删除*/
-function del(){
+/*同意*/
+function ok(){
 	parent.$.ligerDialog.warn('删除!');
 }
-/*转发*/
-function edit(){
-	parent.$.ligerDialog.warn('编辑!');
+/*拒绝*/
+function delete1(){
+	parent.$.ligerDialog.warn('拒绝!');
 }
 $(function(){
-	$("#issueTime").ligerDateEditor();
 	/*工具栏方法*/
 	toolbar();
 	/*初始化邮件列表*/
 	var array = [];
 	for(var i=1;i<=100;i++){
-		array.push({id:i,title:"张三"+i,format:'MHT格式',type:'aadfa',content:"短信内容"+i,issueUser:"张三",issueTime:"2017-02-15 10:24"});
+		array.push({id:i,applyName:"张三"+i,reason:'阿达啊饿啊啊',startTime:'2017-05-01',endTime:"2017-05-02",status:"待审"});
 	}
 	var data={Rows:array};
 	$("#list").ligerGrid({
 		checkbox: true,
         columns: [
 	        { display: 'id', name: 'id',hide : true, },
-	        { display: '标题', name: 'title', width: "10%" },
-	        { display: '格式', name: 'format', width: "10%" },
-	        { display: '类型', name: 'type', width:"10%", },
-	        { display: '内容', name: 'content', width:"40%", },
-	        { display: '发布人', name: 'issueUser', width:"10%", },
-	        { display: '发布日期', name: 'issueTime', width:"19%", }
+	        { display: '申请人', name: 'applyName', width: "10%" },
+	        { display: '事由', name: 'reason', width: "50%" },
+	        { display: '开始时间', name: 'startTime', width:"10%", },
+	        { display: '结束时间', name: 'endTime', width:"10%", },
+	        { display: '状态', name: 'status', width:"10%", }
         ], pageSize:10,
         data:data,
         width: '100%',height:'99%'

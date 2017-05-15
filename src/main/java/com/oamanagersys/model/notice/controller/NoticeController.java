@@ -28,4 +28,31 @@ public class NoticeController {
 		mav.setViewName("pages/notice/unread_list");
 		return mav;
 	}
+	
+	/**
+	 * 待审通知页面
+	 * @return
+	 */
+	@RequestMapping("/careful_list")
+	public String carefulMsg(){	
+		return "pages/notice/careful_list";
+	}
+	
+	/**
+	 * 新增通知页面
+	 * @return
+	 */
+	@RequestMapping("/add_notice")
+	public String addNotice(){	
+		return "pages/notice/add_notice";
+	}
+	
+	/**
+	 * 通知管理页面
+	 * @return
+	 */
+	@RequestMapping("/notice_manager")
+	public String noticeManager(){	
+		return "pages/notice/notice_manager";
+	}
 }

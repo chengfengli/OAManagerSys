@@ -2,7 +2,9 @@
 function toolbar() {
 	var items = [];
 	items.push({text: "外出",icon:'add',click: function () {leave();}});
+	items.push({ line:true });
 	items.push({text: "销假",icon:'delete',click: function () {}});
+	items.push({ line:true });
 	items.push({text: "撤销",icon:'candle',click: function () {}});
 	$("#toolbar").ligerToolBar({
 		items: items

@@ -5,29 +5,36 @@
 <html>
 	<head>
 		<meta http-equiv="content-type" content="text/html;charset=utf-8">
-		<title>所有公告</title>
+		<title>写信</title>
 		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/Aqua/css/ligerui-all.css" />
 		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/ligerui-icons.css" />
-		<link rel="stylesheet" type="text/css" href="<%=context %>/css/commons/commons.css" />
+		<link rel="stylesheet" type="text/css" href="<%=context %>/css/notice/add_notice.css" />
+		<link rel="stylesheet" type="text/css" href="<%=context %>/wangEditor/dist/css/wangEditor.min.css">
 		<script>
 			var path = '<%=context %>';
 		</script>
 	</head>
 
 	<body>
-		<!-- 工具栏 -->
 		<div id="toolbar"></div>
-		<!-- 搜索栏 -->
-		<table id="querybar">
+		<table id="table">
 			<tr>
-				<td class="title">格式</td>
+				<td id="receive">标题</td>
+				<td>
+					<input type="text" name="title" id="title" class="liger-textbox" />
+				</td>
+			</tr>
+			<tr>
+				<td>格式</td>
 				<td>
 					<select id="format" name="format" class="liger-combobox">
 						<option value="common" selected="selected">普通</option>
 						<option value="MHT">MHT</option>
 					</select>
 				</td>
-				<td class="title">类型</td>
+			</tr>
+			<tr>
+				<td>类型</td>
 				<td>
 					<select id="type" name="type" class="liger-combobox">
 						<option value="common" selected="selected">类型一</option>
@@ -36,14 +43,25 @@
 						<option value="MHT">类型四</option>
 					</select>
 				</td>
-				<td class="title"><input type="button" value="查询" class="liger-button" /></td>
+			</tr>
+			<tr>
+				<td valign="top">内容</td>
+				<td valign="top">
+					<textarea name="content" id="content" class="l-textarea"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td valign="top">附件</td>
+				<td>
+					<input type="file" multiple="true" id="file" name="file" id="enclosure"/>
+					<input type="button" id="browse" value="选择..." class="liger-button" /><span id="file_count"></span>
+					<ul id="file_list"></ul>
+				</td>
 			</tr>
 		</table>
-		<!-- 已发邮件列表 -->
-		<div id="list"></div>
-		
 	</body>
 	<script src="<%=context %>/js/jquery-1.9.0.min.js"></script>
 	<script src="<%=context %>/Source/lib/ligerUI/js/ligerui.all.js"></script>
-	<script src="<%=context %>/js/notice/all_list.js"></script>
+	<script src="<%=context %>/js/notice/add_notice.js"></script>
+	<script src="<%=context %>/wangEditor/dist/js/wangEditor.js"></script>
 </html>

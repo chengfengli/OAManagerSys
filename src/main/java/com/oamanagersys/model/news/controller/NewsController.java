@@ -28,4 +28,24 @@ public class NewsController {
 		mav.setViewName("pages/news/unread_list");
 		return mav;
 	}
+	
+	/**
+	 * 添加/编辑新闻页面
+	 * @return
+	 */
+	@RequestMapping("/add_news")
+	public ModelAndView addNews(){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("pages/news/add_news");
+		return mav;
+	}
+	
+	/**
+	 * 新闻管理页面
+	 * @return
+	 */
+	@RequestMapping("/news_manager")
+	public String newsManager(){
+		return "pages/news/news_manager";
+	}
 }

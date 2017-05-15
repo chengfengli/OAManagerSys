@@ -2,6 +2,7 @@
 function toolbar() {
 	var items = [];
 	items.push({text:'保存',icon:'save',click: function () {}});
+	items.push({ line:true });
 	items.push({text:'重置',icon:'reset',click: function () {edit();}});
 	$("#toolbar").ligerToolBar({
 		items: items

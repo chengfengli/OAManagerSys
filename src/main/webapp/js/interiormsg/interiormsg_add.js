@@ -2,6 +2,7 @@
 function toolbar() {
 	var items = [];
 	items.push({text: "发送",icon: 'up',click: function () {send()}});
+	items.push({ line:true });
 	items.push({text: "存草稿",icon: 'pager',click: function () {}});
 	$("#toolbar").ligerToolBar({
 		items: items

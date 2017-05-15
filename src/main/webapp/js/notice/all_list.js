@@ -2,7 +2,9 @@
 function toolbar() {
 	var items = [];
 	items.push({text: "详情",icon:'view',click: function () {details();}});
+	items.push({ line:true });
 	items.push({text: "删除",icon:'delete',click: function () {del();}});
+	items.push({ line:true });
 	items.push({text: "编辑",icon:'edit',click: function () {forward();}});
 	$("#toolbar").ligerToolBar({
 		items: items

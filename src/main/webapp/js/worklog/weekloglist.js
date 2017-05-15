@@ -3,7 +3,9 @@
 function toolbar() {
 	var items = [];
 	items.push({text:'新建周报',icon:'add',click: function () {addWorkLog();}});
+	items.push({ line:true });
 	items.push({text:'编辑',icon:'edit',click: function () {edit();}});
+	items.push({ line:true });
 	items.push({text:'删除',icon:'delete',click: function () {del();}});
 	$("#toolbar").ligerToolBar({
 		items: items

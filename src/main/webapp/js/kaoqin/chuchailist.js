@@ -2,7 +2,9 @@
 function toolbar() {
 	var items = [];
 	items.push({text: "申请出差",icon:'add',click: function () {chuchai();}});
+	items.push({ line:true });
 	items.push({text: "出差归来",icon:'delete',click: function () {}});
+	items.push({ line:true });
 	items.push({text: "撤销",icon:'candle',click: function () {}});
 	$("#toolbar").ligerToolBar({
 		items: items

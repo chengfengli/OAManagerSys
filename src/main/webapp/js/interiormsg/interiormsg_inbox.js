@@ -2,8 +2,11 @@
 function toolbar() {
 	var items = [];
 	items.push({text: "详情",icon:'view',click: function () {details();}});
+	items.push({ line:true });
 	items.push({text: "删除",icon:'delete',click: function () {del();}});
+	items.push({ line:true });
 	items.push({text: "转发",icon:'outbox',click: function () {forward();}});
+	items.push({ line:true });
 	items.push({text: "标记位已读",icon:'ok',click: function () {signreaded();}});
 	$("#toolbar").ligerToolBar({
 		items: items

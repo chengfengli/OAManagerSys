@@ -2,6 +2,7 @@
 function toolbar() {
 	var items = [];
 	items.push({text: "签到",icon:'in',click: function () {signin();}});
+	items.push({ line:true });
 	items.push({text: "签退",icon:'out',click: function () {signout();}});
 	$("#toolbar").ligerToolBar({
 		items: items

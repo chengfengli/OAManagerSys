@@ -8,7 +8,7 @@
 		<title>请假登记</title>
 		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/Aqua/css/ligerui-all.css" />
 		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/ligerui-icons.css" />
-		<link rel="stylesheet" type="text/css" href="<%=context %>/css/usermanager/setpermission.css" />
+		<link rel="stylesheet" type="text/css" href="<%=context %>/css/usermanager/setrows.css" />
 		<script src="<%=context %>/js/jquery-1.9.0.min.js"></script>
 		<script src="<%=context %>/Source/lib/ligerUI/js/ligerui.all.js"></script>
 		<script>
@@ -18,14 +18,21 @@
 	</head>
 
 	<body>
-		<c:forEach items="${lists }" var="list">
-			<div id="${list.id }">
-				<div class="show"></div>
-				<div class="hide"></div>
-				<input type="checkbox" data-id="${list.id }" class="liger-checkbox" />${list.text }<br>
-				<div class="checklist"></div>
-			</div>
-		</c:forEach>
+		<table id="table">
+			<tr>
+				<td valign="top">
+					<c:forEach items="${lists }" var="list">
+						<input type="checkbox" id="${list.id }" data-text="${list.text }" class="liger-checkbox" />${list.text }<br>
+					</c:forEach>
+				</td>
+				<td>
+					<input id="key" type="hidden" value="" /><input id="text" type="hidden" value="" />
+					<textarea></textarea>
+				</td>
+			</tr>
+		</table>
+		<input type="button" id="add" value="添加" class="liger-button" />
+		<div id="error"></div>
 	</body>
-	<script src="<%=context %>/js/usermanager/setpermission.js"></script>
+	<script src="<%=context %>/js/usermanager/setrows.js"></script>
 </html>

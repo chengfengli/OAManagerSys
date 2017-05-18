@@ -1,0 +1,4 @@
+#table{margin:10px auto;}
+#table td{padding:5px 10px;}
+#table td input{width:300px;}
+#table td:nth-child(1){text-align:right;}

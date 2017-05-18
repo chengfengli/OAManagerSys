@@ -177,10 +177,10 @@ public class AnnotationUtil {
 	 */
 	public static Map<String,Object> ReadJsonFile(String path,HttpServletRequest request) { 
         File file = new File(request.getServletContext().getRealPath("/")+path);
-        BufferedReader reader = null;  
+        BufferedReader reader = null;
         String jsonstr = "";
         try {  
-            reader = new BufferedReader(new FileReader(file));  
+            reader = new BufferedReader(new FileReader(file));
             String tempString = null;  
             while ((tempString = reader.readLine()) != null) {  
             	jsonstr = jsonstr + tempString;  
@@ -198,34 +198,37 @@ public class AnnotationUtil {
             }
         }
         jsonstr = jsonstr.replaceAll("\\s+", "");
-        StringBuffer sb = new StringBuffer();
-		String scheme = request.getScheme();
-		String servletNmae = request.getServerName();
-		String servletPort = Integer.toString(request.getServerPort());
-		sb.append(scheme);
-		sb.append("://");
-		sb.append(servletNmae);
-		sb.append(":");
-		sb.append(servletPort);
-		sb.append("/");
-		sb.append("OAManagerSys/");
-        jsonstr = jsonstr.replaceAll("url='", "url='"+sb.toString());
+        if(request!=null){
+	        StringBuffer sb = new StringBuffer();
+			String scheme = request.getScheme();
+			String servletNmae = request.getServerName();
+			String servletPort = Integer.toString(request.getServerPort());
+			sb.append(scheme);
+			sb.append("://");
+			sb.append(servletNmae);
+			sb.append(":");
+			sb.append(servletPort);
+			sb.append("/");
+			sb.append("OAManagerSys/");
+	        jsonstr = jsonstr.replaceAll("url='", "url='"+sb.toString());
+        }
         JSONObject jb = JSONObject.fromObject(jsonstr);
         Map<String,Object> map = (Map<String, Object>)jb;
         return map;
     }
 	
+	
 	/**
-	 * 读取菜单子json文件
+	 * 设置权限 读取菜单子json文件
 	 * @param path
 	 * @return
 	 */
-	public static String File(String path,HttpServletRequest request) { 
+	public static Map<String,Object> setJsonFile(String path,HttpServletRequest request) { 
         File file = new File(request.getServletContext().getRealPath("/")+path);
-        BufferedReader reader = null;  
+        BufferedReader reader = null;
         String jsonstr = "";
         try {  
-            reader = new BufferedReader(new FileReader(file));  
+            reader = new BufferedReader(new FileReader(file));
             String tempString = null;  
             while ((tempString = reader.readLine()) != null) {  
             	jsonstr = jsonstr + tempString;  
@@ -243,19 +246,9 @@ public class AnnotationUtil {
             }
         }
         jsonstr = jsonstr.replaceAll("\\s+", "");
-        StringBuffer sb = new StringBuffer();
-		String scheme = request.getScheme();
-		String servletNmae = request.getServerName();
-		String servletPort = Integer.toString(request.getServerPort());
-		sb.append(scheme);
-		sb.append("://");
-		sb.append(servletNmae);
-		sb.append(":");
-		sb.append(servletPort);
-		sb.append("/");
-		sb.append("OAManagerSys/");
-        jsonstr = jsonstr.replaceAll("url='", "url='"+sb.toString());
         System.out.println(jsonstr);
-        return jsonstr;
+        JSONObject jb = JSONObject.fromObject(jsonstr);
+        Map<String,Object> map = (Map<String, Object>)jb;
+        return map;
     }
 }

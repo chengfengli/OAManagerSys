@@ -54,20 +54,4 @@ public class UserController {
 		return mav;
 	}
 	
-	/**
-	 * 权限
-	 */
-	@RequestMapping("/setpermission")
-	public ModelAndView setPermission(HttpServletRequest request){
-		ModelAndView mav = new ModelAndView("pages/usermanager/setpermission");
-		//获取顶级菜单
-		List<String> list = AnnotationUtil.getClasses("com.oamanagersys.menu");
-		List<Map<String, String>> result = AnnotationUtil.getClassName(list);
-		mav.addObject("lists", result);
-		//获取子菜单
-		Map<String,Object> childMap = AnnotationUtil.ReadJsonFile("./WEB-INF/classes/childmenu.properties",request);
-		String str = JSON.toJSONString(childMap);
-		mav.addObject("childMenu", str);
-		return mav;
-	}
 }

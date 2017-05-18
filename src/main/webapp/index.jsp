@@ -26,12 +26,12 @@
 		<div id="topmenu" class="l-topmenu">
 			<div class="l-topmenu-logo">OA管理系统</div>
 			<div class="l-topmenu-welcome">
-				<label> 皮肤切换：</label>
-				<select id="skinSelect">
-					<option value="aqua">默认</option>
-					<option value="silvery">Silvery</option>
-					<option value="gray">Gray</option>
-					<option value="gray2014">Gray2014</option>
+				<label>角色</label>
+				<select id="role">
+					<option value="aqua">超级管理员</option>
+					<option value="silvery">总经理</option>
+					<option value="gray">组长</option>
+					<option value="gray2014">销售经理</option>
 				</select>
 				<a href="javascript:void(0)" id="exit">退出</a> 
 			</div> 

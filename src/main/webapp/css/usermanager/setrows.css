@@ -1,0 +1,29 @@
+html,body{height:99%;}
+tr td:nth-child(1){
+	border: 1px solid #E5EFFE;
+    padding: 5px 10px;
+    line-height: 22px;
+    width:130px;
+}
+tr td:nth-child(2){
+	border: 1px solid #E5EFFE;
+    padding: 5px 10px;
+    height:100%;
+}
+table{
+	height:500px;
+	width:100%;
+}
+textarea{
+	height:100%;
+	width:100%;
+}
+#add{
+	float:right;
+	margin-right:10px;
+}
+#error{
+	color:red;
+	font-size:12px;
+	text-align:center;
+}

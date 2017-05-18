@@ -15,3 +15,11 @@
 .viewsourcelink-over {background:#81C0F2;}
 .l-topmenu-welcome label {color:white;}
 #skinSelect {margin-right: 6px;}
+#marquee{
+	position: absolute;
+    width: 77%;
+    top: 0;
+    left: 120px;
+    height: 26px;
+    color:#fff;
+}

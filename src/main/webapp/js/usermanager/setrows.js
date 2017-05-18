@@ -13,12 +13,14 @@ $(function(){
 		var isChick=$(this).prop("checked");
 		var id=$(this).prop("id");
 		var text=$(this).data("text");
-		$("#key").val(id);
-		$("#text").val(text);
 		if(isChick){
+			$("#key").val(id);
+			$("#text").val(text);
 			$("textarea").val(JSON.stringify(childMenu[id],null, 4));
 		}else{
-			$("textarea").val("");
+			if(id==$("#key").val()){
+				$("textarea").val("");
+			}
 		}
 	});
 	/*添加*/

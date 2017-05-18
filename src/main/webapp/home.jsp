@@ -7,7 +7,7 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html;charset=utf-8">
 		<title>主页</title>
-
+		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/Aqua/css/ligerui-all.css" />
 		<script>
 			
 		</script>
@@ -16,4 +16,7 @@
 	<body>
 		<h1>主页</h1>
 	</body>
+	<script src="<%=context %>/js/jquery-1.9.0.min.js"></script>
+	<script src="<%=context %>/Source/lib/ligerUI/js/ligerui.all.js"></script>
+	<script src="<%=context %>/js/home.js"></script>
 </html>

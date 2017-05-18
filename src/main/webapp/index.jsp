@@ -25,11 +25,14 @@
 		<!--顶部 S-->
 		<div id="topmenu" class="l-topmenu">
 			<div class="l-topmenu-logo">OA管理系统</div>
+			<div id="marquee">
+				<marquee width="100%" height="26">指整个Marquee对齐方式</marquee>
+			</div>
 			<div class="l-topmenu-welcome">
 				<label>角色</label>
 				<select id="role">
 					<option value="aqua">超级管理员</option>
-					<option value="silvery">总经理</option>
+					<option value="silvery" selected="selected">总经理</option>
 					<option value="gray">组长</option>
 					<option value="gray2014">销售经理</option>
 				</select>

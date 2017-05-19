@@ -3,6 +3,9 @@
 <% 
 	String context = request.getContextPath();
 	String path = (request.getRealPath("/")).replaceAll("\\\\", "/");
+	
+	String basePath = request.getServerName() + ":" + request.getServerPort() + context + "/";
+	String basePath2 = request.getScheme() + "://"+ request.getServerName() + ":" + request.getServerPort()+ context + "/";
 %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -17,7 +20,8 @@
 			var hostURL = "http://localhost:8080/OAManagerSys/";
 			//子菜单
 			var childMenu = ${childMenu};
-			
+			var basePath = '<%=basePath%>';
+			var basePath2 = '<%=basePath2%>';
 		</script>
 	</head>
 
@@ -26,7 +30,7 @@
 		<div id="topmenu" class="l-topmenu">
 			<div class="l-topmenu-logo">OA管理系统</div>
 			<div id="marquee">
-				<marquee width="100%" height="26">指整个Marquee对齐方式</marquee>
+				<marquee id="marqueetxt" width="100%" height="26">指整个Marquee对齐方式</marquee>
 			</div>
 			<div class="l-topmenu-welcome">
 				<label>角色</label>
@@ -68,4 +72,5 @@
 	<script src="<%=context %>/js/jquery-1.9.0.min.js"></script>
 	<script src="<%=context %>/Source/lib/ligerUI/js/ligerui.all.js"></script>
 	<script src="<%=context %>/js/index.js"></script>
+	<script src="<%=context %>/js/index_websocket.js"></script>
 </html>

@@ -1,8 +1,20 @@
 package com.oamanagersys.model.user.controller;
 
+import java.io.IOException;
+import java.util.Date;
+
+import javax.imageio.ImageIO;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.oamanagersys.util.validation.ValidationCode;
+import com.oamanagersys.websockey.entity.Message;
 
 /**
  * 创建人： 李明
@@ -71,6 +83,59 @@ public class UserController {
 	public ModelAndView loginLog(){
 		ModelAndView mav = new ModelAndView("pages/manageset/loginlog");
 		return mav;
+	}
+	
+	/**
+	 * 创建验证码
+	 * 
+	 * @param req
+	 * @param resp
+	 */
+	@RequestMapping("/code")
+	public void getCode(HttpServletRequest req, HttpServletResponse resp) {
+		ValidationCode code = new ValidationCode();
+		// 禁止图像缓存。
+		resp.setHeader("Pragma", "no-cache");
+		resp.setHeader("Cache-Control", "no-cache");
+		resp.setDateHeader("Expires", 0);
+
+		resp.setContentType("image/png");
+		req.getSession().setAttribute("code", code.getCode());
+		try {
+			ServletOutputStream sos = resp.getOutputStream();
+			ImageIO.write(code.getBuffImg(), "jpeg", sos);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 刷新验证码
+	 * 
+	 * @param req
+	 * @param resp
+	 * @return
+	 */
+	@RequestMapping("/recode")
+	@ResponseBody
+	public Object getReCode(HttpServletRequest req, HttpServletResponse resp) {
+		//创建验证码工具类对象
+		ValidationCode code = new ValidationCode();
+		Message msg = new Message();
+		try {
+			Date data = new Date();
+			Long time = data.getTime();
+			String imgName = time + "code.png";
+			String path = req.getSession().getServletContext().getRealPath("") + "/icon/" + imgName;
+			msg.strMessage = imgName;
+			code.write(path);
+			//获取验证码
+			req.getSession().setAttribute("code", code.getCode());
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return msg;
 	}
 	
 }

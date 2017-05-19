@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.oamanagersys.util.response.Message;
 import com.oamanagersys.util.validation.ValidationCode;
-import com.oamanagersys.websockey.entity.Message;
 
 /**
  * 创建人： 李明
@@ -137,5 +137,67 @@ public class UserController {
 		}
 		return msg;
 	}
+	
+	/**
+	 * 登录
+	 * 
+	 * @param req
+	 * @param user
+	 * @param code
+	 * @return
+	 */
+	@RequestMapping("/login")
+	@ResponseBody
+	public Object getUserByAccountPwd(HttpServletRequest req,String account,String password, String code) {
+		Message msg = new Message();
+		String oldCode = req.getSession().getAttribute("code").toString();
+		req.getSession().setAttribute("user", null);
+		try {
+			if(!"admin".equals(account)) {
+				msg.isSuccess = false;
+				msg.strMessage = "账号错误";
+				msg.errorType = "accountError";
+			}else if(!"admin".equals(password)) {
+				msg.isSuccess = false;
+				msg.strMessage = "密码错误";
+				msg.errorType = "pwdError";
+			}else if (!oldCode.equals(code.toUpperCase())) {
+				msg.isSuccess = false;
+				msg.strMessage = "验证码错误";
+				msg.errorType = "codeError";
+			}else{
+				msg.isSuccess = true;
+				req.getSession().setAttribute("user", account);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return msg;
+	}
+	
+	/**
+	 * 自动加载在本机上登录过的并记住密码的账号
+	 * @param req
+	 * @return
+	 */
+//	@RequestMapping("/loadAccount")
+//	@ResponseBody
+//	public Object selectUserLoacl(HttpServletRequest req){
+//		List<User> users = userService.selectUserLoacl(req);
+//		return null;
+//	}
+	/**
+	 * 自动查询密码
+	 * @param userAccount
+	 * @return
+	 */
+//	@RequestMapping("/loadPwd")
+//	@ResponseBody
+//	public Object selectUserPwd(String userAccount){
+//		String password = userService.selectUserPwd(userAccount);
+//		Message msg = new Message();
+//		msg.strMessage = password;
+//		return msg;
+//	}
 	
 }

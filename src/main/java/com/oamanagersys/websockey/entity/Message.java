@@ -18,8 +18,6 @@ public class Message {
 	public String text;
 	//发送日期
 	public Date date;
-	
-	public String strMessage;
 
 	public String getFrom() {
 		return from;

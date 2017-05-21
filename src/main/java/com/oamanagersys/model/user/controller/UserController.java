@@ -151,27 +151,35 @@ public class UserController {
 	public Object getUserByAccountPwd(HttpServletRequest req,String account,String password, String code) {
 		Message msg = new Message();
 		String oldCode = req.getSession().getAttribute("code").toString();
-		req.getSession().setAttribute("user", null);
-		try {
-			if(!"admin".equals(account)) {
-				msg.isSuccess = false;
-				msg.strMessage = "账号错误";
-				msg.errorType = "accountError";
-			}else if(!"admin".equals(password)) {
-				msg.isSuccess = false;
-				msg.strMessage = "密码错误";
-				msg.errorType = "pwdError";
-			}else if (!oldCode.equals(code.toUpperCase())) {
-				msg.isSuccess = false;
-				msg.strMessage = "验证码错误";
-				msg.errorType = "codeError";
-			}else{
-				msg.isSuccess = true;
-				req.getSession().setAttribute("user", account);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		if (!oldCode.equals(code.toUpperCase())) {
+			msg.isSuccess = false;
+			msg.strMessage = "验证码错误";
+			msg.errorType = "codeError";
+		}else{
+			msg.isSuccess = true;
+			req.getSession().setAttribute("userId", account);
 		}
+		
+//		try {
+//			if(!"admin".equals(account)) {
+//				msg.isSuccess = false;
+//				msg.strMessage = "账号错误";
+//				msg.errorType = "accountError";
+//			}else if(!"admin".equals(password)) {
+//				msg.isSuccess = false;
+//				msg.strMessage = "密码错误";
+//				msg.errorType = "pwdError";
+//			}else if (!oldCode.equals(code.toUpperCase())) {
+//				msg.isSuccess = false;
+//				msg.strMessage = "验证码错误";
+//				msg.errorType = "codeError";
+//			}else{
+//				msg.isSuccess = true;
+//				req.getSession().setAttribute("user", account);
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 		return msg;
 	}
 	

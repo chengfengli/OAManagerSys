@@ -20,6 +20,7 @@
 
 	<body>
 		<h1>主页</h1>
+		<input type="text" id="txt" />
 		<input type="button" id="send" value="发送" />
 	</body>
 	<script src="<%=context %>/js/jquery-1.9.0.min.js"></script>

@@ -2,6 +2,5 @@
     pageEncoding="UTF-8" %>
 <% 
 	String context = request.getContextPath();
-	response.sendRedirect(context+"/index/toindex");
-	//request.getRequestDispatcher(context+"/index/toindex").forward(request, response);
+	response.sendRedirect(context+"/index/tologin");
 %>

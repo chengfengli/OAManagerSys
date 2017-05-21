@@ -90,7 +90,7 @@ $(function() {
 				},
 				success : function(result) {
 					if (result.isSuccess) {
-						location.href = path + "/index.jsp";
+						location.href = path + "/index/toindex";
 					} else {
 						if(result.errorType == "accountError") {
 							$("#account").tip(result.strMessage);

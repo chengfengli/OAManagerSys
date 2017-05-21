@@ -31,10 +31,8 @@ public class HandShake implements HandshakeInterceptor {
 			HttpSession session = servletRequest.getServletRequest().getSession(false);
 			// 标记用户
 			String userId = session.getAttribute("userId").toString();
-			String userName = session.getAttribute("userName").toString();
 			if(userId!=null){
 				map.put("userId", userId);
-				map.put("userName", userName);
 			}else{
 				return false;
 			}

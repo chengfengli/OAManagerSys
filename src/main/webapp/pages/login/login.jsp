@@ -23,13 +23,13 @@
 						</td>
 					</tr>
 					<tr>
-						<td>密码</td>
+						<td>密码</td>
 						<td>
 							<input type="text" id="password" name="password"  autocomplete="off" onfocus="this.type='password'"/>
 						</td>
 					</tr>
 					<tr>
-						<td>验证码</td>
+						<td>验证码</td>
 						<td>
 							<input type="code" id="code" name="code" placeholder="点击验证码切换"/>
 							<input type="button" id="code_content" style="background:url('<%=context %>/user/code');" />

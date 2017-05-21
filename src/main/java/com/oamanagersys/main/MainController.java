@@ -21,8 +21,11 @@ import com.oamanagersys.util.annotation.AnnotationUtil;
 public class MainController {
 	@RequestMapping("/toindex")
 	public ModelAndView toIndex(ModelAndView mav,HttpServletRequest request){
-		request.getSession().setAttribute("userId", "1");
-		request.getSession().setAttribute("userName", "张三");
+		Object userId = request.getSession().getAttribute("userId");
+		if(userId==null){
+			mav.setViewName("pages/login/login");//pages/login/login
+			return mav;
+		}
 		//获取顶级菜单
 		List<String> list = AnnotationUtil.getClasses("com.oamanagersys.menu");
 		List<Map<String, String>> result = AnnotationUtil.getClassName(list);
@@ -32,6 +35,12 @@ public class MainController {
 		String str = JSON.toJSONString(childMap);
 		mav.addObject("childMenu", str);
 		
+		mav.setViewName("index");//pages/login/login
+		return mav;
+	}
+	
+	@RequestMapping("/tologin")
+	public ModelAndView toLogin(ModelAndView mav){
 		mav.setViewName("pages/login/login");
 		return mav;
 	}

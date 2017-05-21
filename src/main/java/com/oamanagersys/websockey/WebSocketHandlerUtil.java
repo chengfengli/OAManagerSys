@@ -45,7 +45,7 @@ public class WebSocketHandlerUtil implements WebSocketHandler {
 		message.setFromName("系统提示");
 		message.setTo("0");
 		message.setText("上线");
-		broadcast(new TextMessage(new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().toJson(message)));
+		//broadcast(new TextMessage(new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().toJson(message)));
 		//判断用户在离线队列中是否有未读消息
 		if(mesMap.get(userId)!=null){
 			WebSocketSession webSession = userSocketSessionMap.get(userId);
@@ -87,7 +87,7 @@ public class WebSocketHandlerUtil implements WebSocketHandler {
 		}else{//用户不在线，保到离线消息列表
 			List<TextMessage> offLineList = mesMap.get(msg.getTo());
 			if(offLineList==null){
-				msgList = new ArrayList<TextMessage>();
+				offLineList = new ArrayList<TextMessage>();
 			}
 			offLineList.add(txtMsg);
 			//把接收方用户id及消息加入到离线列表

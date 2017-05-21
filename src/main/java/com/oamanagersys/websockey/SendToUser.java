@@ -23,7 +23,7 @@ public class SendToUser extends Thread {
 		if (socketSession != null && socketSession.isOpen()) {
 			for(int i=0;i<mesList.size();i++){
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(10);
 					socketSession.sendMessage(mesList.get(i));
 				} catch (Exception e) {
 					e.printStackTrace();

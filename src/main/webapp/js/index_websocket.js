@@ -7,20 +7,19 @@
 	} else {
 		websocket = new SockJS("http://" + basePath + "ws/sockjsindex");
 	}
-	websocket.onopen = function(event) {
-		$.ligerDialog.tip({  title: '提示',content:'服务器恢复!'});
-	};
+//	websocket.onopen = function(event) {
+//		$.ligerDialog.tip({  title: '提示',content:'服务器恢复!'});
+//	};
 	//接收消息
-	websocket.onmessage = function(event) {
-		var data=JSON.parse(event.data);
-		$("#marqueetxt").html('首页成功！');
-		//$.ligerDialog.tip({  title: '提示',content:'首页成功！'});
-	};
-	websocket.onerror = function(event) {
-		console.log("WebSocket:发生错误 ");
-	};
-	websocket.onclose = function(event) {
-		$.ligerDialog.tip({  title: '提示',content:'服务器错误!'});
-	}
+//	websocket.onmessage = function(event) {
+//		var data=JSON.parse(event.data);
+//		$("#marqueetxt").html('首页成功！');
+//	};
+//	websocket.onerror = function(event) {
+//		console.log("WebSocket:发生错误 ");
+//	};
+//	websocket.onclose = function(event) {
+//		$.ligerDialog.tip({  title: '提示',content:'服务器错误!'});
+//	}
 });
 

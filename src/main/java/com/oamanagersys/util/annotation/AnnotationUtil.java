@@ -6,7 +6,6 @@ import java.io.FileFilter;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.net.JarURLConnection;
 import java.net.URL;
 import java.net.URLDecoder;
@@ -19,8 +18,6 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.collections.set.SynchronizedSet;
 
 import net.sf.json.JSONObject;
 

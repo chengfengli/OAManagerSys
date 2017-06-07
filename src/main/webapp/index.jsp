@@ -57,7 +57,7 @@
 			<!--右侧内容-->
 			<div position="center" id="framecenter"> 
 				<div tabid="home" title="我的主页" style="height:300px" >
-					<iframe frameborder="0" name="home" id="home" src="<%=context %>/home.jsp"></iframe>
+					<iframe frameborder="0" name="home" id="home" src="<%=context %>/upload.html"></iframe>
 				</div> 
 			</div> 
 		</div>

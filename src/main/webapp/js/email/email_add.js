@@ -48,9 +48,9 @@ $(function(){
 	var editor = new wangEditor('content');
 	editor.create();
 	/*选择附件*/
-	$("#browse").click(function(){
-		$("#file").click();
-	});
+//	$("#browse").click(function(){
+//		$("#file").click();
+//	});
 	/*选择文件后*/
 	$("#file").change(function(){
 		var files = this.files;

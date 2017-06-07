@@ -1,6 +1,5 @@
 package com.oamanagersys.websockey;
 
-import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
@@ -33,7 +32,4 @@ public class SendToAll extends Thread {
 			}
 		}
 	}
-	
-	
-
 }

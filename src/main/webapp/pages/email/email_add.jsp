@@ -150,31 +150,11 @@
 				<td>
 					<div id="picker">文件上传</div>
 					<input type="file" multiple="true" id="file" name="file" id="enclosure"/>
-					<div id="picker">文件上传</div><span id="file_count"></span>
 					<ul id="file_list"></ul>
-					<input type="button" value="上传" id="uploadBtn" />
 				</td>
 			</tr>
 		</table>
 	</body>
 	
 	<script src="<%=context %>/js/email/email_add.js"></script>
-	<%-- <script src="<%=context %>/js/upload.js"></script> --%>
-	<script>
-		var uploader = WebUploader.create({
-			//chunked: true,
-		    // swf文件路径
-		    swf:'<%=context %>/webuploader/Uploader.swf',
-		    // 文件接收服务端。
-		    server: 'file/upload',
-		    // 选择文件的按钮。可选。内部根据当前运行是创建，可能是input元素，也可能是flash.
-		    pick: '#picker',
-		    // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
-		    resize: false,
-		    auto:false
-		});
-		
-	
-
-	</script>
 </html>

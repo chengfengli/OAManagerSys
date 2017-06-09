@@ -1,12 +1,12 @@
 ﻿$(function(){
-	var websocket;
-	if ('WebSocket' in window) {
-		websocket = new WebSocket("ws://" + basePath + "wsindex?uid=1");
-	} else if ('MozWebSocket' in window) {
-		websocket = new MozWebSocket("ws://" + basePath + "wsindex");
-	} else {
-		websocket = new SockJS("http://" + basePath + "ws/sockjsindex");
-	}
+//	var websocket;
+//	if ('WebSocket' in window) {
+//		websocket = new WebSocket("ws://" + basePath + "wsindex");
+//	} else if ('MozWebSocket' in window) {
+//		websocket = new MozWebSocket("ws://" + basePath + "wsindex");
+//	} else {
+//		websocket = new SockJS("http://" + basePath + "ws/sockjsindex");
+//	}
 //	websocket.onopen = function(event) {
 //		$.ligerDialog.tip({  title: '提示',content:'服务器恢复!'});
 //	};

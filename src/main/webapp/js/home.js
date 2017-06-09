@@ -1,11 +1,11 @@
 ﻿$(function(){
 	var websocket;
 	if ('WebSocket' in window) {
-		websocket = new WebSocket("ws://" + basePath + "wshome?uid=1");
+		websocket = new WebSocket("ws://" + path + "wshome");
 	} else if ('MozWebSocket' in window) {
-		websocket = new MozWebSocket("ws://" + basePath + "wshome");
+		websocket = new MozWebSocket("ws://" + path + "wshome");
 	} else {
-		websocket = new SockJS("http://" + basePath + "ws/sockjshome");
+		websocket = new SockJS("http://" + path + "ws/sockjshome");
 	}
 	websocket.onopen = function(event) {
 		console.log("WebSocket:已连接");

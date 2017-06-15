@@ -1,5 +1,6 @@
 package com.oamanagersys.model.department.entity;
 
+import com.oamanagersys.model.user.entity.Emp;
 import com.oamanagersys.util.base.BaseEntity;
 /**
  * 角色实体
@@ -19,6 +20,16 @@ public class Position extends BaseEntity {
 	
 	//部门编号
 	private int depId;
+	
+	private Emp emp;
+
+	public Emp getEmp() {
+		return emp;
+	}
+
+	public void setEmp(Emp emp) {
+		this.emp = emp;
+	}
 
 	public String getPositionCode() {
 		return positionCode;

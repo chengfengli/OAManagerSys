@@ -4,8 +4,9 @@
 
 <Workspace>
 	<Local Expanded="Yes">
-		<Model Expanded="Yes" ID="{AB9F8652-2A9E-4D79-AF04-CEBC8CC8DDAB}" Name="OAManagerSys" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="OAManagerSys.pdm"/>
-		<Model ID="{AB9F8652-2A9E-4D79-AF04-CEBC8CC8DDAB}" Name="OAManagerSys" OpenedReadOnly="Yes" Selected="Yes" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="OAManagerSys.pdm"/>
+		<Model Expanded="Yes" ID="{AB9F8652-2A9E-4D79-AF04-CEBC8CC8DDAB}" Loaded="No" Name="OAManagerSys" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="OAManagerSys.pdm"/>
+		<Model ID="{AB9F8652-2A9E-4D79-AF04-CEBC8CC8DDAB}" Loaded="No" Name="OAManagerSys" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="OAManagerSys.pdm"/>
+		<Model Expanded="Yes" ID="{AB9F8652-2A9E-4D79-AF04-CEBC8CC8DDAB}" Name="OAManagerSys" Selected="Yes" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="OAManagerSys.pdm"/>
 	</Local>
 	<BrowserModule Name="Repository"/>
 </Workspace>

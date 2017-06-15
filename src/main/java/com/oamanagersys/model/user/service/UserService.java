@@ -6,18 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.oamanagersys.model.user.dao.UserDao;
-import com.oamanagersys.model.user.entity.User;
+import com.oamanagersys.model.user.entity.Emp;
 
 @Service
 public class UserService {
 	@Autowired
 	private UserDao userMapper;
 	
-	public List<User> getAllUser(){
+	public List<Emp> getAllUser(){
 		return userMapper.getAllUser();
 	}
 	
-	public int addUser(User user){
+	public int addUser(Emp user){
 		return userMapper.addUser(user);
 	}
 	

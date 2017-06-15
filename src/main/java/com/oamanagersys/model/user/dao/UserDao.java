@@ -2,10 +2,10 @@ package com.oamanagersys.model.user.dao;
 
 import java.util.List;
 
-import com.oamanagersys.model.user.entity.User;
+import com.oamanagersys.model.user.entity.Emp;
 
 public interface UserDao {
-	public List<User> getAllUser();
+	public List<Emp> getAllUser();
 	
-	public int addUser(User user);
+	public int addUser(Emp emp);
 }

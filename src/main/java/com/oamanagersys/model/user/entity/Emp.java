@@ -1,7 +1,11 @@
 package com.oamanagersys.model.user.entity;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import com.oamanagersys.model.department.entity.Position;
 import com.oamanagersys.util.base.BaseEntity;
 
 /**
@@ -10,7 +14,7 @@ import com.oamanagersys.util.base.BaseEntity;
  * @tel		17310545652
  * @createtime	2017年6月15日 下午5:11:34
  */
-public class Emp extends BaseEntity {
+public class Emp extends BaseEntity implements Serializable {
 	//登陆密码
 	private String password;
 	
@@ -31,6 +35,17 @@ public class Emp extends BaseEntity {
 	
 	//是否转正
 	private int formal;
+	
+	//职位
+	private List<Position> position = new ArrayList<Position>();
+
+	public List<Position> getPosition() {
+		return position;
+	}
+
+	public void setPosition(List<Position> position) {
+		this.position = position;
+	}
 
 	public String getPassword() {
 		return password;

@@ -2,17 +2,21 @@ package com.oamanagersys.model.user.controller;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.oamanagersys.model.user.entity.Emp;
+import com.oamanagersys.model.user.service.UserService;
 import com.oamanagersys.util.response.Message;
 import com.oamanagersys.util.validation.ValidationCode;
 
@@ -24,6 +28,8 @@ import com.oamanagersys.util.validation.ValidationCode;
 @Controller
 @RequestMapping("/user")
 public class UserController {
+	@Autowired
+	private UserService userService;
 	/**
 	 * 添加员工页面
 	 */
@@ -207,5 +213,10 @@ public class UserController {
 //		msg.strMessage = password;
 //		return msg;
 //	}
+	@RequestMapping("/getallemp")
+	public List<Emp> getAllEmp(){
+		List<Emp> list = userService.getAllEmp();
+		return list;
+	}
 	
 }

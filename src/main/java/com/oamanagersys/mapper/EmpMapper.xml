@@ -1,20 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.oamanagersys.model.user.dao.UserDao">
-	<resultMap id="userResultMap" type="com.oamanagersys.model.user.entity.Emp">
-		<id column="userid" property="userId" jdbcType="INTEGER" />
-		<result column="username" property="userName" jdbcType="VARCHAR" />
-		<result column="userpwd" property="userPwd" jdbcType="VARCHAR" />
-		<result column="useraccount" property="userAccount" jdbcType="VARCHAR" />
-		<result column="phone" property="phone" jdbcType="VARCHAR" />
-		<result column="address" property="address" jdbcType="VARCHAR" />
-		<result column="sex" property="sex" jdbcType="INTEGER" />
-		<result column="email" property="email" jdbcType="VARCHAR" />
-		<result column="age" property="age" jdbcType="INTEGER" />
+
+	<resultMap id="empResultMap" type="com.oamanagersys.model.user.entity.Emp">
+		<id column="id" property="empNo" />
+		<result column="password" property="password" />
+		<result column="depId" property="depId" />
+		<result column="positionId" property="positionId" />
+		<result column="enttyTime" property="enttyTime" />
+		<result column="probationPeriod" property="probationPeriod" />
+		<result column="name" property="name" />
+		<result column="formal" property="formal" />
+		<result column="createTime" property="createTime" />
+		<result column="createUser" property="createUser" />
+		<result column="lastUpdateTime" property="lastUpdateTime" />
+		<result column="updateUser" property="updateUser" />
+		<!-- <association property="position" javaType="com.oamanagersys.model.department.entity.Position" column="positionId" resultMap="resultPosition"></association> -->
+		<!-- 一对多的映射 -->
+		<collection property="position" ofType="com.oamanagersys.model.department.entity.Position" javaType="arraylist">
+			<id column="id" property="positionId" />
+			<result column="positionCode" property="positionCode" />
+			<result column="positionName" property="positionName" />
+		</collection>
 	</resultMap>
 	
-	<select id="getAllUser" resultMap="userResultMap">
-		select * from user
+	<!-- <resultMap id="resultPosition" type="com.oamanagersys.model.department.entity.Position">
+		<id column="id" property="positionId" />
+		<result column="positionCode" property="positionCode" />
+		<result column="positionNamae" property="positionNamae" />
+	</resultMap> -->
+	
+	<select id="getAllEmp" resultMap="empResultMap">
+		select * from emp,position where emp.positionId = position.positionId 
 	</select>
 	
 	<insert id="addUser" parameterType="com.oamanagersys.model.user.entity.Emp">

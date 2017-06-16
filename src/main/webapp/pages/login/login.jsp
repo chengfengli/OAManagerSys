@@ -10,6 +10,7 @@
 		<link rel="icon" href="img/yun.png" type="image/x-icon"/>
 	</head>
 	<body>
+		<canvas id="canvas"></canvas>	
 		<div id="login_box">
 			<h2 id="login_title">用&nbsp;户&nbsp;登&nbsp;录</h2>
 			<form id="login_form">
@@ -49,7 +50,11 @@
 	</body>
 	<script type="text/javascript" src="<%=context %>/Source/lib/jquery/jquery-1.9.0.min.js" ></script>
 	<script type="text/javascript" src="<%=context %>/js/login/login.js" ></script>
+	<script type="text/javascript" src="<%=context %>/js/canvas.js" ></script>
 	<script>
 		var path = "<%=context %>";
+		$(function(){
+			$("#canvas").canvas1();
+		});
 	</script>
 </html>

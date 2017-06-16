@@ -13,8 +13,8 @@ public class UserService {
 	@Autowired
 	private UserDao userMapper;
 	
-	public List<Emp> getAllEmp(){
-		return userMapper.getAllEmp();
+	public List<Emp> getAllEmp(Emp emp){
+		return userMapper.getAllEmp(emp);
 	}
 	
 	public int addUser(Emp user){

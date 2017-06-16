@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.oamanagersys.model.user.dao.UserDao">
 	<resultMap id="empResultMap" type="com.oamanagersys.model.user.entity.Emp">
-		<id column="id" property="empNo" />
+		<id column="empNo" property="id" />
 		<result column="password" property="password" />
 		<result column="depId" property="depId" />
 		<result column="positionId" property="positionId" />
@@ -20,6 +20,12 @@
 			<id column="id" property="positionId" />
 			<result column="positionCode" property="positionCode" />
 			<result column="positionName" property="positionName" />
+			<result column="parentMenu" property="parentMenu" />
+			<result column="childMenu" property="childMenu" />
+			<result column="createTime" property="createTime" />
+			<result column="createUser" property="createUser" />
+			<result column="lastUpdateTime" property="lastUpdateTime" />
+			<result column="updateUser" property="updateUser" />
 		</collection>
 	</resultMap>
 	
@@ -29,8 +35,14 @@
 		<result column="positionNamae" property="positionNamae" />
 	</resultMap> -->
 	
-	<select id="getAllEmp" resultMap="empResultMap">
+	<select id="getAllEmp" resultMap="empResultMap" parameterType="com.oamanagersys.model.user.entity.Emp">
 		select * from emp,position where emp.positionId = position.positionId 
+		<if test="id != null">
+			and empNo = #{id}
+		</if>
+		<if test="password != password">
+			and empNo = #{id}
+		</if>
 	</select>
 	
 	<insert id="addUser" parameterType="com.oamanagersys.model.user.entity.Emp">

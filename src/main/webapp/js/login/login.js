@@ -24,12 +24,12 @@ $.fn.tip = function(text) {
 /* 非空验证 */
 function check() {
 	$(".tips").remove();
-	var account = $("#account").val();
+	var id = $("#id").val();
 	var password = $("#password").val();
 	var code = $("#code").val();
-	if (account == "") {
-		$("#account").tip("用户名不能为空!");
-		$("#account").focus();
+	if (id == "") {
+		$("#id").tip("用户名不能为空!");
+		$("#id").focus();
 		return false;
 	}
 	if (password == "") {
@@ -46,10 +46,7 @@ function check() {
 }
 
 $(function() {
-	/*alert('浏览器UA='+$.NV('UA')+    
-		    '\n\n浏览器名称='+$.NV('name')+    
-		    '\n\n浏览器版本='+parseInt($.NV('version'))+    
-		    '\n\n浏览器外壳='+$.NV('shell'));*/
+	$("#canvas").canvas1();
 	
 	/* 显示其他账号 */
 	$("#downmenu_ico").click(function() {
@@ -57,7 +54,7 @@ $(function() {
 	});
 
 	/* 双击显示其他账号 */
-	$("#account").dblclick(function() {
+	$("#id").dblclick(function() {
 		$("#downmenu_ico").click();
 	});
 
@@ -70,7 +67,7 @@ $(function() {
 
 	/* 登录 */
 	$("#loginbtn").click(function() {
-		var account = $("#account").val();
+		var id = $("#id").val();
 		var password = $("#password").val();
 		var code = $("#code").val();
 		var remember = 0;
@@ -83,7 +80,7 @@ $(function() {
 				type : "post",
 				dataType : "json",
 				data : {
-					account : account,
+					id : id,
 					password : password,
 					code : code,
 					rememberPassword : remember
@@ -92,8 +89,8 @@ $(function() {
 					if (result.isSuccess) {
 						location.href = path + "/index/toindex";
 					} else {
-						if(result.errorType == "accountError") {
-							$("#account").tip(result.strMessage);
+						if(result.errorType == "passwordError") {
+							$("#id").tip(result.strMessage);
 						}else if(result.errorType == "pwdError"){
 							$("#password").tip(result.strMessage);
 						} else if(result.errorType == "codeError"){

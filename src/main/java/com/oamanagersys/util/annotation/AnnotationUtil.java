@@ -239,7 +239,7 @@ public class AnnotationUtil {
                     reader.close();  
                 } catch (IOException e) { 
                 	e.printStackTrace();
-                }  
+                }
             }
         }
         jsonstr = jsonstr.replaceAll("\\s+", "");

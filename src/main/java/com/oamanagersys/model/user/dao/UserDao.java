@@ -5,7 +5,7 @@ import java.util.List;
 import com.oamanagersys.model.user.entity.Emp;
 
 public interface UserDao {
-	public List<Emp> getAllEmp();
+	public List<Emp> getAllEmp(Emp emp);
 	
 	public int addUser(Emp emp);
 }

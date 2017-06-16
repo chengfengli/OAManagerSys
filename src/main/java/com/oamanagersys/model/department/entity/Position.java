@@ -15,9 +15,28 @@ public class Position extends BaseEntity {
 	//角色名称
 	private String positionName;
 	
-	//权限菜单
-	private String menu;
+	//权限菜单:主菜单
+	private String parentMenu;
+
+	//权限菜单:子菜单
+	private String childMenu;
 	
+	public String getParentMenu() {
+		return parentMenu;
+	}
+	
+	public void setParentMenu(String parentMenu) {
+		this.parentMenu = parentMenu;
+	}
+	
+	public String getChildMenu() {
+		return childMenu;
+	}
+
+	public void setChildMenu(String childMenu) {
+		this.childMenu = childMenu;
+	}
+
 	//部门编号
 	private int depId;
 	
@@ -45,14 +64,6 @@ public class Position extends BaseEntity {
 
 	public void setPositionName(String positionName) {
 		this.positionName = positionName;
-	}
-
-	public String getMenu() {
-		return menu;
-	}
-
-	public void setMenu(String menu) {
-		this.menu = menu;
 	}
 
 	public int getDepId() {

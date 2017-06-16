@@ -154,7 +154,7 @@ public class UserController {
 	 */
 	@RequestMapping("/login")
 	@ResponseBody
-	public Object getUserByAccountPwd(HttpServletRequest req,String account,String password, String code) {
+	public Object getUserByAccountPwd(HttpServletRequest req,Emp emp, String code) {
 		Message msg = new Message();
 		String oldCode = req.getSession().getAttribute("code").toString();
 		if (!oldCode.equals(code.toUpperCase())) {
@@ -162,30 +162,17 @@ public class UserController {
 			msg.strMessage = "验证码错误";
 			msg.errorType = "codeError";
 		}else{
-			msg.isSuccess = true;
-			req.getSession().setAttribute("userId", account);
+			List<Emp> list = userService.getAllEmp(emp);
+			if(list.size()!=0){
+				msg.isSuccess = true;
+				req.getSession().setAttribute("userId", emp.getId());
+				req.getSession().setAttribute("user", list.get(0));
+			}else{
+				msg.isSuccess = false;
+				msg.strMessage = "账号密码错误";
+				msg.errorType = "passwordError";
+			}
 		}
-		
-//		try {
-//			if(!"admin".equals(account)) {
-//				msg.isSuccess = false;
-//				msg.strMessage = "账号错误";
-//				msg.errorType = "accountError";
-//			}else if(!"admin".equals(password)) {
-//				msg.isSuccess = false;
-//				msg.strMessage = "密码错误";
-//				msg.errorType = "pwdError";
-//			}else if (!oldCode.equals(code.toUpperCase())) {
-//				msg.isSuccess = false;
-//				msg.strMessage = "验证码错误";
-//				msg.errorType = "codeError";
-//			}else{
-//				msg.isSuccess = true;
-//				req.getSession().setAttribute("user", account);
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
 		return msg;
 	}
 	
@@ -213,10 +200,11 @@ public class UserController {
 //		msg.strMessage = password;
 //		return msg;
 //	}
-	@RequestMapping("/getallemp")
-	public List<Emp> getAllEmp(){
-		List<Emp> list = userService.getAllEmp();
-		return list;
-	}
+	
+//	@RequestMapping("/getallemp")
+//	public List<Emp> getAllEmp(){
+//		List<Emp> list = userService.getAllEmp();
+//		return list;
+//	}
 	
 }

@@ -2,6 +2,8 @@ package com.oamanagersys.util.base;
 
 import java.util.Date;
 
+import com.oamanagersys.model.user.entity.Emp;
+
 /**
  * 基类
  * @author	李明
@@ -14,6 +16,32 @@ public class BaseEntity {
 	private int createUser;
 	private Date lastUpdateTime;
 	private int updateUser;
+	private Emp create;
+	private Emp update;
+	/**
+	 * @return the create
+	 */
+	public Emp getCreate() {
+		return create;
+	}
+	/**
+	 * @param create the create to set
+	 */
+	public void setCreate(Emp create) {
+		this.create = create;
+	}
+	/**
+	 * @return the update
+	 */
+	public Emp getUpdate() {
+		return update;
+	}
+	/**
+	 * @param update the update to set
+	 */
+	public void setUpdate(Emp update) {
+		this.update = update;
+	}
 	public int getId() {
 		return id;
 	}

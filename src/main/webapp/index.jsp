@@ -35,10 +35,15 @@
 			<div class="l-topmenu-welcome">
 				<label>角色</label>
 				<select id="role">
-					<option value="aqua">超级管理员</option>
-					<option value="silvery" selected="selected">总经理</option>
-					<option value="gray">组长</option>
-					<option value="gray2014">销售经理</option>
+					<c:forEach items="${positions }" var="position">
+						<option value="1">${position.positionName }</option>
+						<c:if test="${position.positionCode == currentPosition }">
+							<option value="${position.positionCode }" selected="selected">${position.positionName }</option>
+						</c:if>
+						<c:if test="${position.positionCode != currentPosition }">
+							<option value="${position.positionCode }">${position.positionName }</option>
+						</c:if>
+					</c:forEach>
 				</select>
 				<a href="javascript:void(0)" id="exit">退出</a> 
 			</div> 

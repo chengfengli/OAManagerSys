@@ -16,7 +16,7 @@ public class Dep extends BaseEntity {
 	private String depName;
 	
 	//描述
-	private String described;
+	private String describe;
 
 	public String getDepCode() {
 		return depCode;
@@ -34,11 +34,11 @@ public class Dep extends BaseEntity {
 		this.depName = depName;
 	}
 
-	public String getDescribed() {
-		return described;
+	public String getDescribe() {
+		return describe;
 	}
 
-	public void setDescribed(String described) {
-		this.described = described;
+	public void setDescribe(String describe) {
+		this.describe = describe;
 	}
 }

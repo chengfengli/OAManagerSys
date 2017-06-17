@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oamanagersys.model.department.dao.DepDao">
+	<resultMap id="depResultMap" type="com.oamanagersys.model.department.entity.Dep">
+		<id column="depId" property="id" />
+		<result column="depCode" property="depCode" />
+		<result column="depName" property="depName" />
+		<result column="describes" property="describe" />
+		<result column="createTime" property="createTime" />
+		<result column="createUser" property="createUser" />
+		<result column="lastUpdateTime" property="lastUpdateTime" />
+		<result column="updateUser" property="updateUser" />
+		<association property="create" javaType="com.oamanagersys.model.user.entity.Emp" column="empNo" resultMap="resultEmp"></association>
+	</resultMap>
+	
+	<resultMap type="com.oamanagersys.model.user.entity.Emp" id="resultEmp">
+	    <result property="name" column="name" />
+	</resultMap>
+	
+	<select id="getDep" resultMap="depResultMap" parameterType="com.oamanagersys.model.department.entity.Dep">
+		select * from dep,emp where dep.createUser = emp.empNo 
+		<if test="id != 0">
+			and dep.depId = #{id}
+		</if>
+		<if test="depCode != null and depCode != ''">
+			and dep.depCode = #{depCode}
+		</if>
+	</select>
+	
+	<insert id="addDep" parameterType="com.oamanagersys.model.department.entity.Dep">
+		INSERT INTO dep(depCode,depName,describes,createTime,createUser,lastUpdateTime,updateUser)
+		VALUES (#{depCode},#{depName},#{describe},#{createTime},#{createUser},#{lastUpdateTime},#{updateUser})
+	</insert>
+	
+	<update id="updateDep" parameterType="com.oamanagersys.model.department.entity.Dep">
+		UPDATE dep SET depName=#{depName},describes=#{describe},lastUpdateTime=#{lastUpdateTime},updateUser=#{updateUser}
+		WHERE depId = #{id}
+	</update>
+	
+	<delete id="deleteDep" parameterType="com.oamanagersys.model.department.entity.Dep">
+		delete from dep where depId = #{id}
+	</delete>
+</mapper>

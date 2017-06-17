@@ -5,14 +5,16 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
+import com.oamanagersys.model.department.service.DepService;
 import com.oamanagersys.util.annotation.AnnotationUtil;
 /**
- * 
+ * 职位
  * @author	李明
  * @tel		17310545652
  * @createtime	2017年5月17日 上午11:17:46
@@ -20,6 +22,9 @@ import com.oamanagersys.util.annotation.AnnotationUtil;
 @Controller
 @RequestMapping("/post")
 public class PostController {
+	
+	@Autowired
+	private DepService depService;
 	/**
 	 * 职位管理页面
 	 */
@@ -34,6 +39,7 @@ public class PostController {
 	@RequestMapping("/addpost")
 	public ModelAndView addPost(){
 		ModelAndView mav = new ModelAndView("pages/usermanager/addpost");
+		mav.addObject("deps", depService.getDep(null));
 		return mav;
 	}
 	

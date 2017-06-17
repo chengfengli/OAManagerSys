@@ -1,6 +1,5 @@
 package com.oamanagersys.model.user.entity;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,7 +13,7 @@ import com.oamanagersys.util.base.BaseEntity;
  * @tel		17310545652
  * @createtime	2017年6月15日 下午5:11:34
  */
-public class Emp extends BaseEntity implements Serializable {
+public class Emp extends BaseEntity {
 	//登陆密码
 	private String password;
 	

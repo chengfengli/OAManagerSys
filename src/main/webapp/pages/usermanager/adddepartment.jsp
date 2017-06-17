@@ -21,19 +21,20 @@
 			<tr>
 				<td>编码</td>
 				<td>
-					<input type="text" name="code" id="code" class="liger-textbox" />
+					<input type="hidden" id="id" value="${dep.id }" />
+					<input type="text" name="depCode" id="depCode" value="${dep.depCode }" class="liger-textbox" />
 				</td>
 			</tr>
 			<tr>
-				<td>部门</td>
+				<td>名称</td>
 				<td>
-					<input type="text" name="department" id="department" class="liger-textbox" />
+					<input type="text" name="depName" id="depName" value="${dep.depName }" class="liger-textbox" />
 				</td>
 			</tr>
 			<tr>
 				<td valign="top">描述</td>
 				<td>
-					<textarea></textarea>
+					<textarea id="describe">${dep.describe }</textarea>
 				</td>
 			</tr>
 		</table>

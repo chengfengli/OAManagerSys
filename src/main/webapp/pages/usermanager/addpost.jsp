@@ -34,11 +34,10 @@
 				<td>部门</td>
 				<td>
 					<select name="department" id="department" class="liger-combobox">
-						<option value="0" selected="selected">请选择</option>
-						<option value="1">研发部</option>
-						<option value="2">人事部</option>
-						<option value="3">销售部</option>
-						<option value="4">行政部</option>
+						<option value=" " selected="selected">---选择部门---</option>
+						<c:forEach items="${deps }" var="dep">
+							<option value="${dep.depCode }">${dep.depName }</option>
+						</c:forEach>
 					</select>
 				</td>
 			</tr>

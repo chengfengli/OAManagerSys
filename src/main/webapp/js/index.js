@@ -10,6 +10,10 @@ function f_addTab(tabid, text, url){
     });
 }
 $(function(){
+	$("#role").change(function(){
+		var positionCode = $(this).val();
+		location.href = hostURL+"index/switchrole?positionCode="+positionCode;
+	});
 	$("#exit").click(function(){
 		$.ligerDialog.success('退出')
 	});

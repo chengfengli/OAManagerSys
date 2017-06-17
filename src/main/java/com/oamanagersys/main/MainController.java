@@ -25,11 +25,12 @@ public class MainController {
 	public ModelAndView toIndex(ModelAndView mav,HttpServletRequest request){
 		Emp user = (Emp)request.getSession().getAttribute("user");
 		if(user==null){
-			mav.setViewName("pages/login/login");//pages/login/login
+			mav.setViewName("pages/login/login");
 			return mav;
 		}
 		//用户角色
 		List<Position> positions = user.getPosition();
+		//是否是管理员
 		boolean isAdmin = false;
 		for(int i=0;i<positions.size();i++){
 			if("ADMIN".equals(positions.get(i).getPositionCode())){
@@ -37,7 +38,7 @@ public class MainController {
 			}
 		}
 		
-		if(!isAdmin){
+		if(isAdmin){
 			//获取顶级菜单
 			List<String> list = AnnotationUtil.getClasses("com.oamanagersys.menu");
 			List<Map<String, String>> result = AnnotationUtil.getClassName(list);
@@ -53,6 +54,8 @@ public class MainController {
 			mav.addObject("lists", list);
 			mav.addObject("childMenu", childMenu);
 		}
+		mav.addObject("positions", positions);
+		mav.addObject("currentPosition", positions.get(0).getPositionCode());
 		mav.setViewName("index");
 		return mav;
 	}
@@ -60,6 +63,27 @@ public class MainController {
 	@RequestMapping("/tologin")
 	public ModelAndView toLogin(ModelAndView mav){
 		mav.setViewName("pages/login/login");
+		return mav;
+	}
+	
+	//切换角色
+	@RequestMapping("/switchrole")
+	public ModelAndView switchRole(ModelAndView mav,HttpServletRequest request,String positionCode){
+		Emp user = (Emp)request.getSession().getAttribute("user");
+		if(user==null){
+			mav.setViewName("pages/login/login");
+			return mav;
+		}
+		//用户角色
+		List<Position> positions = user.getPosition();
+		String parentMenu = positions.get(0).getParentMenu();
+		String childMenu = positions.get(0).getChildMenu();
+		List<Object> list = (List<Object>)JSON.parse(parentMenu);
+		mav.addObject("lists", list);
+		mav.addObject("childMenu", childMenu);
+		mav.addObject("positions", positions);
+		mav.addObject("currentPosition", positionCode);
+		mav.setViewName("index");
 		return mav;
 	}
 }

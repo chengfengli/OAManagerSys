@@ -5,7 +5,7 @@
 <html>
 	<head>
 		<meta http-equiv="content-type" content="text/html;charset=utf-8">
-		<title>职位管理</title>
+		<title>部门管理</title>
 		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/Aqua/css/ligerui-all.css" />
 		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/ligerui-icons.css" />
 		<link rel="stylesheet" type="text/css" href="<%=context %>/css/commons/commons.css" />
@@ -22,10 +22,10 @@
 		<table id="querybar">
 			<tr>
 				<td class="title">编码</td>
-				<td><input type="text" name="code" id="code" class="liger-textbox" /></td>
+				<td><input type="text" id="depCode" class="liger-textbox" /></td>
 				<td class="title">部门</td>
 				<td>
-					<select name="department" id="department" class="liger-combobox">
+					<select name="department" id="id" class="liger-combobox">
 						<option value="0" selected="selected">请选择</option>
 						<option value="1">一个月</option>
 						<option value="2">二个月</option>
@@ -35,7 +35,7 @@
 						<option value="4">六个月</option>
 					</select>
 				</td>
-				<td class="title"><input type="button" value="查询" class="liger-button" /></td>
+				<td class="title"><input type="button" id="select" value="查询" class="liger-button" /></td>
 			</tr>
 		</table>
 		<!-- 列表 -->

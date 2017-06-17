@@ -1,13 +1,12 @@
-﻿/*工具栏*/
+﻿var grid=null;
+/*工具栏*/
 function toolbar() {
 	var items = [];
 	items.push({text:'添加',icon:'add',click: function () {add()}});
 	items.push({ line:true });
-	items.push({text:'编辑',icon:'edit',click: function () {}});
+	items.push({text:'编辑',icon:'edit',click: function () {edit()}});
 	items.push({ line:true });
-	items.push({text:'详情',icon:'view',click: function () {}});
-	items.push({ line:true });
-	items.push({text:'删除',icon:'delete1',click: function () {}});
+	items.push({text:'删除',icon:'delete1',click: function () {del()}});
 	$("#toolbar").ligerToolBar({
 		items: items
 	});
@@ -19,12 +18,27 @@ function add(){
 		width : 400,
 		height :300,
 		allowClose : false,
-		url : path+"/department/adddepartment",
+		url : path+"/department/adddeppage",
 		buttons : [
 			{
 				text : '保存',
 				onclick : function(item, dialog) {
-					dialog.close();
+					var data = dialog.frame.depData();
+					$.ajax({
+						url:path+"/department/adddep",
+						type:"post",
+						dataType:"json",
+						data:data,
+						success:function(response){
+							if(response.isSuccess){
+								dialog.close();
+								grid.loadData();
+								parent.$.ligerDialog.success(response.strMessage);
+							}else{
+								parent.$.ligerDialog.success(response.strMessage);
+							}
+						}
+					});
 				}
 			},
 		    {
@@ -38,37 +52,107 @@ function add(){
 }
 /*编辑*/
 function edit(){
-	
+	var rows = grid.getCheckedRows();
+	if (rows && rows.length == 1) {
+		var ids = [];
+		$(rows).each(function() {
+			ids.push(this.id);
+		});
+		parent.$.ligerDialog.open({
+					title : '修改部门',
+					width : 400,
+					height : 300,
+					allowClose : false,
+					url : path+"/department/adddeppage?id="+ids[0],
+					buttons : [
+						{
+							text : '保存',
+							onclick : function(item, dialog) {
+								var data = dialog.frame.depData();
+								$.ajax({
+									url:path+"/department/adddep",
+									type:"post",
+									dataType:"json",
+									data:data,
+									success:function(response){
+										if(response.isSuccess){
+											dialog.close();
+											grid.loadData();
+											parent.$.ligerDialog.success(response.strMessage);
+										}else{
+											parent.$.ligerDialog.success(response.strMessage);
+										}
+									}
+								});
+							}
+						},
+					    {
+							text : '返回',
+							onclick : function(item, dialog) {
+								dialog.close();
+							}
+						}
+					]
+				});
+	}else{
+		parent.$.ligerDialog.warn("选择一条数据!");
+	}
 }
-/*leaveOffice*/
-function leaveOffice(){
-	
-}
+
 /*删除*/
 function del(){
-	parent.$.ligerDialog.warn('删除!');
+	var rows = grid.getCheckedRows();
+	if (rows && rows.length == 1) {
+		var ids = [];
+		$(rows).each(function() {
+			ids.push(this.id);
+		});
+		$.ajax({
+			url:path+"/department/delete",
+			type:"post",
+			dataType:"json",
+			data:{id:ids[0]},
+			success:function(response){
+				if(response.isSuccess){
+					grid.loadData();
+					parent.$.ligerDialog.success(response.strMessage);
+				}else{
+					parent.$.ligerDialog.success(response.strMessage);
+				}
+			}
+		});
+	}else{
+		parent.$.ligerDialog.warn("选择一条数据!");
+	}
 }
 $(function(){
 	$("#entryTime").ligerDateEditor();
 	/*工具栏方法*/
 	toolbar();
-	/*初始数据*/
-	var array = [];
-	for(var i=1;i<=100;i++){
-		array.push({id:i,code:"0000DAFD"+i,department:"销售部",createTime:"2017-05-01",creater:"超级管理员"});
-	}
-	var data={Rows:array};
-	$("#list").ligerGrid({
+	grid = $("#list").ligerGrid({
+		url:path+"/department/deplist",
 		checkbox: true,
         columns: [
 	        { display: 'id', name: 'id',hide : true, },
-	        { display: '编码', name: 'code', width: "10%" },
-	        { display: '部门', name: 'department', width:"10%"},
+	        { display: '编码', name: 'depCode', width: "15%" },
+	        { display: '部门', name: 'depName', width:"10%"},
+	        { display: '创建人', name: 'create.name', width:"15%"},
 	        { display: '创建时间', name: 'createTime', width:"15%"},
-	        { display: '创建人', name: 'creater', width:"15%"}
+	        { display: '描述', name: 'describe', width:"20%"},
         ], pageSize:10,
-        data:data,
         width: '100%',height:'99%'
+	});
+	
+	$("#select").click(function(){
+		var depCode = $("#depCode").val();
+		var id = $("#id").val();
+		grid.setOptions({  
+            parms : {  
+            	depCode : depCode,  
+                id : id  
+            } 
+		});  
+		grid.loadData(true); 
 	});
 });
 

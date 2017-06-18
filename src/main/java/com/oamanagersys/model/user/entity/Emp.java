@@ -21,7 +21,7 @@ public class Emp extends BaseEntity {
 	private int depId;
 	
 	//职位编号
-	private int positionId;
+	private String positionId;
 	
 	//入职时间
 	private Date entryTime;
@@ -34,17 +34,6 @@ public class Emp extends BaseEntity {
 	
 	//是否转正
 	private int formal;
-	
-	//职位
-	private List<Position> position = new ArrayList<Position>();
-
-	public List<Position> getPosition() {
-		return position;
-	}
-
-	public void setPosition(List<Position> position) {
-		this.position = position;
-	}
 
 	public String getPassword() {
 		return password;
@@ -62,11 +51,11 @@ public class Emp extends BaseEntity {
 		this.depId = depId;
 	}
 
-	public int getPositionId() {
+	public String getPositionId() {
 		return positionId;
 	}
 
-	public void setPositionId(int positionId) {
+	public void setPositionId(String positionId) {
 		this.positionId = positionId;
 	}
 

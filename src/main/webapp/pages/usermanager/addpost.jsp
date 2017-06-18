@@ -21,22 +21,22 @@
 			<tr>
 				<td>编码</td>
 				<td>
-					<input type="text" name="code" id="code" class="liger-textbox" />
+					<input type="text" id="positionCode" class="liger-textbox" />
 				</td>
 			</tr>
 			<tr>
 				<td>职位</td>
 				<td>
-					<input type="text" name="post" id="post" class="liger-textbox" />
+					<input type="text" id="positionName" class="liger-textbox" />
 				</td>
 			</tr>
 			<tr>
 				<td>部门</td>
 				<td>
-					<select name="department" id="department" class="liger-combobox">
+					<select name="department" id="dep" class="liger-combobox">
 						<option value=" " selected="selected">---选择部门---</option>
 						<c:forEach items="${deps }" var="dep">
-							<option value="${dep.depCode }">${dep.depName }</option>
+							<option value="${dep.id }">${dep.depName }</option>
 						</c:forEach>
 					</select>
 				</td>

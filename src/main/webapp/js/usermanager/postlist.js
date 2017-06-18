@@ -1,4 +1,5 @@
-﻿/*工具栏*/
+﻿var grid
+/*工具栏*/
 function toolbar() {
 	var items = [];
 	items.push({text:'添加',icon:'add',click: function () {add()}});
@@ -19,12 +20,27 @@ function add(){
 		width : 500,
 		height :300,
 		allowClose : false,
-		url : path+"/post/addpost",
+		url : path+"/post/addpostpage",
 		buttons : [
 			{
 				text : '保存',
 				onclick : function(item, dialog) {
-					console.log(dialog.frame.data);
+					var data = dialog.frame.data();
+					$.ajax({
+						url:path+"/post/addpost",
+						type:"post",
+						dataType:"json",
+						data:data,
+						success:function(response){
+							if(response.isSuccess){
+								dialog.close();
+								grid.loadData();
+								parent.$.ligerDialog.success(response.strMessage);
+							}else{
+								parent.$.ligerDialog.success(response.strMessage);
+							}
+						}
+					});
 					dialog.close();
 				}
 			},
@@ -59,17 +75,21 @@ $(function(){
 		array.push({id:i,code:"0000DAFD"+i,position:"总经理"+i,department:"销售部",createTime:"2017-05-01",creater:"超级管理员"});
 	}
 	var data={Rows:array};
-	$("#list").ligerGrid({
+	grid = $("#list").ligerGrid({
+		url:path+"/post/getpost",
 		checkbox: true,
         columns: [
 	        { display: 'id', name: 'id',hide : true, },
-	        { display: '编码', name: 'code', width: "10%" },
-	        { display: '职位', name: 'position', width:"10%"},
-	        { display: '部门', name: 'department', width:"10%"},
-	        { display: '创建时间', name: 'createTime', width:"15%"},
-	        { display: '创建人', name: 'creater', width:"15%"}
+	        { display: '编码', name: 'positionCode', width: "10%" },
+	        { display: '职位', name: 'positionName', width:"10%"},
+	        { display: '部门', name: 'dep.depName', width:"10%"},
+	        { display: '创建时间', name: 'createTime', width:"15%",render:function(row){
+	        		var str = new Date(parseInt(row.createTime)).toLocaleString().replace(/:\d{1,2}$/,' ');
+	        		return str;
+	        	}
+	        },
+	        { display: '创建人', name: 'create.name', width:"15%"}
         ], pageSize:10,
-        data:data,
         width: '100%',height:'99%'
 	});
 });

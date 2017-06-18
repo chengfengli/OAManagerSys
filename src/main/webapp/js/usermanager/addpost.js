@@ -1,6 +1,13 @@
-﻿var data;
+﻿var role={};
+function data(){
+	var data = role;
+	data.positionCode = $("#positionCode").val();
+	data.positionName = $("#positionName").val();
+	data.depId = $("#dep").val();
+	return data;
+}
 $(function(){
-	$("#department").ligerComboBox({width:300});
+	$("#dep").ligerComboBox({width:300});
 	$("#set").click(function(){
 		parent.$.ligerDialog.open({
 			title : '配置访问权限',
@@ -12,7 +19,7 @@ $(function(){
 				{
 					text : '确定',
 					onclick : function(item, dialog) {
-						data = dialog.frame.data();
+						role = dialog.frame.data();
 						dialog.close();
 					}
 				},

@@ -5,12 +5,14 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
 import com.oamanagersys.model.department.entity.Position;
+import com.oamanagersys.model.department.service.PostService;
 import com.oamanagersys.model.user.entity.Emp;
 import com.oamanagersys.util.annotation.AnnotationUtil;
 /**
@@ -21,6 +23,8 @@ import com.oamanagersys.util.annotation.AnnotationUtil;
 @Controller
 @RequestMapping("/index")
 public class MainController {
+	@Autowired
+	private PostService postService;
 	@RequestMapping("/toindex")
 	public ModelAndView toIndex(ModelAndView mav,HttpServletRequest request){
 		Emp user = (Emp)request.getSession().getAttribute("user");
@@ -29,7 +33,7 @@ public class MainController {
 			return mav;
 		}
 		//用户角色
-		List<Position> positions = user.getPosition();
+		List<Position> positions = postService.getPsotById(user.getPositionId());
 		//是否是管理员
 		boolean isAdmin = false;
 		for(int i=0;i<positions.size();i++){
@@ -46,16 +50,17 @@ public class MainController {
 			//获取子菜单
 			Map<String,Object> childMap = AnnotationUtil.ReadJsonFile("./WEB-INF/classes/childmenu.properties",request);
 			String str = JSON.toJSONString(childMap);
+			System.out.println(str);
 			mav.addObject("childMenu", str);
 		}else{
 			String parentMenu = positions.get(0).getParentMenu();
 			String childMenu = positions.get(0).getChildMenu();
+			mav.addObject("currentPosition", positions.get(0).getPositionCode());
 			List<Object> list = (List<Object>)JSON.parse(parentMenu);
 			mav.addObject("lists", list);
 			mav.addObject("childMenu", childMenu);
 		}
 		mav.addObject("positions", positions);
-		mav.addObject("currentPosition", positions.get(0).getPositionCode());
 		mav.setViewName("index");
 		return mav;
 	}
@@ -75,12 +80,16 @@ public class MainController {
 			return mav;
 		}
 		//用户角色
-		List<Position> positions = user.getPosition();
-		String parentMenu = positions.get(0).getParentMenu();
-		String childMenu = positions.get(0).getChildMenu();
-		List<Object> list = (List<Object>)JSON.parse(parentMenu);
-		mav.addObject("lists", list);
-		mav.addObject("childMenu", childMenu);
+		List<Position> positions = postService.getPsotById(user.getPositionId());
+		for(int i=0;i<positions.size();i++){
+			if(positions.get(i).getPositionCode().equals(positionCode)){
+				String parentMenu = positions.get(i).getParentMenu();
+				String childMenu = positions.get(i).getChildMenu();
+				List<Object> list = (List<Object>)JSON.parse(parentMenu);
+				mav.addObject("lists", list);
+				mav.addObject("childMenu", childMenu);
+			}
+		}
 		mav.addObject("positions", positions);
 		mav.addObject("currentPosition", positionCode);
 		mav.setViewName("index");

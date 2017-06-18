@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oamanagersys.model.department.dao.PostDao">
+	<resultMap id="postResultMap" type="com.oamanagersys.model.department.entity.Position">
+		<id column="positionId" property="id" />
+		<result column="positionCode" property="positionCode" />
+		<result column="positionName" property="positionName" />
+		<result column="depId" property="depId" />
+		<result column="parentMenu" property="parentMenu" />
+		<result column="childMenu" property="childMenu" />
+		<result column="createTime" property="createTime" />
+		<result column="createUser" property="createUser" />
+		<result column="lastUpdateTime" property="lastUpdateTime" />
+		<result column="updateUser" property="updateUser" />
+		<association property="dep" javaType="com.oamanagersys.model.department.entity.Dep" column="positionId" resultMap="resultDep"></association>
+		<association property="create" javaType="com.oamanagersys.model.user.entity.Emp" column="empNo" resultMap="resultEmp"></association>
+	</resultMap>
+	
+	<resultMap id="resultDep" type="com.oamanagersys.model.department.entity.Dep">
+		<id column="depId" property="id" />
+		<result column="depCode" property="depCode" />
+		<result column="depName" property="depName" />
+	</resultMap>
+	
+	<resultMap type="com.oamanagersys.model.user.entity.Emp" id="resultEmp">
+		<id column="empNo" property="id" />
+	    <result property="name" column="name" />
+	</resultMap>
+	
+	<select id="getPsot" resultMap="postResultMap">
+		select * from position,dep,emp where position.depId = dep.depId  and position.createUser = emp.empNo
+	</select>
+	
+	<select id="getPsotById" resultMap="postResultMap" parameterType="java.lang.String">
+		SELECT * FROM `position` WHERE positionId IN (4,5)
+	</select>
+	
+	<insert id="insert" parameterType="com.oamanagersys.model.department.entity.Position">
+		INSERT INTO `position` (positionCode,positionName,depId,createTime,createUser,parentMenu,childMenu)
+		VALUES (#{positionCode},#{positionName},#{depId},#{createTime},#{createUser},#{parentMenu},#{childMenu})
+	</insert>
+	
+	<update id="update" parameterType="com.oamanagersys.model.department.entity.Position">
+		UPDATE FROM `position` SET positionName=#{positionName},depId=#{depId},lastUpdateTime=#{lastUpdateTime},updateUser=#{updateUser}
+		WHERE positionId = #{id}
+	</update>
+</mapper>

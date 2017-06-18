@@ -4,9 +4,9 @@ var menus = [];
 var childMenus={};
 function data(){
 	var data={};
-	data.menus=menus;
-	data.childMenus=childMenus;
-	return JSON.stringify(data);
+	data.parentMenu=JSON.stringify(menus);
+	data.childMenu=JSON.stringify(childMenus);
+	return data;
 }
 $(function(){
 	$("input[type=checkbox]").change(function(){
@@ -45,8 +45,6 @@ $(function(){
 		}else{
 			childMenus[id]=value;
 		}
-		console.log(menus);
-		console.log(JSON.stringify(childMenus));
 	});
 	/*验证json格式*/
 	$("textarea").keyup(function(){
@@ -54,7 +52,7 @@ $(function(){
 			JSON.parse($(this).val());
 			$("#error").text('');
 		}catch(err){
-			$("#error").text('单格式错误!');
+			$("#error").text('格式错误!');
 		}
 	});
 });

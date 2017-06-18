@@ -14,29 +14,10 @@
 		<result column="createUser" property="createUser" />
 		<result column="lastUpdateTime" property="lastUpdateTime" />
 		<result column="updateUser" property="updateUser" />
-		<!-- <association property="position" javaType="com.oamanagersys.model.department.entity.Position" column="positionId" resultMap="resultPosition"></association> -->
-		<!-- 一对多的映射 -->
-		<collection property="position" ofType="com.oamanagersys.model.department.entity.Position" javaType="arraylist">
-			<id column="id" property="positionId" />
-			<result column="positionCode" property="positionCode" />
-			<result column="positionName" property="positionName" />
-			<result column="parentMenu" property="parentMenu" />
-			<result column="childMenu" property="childMenu" />
-			<result column="createTime" property="createTime" />
-			<result column="createUser" property="createUser" />
-			<result column="lastUpdateTime" property="lastUpdateTime" />
-			<result column="updateUser" property="updateUser" />
-		</collection>
 	</resultMap>
 	
-	<!-- <resultMap id="resultPosition" type="com.oamanagersys.model.department.entity.Position">
-		<id column="id" property="positionId" />
-		<result column="positionCode" property="positionCode" />
-		<result column="positionNamae" property="positionNamae" />
-	</resultMap> -->
-	
 	<select id="getAllEmp" resultMap="empResultMap" parameterType="com.oamanagersys.model.user.entity.Emp">
-		select * from emp,position where emp.positionId = position.positionId 
+		select * from emp,position where 1 = 1 
 		<if test="id != null">
 			and empNo = #{id}
 		</if>

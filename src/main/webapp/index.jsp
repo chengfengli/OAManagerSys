@@ -36,7 +36,6 @@
 				<label>角色</label>
 				<select id="role">
 					<c:forEach items="${positions }" var="position">
-						<option value="1">${position.positionName }</option>
 						<c:if test="${position.positionCode == currentPosition }">
 							<option value="${position.positionCode }" selected="selected">${position.positionName }</option>
 						</c:if>

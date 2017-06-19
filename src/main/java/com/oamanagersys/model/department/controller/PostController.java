@@ -47,8 +47,13 @@ public class PostController {
 	 * 添加职位页面
 	 */
 	@RequestMapping("/addpostpage")
-	public ModelAndView addPostPage(Dep dep){
+	public ModelAndView addPostPage(Position position){
 		ModelAndView mav = new ModelAndView("pages/usermanager/addpost");
+		List<Position> list = postService.getPsotById(position.getId()+"");
+		if(list.size()>0){
+			mav.addObject("position", list.get(0));
+		}
+		Dep dep = new Dep();
 		mav.addObject("deps", depService.getDep(dep));
 		return mav;
 	}

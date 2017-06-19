@@ -55,6 +55,7 @@ public class MainController {
 		}else{
 			String parentMenu = positions.get(0).getParentMenu();
 			String childMenu = positions.get(0).getChildMenu();
+			//当前角色
 			mav.addObject("currentPosition", positions.get(0).getPositionCode());
 			List<Object> list = (List<Object>)JSON.parse(parentMenu);
 			mav.addObject("lists", list);

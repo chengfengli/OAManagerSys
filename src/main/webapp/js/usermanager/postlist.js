@@ -4,7 +4,7 @@ function toolbar() {
 	var items = [];
 	items.push({text:'添加',icon:'add',click: function () {add()}});
 	items.push({ line:true });
-	items.push({text:'编辑',icon:'edit',click: function () {}});
+	items.push({text:'编辑',icon:'edit',click: function () {edit()}});
 	items.push({ line:true });
 	items.push({text:'详情',icon:'view',click: function () {}});
 	items.push({ line:true });
@@ -55,7 +55,52 @@ function add(){
 }
 /*编辑*/
 function edit(){
-	location.href=path+"/user/adduser";
+	var rows = grid.getCheckedRows();
+	if (rows && rows.length == 1) {
+		var ids = [];
+		$(rows).each(function() {
+			ids.push(this.id);
+		});
+		parent.$.ligerDialog.open({
+			title : '添加职位',
+			width : 500,
+			height :300,
+			allowClose : false,
+			url : path+"/post/addpostpage?id="+ids[0],
+			buttons : [
+				{
+					text : '保存',
+					onclick : function(item, dialog) {
+						var data = dialog.frame.data();
+						$.ajax({
+							url:path+"/post/addpost",
+							type:"post",
+							dataType:"json",
+							data:data,
+							success:function(response){
+								if(response.isSuccess){
+									dialog.close();
+									grid.loadData();
+									parent.$.ligerDialog.success(response.strMessage);
+								}else{
+									parent.$.ligerDialog.success(response.strMessage);
+								}
+							}
+						});
+						dialog.close();
+					}
+				},
+			    {
+					text : '返回',
+					onclick : function(item, dialog) {
+						dialog.close();
+					}
+				}
+			]
+		});
+	}else{
+		parent.$.ligerDialog.warn("选择一条数据!");
+	}
 }
 /*leaveOffice*/
 function leaveOffice(){

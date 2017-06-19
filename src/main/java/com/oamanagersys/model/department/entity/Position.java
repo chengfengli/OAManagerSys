@@ -47,7 +47,7 @@ public class Position extends BaseEntity {
 	}
 
 	public void setPositionCode(String positionCode) {
-		this.positionCode = positionCode;
+		this.positionCode = positionCode.toUpperCase();
 	}
 
 	public String getPositionName() {

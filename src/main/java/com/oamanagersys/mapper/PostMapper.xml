@@ -32,7 +32,7 @@
 	</select>
 	
 	<select id="getPsotById" resultMap="postResultMap" parameterType="java.lang.String">
-		SELECT * FROM `position` WHERE positionId IN (4,5)
+		SELECT * FROM `position`,dep WHERE position.depId = dep.depId and positionId IN (#{0})
 	</select>
 	
 	<insert id="insert" parameterType="com.oamanagersys.model.department.entity.Position">

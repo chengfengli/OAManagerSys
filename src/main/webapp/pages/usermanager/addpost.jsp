@@ -5,7 +5,7 @@
 <html>
 	<head>
 		<meta http-equiv="content-type" content="text/html;charset=utf-8">
-		<title>请假登记</title>
+		<title>编辑角色</title>
 		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/Aqua/css/ligerui-all.css" />
 		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/ligerui-icons.css" />
 		<link rel="stylesheet" type="text/css" href="<%=context %>/css/usermanager/addpost.css" />
@@ -21,22 +21,30 @@
 			<tr>
 				<td>编码</td>
 				<td>
-					<input type="text" id="positionCode" class="liger-textbox" />
+					<input type="hidden" id="id" value="${position.id }" />
+					<input type="text" id="positionCode" value="${position.positionCode }" class="liger-textbox" />
 				</td>
 			</tr>
 			<tr>
 				<td>职位</td>
 				<td>
-					<input type="text" id="positionName" class="liger-textbox" />
+					<input type="text" id="positionName" value="${position.positionName }" class="liger-textbox" />
 				</td>
 			</tr>
 			<tr>
 				<td>部门</td>
 				<td>
 					<select name="department" id="dep" class="liger-combobox">
-						<option value=" " selected="selected">---选择部门---</option>
+						<c:if test="${position.id != null && position.id != '' }">
+							<option value=" " selected="selected">---选择部门---</option>
+						</c:if>
 						<c:forEach items="${deps }" var="dep">
-							<option value="${dep.id }">${dep.depName }</option>
+							<c:if test="${dep.id == position.dep.id }">
+								<option value="${dep.id }" selected="selected">${dep.depName }</option>
+							</c:if>
+							<c:if test="${dep.id != position.dep.id }">
+								<option value="${dep.id }">${dep.depName }</option>
+							</c:if>
 						</c:forEach>
 					</select>
 				</td>

@@ -23,7 +23,7 @@ public class Dep extends BaseEntity {
 	}
 
 	public void setDepCode(String depCode) {
-		this.depCode = depCode;
+		this.depCode = depCode.toUpperCase();
 	}
 
 	public String getDepName() {

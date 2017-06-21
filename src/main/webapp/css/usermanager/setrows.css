@@ -27,3 +27,6 @@ textarea{
 	font-size:12px;
 	text-align:center;
 }
+.menutxt{
+	cursor:pointer;
+}

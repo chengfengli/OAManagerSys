@@ -10,7 +10,7 @@ function data(){
 }
 $(function(){
 	for(var i in parentMenu){
-		if(existParentMenu!=null){
+		if(existParentMenu.length>0){
 			var jsonParentMenu = JSON.parse(existParentMenu);
 			var isExtis = false;
 			for(var j=0;j<jsonParentMenu.length;j++){
@@ -19,25 +19,60 @@ $(function(){
 				}
 			}
 			if(isExtis){
-				$("#menu").append('<input type="checkbox" checked id="'+parentMenu[i].id+'" data-text="'+parentMenu[i].text+'" class="liger-checkbox" /><span class="menutxt">'+parentMenu[i].text+'</span><br>');
+				$("#menu").append('<input type="checkbox" checked id="'+parentMenu[i].id+'" class="liger-checkbox" /><span class="menutxt" data-id="'+parentMenu[i].id+'">'+parentMenu[i].text+'</span><br>');
 			}else{
-				$("#menu").append('<input type="checkbox" id="'+parentMenu[i].id+'" data-text="'+parentMenu[i].text+'" class="liger-checkbox" /><span class="menutxt">'+parentMenu[i].text+'</span><br>');
+				$("#menu").append('<input type="checkbox" id="'+parentMenu[i].id+'" class="liger-checkbox" /><span class="menutxt" data-id="'+parentMenu[i].id+'">'+parentMenu[i].text+'</span><br>');
 			}
 		}else{
-			$("#menu").append('<input type="checkbox" id="'+parentMenu[i].id+'" data-text="'+parentMenu[i].text+'" class="liger-checkbox" /><span class="menutxt">'+parentMenu[i].text+'</span><br>');
+			$("#menu").append('<input type="checkbox" id="'+parentMenu[i].id+'" class="liger-checkbox" /><span class="menutxt" data-id="'+parentMenu[i].id+'">'+parentMenu[i].text+'</span><br>');
 		}
 	}
+	$(".menutxt").click(function(){
+		var id=$(this).data("id");
+		var text=$(this).text();
+		$("#key").val(id);
+		$("#text").val(text);
+		$("#childMenuTree").ligerTree({
+			data:childMenu[id],
+			onCheck:function(node,checked){
+				console.log(node);
+			}
+		});
+	});
+	//勾选主菜单
 	$("input[type=checkbox]").change(function(){
 		var isChick=$(this).prop("checked");
-		var id=$(this).prop("id");
-		var text=$(this).data("text");
+		var id = $("#key").val();
+		var text = $("#text").val();
+		//勾选菜单
 		if(isChick){
-			$("#key").val(id);
-			$("#text").val(text);
-			$("textarea").val(JSON.stringify(childMenu[id],null, 4));
-		}else{
-			if(id==$("#key").val()){
-				$("textarea").val("");
+			var json = {};
+			json.id=id;
+			json.text=text;
+			if(existParentMenu.length>0){
+				var isExtis = false;
+				//循环判断是否存在勾选的菜单，默认不存在
+				for(var i in existParentMenu){
+					//存在
+					if(existParentMenu[i].id==id){
+						isExtis = true;
+						break;
+					}
+				}
+				//如果不存在
+				if(!isExtis){
+					existParentMenu.push(json);
+				}
+			}else{
+				existParentMenu.push(json);
+			}
+			console.log(existParentMenu);
+		}else{//取消菜单
+			for(var i in existParentMenu){
+				//存在
+				if(existParentMenu[i].id==id){
+					existParentMenu.remove(i);
+				}
 			}
 		}
 	});

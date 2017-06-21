@@ -18,9 +18,9 @@
 			//所有子菜单
 			var childMenu = ${childMenu};
 			//职位已有的主菜单
-			var existParentMenu = null;
+			var existParentMenu = [];
 			//职位已有的子菜单
-			var existChildMenu = null;
+			var existChildMenu = [];
 			if('${exitsPosition}' != ''){
 				existParentMenu = '${exitsPosition.parentMenu}';
 				existChildMenu = '${exitsPosition.childMenu}';
@@ -32,34 +32,17 @@
 		<table id="table">
 			<tr>
 				<td valign="top" id="menu">
-					<%-- <c:choose>
-						<c:when test="${exitsPosition!=null && exitsPosition!=''}">
-							<c:forEach items="${lists }" var="list">
-								<c:forEach items="${exitsPosition}" var="exits">
-									<c:if test="${list.id == exits.id }">
-										<input type="checkbox" id="${list.id }" checked data-text="${list.text }" class="liger-checkbox" />${list.text }<br>
-									</c:if>
-									<c:if test="${list.id != exits.id }">
-										<input type="checkbox" id="${list.id }" data-text="${list.text }" class="liger-checkbox" />${list.text }<br>
-									</c:if>
-								</c:forEach>
-							</c:forEach>
-						</c:when>
-						<c:otherwise>
-							<c:forEach items="${lists}" var="list">
-								<input type="checkbox" id="${list.id }" data-text="${list.text }" class="liger-checkbox" />${list.text }<br>
-							</c:forEach>
-						</c:otherwise>
-					</c:choose> --%>
 				</td>
-				<td>
+				<td valign="top">
 					<input id="key" type="hidden" value="" /><input id="text" type="hidden" value="" />
-					<textarea></textarea>
+					<!-- <textarea></textarea> -->
+					<ul id="childMenuTree">
+					</ul>
 				</td>
 			</tr>
 		</table>
-		<input type="button" id="add" value="添加" class="liger-button" />
-		<div id="error"></div>
+		<!-- <input type="button" id="add" value="添加" class="liger-button" />
+		<div id="error"></div> -->
 	</body>
 	<script src="<%=context %>/js/usermanager/setrows.js"></script>
 </html>

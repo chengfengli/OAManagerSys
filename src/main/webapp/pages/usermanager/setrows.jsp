@@ -13,17 +13,44 @@
 		<script src="<%=context %>/Source/lib/ligerUI/js/ligerui.all.js"></script>
 		<script>
 			var path = '<%=context %>';
+			//所有主菜单
+			var parentMenu = ${lists};
+			//所有子菜单
 			var childMenu = ${childMenu};
+			//职位已有的主菜单
+			var existParentMenu = null;
+			//职位已有的子菜单
+			var existChildMenu = null;
+			if('${exitsPosition}' != ''){
+				existParentMenu = '${exitsPosition.parentMenu}';
+				existChildMenu = '${exitsPosition.childMenu}';
+			}
 		</script>
 	</head>
 
 	<body>
 		<table id="table">
 			<tr>
-				<td valign="top">
-					<c:forEach items="${lists }" var="list">
-						<input type="checkbox" id="${list.id }" data-text="${list.text }" class="liger-checkbox" />${list.text }<br>
-					</c:forEach>
+				<td valign="top" id="menu">
+					<%-- <c:choose>
+						<c:when test="${exitsPosition!=null && exitsPosition!=''}">
+							<c:forEach items="${lists }" var="list">
+								<c:forEach items="${exitsPosition}" var="exits">
+									<c:if test="${list.id == exits.id }">
+										<input type="checkbox" id="${list.id }" checked data-text="${list.text }" class="liger-checkbox" />${list.text }<br>
+									</c:if>
+									<c:if test="${list.id != exits.id }">
+										<input type="checkbox" id="${list.id }" data-text="${list.text }" class="liger-checkbox" />${list.text }<br>
+									</c:if>
+								</c:forEach>
+							</c:forEach>
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${lists}" var="list">
+								<input type="checkbox" id="${list.id }" data-text="${list.text }" class="liger-checkbox" />${list.text }<br>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose> --%>
 				</td>
 				<td>
 					<input id="key" type="hidden" value="" /><input id="text" type="hidden" value="" />

@@ -13,6 +13,15 @@
 		<script src="<%=context %>/Source/lib/ligerUI/js/ligerui.all.js"></script>
 		<script>
 			var path = '<%=context %>';
+			//角色已有的权限
+			var role={parentMenu:"",childMenu:""};
+			//角色ID
+			var positionId=0;
+			if('${exitsPosition}'!=null && '${exitsPosition}'!=""){
+				positionId = '${exitsPosition.id}';
+				role.parentMenu = '${exitsPosition.parentMenu}';
+				role.childMenu = '${exitsPosition.childMenu}';
+			}
 		</script>
 	</head>
 
@@ -21,28 +30,28 @@
 			<tr>
 				<td>编码</td>
 				<td>
-					<input type="hidden" id="id" value="${position.id }" />
-					<input type="text" id="positionCode" value="${position.positionCode }" class="liger-textbox" />
+					<input type="hidden" id="id" value="${exitsPosition.id }" />
+					<input type="text" id="positionCode" value="${exitsPosition.positionCode }" class="liger-textbox" />
 				</td>
 			</tr>
 			<tr>
 				<td>职位</td>
 				<td>
-					<input type="text" id="positionName" value="${position.positionName }" class="liger-textbox" />
+					<input type="text" id="positionName" value="${exitsPosition.positionName }" class="liger-textbox" />
 				</td>
 			</tr>
 			<tr>
 				<td>部门</td>
 				<td>
 					<select name="department" id="dep" class="liger-combobox">
-						<c:if test="${position.id != null && position.id != '' }">
+						<c:if test="${exitsPosition.id != null && exitsPosition.id != '' }">
 							<option value=" " selected="selected">---选择部门---</option>
 						</c:if>
 						<c:forEach items="${deps }" var="dep">
-							<c:if test="${dep.id == position.dep.id }">
+							<c:if test="${dep.id == exitsPosition.dep.id }">
 								<option value="${dep.id }" selected="selected">${dep.depName }</option>
 							</c:if>
-							<c:if test="${dep.id != position.dep.id }">
+							<c:if test="${dep.id != exitsPosition.dep.id }">
 								<option value="${dep.id }">${dep.depName }</option>
 							</c:if>
 						</c:forEach>

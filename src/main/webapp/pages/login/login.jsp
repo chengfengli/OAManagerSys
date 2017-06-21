@@ -18,7 +18,7 @@
 					<tr>
 						<td>账号</td>
 						<td>
-							<input type="text" id="id" name="id"  autocomplete="off"/>
+							<input type="text" id="id" name="id" value="10001"  autocomplete="off"/>
 							<div id="downmenu_ico"></div>
 							<ul id="account-list"></ul>
 						</td>
@@ -26,7 +26,7 @@
 					<tr>
 						<td>密码</td>
 						<td>
-							<input type="text" id="password" name="password"  autocomplete="off" onfocus="this.type='password'"/>
+							<input type="text" id="password" name="password" value="123456" autocomplete="off" onfocus="this.type='password'"/>
 						</td>
 					</tr>
 					<tr>

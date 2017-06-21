@@ -3,12 +3,30 @@ var menus = [];
 //子菜单
 var childMenus={};
 function data(){
-	var data={};
+	var data={parentMenu:"",childMenu:""};
 	data.parentMenu=JSON.stringify(menus);
 	data.childMenu=JSON.stringify(childMenus);
 	return data;
 }
 $(function(){
+	for(var i in parentMenu){
+		if(existParentMenu!=null){
+			var jsonParentMenu = JSON.parse(existParentMenu);
+			var isExtis = false;
+			for(var j=0;j<jsonParentMenu.length;j++){
+				if(jsonParentMenu[j].id==parentMenu[i].id){
+					isExtis = true;
+				}
+			}
+			if(isExtis){
+				$("#menu").append('<input type="checkbox" checked id="'+parentMenu[i].id+'" data-text="'+parentMenu[i].text+'" class="liger-checkbox" /><span class="menutxt">'+parentMenu[i].text+'</span><br>');
+			}else{
+				$("#menu").append('<input type="checkbox" id="'+parentMenu[i].id+'" data-text="'+parentMenu[i].text+'" class="liger-checkbox" /><span class="menutxt">'+parentMenu[i].text+'</span><br>');
+			}
+		}else{
+			$("#menu").append('<input type="checkbox" id="'+parentMenu[i].id+'" data-text="'+parentMenu[i].text+'" class="liger-checkbox" /><span class="menutxt">'+parentMenu[i].text+'</span><br>');
+		}
+	}
 	$("input[type=checkbox]").change(function(){
 		var isChick=$(this).prop("checked");
 		var id=$(this).prop("id");

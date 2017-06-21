@@ -1,5 +1,6 @@
 package com.oamanagersys.model.department.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,7 +52,7 @@ public class PostController {
 		ModelAndView mav = new ModelAndView("pages/usermanager/addpost");
 		List<Position> list = postService.getPsotById(position.getId()+"");
 		if(list.size()>0){
-			mav.addObject("position", list.get(0));
+			mav.addObject("exitsPosition", list.get(0));
 		}
 		Dep dep = new Dep();
 		mav.addObject("deps", depService.getDep(dep));
@@ -86,18 +87,29 @@ public class PostController {
 	 * 设置页面权限页面
 	 */
 	@RequestMapping("/setrows")
-	public ModelAndView setRows(HttpServletRequest request){
-		ModelAndView mav = new ModelAndView("pages/usermanager/setrows");
-		//获取顶级菜单
-		List<String> list = AnnotationUtil.getClasses("com.oamanagersys.menu");
-		List<Map<String, String>> result = AnnotationUtil.getClassName(list);
-		mav.addObject("lists", result);
-		//获取子菜单
-		Map<String,Object> childMap = AnnotationUtil.ReadJsonFile("./WEB-INF/classes/childmenu.properties",request);
-		String str = JSON.toJSONString(childMap);
-		System.out.println(str);
-		mav.addObject("childMenu", str);
-		return mav;
+	public ModelAndView setRows(HttpServletRequest request,Position position){
+		try {
+			request.setCharacterEncoding("utf-8");
+			ModelAndView mav = new ModelAndView("pages/usermanager/setrows");
+			//编辑角色是，获取角色信息
+			List<Position> positions = postService.getPsotById(position.getId()+"");
+			if(positions.size()>0){
+				mav.addObject("exitsPosition", positions.get(0));
+			}
+			//获取顶级菜单
+			List<String> list = AnnotationUtil.getClasses("com.oamanagersys.menu");
+			List<Map<String, String>> result = AnnotationUtil.getClassName(list);
+			String resultstr = JSON.toJSONString(result);
+			mav.addObject("lists", resultstr);
+			//获取子菜单
+			Map<String,Object> childMap = AnnotationUtil.ReadJsonFile("./WEB-INF/classes/childmenu.properties",request);
+			String str = JSON.toJSONString(childMap);
+			mav.addObject("childMenu", str);
+			return mav;
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	/**

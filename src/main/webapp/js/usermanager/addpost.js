@@ -1,5 +1,4 @@
-﻿var role={};
-function data(){
+﻿function data(){
 	var data = role;
 	data.positionCode = $("#positionCode").val();
 	data.positionName = $("#positionName").val();
@@ -15,11 +14,13 @@ $(function(){
 			height :600,
 			allowClose : false,
 			url : path+"/post/setrows",
+			urlParms:{id:positionId},
 			buttons : [
 				{
 					text : '确定',
 					onclick : function(item, dialog) {
-						role = dialog.frame.data();
+						role.parentMenu = dialog.frame.data().parentMenu;
+						role.childMenu = dialog.frame.data().childMenu;
 						dialog.close();
 					}
 				},

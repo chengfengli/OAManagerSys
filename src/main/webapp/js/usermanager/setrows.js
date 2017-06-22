@@ -2,12 +2,14 @@
 var menus = [];
 //子菜单
 var childMenus={};
+var tree;
 function data(){
 	var data={parentMenu:"",childMenu:""};
-	data.parentMenu=JSON.stringify(menus);
+	data.parentMenu=JSON.stringify(existParentMenu);
 	data.childMenu=JSON.stringify(childMenus);
 	return data;
 }
+
 $(function(){
 	for(var i in parentMenu){
 		if(existParentMenu.length>0){
@@ -27,20 +29,43 @@ $(function(){
 			$("#menu").append('<input type="checkbox" id="'+parentMenu[i].id+'" class="liger-checkbox" /><span class="menutxt" data-id="'+parentMenu[i].id+'">'+parentMenu[i].text+'</span><br>');
 		}
 	}
+	
 	$(".menutxt").click(function(){
 		var id=$(this).data("id");
 		var text=$(this).text();
 		$("#key").val(id);
 		$("#text").val(text);
-		$("#childMenuTree").ligerTree({
+		tree = $("#childMenuTree").ligerTree({
 			data:childMenu[id],
 			onCheck:function(node,checked){
-				console.log(node);
+				var parentNode = tree.getParentTreeItem(node.target);
+				if(checked){
+					if(parentNode!=null){//如果有父节点
+						var parentId = parentNode.id
+					}else{
+						var isExtis = false;
+						for(var i in existParentMenu){
+							//存在
+							if(existParentMenu[i].id==id){
+								isExtis = true;
+								break;
+							}
+						}
+						if(isExtis){
+							console.log(node.data)
+						}else{
+							parent.$.ligerDialog.warn("选择一个主菜单!");
+						}
+					}
+				}
 			}
 		});
+		tree.selectNode(d);
 	});
+	
 	//勾选主菜单
 	$("input[type=checkbox]").change(function(){
+		$(this).next().click();
 		var isChick=$(this).prop("checked");
 		var id = $("#key").val();
 		var text = $("#text").val();
@@ -51,7 +76,7 @@ $(function(){
 			json.text=text;
 			if(existParentMenu.length>0){
 				var isExtis = false;
-				//循环判断是否存在勾选的菜单，默认不存在
+				//循环判断在已有的菜单中是否存在勾选的菜单，默认不存在
 				for(var i in existParentMenu){
 					//存在
 					if(existParentMenu[i].id==id){
@@ -66,16 +91,16 @@ $(function(){
 			}else{
 				existParentMenu.push(json);
 			}
-			console.log(existParentMenu);
 		}else{//取消菜单
 			for(var i in existParentMenu){
 				//存在
 				if(existParentMenu[i].id==id){
-					existParentMenu.remove(i);
+					existParentMenu.splice(i,1);
 				}
 			}
 		}
 	});
+	
 	/*添加*/
 	$("#add").click(function(){
 		var json = {};

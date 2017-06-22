@@ -20,7 +20,7 @@
 			//职位已有的主菜单
 			var existParentMenu = [];
 			//职位已有的子菜单
-			var existChildMenu = [];
+			var existChildMenu = {};
 			if('${exitsPosition}' != ''){
 				existParentMenu = '${exitsPosition.parentMenu}';
 				existChildMenu = '${exitsPosition.childMenu}';

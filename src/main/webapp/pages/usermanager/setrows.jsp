@@ -23,7 +23,7 @@
 			var existChildMenu = {};
 			if('${exitsPosition}' != ''){
 				existParentMenu = '${exitsPosition.parentMenu}';
-				existChildMenu = '${exitsPosition.childMenu}';
+				existChildMenu = JSON.parse('${exitsPosition.childMenu}');
 			}
 		</script>
 	</head>

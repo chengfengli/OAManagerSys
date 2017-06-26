@@ -14,8 +14,13 @@ $(function(){
 		var positionCode = $(this).val();
 		location.href = hostURL+"index/switchrole?positionCode="+positionCode;
 	});
+	//退出
 	$("#exit").click(function(){
-		$.ligerDialog.success('退出')
+		$.ligerDialog.confirm('确定退出？', function (yes) {
+			if(yes){
+				location.href = hostURL+"user/loginout";
+			}
+		});
 	});
 	//布局
 	$("#layout1").ligerLayout({

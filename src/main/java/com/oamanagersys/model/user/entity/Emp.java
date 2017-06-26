@@ -1,9 +1,8 @@
 package com.oamanagersys.model.user.entity;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
+import com.oamanagersys.model.department.entity.Dep;
 import com.oamanagersys.model.department.entity.Position;
 import com.oamanagersys.util.base.BaseEntity;
 
@@ -34,6 +33,12 @@ public class Emp extends BaseEntity {
 	
 	//是否转正
 	private int formal;
+	
+	//部门
+	private Dep dep;
+	
+	//职位
+	private Position position;
 
 	public String getPassword() {
 		return password;
@@ -89,5 +94,21 @@ public class Emp extends BaseEntity {
 
 	public void setFormal(int formal) {
 		this.formal = formal;
+	}
+	
+	public Dep getDep() {
+		return dep;
+	}
+
+	public void setDep(Dep dep) {
+		this.dep = dep;
+	}
+
+	public Position getPosition() {
+		return position;
+	}
+
+	public void setPosition(Position position) {
+		this.position = position;
 	}
 }

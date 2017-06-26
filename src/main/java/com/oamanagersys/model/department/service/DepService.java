@@ -53,8 +53,8 @@ public class DepService {
 	 * @param dep
 	 * @return
 	 */
-	public int deleteDep(Dep dep){
-		int count  = depDao.deleteDep(dep);
+	public int deleteDep(String ids){
+		int count  = depDao.deleteDep(ids.split(","));
 		return count;
 	}
 }

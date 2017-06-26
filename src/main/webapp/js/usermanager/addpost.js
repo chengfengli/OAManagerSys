@@ -3,6 +3,11 @@
 	data.positionCode = $("#positionCode").val();
 	data.positionName = $("#positionName").val();
 	data.depId = $("#dep").val();
+	if($("#id").val() == ""){
+		data.id = 0;
+	}else{
+		data.id = $("#id").val();
+	}
 	return data;
 }
 $(function(){

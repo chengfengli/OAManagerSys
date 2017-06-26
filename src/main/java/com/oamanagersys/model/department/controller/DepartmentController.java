@@ -96,13 +96,13 @@ public class DepartmentController {
 	
 	/**
 	 * 删除部门
-	 * @param dep
+	 * @param id
 	 * @return
 	 */
 	@RequestMapping("/delete")
 	@ResponseBody
-	public Message deleteDep(Dep dep,HttpServletRequest request){
-		int count = depService.deleteDep(dep);
+	public Message deleteDep(String id,HttpServletRequest request){
+		int count = depService.deleteDep(id);
 		Message message = new Message();
 		if(count > 0){
 			message.isSuccess = true;

@@ -15,6 +15,9 @@ function f_selectNode(parmas){
 				if(data.id == parmas[j].id){
 					return true;
 				}
+				if(parmas[j].children){
+    				f_selectNode(parmas[j].children);
+    			}
 			}
 		}
 	}
@@ -34,13 +37,28 @@ function removeMenu(key,canacelMenus,canacelNodeId){
 	console.log(existChildMenu);
 }
 
+function addChildMenu(currentCheckedNode,parentId,currentNodeId){
+	for(var i in existChildMenu[currentNodeId]){
+		if(existChildMenu[currentNodeId][i].id == parentId){
+			var isExtis = false;
+			for(var j in existChildMenu[currentNodeId][i].children){
+				if(existChildMenu[currentNodeId][i].children[j].id == currentCheckedNode.id){
+					isExtis = true;
+				}
+			}
+			if(!isExtis){
+				existChildMenu[currentNodeId][i].children.push(currentCheckedNode);
+			}
+		}
+	}
+}
+
 $(function(){
 	for(var i in parentMenu){
 		if(existParentMenu.length>0){
-			var jsonParentMenu = JSON.parse(existParentMenu);
 			var isExtis = false;
-			for(var j=0;j<jsonParentMenu.length;j++){
-				if(jsonParentMenu[j].id==parentMenu[i].id){
+			for(var j=0;j<existParentMenu.length;j++){
+				if(existParentMenu[j].id==parentMenu[i].id){
 					isExtis = true;
 				}
 			}
@@ -63,11 +81,17 @@ $(function(){
 		tree = $("#childMenuTree").ligerTree({
 			data:childMenu[id],
 			onCheck:function(node,checked){
+				//勾选的节点
+				var currentCheckedNode = node.data;
+				//勾选的节点的父节点
 				var parentNode = tree.getParentTreeItem(node.target);
+				//勾选的节点的主菜单id
 				var currentNodeId = $("#key").val();
 				if(checked && constans == 0){
 					if(parentNode!=null){//如果有父节点
-						var parentId = parentNode.id
+						//勾选的节点的父节点id
+						var parentId = parentNode.id;
+						addChildMenu(currentCheckedNode,parentId,currentNodeId)
 					}else{//最顶级的子菜单
 						var isExtis = false;
 						for(var i in existParentMenu){
@@ -80,13 +104,13 @@ $(function(){
 						if(isExtis){
 							isExtis = false;
 							for(var i in existChildMenu[currentNodeId]){
-								if(node.data.id == existChildMenu[currentNodeId][i].id){
+								if(currentCheckedNode.id == existChildMenu[currentNodeId][i].id){
 									isExtis = true;
 									break;
 								}
 							}
 							if(!isExtis){
-								existChildMenu[currentNodeId].push(node.data);
+								existChildMenu[currentNodeId].push(currentCheckedNode);
 							}
 						}else{
 							parent.$.ligerDialog.warn("选择一个主菜单!");

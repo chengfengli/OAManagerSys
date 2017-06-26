@@ -1,8 +1,7 @@
-﻿/*工具栏*/
+﻿var grid;
+/*工具栏*/
 function toolbar() {
 	var items = [];
-	items.push({text:'设置权限',icon:'settings',click: function () {setting();}});
-	items.push({ line:true });
 	items.push({text:'编辑',icon:'edit',click: function () {edit();}});
 	items.push({ line:true });
 	items.push({text:'个人信息',icon:'information_personal',click: function () {}});
@@ -60,20 +59,44 @@ $(function(){
 		array.push({id:i,workNo:"0000"+i,name:"李四"+i,department:"销售部",position:"销售经理",entryTime:"2017-05-01",onTrialTime:"三个月",official:"否",onJob:"在职"});
 	}
 	var data={Rows:array};
-	$("#list").ligerGrid({
+	grid = $("#list").ligerGrid({
+		url:path+"/user/getallemp",
 		checkbox: true,
         columns: [
-	        { display: 'id', name: 'id',hide : true, },
-	        { display: '工号', name: 'workNo', width: "10%" },
+	        { display: '工号', name: 'id', width: "10%" },
 	        { display: '姓名', name: 'name', width:"10%" },
-	        { display: '部门', name: 'department', width:"10%"},
+	        { display: '部门', name: 'dep.depName', width:"10%"},
 	        { display: '职位', name: 'position', width:"10%"},
-	        { display: '入职时间', name: 'entryTime', width:"15%"},
-	        { display: '试用时间', name: 'onTrialTime', width:"15%"},
-	        { display: '是否转正', name: 'official', width:"10%"},
+	        { display: '入职时间', name: 'entryTime', width:"15%",render:function(row){
+	        		var str = new Date(parseInt(row.entryTime)).toLocaleString().replace(/\//g,'-');
+	        		return str;
+	        	}
+	        },
+	        { display: '试用时间', name: 'probationPeriod', width:"15%",render:function(row){
+	        		var str = '';
+	        		if(row.probationPeriod == 1){
+	        			str = '一个月';
+	        		}else if(row.probationPeriod == 2){
+	        			str = '二个月';
+	        		}
+	        		else if(row.probationPeriod == 3){
+	        			str = '三个月';
+	        		}
+	        		return str;
+	        	}
+	        },
+	        { display: '是否转正', name: 'formal', width:"10%",render:function(row){
+	        		var str = '';
+	        		if(row.formal == 0){
+	        			str = '否';
+	        		}else if(row.formal == 1){
+	        			str = '是';
+	        		}
+	        		return str;
+	        	}
+	        },
 	        { display: '是否在职', name: 'onJob', width:"10%"}
         ], pageSize:10,
-        data:data,
         width: '100%',height:'99%'
 	});
 });

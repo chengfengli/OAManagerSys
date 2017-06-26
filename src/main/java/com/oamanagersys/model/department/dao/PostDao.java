@@ -33,4 +33,10 @@ public interface PostDao {
 	 * @return
 	 */
 	public int update(Position position);
+	/**
+	 * 修改角色信息
+	 * @param position
+	 * @return
+	 */
+	public int delete(String[] ids);
 }

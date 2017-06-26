@@ -102,27 +102,27 @@ function edit(){
 /*删除*/
 function del(){
 	var rows = grid.getCheckedRows();
-	if (rows && rows.length == 1) {
-		var ids = [];
+	if (rows && rows.length != 0) {
+		var ids = '';
 		$(rows).each(function() {
-			ids.push(this.id);
+			if(ids == ''){
+				ids += ''+this.id;
+			}else{
+				ids += ','+this.id;
+			}
 		});
 		$.ajax({
 			url:path+"/department/delete",
 			type:"post",
 			dataType:"json",
-			data:{id:ids[0]},
+			data:{id:ids},
 			success:function(response){
-				if(response.isSuccess){
-					grid.loadData();
-					parent.$.ligerDialog.success(response.strMessage);
-				}else{
-					parent.$.ligerDialog.success(response.strMessage);
-				}
+				grid.loadData();
+				parent.$.ligerDialog.success(response.strMessage);
 			}
 		});
 	}else{
-		parent.$.ligerDialog.warn("选择一条数据!");
+		parent.$.ligerDialog.warn("选择要删除的数据!");
 	}
 }
 $(function(){

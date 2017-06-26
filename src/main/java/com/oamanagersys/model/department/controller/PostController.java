@@ -113,6 +113,26 @@ public class PostController {
 	}
 	
 	/**
+	 * 删除角色
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("/delete")
+	@ResponseBody
+	public Message deletePost(String id,HttpServletRequest request){
+		Message message = new Message();
+		int count = postService.delete(id);
+		if(count > 0){
+			message.isSuccess=true;
+			message.strMessage="删除成功!";
+		}else{
+			message.isSuccess=false;
+			message.strMessage="删除失败!";
+		}
+		return message;
+	}
+	
+	/**
 	 * 角色列表
 	 * @return
 	 */

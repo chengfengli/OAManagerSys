@@ -6,9 +6,7 @@ function toolbar() {
 	items.push({ line:true });
 	items.push({text:'编辑',icon:'edit',click: function () {edit()}});
 	items.push({ line:true });
-	items.push({text:'详情',icon:'view',click: function () {}});
-	items.push({ line:true });
-	items.push({text:'删除',icon:'delete1',click: function () {}});
+	items.push({text:'删除',icon:'delete1',click: function () {del()}});
 	$("#toolbar").ligerToolBar({
 		items: items
 	});
@@ -62,7 +60,7 @@ function edit(){
 			ids.push(this.id);
 		});
 		parent.$.ligerDialog.open({
-			title : '添加职位',
+			title : '修改职位',
 			width : 500,
 			height :300,
 			allowClose : false,
@@ -102,24 +100,45 @@ function edit(){
 		parent.$.ligerDialog.warn("选择一条数据!");
 	}
 }
-/*leaveOffice*/
-function leaveOffice(){
-	
-}
+
 /*删除*/
 function del(){
-	parent.$.ligerDialog.warn('删除!');
+	var rows = grid.getCheckedRows();
+	if (rows && rows.length != 0) {
+		var ids = '';
+		$(rows).each(function() {
+			if(ids == ''){
+				ids+= ''+this.id;
+			}else{
+				ids+= ','+this.id;
+			}
+		});
+		parent.$.ligerDialog.confirm('确定删除职位？', function (yes) {
+			if(yes){
+				$.ajax({
+					url:path+"/post/delete",
+					type:"post",
+					dataType:"json",
+					data:{id:ids},
+					seccess:function(response){
+						grid.loadData();
+						parent.$.ligerDialog.success(response.strMessage);
+					},
+					error:function(response){
+						parent.$.ligerDialog.error('系统错误');
+					}
+				});
+			}
+		});
+	}else{
+		parent.$.ligerDialog.warn("选择要删除的数据!");
+	}
 }
 $(function(){
 	$("#entryTime").ligerDateEditor();
 	/*工具栏方法*/
 	toolbar();
 	/*初始数据*/
-	var array = [];
-	for(var i=1;i<=100;i++){
-		array.push({id:i,code:"0000DAFD"+i,position:"总经理"+i,department:"销售部",createTime:"2017-05-01",creater:"超级管理员"});
-	}
-	var data={Rows:array};
 	grid = $("#list").ligerGrid({
 		url:path+"/post/getpost",
 		checkbox: true,
@@ -129,7 +148,7 @@ $(function(){
 	        { display: '职位', name: 'positionName', width:"10%"},
 	        { display: '部门', name: 'dep.depName', width:"10%"},
 	        { display: '创建时间', name: 'createTime', width:"15%",render:function(row){
-	        		var str = new Date(parseInt(row.createTime)).toLocaleString().replace(/:\d{1,2}$/,' ');
+	        		var str = new Date(parseInt(row.createTime)).toLocaleString().replace(/\//g,'-');
 	        		return str;
 	        	}
 	        },

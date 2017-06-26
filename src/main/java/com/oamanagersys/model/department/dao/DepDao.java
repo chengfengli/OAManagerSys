@@ -20,5 +20,5 @@ public interface DepDao {
 	public int updateDep(Dep dep);
 	
 	//添加部门
-	public int deleteDep(Dep dep);
+	public int deleteDep(String[] ids);
 }

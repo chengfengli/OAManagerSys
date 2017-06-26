@@ -55,4 +55,13 @@ public class PostService {
 		position.setLastUpdateTime(new Date());
 		return postDao.update(position);
 	}
+	
+	/**
+	 * 修改职位信息
+	 * @param position
+	 * @return
+	 */
+	public int delete(String ids){
+		return postDao.delete(ids.split(","));
+	}
 }

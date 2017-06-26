@@ -2,7 +2,10 @@ package com.oamanagersys.model.user.controller;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
@@ -88,6 +91,19 @@ public class UserController {
 	@RequestMapping("/loginlog")
 	public ModelAndView loginLog(){
 		ModelAndView mav = new ModelAndView("pages/manageset/loginlog");
+		return mav;
+	}
+	
+	/**
+	 * 退出
+	 */
+	@RequestMapping("/loginout")
+	public ModelAndView loginOut(HttpServletRequest request){
+		Enumeration em = request.getSession().getAttributeNames();
+		while(em.hasMoreElements()){
+			request.getSession().removeAttribute(em.nextElement().toString());
+		}
+		ModelAndView mav = new ModelAndView("pages/login/login");
 		return mav;
 	}
 	
@@ -201,10 +217,13 @@ public class UserController {
 //		return msg;
 //	}
 	
-//	@RequestMapping("/getallemp")
-//	public List<Emp> getAllEmp(){
-//		List<Emp> list = userService.getAllEmp();
-//		return list;
-//	}
+	@RequestMapping("/getallemp")
+	@ResponseBody
+	public Map<String,List<Emp>> getAllEmp(Emp emp){
+		Map<String,List<Emp>> map = new HashMap<String,List<Emp>>();
+		List<Emp> list = userService.getAllEmp(emp);
+		map.put("Rows", list);
+		return map;
+	}
 	
 }

@@ -22,7 +22,7 @@
 			//职位已有的子菜单
 			var existChildMenu = {};
 			if('${exitsPosition}' != ''){
-				existParentMenu = '${exitsPosition.parentMenu}';
+				existParentMenu = JSON.parse('${exitsPosition.parentMenu}');
 				existChildMenu = JSON.parse('${exitsPosition.childMenu}');
 			}
 		</script>

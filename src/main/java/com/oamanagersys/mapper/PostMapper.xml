@@ -41,7 +41,14 @@
 	</insert>
 	
 	<update id="update" parameterType="com.oamanagersys.model.department.entity.Position">
-		UPDATE FROM `position` SET positionName=#{positionName},depId=#{depId},lastUpdateTime=#{lastUpdateTime},updateUser=#{updateUser}
+		UPDATE `position` SET parentMenu=#{parentMenu},childMenu=#{childMenu},positionName=#{positionName},depId=#{depId},lastUpdateTime=#{lastUpdateTime},updateUser=#{updateUser}
 		WHERE positionId = #{id}
 	</update>
+	
+	<delete id="delete">
+		DELETE FROM `position` WHERE positionId in
+		<foreach collection="array" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
 </mapper>

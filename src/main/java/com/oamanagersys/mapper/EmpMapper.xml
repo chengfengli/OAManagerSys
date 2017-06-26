@@ -6,7 +6,7 @@
 		<result column="password" property="password" />
 		<result column="depId" property="depId" />
 		<result column="positionId" property="positionId" />
-		<result column="enttyTime" property="enttyTime" />
+		<result column="entryTime" property="entryTime" />
 		<result column="probationPeriod" property="probationPeriod" />
 		<result column="name" property="name" />
 		<result column="formal" property="formal" />
@@ -14,15 +14,24 @@
 		<result column="createUser" property="createUser" />
 		<result column="lastUpdateTime" property="lastUpdateTime" />
 		<result column="updateUser" property="updateUser" />
+		<association property="dep" javaType="com.oamanagersys.model.department.entity.Dep" column="depId" resultMap="resultDep"></association>
 	</resultMap>
 	
+	<resultMap id="resultDep" type="com.oamanagersys.model.department.entity.Dep">
+		<id column="depId" property="id" />
+		<result column="depCode" property="depCode" />
+		<result column="depName" property="depName" />
+	</resultMap>
+	
+	
+	
 	<select id="getAllEmp" resultMap="empResultMap" parameterType="com.oamanagersys.model.user.entity.Emp">
-		select * from emp,position where 1 = 1 
-		<if test="id != null">
+		select * from emp,position,dep where emp.depId = dep.depId and position.positionId = emp.positionId
+		<if test="id != 0">
 			and empNo = #{id}
 		</if>
-		<if test="password != password">
-			and empNo = #{id}
+		<if test="password != null and password != ''">
+			and password = #{password}
 		</if>
 	</select>
 	

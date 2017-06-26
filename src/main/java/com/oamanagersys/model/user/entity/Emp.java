@@ -34,6 +34,9 @@ public class Emp extends BaseEntity {
 	//是否转正
 	private int formal;
 	
+	//是否在职
+	private int onJob;
+
 	//部门
 	private Dep dep;
 	
@@ -70,6 +73,14 @@ public class Emp extends BaseEntity {
 
 	public void setEntryTime(Date entryTime) {
 		this.entryTime = entryTime;
+	}
+	
+	public int getOnJob() {
+		return onJob;
+	}
+
+	public void setOnJob(int onJob) {
+		this.onJob = onJob;
 	}
 
 	public int getProbationPeriod() {

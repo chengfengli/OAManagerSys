@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.oamanagersys.model.department.entity.Dep;
 import com.oamanagersys.model.department.service.DepService;
 import com.oamanagersys.model.user.entity.Emp;
+import com.oamanagersys.model.user.service.UserService;
 import com.oamanagersys.util.response.Message;
 
 /**
@@ -28,6 +29,9 @@ import com.oamanagersys.util.response.Message;
 public class DepartmentController {
 	@Autowired
 	private DepService depService;
+	
+	@Autowired
+	private UserService userService;
 	
 	/**
 	 * 部门管理页面

@@ -15,12 +15,19 @@
 		<result column="lastUpdateTime" property="lastUpdateTime" />
 		<result column="updateUser" property="updateUser" />
 		<association property="dep" javaType="com.oamanagersys.model.department.entity.Dep" column="depId" resultMap="resultDep"></association>
+		<association property="position" javaType="com.oamanagersys.model.department.entity.Position" column="positionId" resultMap="postResultMap"></association>
 	</resultMap>
 	
 	<resultMap id="resultDep" type="com.oamanagersys.model.department.entity.Dep">
 		<id column="depId" property="id" />
 		<result column="depCode" property="depCode" />
 		<result column="depName" property="depName" />
+	</resultMap>
+	
+	<resultMap id="postResultMap" type="com.oamanagersys.model.department.entity.Position">
+		<id column="positionId" property="id" />
+		<result column="positionCode" property="positionCode" />
+		<result column="positionName" property="positionName" />
 	</resultMap>
 	
 	

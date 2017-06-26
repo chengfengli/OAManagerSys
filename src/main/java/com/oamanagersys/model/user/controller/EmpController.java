@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.oamanagersys.model.department.entity.Dep;
+import com.oamanagersys.model.department.service.DepService;
 import com.oamanagersys.model.user.entity.Emp;
 import com.oamanagersys.model.user.service.UserService;
 import com.oamanagersys.util.response.Message;
@@ -29,16 +31,22 @@ import com.oamanagersys.util.validation.ValidationCode;
  * 联    系：17310545652
  */
 @Controller
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/emp")
+public class EmpController {
+	
+	@Autowired
+	private DepService depService;
 	@Autowired
 	private UserService userService;
+	
 	/**
 	 * 添加员工页面
 	 */
 	@RequestMapping("/adduser")
 	public ModelAndView addUser(){
 		ModelAndView mav = new ModelAndView("pages/usermanager/adduser");
+		Dep dep = new Dep();
+		//mav.addObject("deps", depService.getDep(dep));
 		return mav;
 	}
 	/**

@@ -66,7 +66,7 @@ $(function(){
 	        { display: '工号', name: 'id', width: "10%" },
 	        { display: '姓名', name: 'name', width:"10%" },
 	        { display: '部门', name: 'dep.depName', width:"10%"},
-	        { display: '职位', name: 'position', width:"10%"},
+	        { display: '职位', name: 'position.positionName', width:"10%"},
 	        { display: '入职时间', name: 'entryTime', width:"15%",render:function(row){
 	        		var str = new Date(parseInt(row.entryTime)).toLocaleString().replace(/\//g,'-');
 	        		return str;
@@ -95,7 +95,16 @@ $(function(){
 	        		return str;
 	        	}
 	        },
-	        { display: '是否在职', name: 'onJob', width:"10%"}
+	        { display: '是否在职', name: 'onJob', width:"10%",render:function(row){
+	        		var str = '';
+	        		if(row.onJob == 0){
+	        			str = '否';
+	        		}else if(row.onJob == 1){
+	        			str = '是';
+	        		}
+	        		return str;
+	        	}
+	        }
         ], pageSize:10,
         width: '100%',height:'99%'
 	});

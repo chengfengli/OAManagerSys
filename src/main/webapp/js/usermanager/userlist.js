@@ -41,9 +41,34 @@ function setting(){
 function edit(){
 	location.href=path+"/user/adduser";
 }
-/*leaveOffice*/
+/*离职*/
 function leaveOffice(){
-	
+	var rows = grid.getCheckedRows();
+	if (rows && rows.length == 1) {
+		var ids = '';
+		$(rows).each(function() {
+			if(ids == ''){
+				ids+= ''+this.id;
+			}else{
+				ids+= ','+this.id;
+			}
+		});
+		$.ajax({
+			url:path+"/user/leaveOffice",
+			type:"post",
+			dataType:"json",
+			data:{idStr:ids},
+			success:function(response){
+				parent.$.ligerDialog.error(response.strMessage);
+				grid.loadData();
+			},
+			error:function(){
+				parent.$.ligerDialog.error("系统错误!");
+			}
+		});
+	}else{
+		parent.$.ligerDialog.warn("选择要操作的数据!");
+	}
 }
 /*删除*/
 function del(){
@@ -67,12 +92,8 @@ $(function(){
 	        { display: '姓名', name: 'name', width:"10%" },
 	        { display: '部门', name: 'dep.depName', width:"10%"},
 	        { display: '职位', name: 'position.positionName', width:"10%"},
-	        { display: '入职时间', name: 'entryTime', width:"15%",render:function(row){
-	        		var str = new Date(parseInt(row.entryTime)).toLocaleString().replace(/\//g,'-');
-	        		return str;
-	        	}
-	        },
-	        { display: '试用时间', name: 'probationPeriod', width:"15%",render:function(row){
+	        { display: '入职时间', name: 'entryTime', width:"15%"},
+	        { display: '试用期', name: 'probationPeriod', width:"15%",render:function(row){
 	        		var str = '';
 	        		if(row.probationPeriod == 1){
 	        			str = '一个月';
@@ -107,6 +128,21 @@ $(function(){
 	        }
         ], pageSize:10,
         width: '100%',height:'99%'
+	});
+	
+	$("#select").click(function(){
+		var name = $("#name").val();
+		var entryTime = $("#entryTime").val();
+		var probationPeriod = $("#probationPeriod").val();
+		
+		grid.setOptions({  
+            parms : {  
+            	name : name,  
+            	entryTime : entryTime,
+            	probationPeriod: probationPeriod
+            } 
+		});  
+		grid.loadData(true); 
 	});
 });
 

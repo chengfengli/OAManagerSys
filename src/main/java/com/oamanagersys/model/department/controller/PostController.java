@@ -143,4 +143,17 @@ public class PostController {
 		map.put("Rows", postService.getPsot());
 		return map;
 	}
+	
+	/**
+	 * 角色列表
+	 * @return
+	 */
+	@RequestMapping("/getpostbydepid")
+	@ResponseBody
+	public List<Position> getPostByDepId(int depId){
+		List<Position> list  = postService.getPsotByDepId(depId);
+		return list;
+	}
+	
+	
 }

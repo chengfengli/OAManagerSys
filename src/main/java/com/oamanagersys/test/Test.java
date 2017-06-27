@@ -1,5 +1,6 @@
 package com.oamanagersys.test;
 
+import com.oamanagersys.util.format.DateFormat;
 import com.oamanagersys.util.md5.Md5;
 
 /**
@@ -9,6 +10,6 @@ import com.oamanagersys.util.md5.Md5;
  */
 public class Test {
 	public static void main(String[] args) {
-		System.out.println(Md5.md5("123456"));
+		System.out.println(DateFormat.newDateString());
 	}
 }

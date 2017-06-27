@@ -35,6 +35,10 @@
 		SELECT * FROM `position`,dep WHERE position.depId = dep.depId and positionId IN (#{0})
 	</select>
 	
+	<select id="getPsotByDepId" resultMap="postResultMap" parameterType="java.lang.Integer">
+		SELECT * FROM `position` WHERE position.depId = #{0}
+	</select>
+	
 	<insert id="insert" parameterType="com.oamanagersys.model.department.entity.Position">
 		INSERT INTO `position` (positionCode,positionName,depId,createTime,createUser,parentMenu,childMenu)
 		VALUES (#{positionCode},#{positionName},#{depId},#{createTime},#{createUser},#{parentMenu},#{childMenu})

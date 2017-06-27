@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.oamanagersys.model.department.dao.DepDao;
 import com.oamanagersys.model.department.entity.Dep;
+import com.oamanagersys.util.format.DateFormat;
 
 /**
  * 创建人： 李明
@@ -34,7 +35,7 @@ public class DepService {
 	 * @return
 	 */
 	public int addDep(Dep dep){
-		dep.setCreateTime(new Date());
+		dep.setCreateTime(DateFormat.newDateString());
 		int count  = depDao.addDep(dep);
 		return count;
 	}
@@ -44,7 +45,7 @@ public class DepService {
 	 * @return
 	 */
 	public int updateDep(Dep dep){
-		dep.setLastUpdateTime(new Date());
+		dep.setLastUpdateTime(DateFormat.newDateString());
 		int count  = depDao.updateDep(dep);
 		return count;
 	}

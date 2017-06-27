@@ -23,7 +23,7 @@ public class Emp extends BaseEntity {
 	private String positionId;
 	
 	//入职时间
-	private Date entryTime;
+	private String entryTime;
 	
 	//试用期
 	private int probationPeriod;
@@ -67,11 +67,11 @@ public class Emp extends BaseEntity {
 		this.positionId = positionId;
 	}
 
-	public Date getEntryTime() {
+	public String getEntryTime() {
 		return entryTime;
 	}
 
-	public void setEntryTime(Date entryTime) {
+	public void setEntryTime(String entryTime) {
 		this.entryTime = entryTime;
 	}
 	

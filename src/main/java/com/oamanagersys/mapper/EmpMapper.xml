@@ -10,6 +10,7 @@
 		<result column="probationPeriod" property="probationPeriod" />
 		<result column="name" property="name" />
 		<result column="formal" property="formal" />
+		<result column="onJob" property="onJob" />
 		<result column="createTime" property="createTime" />
 		<result column="createUser" property="createUser" />
 		<result column="lastUpdateTime" property="lastUpdateTime" />
@@ -40,10 +41,19 @@
 		<if test="password != null and password != ''">
 			and password = #{password}
 		</if>
+		<if test="name != null and name != ''">
+			and name = #{name}
+		</if>
+		<if test="entryTime != null and entryTime != ''">
+			and entryTime >= #{entryTime}
+		</if>
+		<if test="probationPeriod != 0">
+			and probationPeriod = #{probationPeriod}
+		</if>
 	</select>
 	
-	<insert id="addUser" parameterType="com.oamanagersys.model.user.entity.Emp">
-		INSERT INTO user(username,userpwd,useraccount,phone,address,sex,email,age)
-		VALUES (#{userName},#{userPwd},#{userAccount},#{phone},#{address},#{sex},#{email},#{age})
+	<insert id="addEmp" parameterType="com.oamanagersys.model.user.entity.Emp">
+		INSERT INTO emp(password,depId,positionId,createTime,createUser,probationPeriod,entryTime,name,formal,onJob)
+		VALUES (#{password},#{depId},#{positionId},#{createTime},#{createUser},#{probationPeriod},#{entryTime},#{name},#{formal},#{onJob})
 	</insert>
 </mapper>

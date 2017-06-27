@@ -137,11 +137,7 @@ $(function(){
 	        { display: '编码', name: 'depCode', width: "15%" },
 	        { display: '部门', name: 'depName', width:"10%"},
 	        { display: '创建人', name: 'create.name', width:"15%"},
-	        { display: '创建时间', name: 'createTime', width:"15%",render:function(dep){
-	        		var str = new Date(parseInt(dep.createTime)).toLocaleString().replace(/:\d{1,2}$/,' ');
-	        		return str;
-	        	}
-	        },
+	        { display: '创建时间', name: 'createTime', width:"15%"},
 	        { display: '描述', name: 'describe', width:"20%"},
         ], pageSize:10,
         width: '100%',height:'99%'

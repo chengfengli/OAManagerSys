@@ -101,7 +101,7 @@ $(function() {
 					}
 				},
 				error : function(result) {
-					alert("系统错误!");
+					parent.$.ligerDialog.success("系统错误!");
 				}
 			})
 		}

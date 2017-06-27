@@ -27,7 +27,7 @@
 				<td><input type="text" name="entryTime" id="entryTime" /></td>
 				<td class="title">试用期</td>
 				<td>
-					<select name="onTrialTime" id="onTrialTime" class="liger-combobox">
+					<select name="probationPeriod" id="probationPeriod" class="liger-combobox">
 						<option value="0" selected="selected">请选择</option>
 						<option value="1">一个月</option>
 						<option value="2">二个月</option>
@@ -37,7 +37,7 @@
 						<option value="4">六个月</option>
 					</select>
 				</td>
-				<td class="title"><input type="button" value="查询" class="liger-button" /></td>
+				<td class="title"><input type="button" id="select" value="查询" class="liger-button" /></td>
 			</tr>
 		</table>
 		<!-- 列表 -->

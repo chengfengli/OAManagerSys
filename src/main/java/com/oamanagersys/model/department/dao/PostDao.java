@@ -22,6 +22,12 @@ public interface PostDao {
 	 */
 	public List<Position> getPsotById(String positionId);
 	/**
+	 * 通过部门获取角色信息
+	 * @param depId
+	 * @return
+	 */
+	public List<Position> getPsotByDepId(int depId);
+	/**
 	 * 添加角色信息
 	 * @param position
 	 * @return

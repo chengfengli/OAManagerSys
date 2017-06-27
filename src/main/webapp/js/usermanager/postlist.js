@@ -147,11 +147,7 @@ $(function(){
 	        { display: '编码', name: 'positionCode', width: "10%" },
 	        { display: '职位', name: 'positionName', width:"10%"},
 	        { display: '部门', name: 'dep.depName', width:"10%"},
-	        { display: '创建时间', name: 'createTime', width:"15%",render:function(row){
-	        		var str = new Date(parseInt(row.createTime)).toLocaleString().replace(/\//g,'-');
-	        		return str;
-	        	}
-	        },
+	        { display: '创建时间', name: 'createTime', width:"15%"},
 	        { display: '创建人', name: 'create.name', width:"15%"}
         ], pageSize:10,
         width: '100%',height:'99%'

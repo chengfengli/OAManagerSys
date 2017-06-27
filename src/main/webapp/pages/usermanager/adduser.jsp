@@ -35,7 +35,7 @@
 				<td>部门</td>
 				<td>
 					<select name="department" id="department" class="liger-combobox">
-						<option value="0" selected="selected">请选择</option>
+						<option value="0" selected="selected">---请选择---</option>
 						<c:forEach items="${deps }" var="dep">
 							<option value="${dep.id }">${dep.depName }</option>
 						</c:forEach>
@@ -45,13 +45,13 @@
 			<tr>
 				<td>职位</td>
 				<td>
-					<input type="text" name="position" id="position" class="liger-textbox" />
+					<input type="text" name="position" id="position" />
 				</td>
 			</tr>
 			<tr>
 				<td>试用时间</td>
 				<td>
-					<select name="onTrialTime" id="onTrialTime" class="liger-combobox">
+					<select name="probationPeriod" id="probationPeriod" class="liger-combobox">
 						<option value="1" selected="selected">一个月</option>
 						<option value="2">二个月</option>
 						<option value="3">三个月</option>

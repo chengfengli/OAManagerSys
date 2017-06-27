@@ -31,7 +31,7 @@ import com.oamanagersys.util.validation.ValidationCode;
  * 联    系：17310545652
  */
 @Controller
-@RequestMapping("/emp")
+@RequestMapping("/user")
 public class EmpController {
 	
 	@Autowired
@@ -46,7 +46,7 @@ public class EmpController {
 	public ModelAndView addUser(){
 		ModelAndView mav = new ModelAndView("pages/usermanager/adduser");
 		Dep dep = new Dep();
-		//mav.addObject("deps", depService.getDep(dep));
+		mav.addObject("deps", depService.getDep(dep));
 		return mav;
 	}
 	/**
@@ -232,6 +232,56 @@ public class EmpController {
 		List<Emp> list = userService.getAllEmp(emp);
 		map.put("Rows", list);
 		return map;
+	}
+	
+	/**
+	 * 编辑员工
+	 * @param emp
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping("/edit")
+	@ResponseBody
+	public Message editEmp(Emp emp,HttpServletRequest req){
+		Emp currentEmp = (Emp)req.getSession().getAttribute("user");
+		Message message = new Message();
+		int count = 0;
+		if(emp.getId() != 0){
+			emp.setCreateUser(currentEmp.getId());
+		}else{
+			emp.setUpdateUser(currentEmp.getId());
+			count = userService.addEmp(emp);
+		}
+		if(count>0){
+			message.isSuccess = true;
+			message.strMessage = "保存成功!";
+		}else{
+			message.isSuccess = false;
+			message.strMessage = "保存失败!";
+		}
+		return message;
+	}
+	/**
+	 * 离职
+	 * @param emp
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping("/leaveOffice")
+	@ResponseBody
+	public Message leaveOffice(String idStr,HttpServletRequest req){
+		Emp currentEmp = (Emp)req.getSession().getAttribute("user");
+		Message message = new Message();
+		int count = 0;
+		
+		if(count>0){
+			message.isSuccess = true;
+			message.strMessage = "保存成功!";
+		}else{
+			message.isSuccess = false;
+			message.strMessage = "保存失败!";
+		}
+		return message;
 	}
 	
 }

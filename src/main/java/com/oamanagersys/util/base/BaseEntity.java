@@ -1,9 +1,5 @@
 package com.oamanagersys.util.base;
 
-import java.util.Date;
-
-import org.springframework.format.annotation.DateTimeFormat;
-
 import com.oamanagersys.model.user.entity.Emp;
 
 /**
@@ -14,10 +10,9 @@ import com.oamanagersys.model.user.entity.Emp;
  */
 public class BaseEntity {
 	private int id;
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH-mm")
-	private Date createTime;
+	private String createTime;
 	private int createUser;
-	private Date lastUpdateTime;
+	private String lastUpdateTime;
 	private int updateUser;
 	private Emp create;
 	private Emp update;
@@ -45,11 +40,11 @@ public class BaseEntity {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Date getCreateTime() {
+	public String getCreateTime() {
 		return createTime;
 	}
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH-mm")
-	public void setCreateTime(Date createTime) {
+	
+	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
 	public int getCreateUser() {
@@ -58,10 +53,10 @@ public class BaseEntity {
 	public void setCreateUser(int createUser) {
 		this.createUser = createUser;
 	}
-	public Date getLastUpdateTime() {
+	public String getLastUpdateTime() {
 		return lastUpdateTime;
 	}
-	public void setLastUpdateTime(Date lastUpdateTime) {
+	public void setLastUpdateTime(String lastUpdateTime) {
 		this.lastUpdateTime = lastUpdateTime;
 	}
 	public int getUpdateUser() {

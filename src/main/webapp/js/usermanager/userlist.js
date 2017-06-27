@@ -59,7 +59,7 @@ function leaveOffice(){
 			dataType:"json",
 			data:{idStr:ids},
 			success:function(response){
-				parent.$.ligerDialog.error(response.strMessage);
+				parent.$.ligerDialog.success(response.strMessage);
 				grid.loadData();
 			},
 			error:function(){

@@ -56,4 +56,11 @@
 		INSERT INTO emp(password,depId,positionId,createTime,createUser,probationPeriod,entryTime,name,formal,onJob)
 		VALUES (#{password},#{depId},#{positionId},#{createTime},#{createUser},#{probationPeriod},#{entryTime},#{name},#{formal},#{onJob})
 	</insert>
+	
+	<update id="updateOnJob">
+		UPDATE emp SET onJob = 0 WHERE empNo IN
+		<foreach collection="array" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</update>
 </mapper>

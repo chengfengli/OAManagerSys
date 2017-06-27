@@ -272,8 +272,7 @@ public class EmpController {
 	public Message leaveOffice(String idStr,HttpServletRequest req){
 		Emp currentEmp = (Emp)req.getSession().getAttribute("user");
 		Message message = new Message();
-		int count = 0;
-		
+		int count = userService.updateOnJob(idStr,currentEmp.getId());
 		if(count>0){
 			message.isSuccess = true;
 			message.strMessage = "保存成功!";

@@ -9,5 +9,5 @@ public interface UserDao {
 	
 	public int addEmp(Emp emp);
 	
-	public int updateOnJob();
+	public int updateOnJob(String[] array);
 }

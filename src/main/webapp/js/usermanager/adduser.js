@@ -42,21 +42,33 @@ function back(){
 $(function(){
 	toolbar();
 	$("#entryTime").ligerDateEditor({width:300 });
-	$("#department,#probationPeriod,#position").ligerComboBox({width:300});
+	$("#department,#probationPeriod").ligerComboBox({width:300});
 	/*选择部门后*/
 	$("#department").change(function(){
 		var depId = $(this).val();
-		var option = '<option value="0" selected="selected">---请选择---</option>';
-		if(depId == 0){
-			$("#position").html(option);
-		}else{
-			position = $("#position").ligerComboBox({
-				url:path+"/post/getpostbydepid",
-				valueField : 'id',
-				textField: 'positionName',
-				parms:{depId:depId}
-			});
-		}
+		position = $("#position").ligerComboBox({
+			url:path+"/post/getpostbydepid",
+			valueField : 'id',
+			textField: 'positionName',
+			isMultiSelect:true,
+			isShowCheckBox:true,
+			parms:{depId:depId}
+		});
 	});
+	/*修改时，加载默认的职位*/
+	if($("#department").val() != 0){
+		var selectId = ($("#positionId").val());
+		position = $("#position").ligerComboBox({
+			url:path+"/post/getpostbydepid",
+			width:300,
+			valueField : 'id',
+			textField: 'positionName',
+			isMultiSelect:true,
+			isShowCheckBox:true,
+			valueFieldID: 'positionId',
+			parms:{depId:$("#department").val()}
+		});
+		position.setValue(selectId);
+	}
 });
 

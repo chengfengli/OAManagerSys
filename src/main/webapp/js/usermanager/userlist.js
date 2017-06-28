@@ -39,13 +39,22 @@ function setting(){
 }
 /*编辑*/
 function edit(){
-	location.href=path+"/user/adduser";
+	var rows = grid.getCheckedRows();
+	if (rows && rows.length == 1) {
+		var ids = [];
+		$(rows).each(function() {
+			ids.push(this.id);
+		});
+		location.href = path+"/user/adduser?id="+ids[0];
+	}else{
+		parent.$.ligerDialog.warn("选择要操作的数据!");
+	}
 }
 /*离职*/
 function leaveOffice(){
 	var rows = grid.getCheckedRows();
-	if (rows && rows.length == 1) {
-		var ids = '';
+	if (rows && rows.length > 0) {
+		var ids = [];
 		$(rows).each(function() {
 			if(ids == ''){
 				ids+= ''+this.id;

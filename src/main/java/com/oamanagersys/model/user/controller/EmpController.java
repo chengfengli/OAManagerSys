@@ -41,16 +41,24 @@ public class EmpController {
 	
 	/**
 	 * 添加员工页面
+	 * @return
 	 */
 	@RequestMapping("/adduser")
-	public ModelAndView addUser(){
+	public ModelAndView addUser(Emp emp){
 		ModelAndView mav = new ModelAndView("pages/usermanager/adduser");
+		if(emp.getId() != 0){
+			List<Emp> list = userService.getAllEmp(emp);
+			if(list.size() > 0){
+				mav.addObject("emp", list.get(0));
+			}
+		}
 		Dep dep = new Dep();
 		mav.addObject("deps", depService.getDep(dep));
 		return mav;
 	}
 	/**
 	 * 员工信息管理
+	 * @return
 	 */
 	@RequestMapping("/userlist")
 	public String staffInfor(){
@@ -59,6 +67,7 @@ public class EmpController {
 	
 	/**
 	 * 编辑信息页面
+	 * @return
 	 */
 	@RequestMapping("/editinfomation")
 	public ModelAndView infoMationPage(){
@@ -68,6 +77,7 @@ public class EmpController {
 	
 	/**
 	 * 账号与安全
+	 * @return
 	 */
 	@RequestMapping("/accountsecurity")
 	public ModelAndView accountSecurityPage(){
@@ -77,6 +87,7 @@ public class EmpController {
 	
 	/**
 	 * 账号信息页面
+	 * @return
 	 */
 	@RequestMapping("/accountinfo")
 	public ModelAndView accountInfo(){
@@ -86,6 +97,7 @@ public class EmpController {
 	
 	/**
 	 * 设置密码页面
+	 * @return
 	 */
 	@RequestMapping("/setpwd")
 	public ModelAndView setPwd(){
@@ -95,6 +107,7 @@ public class EmpController {
 	
 	/**
 	 * 登录日志页面
+	 * @return
 	 */
 	@RequestMapping("/loginlog")
 	public ModelAndView loginLog(){
@@ -104,6 +117,8 @@ public class EmpController {
 	
 	/**
 	 * 退出
+	 * @param request
+	 * @return
 	 */
 	@RequestMapping("/loginout")
 	public ModelAndView loginOut(HttpServletRequest request){
@@ -117,7 +132,6 @@ public class EmpController {
 	
 	/**
 	 * 创建验证码
-	 * 
 	 * @param req
 	 * @param resp
 	 */
@@ -141,7 +155,6 @@ public class EmpController {
 
 	/**
 	 * 刷新验证码
-	 * 
 	 * @param req
 	 * @param resp
 	 * @return
@@ -170,9 +183,8 @@ public class EmpController {
 	
 	/**
 	 * 登录
-	 * 
 	 * @param req
-	 * @param user
+	 * @param emp
 	 * @param code
 	 * @return
 	 */

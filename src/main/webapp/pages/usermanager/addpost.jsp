@@ -45,7 +45,7 @@
 				<td>
 					<select name="department" id="dep" class="liger-combobox">
 						<c:if test="${exitsPosition.id != null && exitsPosition.id != '' }">
-							<option value=" " selected="selected">---选择部门---</option>
+							<option value="0" selected="selected">---选择部门---</option>
 						</c:if>
 						<c:forEach items="${deps }" var="dep">
 							<c:if test="${dep.id == exitsPosition.dep.id }">

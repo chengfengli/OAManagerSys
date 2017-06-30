@@ -63,4 +63,31 @@
 			#{id}
 		</foreach>
 	</update>
+	
+	<update id="updateEmp" parameterType="com.oamanagersys.model.user.entity.Emp">
+		UPDATE emp SET lastUpdateTime = #{lastUpdateTime},updateUser = #{updateUser}
+		<if test="password != null and password != ''">
+			,password = #{password}
+		</if>
+		<if test="name != null and name != ''">
+			,name = #{name}
+		</if>
+		<if test="entryTime != null and entryTime != ''">
+			,entryTime = #{entryTime}
+		</if>
+		<if test="probationPeriod != 0">
+			,probationPeriod = #{probationPeriod}
+		</if>
+		<if test="depId != 0">
+			,depId = #{depId}
+		</if>
+		<if test="positionId != 0">
+			,positionId = #{positionId} 
+		</if> 
+		 WHERE empNo = #{id}
+	</update>
+	
+	<update id="deleteEmp" parameterType="java.lang.Integer">
+		DELETE FROM emp WHERE empNo = #{id}
+	</update>
 </mapper>

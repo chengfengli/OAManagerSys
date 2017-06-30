@@ -66,16 +66,6 @@ public class EmpController {
 	}
 	
 	/**
-	 * 编辑信息页面
-	 * @return
-	 */
-	@RequestMapping("/editinfomation")
-	public ModelAndView infoMationPage(){
-		ModelAndView mav = new ModelAndView("pages/manageset/editinfomation");
-		return mav;
-	}
-	
-	/**
 	 * 账号与安全
 	 * @return
 	 */
@@ -258,8 +248,10 @@ public class EmpController {
 		Emp currentEmp = (Emp)req.getSession().getAttribute("user");
 		Message message = new Message();
 		int count = 0;
+		//如果员工编号存在，则修改，否则新增
 		if(emp.getId() != 0){
 			emp.setCreateUser(currentEmp.getId());
+			count = userService.updateEmp(emp);
 		}else{
 			emp.setUpdateUser(currentEmp.getId());
 			count = userService.addEmp(emp);
@@ -295,4 +287,23 @@ public class EmpController {
 		return message;
 	}
 	
+	/**
+	 * 删除员工
+	 * @param id 员工工号
+	 * @return
+	 */
+	@RequestMapping("/deleteEmp")
+	@ResponseBody
+	public Message deleteEmp(int id,HttpServletRequest req){
+		Message message = new Message();
+		int count = userService.deleteEmp(id);
+		if(count>0){
+			message.isSuccess = true;
+			message.strMessage = "删除成功!";
+		}else{
+			message.isSuccess = false;
+			message.strMessage = "删除失败!";
+		}
+		return message;
+	}
 }

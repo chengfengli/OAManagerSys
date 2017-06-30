@@ -13,122 +13,162 @@
 		<script src="<%=context %>/Source/lib/ligerUI/js/ligerui.all.js"></script>
 		<script>
 			var path = '<%=context %>';
+			var view = ${view };
 		</script>
 	</head>
 
 	<body>
 		<div id="toolbar"></div>
 		<h2 id="title">基本信息</h2>
-		<form>
+		<form id="baseInfor">
 			<table id="table">
+				<tr style="display:none;">
+					<td><input type="hidden"  value="${infor.id }" name="id" /></td>
+					<td><input type="hidden"  value="${infor.empNo }" name="empNo" /></td>
+				</tr>
 				<tr>
 					<td>姓名</td>
 					<td>
-						<input type="text" name="name" id="name" class="liger-textbox" />
+						<input type="text" name="name" value="${infor.emp.name }" class="liger-textbox" />
 					</td>
+					<td>所属部门</td>
+					<td>
+						<input type="text" disabled name="depName" value="${infor.emp.dep.depName }" class="liger-textbox" />
+					</td>
+				</tr>
+				<tr>
 					<td>性别</td>
 					<td>
 						<select name="sex" id="sex" class="liger-combobox">
-							<option value="0" selected="selected">男</option>
-							<option value="1">女</option>
+							<c:if test="${infor.sex ==1 }">
+								<option value="0">男</option>
+								<option value="1" selected="selected">女</option>
+							</c:if>
+							<c:if test="${infor.sex !=1 }">
+								<option value="0" selected="selected">男</option>
+								<option value="1">女</option>
+							</c:if>
+							
 						</select>
+					</td>
+					<td>家庭住址</td>
+					<td>
+						<input type="text" name="address" value="${infor.address }" class="liger-textbox" />
 					</td>
 				</tr>
 				<tr>
-					<td>家庭住址</td>
+					<td>职位</td>
 					<td>
-						<input type="text" name="address" id="address" class="liger-textbox" />
+						<input type="text" name="positionName" id="positionName" class="liger-textbox" />
 					</td>
 					<td>出生日期</td>
 					<td>
-						<input type="text" name="birthDay" id="birthDay" class="liger-textbox" />
+						<input type="text" name="birthday" value="${infor.birthday }" id="birthday" />
 					</td>
 				</tr>
 				<tr>
-					<td>身份证号</td>
-					<td>
-						<input type="text" name="idCard" id="idCard" class="liger-textbox" />
-					</td>
 					<td>年龄</td>
 					<td>
-						<input type="text" name="age" id="age" class="liger-textbox" />
+						<input type="text" name="age" value="${infor.age }" class="liger-textbox" />
+					</td>
+					<td>身份证号</td>
+					<td>
+						<input type="text" name="idCardNo" value="${infor.idCardNo }" class="liger-textbox" />
 					</td>
 				</tr>
 				<tr>
-					<td>毕业院校</td>
-					<td>
-						<input type="text" name="school" id="school" class="liger-textbox" />
-					</td>
 					<td>学历</td>
 					<td>
-						<input type="text" name="education" id="education" class="liger-textbox" />
+						<input type="text" name="education" value="${infor.education }" class="liger-textbox" />
+					</td>
+					<td>毕业院校</td>
+					<td>
+						<input type="text" name="graduationSchool" value="${infor.graduationSchool }" class="liger-textbox" />
 					</td>
 				</tr>
 				<tr>
 					<td>专业</td>
 					<td>
-						<input type="text" name="major" id="major" class="liger-textbox" />
+						<input type="text" name="major" value="${infor.major }" class="liger-textbox" />
 					</td>
 					<td>政治面貌</td>
 					<td>
-						<select name="politicsStatus" id="politicsStatus" class="liger-combobox">
-							<option value="0" selected="selected">群众</option>
-							<option value="1">党员</option>
-							<option value="2">团员</option>
+						<select name="politics" id="politics" class="liger-combobox">
+							<c:if test="${infor.politics == 0 }">
+								<option value="0" selected="selected">群众</option>
+								<option value="1">党员</option>
+								<option value="2">团员</option>
+							</c:if>
+							<c:if test="${infor.politics == 1 }">
+								<option value="0">群众</option>
+								<option value="1" selected="selected">党员</option>
+								<option value="2">团员</option>
+							</c:if>
+							<c:if test="${infor.politics == 2 }">
+								<option value="0">群众</option>
+								<option value="1">党员</option>
+								<option value="2" selected="selected">团员</option>
+							</c:if>
 						</select>
 					</td>
 				</tr>
 				<tr>
 					<td>身高</td>
 					<td>
-						<input type="text" name="height" id="height" class="liger-textbox" />
+						<input type="text" name="height" value="${infor.height }" class="liger-textbox" />
 					</td>
-					<td>体重</td>
+					<td>婚姻状况</td>
 					<td>
-						<input type="text" name="weight" id="weight" class="liger-textbox" />
+						<input type="text" name="maritalStatus" value="${infor.maritalStatus }" placeholder="已婚、未婚、离异、丧偶" class="liger-textbox" />
 					</td>
 				</tr>
 				<tr>
 					<td>手机</td>
 					<td>
-						<input type="text" name="mobile" id="mobile" class="liger-textbox" />
+						<input type="text" name="mobilePhone" value="${infor.mobilePhone }" class="liger-textbox" />
 					</td>
-					<td>邮箱</td>
+					<td>电子邮箱</td>
 					<td>
-						<input type="text" name="email" id="email" class="liger-textbox" />
+						<input type="text" name="email" value="${infor.email }" class="liger-textbox" />
 					</td>
 				</tr>
 				<tr>
-					<td>婚姻状况</td>
+					<td>体重</td>
 					<td>
-						<input type="text" name="marry" id="marry" placeholder="已婚、未婚、离异、丧偶" class="liger-textbox" />
+						<input type="text" name="weight" value="${infor.weight }" class="liger-textbox" />
 					</td>
 					<td>有无子女</td>
 					<td>
-						<select name="child" id="child" class="liger-combobox">
-							<option value="1">有</option>
-							<option value="0" selected="selected">无</option>
+						<select name="children" id="children" class="liger-combobox">
+							<c:if test="${infor.children ==0 }">
+								<option value="1">有</option>
+								<option value="0" selected="selected">无</option>
+							</c:if>
+							<c:if test="${infor.children !=0 }">
+								<option value="1" selected="selected">有</option>
+								<option value="0">无</option>
+							</c:if>
 						</select>
 					</td>
 				</tr>
 				<tr>
-					<td valign="top">个性签名</td>
+					<td valign="top">签名</td>
 					<td>
-						<textarea name="signature" id="signature"></textarea>
+						<textarea name="autograph">${infor.autograph }</textarea>
 					</td>
 					<td valign="top">个人说明</td>
 					<td>
-						<textarea name="state" id="state"></textarea>
+						<textarea name="explain">${infor.explain }</textarea>
 					</td>
 				</tr>
 				<tr>
-					<td valign="top">兴趣爱好</td>
-					<td>
-						<textarea name="love" id="love"></textarea>
-					</td>
 					<td valign="top">禁忌</td>
 					<td>
-						<textarea name="taboo" id="taboo"></textarea>
+						<textarea name="taboo">${infor.taboo }</textarea>
+					</td>
+					<td valign="top">兴趣爱好</td>
+					<td>
+						<textarea name="hobby">${infor.hobby }</textarea>
 					</td>
 				</tr>
 			</table>

@@ -4,7 +4,7 @@ function toolbar() {
 	var items = [];
 	items.push({text:'编辑',icon:'edit',click: function () {edit();}});
 	items.push({ line:true });
-	items.push({text:'个人信息',icon:'information_personal',click: function () {}});
+	items.push({text:'基本信息',icon:'information_personal',click: function () {viewInfor();}});
 	items.push({ line:true });
 	items.push({text:'离职',icon:'delete',click: function () {leaveOffice();}});
 	items.push({ line:true });
@@ -50,6 +50,19 @@ function edit(){
 		parent.$.ligerDialog.warn("选择要操作的数据!");
 	}
 }
+/*基本信息*/
+function viewInfor(){
+	var rows = grid.getCheckedRows();
+	if (rows && rows.length > 0) {
+		var ids = [];
+		$(rows).each(function() {
+			ids.push(this.id);
+		});
+		location.href = path+"/infor/editinfomation?empNo="+ids[0];
+	}else{
+		parent.$.ligerDialog.warn("选择要操作的数据!");
+	}
+}
 /*离职*/
 function leaveOffice(){
 	var rows = grid.getCheckedRows();
@@ -81,18 +94,33 @@ function leaveOffice(){
 }
 /*删除*/
 function del(){
-	parent.$.ligerDialog.warn('删除!');
+	var rows = grid.getCheckedRows();
+	if (rows && rows.length > 0) {
+		var ids = [];
+		$(rows).each(function() {
+			ids.push(this.id);
+		});
+		$.ajax({
+			url:path+"/user/deleteEmp",
+			type:"post",
+			dataType:"json",
+			data:{id:ids[0]},
+			success:function(response){
+				parent.$.ligerDialog.success(response.strMessage);
+				grid.loadData();
+			},
+			error:function(){
+				parent.$.ligerDialog.error("系统错误!");
+			}
+		});
+	}else{
+		parent.$.ligerDialog.warn("选择要操作的数据!");
+	}
 }
 $(function(){
 	$("#entryTime").ligerDateEditor();
 	/*工具栏方法*/
 	toolbar();
-	/*初始数据*/
-	var array = [];
-	for(var i=1;i<=100;i++){
-		array.push({id:i,workNo:"0000"+i,name:"李四"+i,department:"销售部",position:"销售经理",entryTime:"2017-05-01",onTrialTime:"三个月",official:"否",onJob:"在职"});
-	}
-	var data={Rows:array};
 	grid = $("#list").ligerGrid({
 		url:path+"/user/getallemp",
 		checkbox: true,
@@ -143,7 +171,6 @@ $(function(){
 		var name = $("#name").val();
 		var entryTime = $("#entryTime").val();
 		var probationPeriod = $("#probationPeriod").val();
-		
 		grid.setOptions({  
             parms : {  
             	name : name,  

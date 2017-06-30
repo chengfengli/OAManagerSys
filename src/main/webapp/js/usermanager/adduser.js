@@ -14,6 +14,9 @@ function toolbar() {
 /*保存*/
 function save(){
 	var params = {};
+	if($("#id").val() != ""){
+		params.id = $("#id").val();
+	}
 	params.name = $("#name").val();
 	params.entryTime = $("#entryTime").val();
 	params.depId = $("#department").val();
@@ -52,12 +55,13 @@ $(function(){
 			textField: 'positionName',
 			isMultiSelect:true,
 			isShowCheckBox:true,
+			width:300,
 			parms:{depId:depId}
 		});
 	});
 	/*修改时，加载默认的职位*/
 	if($("#department").val() != 0){
-		var selectId = ($("#positionId").val());
+		var selectId = $("#positionId").val();
 		position = $("#position").ligerComboBox({
 			url:path+"/post/getpostbydepid",
 			width:300,

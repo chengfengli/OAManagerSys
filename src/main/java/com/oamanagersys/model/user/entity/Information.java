@@ -18,7 +18,7 @@ public class Information extends BaseEntity {
 	private String address;
 	
 	//出生日期
-	private Date birthday;
+	private String birthday;
 	
 	//身份证号
 	private String idCardNo;
@@ -36,7 +36,7 @@ public class Information extends BaseEntity {
 	private String major;
 	
 	//政治面貌
-	private String politics;
+	private int politics;
 	
 	//身高
 	private int height;
@@ -70,13 +70,16 @@ public class Information extends BaseEntity {
 	
 	//员工号
 	private int empNo;
+	
+	//员工公司信息
+	private Emp emp;
 
 	public int getSex() {
 		return sex;
 	}
 
-	public void setSex(int sex) {
-		this.sex = sex;
+	public void setSex(String sex) {
+		this.sex = Integer.parseInt(sex);
 	}
 
 	public String getAddress() {
@@ -87,11 +90,11 @@ public class Information extends BaseEntity {
 		this.address = address;
 	}
 
-	public Date getBirthday() {
+	public String getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(Date birthday) {
+	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
 
@@ -107,8 +110,8 @@ public class Information extends BaseEntity {
 		return age;
 	}
 
-	public void setAge(int age) {
-		this.age = age;
+	public void setAge(String age) {
+		this.age = Integer.parseInt(age);
 	}
 
 	public String getGraduationSchool() {
@@ -135,28 +138,28 @@ public class Information extends BaseEntity {
 		this.major = major;
 	}
 
-	public String getPolitics() {
+	public int getPolitics() {
 		return politics;
 	}
 
 	public void setPolitics(String politics) {
-		this.politics = politics;
+		this.politics = Integer.parseInt(politics);
 	}
 
 	public int getHeight() {
 		return height;
 	}
 
-	public void setHeight(int height) {
-		this.height = height;
+	public void setHeight(String height) {
+		this.height = Integer.parseInt(height);
 	}
 
 	public int getWeight() {
 		return weight;
 	}
 
-	public void setWeight(int weight) {
-		this.weight = weight;
+	public void setWeight(String weight) {
+		this.weight = Integer.parseInt(weight);;
 	}
 
 	public String getMobilePhone() {
@@ -187,8 +190,8 @@ public class Information extends BaseEntity {
 		return children;
 	}
 
-	public void setChildren(int children) {
-		this.children = children;
+	public void setChildren(String children) {
+		this.children = Integer.parseInt(children);
 	}
 
 	public String getAutograph() {
@@ -227,7 +230,15 @@ public class Information extends BaseEntity {
 		return empNo;
 	}
 
-	public void setEmpNo(int empNo) {
-		this.empNo = empNo;
+	public void setEmpNo(String empNo) {
+		this.empNo = Integer.parseInt(empNo);
+	}
+
+	public Emp getEmp() {
+		return emp;
+	}
+
+	public void setEmp(Emp emp) {
+		this.emp = emp;
 	}
 }

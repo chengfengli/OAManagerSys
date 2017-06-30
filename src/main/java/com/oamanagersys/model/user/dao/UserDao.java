@@ -10,4 +10,8 @@ public interface UserDao {
 	public int addEmp(Emp emp);
 	
 	public int updateOnJob(String[] array);
+	
+	public int updateEmp(Emp emp);
+	
+	public int deleteEmp(int id);
 }

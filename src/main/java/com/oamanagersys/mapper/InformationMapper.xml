@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oamanagersys.model.user.dao.InformationDao">
+	
+	<resultMap id="informationResultMap" type="com.oamanagersys.model.user.entity.Information">
+		<id column="informationId" property="id" />
+		<result column="sex" property="sex" />
+		<result column="address" property="address" />
+		<result column="birthday" property="birthday" />
+		<result column="idCardNo" property="idCardNo" />
+		<result column="age" property="age" />
+		<result column="graduationSchool" property="graduationSchool" />
+		<result column="education" property="education" />
+		<result column="major" property="major" />
+		<result column="politics" property="politics" />
+		<result column="height" property="height" />
+		<result column="weight" property="weight" />
+		<result column="mobilePhone" property="mobilePhone" />
+		<result column="email" property="email" />
+		<result column="maritalStatus" property="maritalStatus" />
+		<result column="children" property="children" />
+		<result column="autograph" property="autograph" />
+		<result column="explain" property="explain" />
+		<result column="hobby" property="hobby" />
+		<result column="taboo" property="taboo" />
+		<result column="empNo" property="empNo" />
+		<result column="createTime" property="createTime" />
+		<result column="createUser" property="createUser" />
+		<result column="lastUpdateTime" property="lastUpdateTime" />
+		<result column="updateUser" property="updateUser" />
+		<association property="emp" javaType="com.oamanagersys.model.user.entity.Emp" column="empId" resultMap="empResultMap"></association>
+	</resultMap>
+
+	<resultMap id="empResultMap" type="com.oamanagersys.model.user.entity.Emp">
+		<id column="empNo" property="id" />
+		<result column="password" property="password" />
+		<result column="depId" property="depId" />
+		<result column="positionId" property="positionId" />
+		<result column="entryTime" property="entryTime" />
+		<result column="probationPeriod" property="probationPeriod" />
+		<result column="name" property="name" />
+		<result column="formal" property="formal" />
+		<result column="onJob" property="onJob" />
+		<association property="dep" javaType="com.oamanagersys.model.department.entity.Dep" column="depId" resultMap="resultDep"></association>
+	</resultMap>
+	
+	<resultMap id="resultDep" type="com.oamanagersys.model.department.entity.Dep">
+		<id column="depId" property="id" />
+		<result column="depCode" property="depCode" />
+		<result column="depName" property="depName" />
+	</resultMap>
+	
+	<insert id="insterInfor" parameterType="com.oamanagersys.model.user.entity.Information">
+		INSERT INTO information(sex,address,birthday,createTime,createUser,idCardNo,age,graduationSchool,education,major,politics,height,weight,mobilePhone,email,maritalStatus,children,autograph,`explain`,hobby,taboo,empNo)
+		VALUES (#{sex},#{address},#{birthday},#{createTime},#{createUser},#{idCardNo},#{age},#{graduationSchool},#{education},#{major},#{politics},#{height},#{weight},#{mobilePhone},#{email},#{maritalStatus},#{children},#{autograph},#{explain},#{hobby},#{taboo},#{empNo})
+	</insert>
+	
+	<select id="selectInforByEmpNo" resultMap="informationResultMap" parameterType="com.oamanagersys.model.user.entity.Information">
+		SELECT * FROM information,emp,dep WHERE information.empNo = emp.empNo AND emp.depId = dep.depId AND information.empNo = #{empNo}
+	</select>
+	
+	<update id="updateInfor" parameterType="com.oamanagersys.model.user.entity.Information">
+		UPDATE information SET sex=#{sex},address=#{address},birthday=#{birthday},idCardNo=#{idCardNo},age=#{age},graduationSchool=#{graduationSchool},education=#{education},major=#{major},politics=#{politics},
+		height=#{height},weight=#{weight},mobilePhone=#{mobilePhone},email=#{email},maritalStatus=#{maritalStatus},children=#{children},`explain`=#{explain},hobby=#{hobby},taboo=#{taboo},updateUser=#{updateUser},lastUpdateTime=#{lastUpdateTime} 
+		WHERE informationId = #{id}
+	</update>
+	
+</mapper>

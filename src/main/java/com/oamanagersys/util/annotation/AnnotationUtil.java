@@ -200,13 +200,14 @@ public class AnnotationUtil {
 			String scheme = request.getScheme();
 			String servletNmae = request.getServerName();
 			String servletPort = Integer.toString(request.getServerPort());
+			String context = request.getContextPath()+"/";;
 			sb.append(scheme);
 			sb.append("://");
 			sb.append(servletNmae);
 			sb.append(":");
 			sb.append(servletPort);
 			sb.append("/");
-			sb.append("OAManagerSys/");
+			sb.append(context);
 	        jsonstr = jsonstr.replaceAll("url='", "url='"+sb.toString());
         }
         JSONObject jb = JSONObject.fromObject(jsonstr);

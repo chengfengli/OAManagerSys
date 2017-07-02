@@ -18,10 +18,10 @@
 		<script>
 			//服务器地址
 			var hostURL = "http://localhost:8080/OAManagerSys/";
-			//子菜单
-			var childMenu = ${childMenu};
 			var basePath = '<%=basePath%>';
 			var basePath2 = '<%=basePath2%>';
+			//子菜单
+			var childMenu = ${childMenu};
 		</script>
 	</head>
 

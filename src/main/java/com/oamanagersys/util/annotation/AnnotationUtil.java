@@ -206,7 +206,6 @@ public class AnnotationUtil {
 			sb.append(servletNmae);
 			sb.append(":");
 			sb.append(servletPort);
-			sb.append("/");
 			sb.append(context);
 	        jsonstr = jsonstr.replaceAll("url='", "url='"+sb.toString());
         }

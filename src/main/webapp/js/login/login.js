@@ -6,8 +6,7 @@ $.fn.tip = function(text) {
 	var input_width = this.width();
 	var left = this.offset().left + 10;
 	var top = this.offset().top + 26;
-	$("body")
-			.append(
+	$("body").append(
 					'<div class="tips" style="background: #A7D1F7;position: absolute;left:'
 							+ left
 							+ 'px;top:'
@@ -47,7 +46,6 @@ function check() {
 
 $(function() {
 	$("#canvas").canvas1();
-	
 	/* 显示其他账号 */
 	$("#downmenu_ico").click(function() {
 		$("#account-list").toggle();
@@ -75,6 +73,7 @@ $(function() {
 			remember = 1;
 		}
 		if (check()) {
+			var manager = $.ligerDialog.waitting('登录中,请稍候...');
 			$.ajax({
 				url : path + "/user/login",
 				type : "post",
@@ -86,6 +85,7 @@ $(function() {
 					rememberPassword : remember
 				},
 				success : function(result) {
+					manager.close();
 					if (result.isSuccess) {
 						location.href = path + "/index/toindex";
 					} else {

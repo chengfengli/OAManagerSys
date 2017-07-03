@@ -6,6 +6,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>登录</title>
+		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/Aqua/css/ligerui-all.css" />
 		<link rel="stylesheet" href="<%=context %>/css/login/login.css" />
 		<!-- <link rel="icon" href="img/yun.png" type="image/x-icon"/> -->
 	</head>
@@ -49,6 +50,7 @@
 		</fieldset>
 	</body>
 	<script type="text/javascript" src="<%=context %>/Source/lib/jquery/jquery-1.9.0.min.js" ></script>
+	<script src="<%=context %>/Source/lib/ligerUI/js/ligerui.all.js"></script>
 	<script type="text/javascript" src="<%=context %>/js/canvas.js" ></script>
 	<script type="text/javascript" src="<%=context %>/js/login/login.js" ></script>
 	<script>

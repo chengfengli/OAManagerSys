@@ -36,17 +36,13 @@ $(function(){
 		height: height,
 		showSwitchInTab : true,
 		showSwitch: true,
-		onAfterAddTabItem: function (tabdata)
-		{
+		onAfterAddTabItem: function (tabdata){
 			tabItems.push(tabdata);
 		},
-		onAfterRemoveTabItem: function (tabid)
-		{ 
-			for (var i = 0; i < tabItems.length; i++)
-			{
+		onAfterRemoveTabItem: function (tabid){ 
+			for (var i = 0; i < tabItems.length; i++){
 				var o = tabItems[i];
-				if (o.tabid == tabid)
-				{
+				if (o.tabid == tabid){
 					tabItems.splice(i, 1);
 					break;
 				}
@@ -77,17 +73,17 @@ $(function(){
 			},
 			onSelect: function (node)
 			{
-				if (!node.data.url) return;
-				if (node.data.isnew)
-				{ 
+				if (!node.data.url){
+					return;
+				}
+				if (node.data.isnew){ 
 					return;
 				}
 				var tabid = $(node.target).attr("tabid");
-				if (!tabid)
-				{
+				if (!tabid){
 					tabid = new Date().getTime();
 					$(node.target).attr("tabid", tabid)
-				} 
+				}
 				f_addTab(tabid, node.data.text, node.data.url);
 			}
 		});

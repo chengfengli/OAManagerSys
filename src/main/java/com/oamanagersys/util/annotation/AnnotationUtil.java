@@ -176,22 +176,22 @@ public class AnnotationUtil {
         File file = new File(request.getServletContext().getRealPath("/")+path);
         BufferedReader reader = null;
         String jsonstr = "";
-        try {  
+        try {
             reader = new BufferedReader(new FileReader(file));
-            String tempString = null;  
-            while ((tempString = reader.readLine()) != null) {  
-            	jsonstr = jsonstr + tempString;  
-            }  
-            reader.close();  
-        } catch (IOException e) {  
-            e.printStackTrace();  
-        } finally {  
-            if (reader != null) {  
-                try {  
-                    reader.close();  
-                } catch (IOException e) { 
+            String tempString = null;
+            while ((tempString = reader.readLine()) != null) {
+            	jsonstr = jsonstr + tempString;
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
                 	e.printStackTrace();
-                }  
+                }
             }
         }
         jsonstr = jsonstr.replaceAll("\\s+", "");
@@ -200,7 +200,7 @@ public class AnnotationUtil {
 			String scheme = request.getScheme();
 			String servletNmae = request.getServerName();
 			String servletPort = Integer.toString(request.getServerPort());
-			String context = request.getContextPath()+"/";;
+			String context = request.getContextPath()+"/";
 			sb.append(scheme);
 			sb.append("://");
 			sb.append(servletNmae);
@@ -210,7 +210,8 @@ public class AnnotationUtil {
 	        jsonstr = jsonstr.replaceAll("url='", "url='"+sb.toString());
         }
         JSONObject jb = JSONObject.fromObject(jsonstr);
-        Map<String,Object> map = (Map<String, Object>)jb;
+        @SuppressWarnings("unchecked")
+		Map<String,Object> map = (Map<String, Object>)jb;
         return map;
     }
 	
@@ -243,9 +244,9 @@ public class AnnotationUtil {
             }
         }
         jsonstr = jsonstr.replaceAll("\\s+", "");
-        System.out.println(jsonstr);
         JSONObject jb = JSONObject.fromObject(jsonstr);
-        Map<String,Object> map = (Map<String, Object>)jb;
+        @SuppressWarnings("unchecked")
+		Map<String,Object> map = (Map<String, Object>)jb;
         return map;
     }
 }

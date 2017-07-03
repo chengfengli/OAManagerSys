@@ -10,13 +10,14 @@
 				http://www.springframework.org/schema/context 
 				http://www.springframework.org/schema/context/spring-context.xsd
 				http://www.springframework.org/schema/oxm 
-				http://www.springframework.org/schema/oxm/spring-oxm-3.1.xsd 
+				http://www.springframework.org/schema/oxm/spring-oxm-3.2.xsd 
 				http://www.springframework.org/schema/mvc 
-				http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
+				http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+				">
 	<!-- 激活Spring注解方式：自动扫描，并注入bean -->
 	<context:component-scan base-package="com.oamanagersys" />
 	
-	<!--对静态资源文件的访问 -->
+	<!--启用注解 -->
 	<mvc:annotation-driven />
 	
 	<!--静态资源的访问 -->
@@ -60,6 +61,17 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
+			<!-- 以下是静态资源 -->
+			<mvc:exclude-mapping path="/index/**"/>
+            <mvc:exclude-mapping path="/icon/**" />
+            <mvc:exclude-mapping path="/css/**" />
+            <mvc:exclude-mapping path="/pages/**" />
+            <mvc:exclude-mapping path="/js/**" />
+            <mvc:exclude-mapping path="/wangEditor/**" />
+            <mvc:exclude-mapping path="/webuploader/**" />
+            <mvc:exclude-mapping path="/Source/**" />
+            <mvc:exclude-mapping path="/user/code" />
+            <mvc:exclude-mapping path="/user/login" />
 			<bean class="com.oamanagersys.util.interceptor.LoginInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>

@@ -28,14 +28,14 @@ public class LoginInterceptor implements HandlerInterceptor {
 	}
 
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object object) throws Exception {
-		//获取Session  
+		//获取Session
         HttpSession session = request.getSession();
         Object user = session.getAttribute("user");
         if(user != null){
         	return true;
         }else{
-        	//不符合条件的，跳转到登录界面  
-            request.getRequestDispatcher("pages/login/login.jsp").forward(request, response);
+        	//不符合条件的，跳转到登录界面
+            request.getRequestDispatcher("/index/toindex").forward(request, response);
         	return false;
         }
 	}

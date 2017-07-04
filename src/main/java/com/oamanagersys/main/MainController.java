@@ -50,7 +50,6 @@ public class MainController {
 			//获取子菜单
 			Map<String,Object> childMap = AnnotationUtil.ReadJsonFile("./WEB-INF/classes/childmenu.properties",request);
 			String str = JSON.toJSONString(childMap);
-			System.out.println(str);
 			mav.addObject("childMenu", str);
 		}else{
 			String parentMenu = positions.get(0).getParentMenu();

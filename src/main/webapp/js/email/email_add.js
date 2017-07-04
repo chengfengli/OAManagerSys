@@ -1,4 +1,6 @@
-﻿/*工具栏*/
+﻿var E = window.wangEditor
+var editor = new E('content')
+/*工具栏*/
 function toolbar() {
 	var items = [];
 	items.push({text: "发送",icon:'up',click: function () {send()}});
@@ -11,15 +13,42 @@ function toolbar() {
 /*验证、发送*/
 function send(){
 	var account = $("#account").val();
-	var subject = $("#subject").val();
+	var title = $("#title").val();
+	var content = editor.$txt.html();
 	if(account.trim()==""){
 		parent.$.ligerDialog.warn('填写收件人!');
 		return;
 	}
-	if(subject.trim()==""){
+	if(title.trim()==""){
 		parent.$.ligerDialog.warn('填写主题!');
 		return;
 	}
+	if(content != "" && content.trim() != ""){
+		parent.$.ligerDialog.warn('填写内容!');
+		return;
+	}
+	var data = {
+		title:title,
+		content:content,
+		acceptNo:account,
+	}
+	$.ajax({
+		url:path+"/email/doSend",
+		type:"post",
+		dataType:"json",
+		data:data,
+		success:function(response){
+			if(response.isSuccess){
+				parent.$.ligerDialog.success("发送成功!");
+				send_websocket("1","发送成功!");
+			}else{
+				parent.$.ligerDialog.error("发送失败!");
+			}
+		},
+		error:function(response){
+			parent.$.ligerDialog.error("系统错误!");
+		}
+	});
 }
 /**/
 function add_send_user(userEmail){
@@ -82,7 +111,6 @@ uploader.on( 'uploadAccept', function(data,data1,data2) {
 $(function(){
 	toolbar();
 	/*初始化富文本编辑器*/
-	var editor = new wangEditor('content');
 	editor.create();
 	/*选择文件后*/
 	$("#file").change(function(){
@@ -98,5 +126,6 @@ $(function(){
 	$(".group_send").click(function(){
 		alert(JSON.stringify($(".group_send")));
 	});
+	
 });
 

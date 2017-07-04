@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<% String context = request.getContextPath(); %>
+<%  
+	String context = request.getContextPath(); 
+	String basePath = request.getServerName() + ":" + request.getServerPort() + context+"/";
+%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -16,7 +19,7 @@
 		<script src="<%=context %>/webuploader/webuploader.js"></script>
 		<script src="<%=context %>/wangEditor/dist/js/wangEditor.js"></script>
 		<script>
-			var path = '<%=context %>';
+			var path = '<%=basePath %>';
 		</script>
 	</head>
 
@@ -26,7 +29,7 @@
 			<tr>
 				<td id="receive">收件人</td>
 				<td>
-					<input type="text" name="account" id="account" class="liger-textbox" />
+					<input type="text" id="account" class="liger-textbox" />
 				</td>
 				<td rowspan="5" valign="top" style="width:150px;">
 					<div id="accordion1" class="l-accordion-panel" ligeruiid="accordion1"> 
@@ -49,13 +52,13 @@
 			<tr>
 				<td>抄送</td>
 				<td>
-					<input type="text" name="chaosong" id="chaosong" class="liger-textbox" />
+					<input type="text" id="chaosong" class="liger-textbox" />
 				</td>
 			</tr>
 			<tr>
 				<td>主题</td>
 				<td>
-					<input type="text" name="subject" id="subject" class="liger-textbox" />
+					<input type="text" id="title" class="liger-textbox" />
 				</td>
 			</tr>
 			<tr>
@@ -67,6 +70,7 @@
 			<tr>
 				<td valign="top">附件</td>
 				<td>
+					<input type="button" id="getvalue" value="get" />
 					<div id="picker">文件上传</div>
 					<input type="file" multiple="true" id="file" name="file" id="enclosure"/>
 					<ul id="file_list"></ul>
@@ -76,4 +80,5 @@
 	</body>
 	
 	<script src="<%=context %>/js/email/email_add.js"></script>
+	<script src="<%=context %>/js/websocket.js"></script>
 </html>

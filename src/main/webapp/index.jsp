@@ -18,8 +18,7 @@
 		<script>
 			//服务器地址
 			var hostURL = "http://localhost:8080/OAManagerSys/";
-			var basePath = '<%=basePath%>';
-			var basePath2 = '<%=basePath2%>';
+			var path = '<%=basePath%>';
 			//子菜单
 			var childMenu = ${childMenu};
 		</script>
@@ -76,4 +75,5 @@
 	<script src="<%=context %>/js/jquery-1.9.0.min.js"></script>
 	<script src="<%=context %>/Source/lib/ligerUI/js/ligerui.all.js"></script>
 	<script src="<%=context %>/js/index.js"></script>
+	<script src="<%=context %>/js/websocket.js"></script>
 </html>

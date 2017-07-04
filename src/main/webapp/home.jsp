@@ -39,6 +39,6 @@
 	</body>
 	
 	<script src="<%=context %>/Source/lib/ligerUI/js/ligerui.all.js"></script>
-	<script src="<%=context %>/js/home.js"></script>
+	<%-- <script src="<%=context %>/js/home.js"></script> --%>
 	<script src="<%=context %>/js/upload.js"></script>
 </html>

@@ -1,4 +1,4 @@
-﻿var grid
+﻿var grid;
 /*工具栏*/
 function toolbar() {
 	var items = [];
@@ -120,12 +120,12 @@ function del(){
 					type:"post",
 					dataType:"json",
 					data:{id:ids},
-					seccess:function(response){
-						grid.loadData();
+					success:function(response){
 						parent.$.ligerDialog.success(response.strMessage);
+						grid.loadData();
 					},
-					error:function(response){
-						parent.$.ligerDialog.error('系统错误');
+					error:function(){
+						parent.$.ligerDialog.error("系统错误!");
 					}
 				});
 			}
@@ -152,5 +152,23 @@ $(function(){
         ], pageSize:10,
         width: '100%',height:'99%'
 	});
+	
+	/*搜索*/
+	$("#select").click(function(){
+		var post = $("#post").val();
+		var department = $("#department").val();
+		grid.setOptions({  
+            parms : {  
+            	depId : department,
+            	positionName : post  
+            } 
+		});  
+		grid.loadData(true); 
+	});
+	$(document).keypress(function(e) {
+		if (e.keyCode == 13) {
+			$("#select").click();
+		}
+	})
 });
 

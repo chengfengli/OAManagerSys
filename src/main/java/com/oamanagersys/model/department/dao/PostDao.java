@@ -14,7 +14,7 @@ public interface PostDao {
 	 * 获取角色信息
 	 * @return
 	 */
-	public List<Position> getPsot();
+	public List<Position> getPsot(Position position);
 	
 	/**
 	 * 通过id获取角色信息

@@ -95,7 +95,6 @@ $(function() {
 							$("#password").tip(result.strMessage);
 						} else if(result.errorType == "codeError"){
 							$("#code").tip(result.strMessage);
-							$("#code_content").click();
 						}
 						
 					}
@@ -106,26 +105,6 @@ $(function() {
 			})
 		}
 	});
-
-	/* 刷新验证码 */
-	$("#code_content").click(
-		function() {
-			$.ajax({
-				url : path + "/user/recode",
-				type : "post",
-				dataType : "json",
-				success : function(result) {
-					$("#code_content").css(
-							"background",
-							"url(" + path + "/icon/" + result.strMessage
-									+ ")")
-				},
-				error : function(result) {
-					alert("系统错误!");
-				}
-			});
-		}
-	);
 	
 	/*自动加载在本机上登录过的并记住密码的账号*/
 //	$.ajax({

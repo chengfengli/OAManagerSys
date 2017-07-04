@@ -111,14 +111,21 @@ function del(){
 				ids += ','+this.id;
 			}
 		});
-		$.ajax({
-			url:path+"/department/delete",
-			type:"post",
-			dataType:"json",
-			data:{id:ids},
-			success:function(response){
-				grid.loadData();
-				parent.$.ligerDialog.success(response.strMessage);
+		parent.$.ligerDialog.confirm('确定删除职位？', function (yes) {
+			if(yes){
+				$.ajax({
+					url:path+"/department/delete",
+					type:"post",
+					dataType:"json",
+					data:{id:ids},
+					success:function(response){
+						grid.loadData();
+						parent.$.ligerDialog.success(response.strMessage);
+					},
+					error:function(){
+						parent.$.ligerDialog.error(response.strMessage);
+					}
+				});
 			}
 		});
 	}else{
@@ -150,9 +157,14 @@ $(function(){
             parms : {  
             	depCode : depCode,  
                 id : id  
-            } 
+            }
 		});  
 		grid.loadData(true); 
 	});
+	$(document).keypress(function(e) {
+		if (e.keyCode == 13) {
+			$("#select").click();
+		}
+	})
 });
 

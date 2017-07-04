@@ -27,8 +27,14 @@
 	    <result property="name" column="name" />
 	</resultMap>
 	
-	<select id="getPsot" resultMap="postResultMap">
+	<select id="getPsot" resultMap="postResultMap" parameterType="com.oamanagersys.model.department.entity.Position">
 		select * from position,dep,emp where position.depId = dep.depId  and position.createUser = emp.empNo
+		<if test="positionName != null and positionName != ''">
+			and position.positionName like concat(concat('%',#{positionName}),'%')
+		</if>
+		<if test="depId != 0">
+			and position.depId = #{depId}
+		</if>
 	</select>
 	
 	<select id="getPsotById" resultMap="postResultMap" parameterType="java.lang.String">

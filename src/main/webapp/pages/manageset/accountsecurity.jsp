@@ -17,7 +17,6 @@
 	</head>
 
 	<body>
-		<div id="toolbar"></div>
 		<div id="portalMain"></div>
 	</body>
 	<script src="<%=context %>/js/manageset/accountsecurity.js"></script>

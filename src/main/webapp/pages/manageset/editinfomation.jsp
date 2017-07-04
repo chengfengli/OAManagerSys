@@ -29,11 +29,11 @@
 				<tr>
 					<td>姓名</td>
 					<td>
-						<input type="text" name="name" value="${infor.emp.name }" class="liger-textbox" />
+						<input type="text" name="name" value="${emp.name }" class="liger-textbox" />
 					</td>
 					<td>所属部门</td>
 					<td>
-						<input type="text" disabled name="depName" value="${infor.emp.dep.depName }" class="liger-textbox" />
+						<input type="text" disabled name="depName" value="${emp.dep.depName }" class="liger-textbox" />
 					</td>
 				</tr>
 				<tr>

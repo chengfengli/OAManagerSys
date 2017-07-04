@@ -22,7 +22,6 @@
 				<td>
 					<input type="text" name="account" id="account" class="liger-textbox" />
 				</td>
-				
 			</tr>
 			<tr>
 				<td>抄送</td>

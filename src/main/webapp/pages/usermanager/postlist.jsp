@@ -22,20 +22,17 @@
 		<table id="querybar">
 			<tr>
 				<td class="title">职位</td>
-				<td><input type="text" name="post" id="post" class="liger-textbox" /></td>
+				<td><input type="text" id="post" class="liger-textbox" /></td>
 				<td class="title">部门</td>
 				<td>
-					<select name="department" id="department" class="liger-combobox">
+					<select id="department" class="liger-combobox">
 						<option value="0" selected="selected">请选择</option>
-						<option value="1">一个月</option>
-						<option value="2">二个月</option>
-						<option value="3">三个月</option>
-						<option value="4">四个月</option>
-						<option value="4">五个月</option>
-						<option value="4">六个月</option>
+						<c:forEach items="${deps }" var="dep">
+						<option value="${dep.id }">${dep.depName }</option>
+						</c:forEach>
 					</select>
 				</td>
-				<td class="title"><input type="button" value="查询" class="liger-button" /></td>
+				<td class="title"><input id="select" type="button" value="查询" class="liger-button" /></td>
 			</tr>
 		</table>
 		<!-- 列表 -->

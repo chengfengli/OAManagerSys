@@ -1,5 +1,7 @@
 package com.oamanagersys.model.user.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.oamanagersys.model.user.entity.Emp;
 import com.oamanagersys.model.user.entity.Information;
 import com.oamanagersys.model.user.service.InformationService;
+import com.oamanagersys.model.user.service.UserService;
 import com.oamanagersys.util.response.Message;
 
 /**
@@ -24,21 +27,33 @@ public class InformationController {
 	Message msg = new Message();
 	@Autowired
 	private InformationService inforService;
-	
+	@Autowired
+	private UserService userService;
 	/**
 	 * 编辑员工基本信息页面
 	 * @return
 	 */
 	@RequestMapping("/editinfomation")
 	public ModelAndView infoMationPage(Information infor,HttpServletRequest request){
+		int empNo = infor.getEmpNo();
 		Emp currentUser = (Emp)request.getSession().getAttribute("user");
-		if(infor.getEmpNo() == 0){
+		Emp emp = new Emp();
+		if(infor.getEmpNo() == 0){//从左菜单直接进入，自己查看自己的信息
+			emp = currentUser;
 			infor = inforService.inforByEmpNo(currentUser.getId());
+			infor.setId(currentUser.getId());
 		}else{
 			infor = inforService.inforByEmpNo(infor.getEmpNo());
+			infor.setEmpNo(empNo+"");
+			emp.setId(infor.getEmpNo());
+			List<Emp> list = userService.getAllEmp(emp);
+			if(list.size()>0){
+				emp = list.get(0);
+			}
 		}
 		ModelAndView mav = new ModelAndView("pages/manageset/editinfomation");
 		mav.addObject("infor", infor);
+		mav.addObject("emp", emp);
 		if(infor.getEmpNo() == currentUser.getId()){
 			mav.addObject("view", true);
 		}else{

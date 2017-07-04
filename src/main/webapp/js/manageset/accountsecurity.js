@@ -1,19 +1,4 @@
-﻿/*工具栏*/
-function toolbar() {
-	var items = [];
-	items.push({
-		text : '修改密码',
-		icon : 'editpwd',
-		click : function() {
-			edit();
-		}
-	});
-	$("#toolbar").ligerToolBar({
-		items : items
-	});
-}
-$(function() {
-	toolbar();
+﻿$(function() {
 	$("#portalMain").ligerPortal({
 		columns : [{
 			width : 500,

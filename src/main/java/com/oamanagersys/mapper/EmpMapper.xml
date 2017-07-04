@@ -1,93 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.oamanagersys.model.user.dao.UserDao">
-	<resultMap id="empResultMap" type="com.oamanagersys.model.user.entity.Emp">
-		<id column="empNo" property="id" />
-		<result column="password" property="password" />
-		<result column="depId" property="depId" />
-		<result column="positionId" property="positionId" />
-		<result column="entryTime" property="entryTime" />
-		<result column="probationPeriod" property="probationPeriod" />
-		<result column="name" property="name" />
-		<result column="formal" property="formal" />
-		<result column="onJob" property="onJob" />
+<mapper namespace="com.oamanagersys.model.email.dao.EmailDao">
+	<resultMap id="empResultMap" type="com.oamanagersys.model.email.entity.Email">
+		<id column="emailId" property="id" />
+		<result column="title" property="title" />
+		<result column="content" property="content" />
+		<result column="acceptStatus" property="acceptStatus" />
+		<result column="sendStatus" property="sendStatus" />
+		<result column="acceptNo" property="acceptNo" />
+		<result column="sendNo" property="sendNo" />
+		<result column="delete" property="delete" />
 		<result column="createTime" property="createTime" />
 		<result column="createUser" property="createUser" />
-		<result column="lastUpdateTime" property="lastUpdateTime" />
-		<result column="updateUser" property="updateUser" />
-		<association property="dep" javaType="com.oamanagersys.model.department.entity.Dep" column="depId" resultMap="resultDep"></association>
-		<association property="position" javaType="com.oamanagersys.model.department.entity.Position" column="positionId" resultMap="postResultMap"></association>
+		<result column="sendTime" property="sendTime" />
+		<association property="emp" javaType="com.oamanagersys.model.user.entity.Emp" column="empId" resultMap="resultEmp"></association>
 	</resultMap>
 	
-	<resultMap id="resultDep" type="com.oamanagersys.model.department.entity.Dep">
-		<id column="depId" property="id" />
-		<result column="depCode" property="depCode" />
-		<result column="depName" property="depName" />
+	<resultMap id="resultEmp" type="com.oamanagersys.model.user.entity.Emp">
+		<id column="empId" property="id" />
+		<result column="name" property="name" />
 	</resultMap>
 	
-	<resultMap id="postResultMap" type="com.oamanagersys.model.department.entity.Position">
-		<id column="positionId" property="id" />
-		<result column="positionCode" property="positionCode" />
-		<result column="positionName" property="positionName" />
-	</resultMap>
-	
-	
-	
-	<select id="getAllEmp" resultMap="empResultMap" parameterType="com.oamanagersys.model.user.entity.Emp">
-		select * from emp,position,dep where emp.depId = dep.depId and position.positionId = emp.positionId
-		<if test="id != 0">
-			and empNo = #{id}
-		</if>
-		<if test="password != null and password != ''">
-			and password = #{password}
-		</if>
-		<if test="name != null and name != ''">
-			and name = #{name}
-		</if>
-		<if test="entryTime != null and entryTime != ''">
-			and entryTime >= #{entryTime}
-		</if>
-		<if test="probationPeriod != 0">
-			and probationPeriod = #{probationPeriod}
-		</if>
-	</select>
-	
-	<insert id="addEmp" parameterType="com.oamanagersys.model.user.entity.Emp">
-		INSERT INTO emp(password,depId,positionId,createTime,createUser,probationPeriod,entryTime,name,formal,onJob)
-		VALUES (#{password},#{depId},#{positionId},#{createTime},#{createUser},#{probationPeriod},#{entryTime},#{name},#{formal},#{onJob})
+	<insert id="insert" parameterType="com.oamanagersys.model.email.entity.Email">
+		INSERT INTO email(title,content,acceptStatus,sendStatus,acceptNo,sendNo,delete,createTime,createUser,sendTime)
+		VALUES (#{title},#{content},#{acceptStatus},#{sendStatus},#{acceptNo},#{sendNo},#{delete},#{createTime},#{createUser},#{sendTime})
 	</insert>
 	
-	<update id="updateOnJob">
-		UPDATE emp SET onJob = 0 WHERE empNo IN
-		<foreach collection="array" item="id" open="(" separator="," close=")">
-			#{id}
-		</foreach>
-	</update>
 	
-	<update id="updateEmp" parameterType="com.oamanagersys.model.user.entity.Emp">
-		UPDATE emp SET lastUpdateTime = #{lastUpdateTime},updateUser = #{updateUser}
-		<if test="password != null and password != ''">
-			,password = #{password}
-		</if>
-		<if test="name != null and name != ''">
-			,name = #{name}
-		</if>
-		<if test="entryTime != null and entryTime != ''">
-			,entryTime = #{entryTime}
-		</if>
-		<if test="probationPeriod != 0">
-			,probationPeriod = #{probationPeriod}
-		</if>
-		<if test="depId != 0">
-			,depId = #{depId}
-		</if>
-		<if test="positionId != 0">
-			,positionId = #{positionId} 
-		</if> 
-		 WHERE empNo = #{id}
-	</update>
 	
-	<update id="deleteEmp" parameterType="java.lang.Integer">
-		DELETE FROM emp WHERE empNo = #{id}
-	</update>
+	
+	
 </mapper>

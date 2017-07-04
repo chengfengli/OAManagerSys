@@ -76,5 +76,4 @@
 	<script src="<%=context %>/js/jquery-1.9.0.min.js"></script>
 	<script src="<%=context %>/Source/lib/ligerUI/js/ligerui.all.js"></script>
 	<script src="<%=context %>/js/index.js"></script>
-	<script src="<%=context %>/js/index_websocket.js"></script>
 </html>

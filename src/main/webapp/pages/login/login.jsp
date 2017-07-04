@@ -49,10 +49,10 @@
 			</form>
 		</fieldset>
 	</body>
-	<script type="text/javascript" src="<%=context %>/Source/lib/jquery/jquery-1.9.0.min.js" ></script>
+	<script src="<%=context %>/Source/lib/jquery/jquery-1.9.0.min.js" ></script>
 	<script src="<%=context %>/Source/lib/ligerUI/js/ligerui.all.js"></script>
-	<script type="text/javascript" src="<%=context %>/js/canvas.js" ></script>
-	<script type="text/javascript" src="<%=context %>/js/login/login.js" ></script>
+	<script src="<%=context %>/js/canvas.js" ></script>
+	<script src="<%=context %>/js/login/login.js" ></script>
 	<script>
 		var path = "<%=context %>";
 	</script>

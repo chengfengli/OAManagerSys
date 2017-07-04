@@ -35,93 +35,12 @@
          				</div>
          				<div class="l-accordion-content">
 				        	<ul id="contacts_lsit">
-			                	<li>列表一<img src="<%=context %>/icon/group_send.png" onclick="add_group_send('列表一')" title="抄送人" alt="send_user" />
-			                		<img src="<%=context %>/icon/send_user.png" onclick="add_send_user('列表一')" class="send_user" title="收件人" alt="send_user" />
-			                	</li>
-			                    <li>列表二<img src="<%=context %>/icon/group_send.png" onclick="add_group_send('列表二')" title="抄送人" alt="send_user" />
-			                		<img src="<%=context %>/icon/send_user.png" onclick="add_send_user('列表二')" title="收件人" alt="send_user" />
-			                	</li>
-			                    <li>列表三<img src="<%=context %>/icon/group_send.png" title="抄送人" alt="send_user" />
-			                		<img src="<%=context %>/icon/send_user.png" title="收件人" alt="send_user" />
-			                	</li>
-			                    <li>列表四<img src="<%=context %>/icon/group_send.png" title="抄送人" alt="send_user" />
-			                		<img src="<%=context %>/icon/send_user.png" title="收件人" alt="send_user" />
-			                	</li>
-			                    <li>列表五<img src="<%=context %>/icon/group_send.png" title="抄送人" alt="send_user" />
-			                		<img src="<%=context %>/icon/send_user.png" title="收件人" alt="send_user" />
-			                	</li>
-			                    <li>列表一<img src="<%=context %>/icon/group_send.png" title="抄送人" alt="send_user" />
-			                		<img src="<%=context %>/icon/send_user.png" title="收件人" alt="send_user" />
-			                	</li>
-			                    <li>列表二<img src="<%=context %>/icon/group_send.png" title="抄送人" alt="send_user" />
-			                		<img src="<%=context %>/icon/send_user.png" title="收件人" alt="send_user" />
-			                	</li>
-			                    <li>列表三<img src="<%=context %>/icon/group_send.png" title="抄送人" alt="send_user" />
-			                		<img src="<%=context %>/icon/send_user.png" title="收件人" alt="send_user" />
-			                	</li>
-			                    <li>列表四<img src="<%=context %>/icon/group_send.png" title="抄送人" alt="send_user" />
-			                		<img src="<%=context %>/icon/send_user.png" title="收件人" alt="send_user" />
-			                	</li>
-			                    <li>列表五<img src="<%=context %>/icon/group_send.png" title="抄送人" alt="send_user" />
-			                		<img src="<%=context %>/icon/send_user.png" title="收件人" alt="send_user" />
-			                	</li>
-			                    <li>列表一<img src="<%=context %>/icon/group_send.png" title="抄送人" alt="send_user" />
-			                		<img src="<%=context %>/icon/send_user.png" title="收件人" alt="send_user" />
-			                	</li>
-			                    <li>列表二<img src="<%=context %>/icon/group_send.png" title="抄送人" alt="send_user" />
-			                		<img src="<%=context %>/icon/send_user.png" title="收件人" alt="send_user" />
-			                	</li>
-			                    <li>列表三<img src="<%=context %>/icon/group_send.png" title="抄送人" alt="send_user" />
-			                		<img src="<%=context %>/icon/send_user.png" title="收件人" alt="send_user" />
-			                	</li>
-			                    <li>列表四<img src="<%=context %>/icon/group_send.png" title="抄送人" alt="send_user" />
-			                		<img src="<%=context %>/icon/send_user.png" title="收件人" alt="send_user" />
-			                	</li>
-			                    <li>列表五<img src="<%=context %>/icon/group_send.png" title="抄送人" alt="send_user" />
-			                		<img src="<%=context %>/icon/send_user.png" title="收件人" alt="send_user" />
-			                	</li>
-			                    <li>列表一<img src="<%=context %>/icon/group_send.png" title="抄送人" alt="send_user" />
-			                		<img src="<%=context %>/icon/send_user.png" title="收件人" alt="send_user" />
-			                	</li>
-			                    <li>列表二<img src="<%=context %>/icon/group_send.png" title="抄送人" alt="send_user" />
-			                		<img src="<%=context %>/icon/send_user.png" title="收件人" alt="send_user" />
-			                	</li>
-			                    <li>列表三<img src="<%=context %>/icon/group_send.png" title="抄送人" alt="send_user" />
-			                		<img src="<%=context %>/icon/send_user.png" title="收件人" alt="send_user" />
-			                	</li>
-			                    <li>列表四<img src="<%=context %>/icon/group_send.png" title="抄送人" alt="send_user" />
-			                		<img src="<%=context %>/icon/send_user.png" title="收件人" alt="send_user" />
-			                	</li>
-			                    <li>列表五<img src="<%=context %>/icon/group_send.png" title="抄送人" alt="send_user" />
-			                		<img src="<%=context %>/icon/send_user.png" title="收件人" alt="send_user" />
-			                	</li>
-			                	<li>列表四<img src="<%=context %>/icon/group_send.png" title="抄送人" alt="send_user" />
-			                		<img src="<%=context %>/icon/send_user.png" title="收件人" alt="send_user" />
-			                	</li>
-			                    <li>列表五<img src="<%=context %>/icon/group_send.png" title="抄送人" alt="send_user" />
-			                		<img src="<%=context %>/icon/send_user.png" title="收件人" alt="send_user" />
-			                	</li>
-			                	<li>列表四<img src="<%=context %>/icon/group_send.png" title="抄送人" alt="send_user" />
-			                		<img src="<%=context %>/icon/send_user.png" title="收件人" alt="send_user" />
-			                	</li>
-			                    <li>列表五<img src="<%=context %>/icon/group_send.png" title="抄送人" alt="send_user" />
-			                		<img src="<%=context %>/icon/send_user.png" title="收件人" alt="send_user" />
-			                	</li>
-			                	<li>列表五<img src="<%=context %>/icon/group_send.png" title="抄送人" alt="send_user" />
-			                		<img src="<%=context %>/icon/send_user.png" title="收件人" alt="send_user" />
-			                	</li>
-			                	<li>列表四<img src="<%=context %>/icon/group_send.png" title="抄送人" alt="send_user" />
-			                		<img src="<%=context %>/icon/send_user.png" title="收件人" alt="send_user" />
-			                	</li>
-			                    <li>列表五<img src="<%=context %>/icon/group_send.png" title="抄送人" alt="send_user" />
-			                		<img src="<%=context %>/icon/send_user.png" title="收件人" alt="send_user" />
-			                	</li>
-			                	<li>列表四<img src="<%=context %>/icon/group_send.png" title="抄送人" alt="send_user" />
-			                		<img src="<%=context %>/icon/send_user.png" title="收件人" alt="send_user" />
-			                	</li>
-			                    <li>列表五<img src="<%=context %>/icon/group_send.png" title="抄送人" alt="send_user" />
-			                		<img src="<%=context %>/icon/send_user.png" title="收件人" alt="send_user" />
-			                	</li>
+				        		<c:forEach items="${emps }" var="emp">
+				                	<li>${emp.name }<img src="<%=context %>/icon/group_send.png" onclick="add_group_send('${emp.id }')" title="抄送人" />
+				                		<img src="<%=context %>/icon/send_user.png" onclick="add_send_user('${emp.id }')" class="send_user" title="收件人" />
+				                		<span class="depName">${emp.dep.depName }</span>
+				                	</li>
+				        		</c:forEach>
 				        	</ul>
 				        </div>
 				    </div>

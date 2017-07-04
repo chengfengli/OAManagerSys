@@ -1,6 +1,5 @@
 package com.oamanagersys.model.department.service;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +19,11 @@ public class PostService {
 	@Autowired
 	private PostDao postDao;
 	/**
-	 * 查询职位
+	 * 查询所有职位
 	 * @return
 	 */
-	public List<Position> getPsot(){
-		List<Position> list = postDao.getPsot();
+	public List<Position> getPsot(Position position){
+		List<Position> list = postDao.getPsot(position);
 		return list;
 	}
 	
@@ -39,7 +38,7 @@ public class PostService {
 	}
 	
 	/**
-	 * 通过id获取角色信息
+	 * 通过部门id获取角色信息
 	 * @return
 	 */
 	public List<Position> getPsotByDepId(int depId){

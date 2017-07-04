@@ -40,8 +40,11 @@ public class PostController {
 	 * 职位管理页面
 	 */
 	@RequestMapping("/postlist")
-	public String postlist(){
-		return "pages/usermanager/postlist";
+	public ModelAndView postlist(){
+		List<Dep> list = depService.getDep(new Dep());
+		ModelAndView mav = new ModelAndView("pages/usermanager/postlist");
+		mav.addObject("deps", list);
+		return mav;
 	}
 	
 	/**
@@ -138,9 +141,9 @@ public class PostController {
 	 */
 	@RequestMapping("/getpost")
 	@ResponseBody
-	public Map<String,Object> getPost(){
+	public Map<String,Object> getPost(Position position){
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("Rows", postService.getPsot());
+		map.put("Rows", postService.getPsot(position));
 		return map;
 	}
 	

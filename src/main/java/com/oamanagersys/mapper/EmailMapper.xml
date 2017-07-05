@@ -21,9 +21,12 @@
 		<result column="name" property="name" />
 	</resultMap>
 	
-	<insert id="insert" parameterType="com.oamanagersys.model.email.entity.Email">
+	<insert id="insert" parameterType="java.util.List">
 		INSERT INTO email(title,content,acceptStatus,sendStatus,acceptNo,sendNo,`delete`,createTime,createUser,sendTime)
-		VALUES (#{title},#{content},#{acceptStatus},#{sendStatus},#{acceptNo},#{sendNo},#{delete},#{createTime},#{createUser},#{sendTime})
+		VALUES
+		<foreach collection="list" item="email" index="index" separator=",">
+		(#{email.title},#{email.content},#{email.acceptStatus},#{email.sendStatus},#{email.acceptNo},#{email.sendNo},#{email.delete},#{email.createTime},#{email.createUser},#{email.sendTime})
+		</foreach>
 	</insert>
 
 	<select id="selectInbox" resultMap="empResultMap" parameterType="com.oamanagersys.model.email.entity.SearchEmail">

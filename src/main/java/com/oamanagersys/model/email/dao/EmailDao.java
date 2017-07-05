@@ -11,7 +11,7 @@ import com.oamanagersys.model.email.entity.SearchEmail;
  * 联    系：17310545652
  */
 public interface EmailDao {
-	public int insert(Email email);
+	public int insert(List<Email> list);
 	
 	public List<Email> selectInbox(SearchEmail searchEmail);
 }

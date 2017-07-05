@@ -9,16 +9,20 @@ function f_addTab(tabid, text, url){
         url: url
     });
 }
+
+websocket.onopen = function(event) {
+	console.log("WebSocket:已连接");
+};
 $(function(){
 	$("#role").change(function(){
 		var positionCode = $(this).val();
-		location.href = hostURL+"index/switchrole?positionCode="+positionCode;
+		location.href = path+"/index/switchrole?positionCode="+positionCode;
 	});
 	//退出
 	$("#exit").click(function(){
 		$.ligerDialog.confirm('确定退出？', function (yes) {
 			if(yes){
-				location.href = hostURL+"user/loginout";
+				location.href = path+"/user/loginout";
 			}
 		});
 	});
@@ -69,7 +73,7 @@ $(function(){
 			attribute: ['nodename', 'url'],
 			render : function(a){
 				if (!a.isnew) return a.text;
-				return '<a href="' + hostURL+a.url + '" target="_blank">' + a.text + '</a>';
+				return '<a href="' +path+"/"+a.url + '" target="_blank">' + a.text + '</a>';
 			},
 			onSelect: function (node)
 			{

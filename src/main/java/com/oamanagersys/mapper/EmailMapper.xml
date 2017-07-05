@@ -22,10 +22,22 @@
 	</resultMap>
 	
 	<insert id="insert" parameterType="com.oamanagersys.model.email.entity.Email">
-		INSERT INTO email(title,content,acceptStatus,sendStatus,acceptNo,sendNo,delete,createTime,createUser,sendTime)
+		INSERT INTO email(title,content,acceptStatus,sendStatus,acceptNo,sendNo,`delete`,createTime,createUser,sendTime)
 		VALUES (#{title},#{content},#{acceptStatus},#{sendStatus},#{acceptNo},#{sendNo},#{delete},#{createTime},#{createUser},#{sendTime})
 	</insert>
-	
+
+	<select id="selectInbox" resultMap="empResultMap" parameterType="com.oamanagersys.model.email.entity.SearchEmail">
+		select * from emp,email where email.sendNo = emp.empNo and `delete` = 0 and acceptNo like concat(concat('%',#{acceptNo}),'%')
+		<if test="sendUser != null and sendUser != ''">
+			and emp.name like concat(concat('%',#{sendUser}),'%')
+		</if>
+		<if test="acceptStatus != -1">
+			and acceptStatus = #{acceptStatus}
+		</if>
+		<if test="sendTime != null and sendTime != ''">
+			and sendTime >= #{sendTime}
+		</if>
+	</select>	
 	
 	
 	

@@ -1,11 +1,11 @@
-﻿var E = window.wangEditor
-var editor = new E('content')
+﻿var E = window.wangEditor;
+var editor = new E('content');
 /*工具栏*/
 function toolbar() {
 	var items = [];
 	items.push({text: "发送",icon:'up',click: function () {send()}});
 	items.push({ line:true });
-	items.push({text: "存草稿",icon:'pager',click: function () {}});
+	items.push({text: "存草稿",icon:'pager',click: function () {draft();}});
 	$("#toolbar").ligerToolBar({
 		items: items
 	});
@@ -15,15 +15,15 @@ function send(){
 	var account = $("#account").val();
 	var title = $("#title").val();
 	var content = editor.$txt.html();
-	if(account.trim()==""){
+	if(account=="" || account.trim()==""){
 		parent.$.ligerDialog.warn('填写收件人!');
 		return;
 	}
-	if(title.trim()==""){
+	if(title=="" || title.trim()==""){
 		parent.$.ligerDialog.warn('填写主题!');
 		return;
 	}
-	if(content != "" && content.trim() != ""){
+	if(content == "" || content.trim() == ""){
 		parent.$.ligerDialog.warn('填写内容!');
 		return;
 	}
@@ -39,10 +39,10 @@ function send(){
 		data:data,
 		success:function(response){
 			if(response.isSuccess){
-				parent.$.ligerDialog.success("发送成功!");
-				send_websocket("1","发送成功!");
+				parent.$.ligerDialog.success(response.strMessage);
+				send_websocket(response.acceptNo,response.tips);
 			}else{
-				parent.$.ligerDialog.error("发送失败!");
+				parent.$.ligerDialog.error(response.strMessage);
 			}
 		},
 		error:function(response){
@@ -50,7 +50,42 @@ function send(){
 		}
 	});
 }
-/**/
+/*存草稿*/
+function draft(){
+	var account = $("#account").val();
+	var title = $("#title").val();
+	var content = editor.$txt.html();
+	if(title=="" || title.trim()==""){
+		parent.$.ligerDialog.warn('填写主题!');
+		return;
+	}
+	if(content == "" || content.trim() == ""){
+		parent.$.ligerDialog.warn('填写内容!');
+		return;
+	}
+	var data = {
+		title:title,
+		content:content,
+		acceptNo:account,
+	}
+	$.ajax({
+		url:path+"/email/draft",
+		type:"post",
+		dataType:"json",
+		data:data,
+		success:function(response){
+			if(response.isSuccess){
+				parent.$.ligerDialog.success(response.strMessage);
+			}else{
+				parent.$.ligerDialog.error(response.strMessage);
+			}
+		},
+		error:function(response){
+			parent.$.ligerDialog.error("系统错误!");
+		}
+	});
+}
+/*添加接收人*/
 function add_send_user(userEmail){
 	if($("#account").val().trim()==""){
 		$("#account").val(userEmail);
@@ -58,7 +93,6 @@ function add_send_user(userEmail){
 		if($("#account").val().indexOf(userEmail)==-1){
 			$("#account").val($("#account").val()+";"+userEmail);
 		}
-		
 	}
 }
 /*添加抄送人*/
@@ -126,6 +160,5 @@ $(function(){
 	$(".group_send").click(function(){
 		alert(JSON.stringify($(".group_send")));
 	});
-	
 });
 

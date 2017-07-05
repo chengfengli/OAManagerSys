@@ -1,6 +1,9 @@
 package com.oamanagersys.model.email.dao;
 
+import java.util.List;
+
 import com.oamanagersys.model.email.entity.Email;
+import com.oamanagersys.model.email.entity.SearchEmail;
 
 /**
  * 创建人： 李明
@@ -9,4 +12,6 @@ import com.oamanagersys.model.email.entity.Email;
  */
 public interface EmailDao {
 	public int insert(Email email);
+	
+	public List<Email> selectInbox(SearchEmail searchEmail);
 }

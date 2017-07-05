@@ -67,7 +67,7 @@ function viewInfor(){
 function leaveOffice(){
 	var rows = grid.getCheckedRows();
 	if (rows && rows.length > 0) {
-		var ids = [];
+		var ids = "";
 		$(rows).each(function() {
 			if(ids == ''){
 				ids+= ''+this.id;

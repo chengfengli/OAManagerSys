@@ -1,26 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%  
-	String context = request.getContextPath(); 
-	String basePath = request.getServerName() + ":" + request.getServerPort() + context+"/";
-%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 	<head>
 		<meta http-equiv="content-type" content="text/html;charset=utf-8">
 		<title>写信</title>
-		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/Aqua/css/ligerui-all.css" />
-		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/ligerui-icons.css" />
+		<%@ include file="/base.jsp" %>
 		<link rel="stylesheet" type="text/css" href="<%=context %>/css/email/email_add.css" />
-		<link rel="stylesheet" type="text/css" href="<%=context %>/wangEditor/dist/css/wangEditor.min.css">
-		<link rel="stylesheet" type="text/css" href="<%=context %>/webuploader/webuploader.css">
-		<script src="<%=context %>/js/jquery-1.9.0.min.js"></script>
-		<script src="<%=context %>/Source/lib/ligerUI/js/ligerui.all.js"></script>
-		<script src="<%=context %>/webuploader/webuploader.js"></script>
-		<script src="<%=context %>/wangEditor/dist/js/wangEditor.js"></script>
-		<script>
-			var path = '<%=basePath %>';
-		</script>
 	</head>
 
 	<body>
@@ -70,7 +56,6 @@
 			<tr>
 				<td valign="top">附件</td>
 				<td>
-					<input type="button" id="getvalue" value="get" />
 					<div id="picker">文件上传</div>
 					<input type="file" multiple="true" id="file" name="file" id="enclosure"/>
 					<ul id="file_list"></ul>
@@ -80,5 +65,4 @@
 	</body>
 	
 	<script src="<%=context %>/js/email/email_add.js"></script>
-	<script src="<%=context %>/js/websocket.js"></script>
 </html>

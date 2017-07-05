@@ -1,10 +1,13 @@
 package com.oamanagersys.model.email.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.oamanagersys.model.email.dao.EmailDao;
 import com.oamanagersys.model.email.entity.Email;
+import com.oamanagersys.model.email.entity.SearchEmail;
 import com.oamanagersys.util.format.DateFormat;
 
 /**
@@ -40,6 +43,15 @@ public class EmailService {
 		//发送状态为草稿
 		email.setSendStatus(0);
 		return emailDao.insert(email);
+	}
+	
+	/**
+	 * 收件箱
+	 * @param empNo
+	 * @return
+	 */
+	public List<Email> selectInbox(SearchEmail searchEmail){
+		return emailDao.selectInbox(searchEmail);
 	}
 	
 	

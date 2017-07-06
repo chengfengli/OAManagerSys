@@ -15,40 +15,19 @@ function toolbar() {
 }
 /*详情*/
 function details(){
-	var manager = $("#email_list").ligerGetGridManager();
-	var rows = manager.getCheckedRows();
+	var rows = grid.getCheckedRows();
 	if (rows && rows.length == 1) {
 		var ids = [];
 		$(rows).each(function() {
 			ids.push(this.id);
 		});
-		parent.$.ligerDialog.warn(ids[0]);
-		return;
-		$.ligerDialog.open({
-					title : '消息详情',
-					width : 900,
-					height : 500,
-					allowClose : false,
-					url : '${_ctx}/bap/message/detailedMessage?url=replyPage&messageId='+ ids[0],
-					buttons : [ {
-						text : '返回',
-						onclick : function(item, dialog) {
-							dialog.close();
-						}
-					} ]
-				});
+		location.href = path+"/email/details?id="+ids[0];
+	}else{
+		parent.$.ligerDialog.warn("选择一封邮件");
 	}
 }
 /*删除*/
 function del(){
-	parent.$.ligerDialog.warn('删除!');
-}
-/*转发*/
-function forward(){
-	parent.$.ligerDialog.warn('转发!');
-}
-/*标记为已读*/
-function signreaded(){
 	var rows = grid.getCheckedRows();
 	if (rows && rows.length > 0) {
 		var ids = '';
@@ -60,13 +39,14 @@ function signreaded(){
 			}
 		});
 		$.ajax({
-			url:path+"/email/readed",
+			url:path+"/email/delete",
 			type:"post",
 			dataType:"json",
-			data:{id:ids},
+			data:{ids:ids},
 			success:function(response){
-				parent.$.ligerDialog.success(response.strMessage);
-				grid.loadData();
+				if(response.isSuccess){
+					grid.loadData();
+				}
 			},
 			error:function(){
 				parent.$.ligerDialog.error("系统错误!");
@@ -75,27 +55,71 @@ function signreaded(){
 	}else{
 		parent.$.ligerDialog.warn("选择要操作的数据!");
 	}
-	parent.$.ligerDialog.warn('已读!');
+}
+/*转发*/
+function forward(){
+	var rows = grid.getCheckedRows();
+	if (rows && rows.length == 1) {
+		var ids = [];
+		$(rows).each(function() {
+			ids.push(this.id);
+		});
+		location.href = path+"/email/writerEmail?type=forward&id="+ids[0];
+	}else{
+		parent.$.ligerDialog.warn("选择一封邮件");
+	}
+}
+/*标记为已读*/
+function signreaded(){
+	var rows = grid.getCheckedRows();
+	if (rows && rows.length > 0) {
+		var ids = '';
+		var emailStatus = [];
+		$(rows).each(function() {
+			emailStatus.push(this.emailStatus);
+			if(ids == ''){
+				ids+= ''+this.id;
+			}else{
+				ids+= ','+this.id;
+			}
+		});
+		for(var i in emailStatus){
+			if(emailStatus[i] == 1){
+				parent.$.ligerDialog.warn("数据中包含了已读邮件!");
+				return;
+			}
+		}
+		$.ajax({
+			url:path+"/email/readed",
+			type:"post",
+			dataType:"json",
+			data:{ids:ids},
+			success:function(response){
+				if(response.isSuccess){
+					grid.loadData();
+				}
+			},
+			error:function(){
+				parent.$.ligerDialog.error("系统错误!");
+			}
+		});
+	}else{
+		parent.$.ligerDialog.warn("选择要操作的数据!");
+	}
 }
 $(function(){
 	$("#sendTime").ligerDateEditor();
 	/*工具栏方法*/
 	toolbar();
-	/*初始化邮件列表*/
-	var array = [];
-	for(var i=1;i<=100;i++){
-		array.push({id:i,sender:"张三"+i,status:"已读"+i,subject:"测试"+i,receiveTime:"2017-02-15"});
-	}
-	var data={Rows:array};
 	grid = $("#email_list").ligerGrid({
 		checkbox: true,
         columns: [
 	        { display: 'id', name: 'id',hide : true, },
 	        { display: '发件人', name: 'emp.name', width: "9%" },
-	        { display: '状态', name: 'acceptStatus', width: "10%",render:function(row){
-	        	if(row.acceptStatus == 0){
+	        { display: '状态', name: 'emailStatus', width: "10%",render:function(row){
+	        	if(row.emailStatus == 0){
 	        		return "未读";
-	        	}else if(row.acceptStatus == 1){
+	        	}else if(row.emailStatus == 1){
 	        		return "已读";
 	        	}
 	        }},

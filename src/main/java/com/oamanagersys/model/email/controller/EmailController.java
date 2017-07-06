@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,9 +34,21 @@ public class EmailController {
 	 * @return
 	 */
 	@RequestMapping("/writerEmail")
-	public ModelAndView writerEmail(){
-		List<Emp> list = userService.getAllEmp(new Emp());
+	public ModelAndView writerEmail(SearchEmail searchEmail,String type,HttpServletRequest request){
 		ModelAndView mav = new ModelAndView("pages/email/email_add");
+		List<Emp> list = userService.getAllEmp(new Emp());
+		mav.addObject("back", false);
+		if(searchEmail.getId()!=0){
+			List<Email> email_list = emailService.selectInbox(searchEmail);
+			if(list.size() >0){
+				if("forward".equals(type)){
+					email_list.get(0).setTitle("转发："+email_list.get(0).getTitle());
+				}
+				mav.addObject("email", email_list.get(0));
+				mav.addObject("back", true);
+			}
+		}
+		
 		mav.addObject("emps", list);
 		return mav;
 	}
@@ -63,13 +76,36 @@ public class EmailController {
 	public String sendboxEmail(){
 		return "pages/email/email_sended";
 	}
+	
 	/**
-	 * 详情页面
+	 * 收件：详情页面
 	 * @return
 	 */
 	@RequestMapping("/details")
-	public String detailsEmail(){
-		return "pages/email/email_details";
+	public ModelAndView detailsEmail(SearchEmail searchEmail,HttpServletRequest request){
+		ModelAndView mav = new ModelAndView("pages/email/email_details");
+		List<Email> list = emailService.selectInbox(searchEmail);
+		if(list.size() > 0){
+			Email email = list.get(0);
+			if(StringUtils.isBlank(email.getReadTime())){
+				emailService.updateReaded(Integer.toString(searchEmail.getId()));
+			}
+			mav.addObject("email", list.get(0));
+		}
+		return mav;
+	}
+	/**
+	 * 发件：详情页面
+	 * @return
+	 */
+	@RequestMapping("/send_details")
+	public ModelAndView send_detailsEmail(SearchEmail searchEmail,HttpServletRequest request){
+		ModelAndView mav = new ModelAndView("pages/email/email_details");
+		List<Email> list = emailService.selectOutbox(searchEmail);
+		if(list.size() > 0){
+			mav.addObject("email", list.get(0));
+		}
+		return mav;
 	}
 	
 	/**
@@ -83,11 +119,18 @@ public class EmailController {
 		Map<String,Object> map = new HashMap<String,Object>();
 		email.setSendNo(currentEmp.getId());
 		email.setCreateUser(currentEmp.getId());
+		List<Emp> emps = userService.getEmpById(email.getAcceptNo());
+		String name ="";
+		for(int i =0;i<emps.size();i++){
+			name += emps.get(i).getName()+";";
+			
+		}
+		email.setAcceptName(name);
 		int count  = emailService.send(email);
 		if(count > 0){
 			map.put("isSuccess", true);
 			map.put("strMessage", "发送成功");
-			map.put("acceptNo", email.getAcceptNo().toString());
+			map.put("acceptNo", email.getAcceptNo());
 			map.put("tips", "你有新的邮件！");
 		}else{
 			map.put("isSuccess", false);
@@ -106,6 +149,13 @@ public class EmailController {
 		Emp currentEmp = (Emp)request.getSession().getAttribute("user");
 		email.setSendNo(currentEmp.getId());
 		email.setCreateUser(currentEmp.getId());
+		List<Emp> emps = userService.getEmpById(email.getAcceptNo());
+		String name ="";
+		for(int i =0;i<emps.size();i++){
+			name += emps.get(i).getName()+";";
+			
+		}
+		email.setAcceptName(name);
 		int count  = emailService.draft(email);
 		if(count > 0){
 			message.isSuccess = true;
@@ -138,14 +188,65 @@ public class EmailController {
 	 */
 	@RequestMapping("/readed")
 	@ResponseBody
-	public Message readed(SearchEmail searchEmail,HttpServletRequest request){
-		Map<String,List<Email>> map = new HashMap<String,List<Email>>();
-		Emp currentEmp = (Emp)request.getSession().getAttribute("user");
-		searchEmail.setAcceptNo(Integer.toString(currentEmp.getId()));
-		List<Email> list = emailService.selectInbox(searchEmail);
-		map.put("Rows", list);
+	public Message readed(String ids,HttpServletRequest request){
+		int count = emailService.updateReaded(ids);
+		if(count > 0){
+			message.isSuccess = true;
+			message.strMessage = "标记成功";
+		}else{
+			message.isSuccess = false;
+		}
 		return message;
 	}
+	
+	/**
+	 * 删除邮件
+	 * @return
+	 */
+	@RequestMapping("/delete")
+	@ResponseBody
+	public Message delete(String ids){
+		int count = emailService.deleteEmail(ids);
+		if(count > 0){
+			message.isSuccess = true;
+			message.strMessage = "删除成功";
+		}else{
+			message.isSuccess = false;
+			message.strMessage = "删除失败";
+		}
+		return message;
+	}
+	
+	/**
+	 * 发件箱
+	 * @return
+	 */
+	@RequestMapping("/outboxList")
+	@ResponseBody
+	public Map<String,List<Email>> selectOutbox(SearchEmail searchEmail,HttpServletRequest request){
+		Map<String,List<Email>> map = new HashMap<String,List<Email>>();
+		Emp currentEmp = (Emp)request.getSession().getAttribute("user");
+		searchEmail.setSendNo(currentEmp.getId());
+		List<Email> list = emailService.selectOutbox(searchEmail);
+		map.put("Rows", list);
+		return map;
+	}
+	
+	/**
+	 * 草稿箱
+	 * @return
+	 */
+	@RequestMapping("/drartList")
+	@ResponseBody
+	public Map<String,List<Email>> selectDrart(SearchEmail searchEmail,HttpServletRequest request){
+		Map<String,List<Email>> map = new HashMap<String,List<Email>>();
+		Emp currentEmp = (Emp)request.getSession().getAttribute("user");
+		searchEmail.setSendNo(currentEmp.getId());
+		List<Email> list = emailService.selectDrart(searchEmail);
+		map.put("Rows", list);
+		return map;
+	}
+	
 	
 	
 }

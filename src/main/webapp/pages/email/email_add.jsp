@@ -7,6 +7,9 @@
 		<title>写信</title>
 		<%@ include file="/base.jsp" %>
 		<link rel="stylesheet" type="text/css" href="<%=context %>/css/email/email_add.css" />
+		<script>
+			var back = ${back};
+		</script>
 	</head>
 
 	<body>
@@ -44,13 +47,13 @@
 			<tr>
 				<td>主题</td>
 				<td>
-					<input type="text" id="title" class="liger-textbox" />
+					<input type="text" id="title" value="${email.title }" class="liger-textbox" />
 				</td>
 			</tr>
 			<tr>
 				<td valign="top">内容</td>
 				<td valign="top">
-					<textarea name="content" id="content" class="l-textarea"></textarea>
+					<textarea name="content" id="content" class="l-textarea">${email.content }</textarea>
 				</td>
 			</tr>
 			<tr>

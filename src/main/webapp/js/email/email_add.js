@@ -6,13 +6,22 @@ function toolbar() {
 	items.push({text: "发送",icon:'up',click: function () {send()}});
 	items.push({ line:true });
 	items.push({text: "存草稿",icon:'pager',click: function () {draft();}});
+	if(back){
+		items.push({ line:true });
+		items.push({text: "返回",icon:'back',click: function () {back()}});
+	}
 	$("#toolbar").ligerToolBar({
 		items: items
 	});
 }
+/*返回*/
+function back(){
+	history.go(-1);
+}
 /*验证、发送*/
 function send(){
 	var account = $("#account").val();
+	var copyer = $("#chaosong").val();
 	var title = $("#title").val();
 	var content = editor.$txt.html();
 	if(account=="" || account.trim()==""){
@@ -31,6 +40,7 @@ function send(){
 		title:title,
 		content:content,
 		acceptNo:account,
+		copyer:copyer
 	}
 	$.ajax({
 		url:path+"/email/doSend",
@@ -53,6 +63,7 @@ function send(){
 /*存草稿*/
 function draft(){
 	var account = $("#account").val();
+	var copyer = $("#chaosong").val();
 	var title = $("#title").val();
 	var content = editor.$txt.html();
 	if(title=="" || title.trim()==""){
@@ -67,6 +78,7 @@ function draft(){
 		title:title,
 		content:content,
 		acceptNo:account,
+		copyer:copyer
 	}
 	$.ajax({
 		url:path+"/email/draft",

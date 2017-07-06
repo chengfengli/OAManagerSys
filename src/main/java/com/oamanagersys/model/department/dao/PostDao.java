@@ -40,7 +40,7 @@ public interface PostDao {
 	 */
 	public int update(Position position);
 	/**
-	 * 修改角色信息
+	 * 删除角色信息
 	 * @param position
 	 * @return
 	 */

@@ -52,6 +52,13 @@
 		</if>
 	</select>
 	
+	<select id="getEmpById" resultMap="empResultMap">
+		select * from emp where empNo in
+		<foreach collection="array" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</select>
+	
 	<insert id="addEmp" parameterType="com.oamanagersys.model.user.entity.Emp">
 		INSERT INTO emp(password,depId,positionId,createTime,createUser,probationPeriod,entryTime,name,formal,onJob)
 		VALUES (#{password},#{depId},#{positionId},#{createTime},#{createUser},#{probationPeriod},#{entryTime},#{name},#{formal},#{onJob})

@@ -14,4 +14,11 @@ public interface EmailDao {
 	public int insert(List<Email> list);
 	
 	public List<Email> selectInbox(SearchEmail searchEmail);
+	
+	public int update_readed(String[] ids);
+	
+	public int delete_email(String[] ids);
+	
+	public List<Email> selectSendEmail(SearchEmail searchEmail);
+	
 }

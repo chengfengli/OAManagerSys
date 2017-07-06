@@ -5,14 +5,17 @@
 		<id column="emailId" property="id" />
 		<result column="title" property="title" />
 		<result column="content" property="content" />
-		<result column="acceptStatus" property="acceptStatus" />
-		<result column="sendStatus" property="sendStatus" />
+		<result column="boxType" property="boxType" />
+		<result column="emailStatus" property="emailStatus" />
+		<result column="copyer" property="copyer" />
 		<result column="acceptNo" property="acceptNo" />
+		<result column="acceptName" property="acceptName" />
 		<result column="sendNo" property="sendNo" />
 		<result column="delete" property="delete" />
 		<result column="createTime" property="createTime" />
 		<result column="createUser" property="createUser" />
 		<result column="sendTime" property="sendTime" />
+		<result column="readTime" property="readTime" />
 		<association property="emp" javaType="com.oamanagersys.model.user.entity.Emp" column="empId" resultMap="resultEmp"></association>
 	</resultMap>
 	
@@ -22,25 +25,65 @@
 	</resultMap>
 	
 	<insert id="insert" parameterType="java.util.List">
-		INSERT INTO email(title,content,acceptStatus,sendStatus,acceptNo,sendNo,`delete`,createTime,createUser,sendTime)
+		INSERT INTO email(title,content,boxType,emailStatus,acceptNo,acceptName,sendNo,`delete`,createTime,createUser,sendTime,copyer,readTime)
 		VALUES
 		<foreach collection="list" item="email" index="index" separator=",">
-		(#{email.title},#{email.content},#{email.acceptStatus},#{email.sendStatus},#{email.acceptNo},#{email.sendNo},#{email.delete},#{email.createTime},#{email.createUser},#{email.sendTime})
+		(#{email.title},#{email.content},#{email.boxType},#{email.emailStatus},#{email.acceptNo},#{email.acceptName},#{email.sendNo},#{email.delete},#{email.createTime},#{email.createUser},#{email.sendTime},#{email.copyer},#{email.readTime})
 		</foreach>
 	</insert>
 
 	<select id="selectInbox" resultMap="empResultMap" parameterType="com.oamanagersys.model.email.entity.SearchEmail">
-		select * from emp,email where email.sendNo = emp.empNo and `delete` = 0 and acceptNo like concat(concat('%',#{acceptNo}),'%')
+		select * from emp,email where email.sendNo = emp.empNo and `delete` = 1
+		<if test="boxType != -1">
+			and boxType = #{boxType}
+		</if>
+		<if test="acceptNo != null and acceptNo != ''">
+			and acceptNo = #{acceptNo}
+		</if>
+		<if test="acceptName != null and acceptName != ''">
+			and acceptNo = #{acceptNo}
+		</if>
+		<if test="sendNo != 0">
+			and sendNo = #{sendNo}
+		</if>
 		<if test="sendUser != null and sendUser != ''">
 			and emp.name like concat(concat('%',#{sendUser}),'%')
 		</if>
-		<if test="acceptStatus != -1">
-			and acceptStatus = #{acceptStatus}
+		<if test="emailStatus != -1">
+			and emailStatus = #{emailStatus}
 		</if>
 		<if test="sendTime != null and sendTime != ''">
 			and sendTime >= #{sendTime}
 		</if>
-	</select>	
+		<if test="id != 0">
+			and emailId = #{id}
+		</if>
+	</select>
+	
+	<select id="selectSendEmail" resultMap="empResultMap" parameterType="com.oamanagersys.model.email.entity.SearchEmail">
+		select * from emp,email where email.sendNo = emp.empNo and `delete` = 1 and boxType = #{boxType}
+		<if test="acceptName != null and acceptName != ''">
+			and acceptName = like concat(concat('%',#{acceptName}),'%')
+		</if>
+		<if test="sendTime != null and sendTime != ''">
+			and sendTime >= #{sendTime}
+		</if>
+	</select>
+	
+	<update id="update_readed">
+		update email set emailStatus = 1,readTime = CURDATE() where emailId in
+		<foreach collection="array" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</update>
+	
+	<update id="delete_email">
+		update email set `delete` = 0 where emailId in
+		<foreach collection="array" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</update>
+	
 	
 	
 	

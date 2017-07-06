@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 /**
- * 给制定用户发消息
+ * 给指定用户发消息
  * @author	李明
  * @tel		17310545652
  * @createtime	2017年5月19日 下午3:26:39

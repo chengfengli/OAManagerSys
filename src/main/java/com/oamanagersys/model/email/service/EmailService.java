@@ -29,22 +29,27 @@ public class EmailService {
 	public int send(Email email){
 		email.setCreateTime(DateFormat.newDateString());
 		//发送状态为已发送
-		email.setSendStatus(1);
 		email.setSendTime(DateFormat.newDateString());
+		email.setBoxType(2);
 		List<Email> list = new ArrayList<Email>();
+		list.add(email);
 		String acceptNo = email.getAcceptNo();
 		String acceptNos[] = acceptNo.split(";");
+		String acceptName = email.getAcceptName();
+		String acceptNames[] = acceptName.split(";");
 		for(int i=0;i<acceptNos.length;i++){
 			Email e = new Email();
-			e.setSendStatus(1);
 			e.setTitle(email.getTitle());
 			e.setContent(email.getContent());
 			e.setSendTime(email.getSendTime());
-			e.setSendStatus(email.getSendStatus());
 			e.setSendNo(email.getSendNo());
-			e.setAcceptNo(acceptNos[i]);
 			e.setCreateUser(email.getCreateUser());
 			e.setCreateTime(email.getCreateTime());
+			e.setAcceptNo(acceptNos[i]);
+			e.setAcceptName(acceptNames[i]);
+			e.setBoxType(1);
+			e.setCopyer(email.getCopyer());
+			e.setEmailStatus(0);
 			list.add(e);
 		}
 		return emailDao.insert(list);
@@ -57,16 +62,10 @@ public class EmailService {
 	 */
 	public int draft(Email email){
 		email.setCreateTime(DateFormat.newDateString());
-		//发送状态为草稿
-		email.setSendStatus(0);
+		//邮件状态为草稿
+		email.setBoxType(0);
 		List<Email> list = new ArrayList<Email>();
-		String acceptNo = email.getAcceptNo();
-		String acceptNos[] = acceptNo.split(";");
-		for(int i=0;i<acceptNos.length;i++){
-			Email e = email;
-			e.setAcceptNo(acceptNos[i]);
-			list.add(e);
-		}
+		list.add(email);
 		return emailDao.insert(list);
 	}
 	
@@ -76,8 +75,55 @@ public class EmailService {
 	 * @return
 	 */
 	public List<Email> selectInbox(SearchEmail searchEmail){
+		if(searchEmail.getId() == 0){
+			searchEmail.setBoxType(1);
+		}else{
+			searchEmail.setBoxType(-1);
+		}
 		return emailDao.selectInbox(searchEmail);
 	}
 	
+	/**
+	 * 标记为已读
+	 * @param ids
+	 * @return
+	 */
+	public int updateReaded(String ids){
+		String[]  id = ids.split(",");
+		return emailDao.update_readed(id);
+	}
 	
+	/**
+	 * 删除邮件
+	 * @param ids
+	 * @return
+	 */
+	public int deleteEmail(String ids){
+		String[]  id = ids.split(",");
+		return emailDao.delete_email(id);
+	}
+	
+	/**
+	 * 发件箱
+	 * @param searchEmail
+	 * @return
+	 */
+	public List<Email> selectOutbox(SearchEmail searchEmail){
+		if(searchEmail.getId() == 0){
+			searchEmail.setBoxType(2);
+		}else{
+			searchEmail.setBoxType(-1);
+		}
+		return emailDao.selectInbox(searchEmail);
+	}
+	
+	/**
+	 * 草稿箱
+	 * @param searchEmail
+	 * @return
+	 */
+	public List<Email> selectDrart(SearchEmail searchEmail){
+		searchEmail.setBoxType(0);
+		return emailDao.selectInbox(searchEmail);
+	}
 }

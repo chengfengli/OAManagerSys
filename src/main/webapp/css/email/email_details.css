@@ -13,4 +13,4 @@
 
 #email_table{margin-top:0px;width:100%;}
 #email_table td{padding:3px 10px;}
-#email_table td:nth-child(1){text-align:right;min-width:100px;}
+#email_table td:nth-child(1){text-align:right;width:100px;}

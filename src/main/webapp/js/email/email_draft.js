@@ -1,56 +1,90 @@
-﻿/*工具栏*/
+﻿var grid;
+/*工具栏*/
 function toolbar() {
 	var items = [];
 	items.push({text: "详情",icon:'view',click: function () {details();}});
 	items.push({ line:true });
 	items.push({text: "删除",icon:'delete',click: function () {del();}});
 	items.push({ line:true });
-	items.push({text: "编辑",icon:'edit',click: function () {forward();}});
+	items.push({text: "编辑",icon:'edit',click: function () {edit();}});
 	$("#toolbar").ligerToolBar({
 		items: items
 	});
 }
 /*详情*/
 function details(){
-	location.href=path+"/email/details";
-	return;
-	var rows = manager.getCheckedRows();
+	var rows = grid.getCheckedRows();
 	if (rows && rows.length == 1) {
 		var ids = [];
 		$(rows).each(function() {
 			ids.push(this.id);
 		});
-		parent.$.ligerDialog.warn(ids[0]);
+		location.href = path+"/email/send_details?id="+ids[0];
+	}else{
+		parent.$.ligerDialog.warn("选择一封邮件");
 	}
 }
 /*删除*/
 function del(){
-	parent.$.ligerDialog.warn('删除!');
+	var rows = grid.getCheckedRows();
+	if (rows && rows.length > 0) {
+		var ids = '';
+		$(rows).each(function() {
+			if(ids == ''){
+				ids+= ''+this.id;
+			}else{
+				ids+= ','+this.id;
+			}
+		});
+		$.ajax({
+			url:path+"/email/delete",
+			type:"post",
+			dataType:"json",
+			data:{ids:ids},
+			success:function(response){
+				if(response.isSuccess){
+					grid.loadData();
+				}
+			},
+			error:function(){
+				parent.$.ligerDialog.error("系统错误!");
+			}
+		});
+	}else{
+		parent.$.ligerDialog.warn("选择要操作的数据!");
+	}
 }
-/*转发*/
+/*编辑*/
 function edit(){
-	parent.$.ligerDialog.warn('编辑!');
+	var rows = grid.getCheckedRows();
+	if (rows && rows.length == 1) {
+		var ids = [];
+		$(rows).each(function() {
+			ids.push(this.id);
+		});
+		location.href = path+"/email/writerEmail?type=edit&id="+ids[0];
+	}else{
+		parent.$.ligerDialog.warn("选择一封邮件");
+	}
 }
 $(function(){
 	$("#time").ligerDateEditor();
 	/*工具栏方法*/
 	toolbar();
-	/*初始化邮件列表*/
-	var array = [];
-	for(var i=1;i<=100;i++){
-		array.push({id:i,receiveposition:"张三"+i,status:"已读"+i,subject:"测试"+i,addTime:"2017-02-15 10:24"});
-	}
-	var data={Rows:array};
-	var manager=$("#email_list").ligerGrid({
+	grid=$("#email_list").ligerGrid({
 		checkbox: true,
         columns: [
 	        { display: 'id', name: 'id',hide : true, },
-	        { display: '收件人', name: 'receiveposition', width: "9%" },
-	        { display: '主题', name: 'subject', width:"50%" },
-	        { display: '时间', name: 'addTime', width:"30%", }
+	        { display: '收件人', name: 'acceptUser', width: "9%" },
+	        { display: '抄送', name: 'copyer', width:"10%" },
+	        { display: '主题', name: 'title', width:"50%" },
+	        { display: '时间', name: 'createTime', width:"30%", }
         ], pageSize:10,
-        data:data,
+        url:path+"/email/drartList",
         width: '100%',height:'99%'
 	});
+	
+	/*搜索*/
+	
 });
 

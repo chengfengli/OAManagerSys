@@ -69,29 +69,31 @@ public class WebSocketHandlerUtil implements WebSocketHandler {
 	/**
 	 * 消息处理，在客户端通过Websocket.send()发送的消息会经过这里，然后进行相应的处理
 	 */
-	@SuppressWarnings("unused")
 	public void handleMessage(WebSocketSession webSession, WebSocketMessage<?> message) throws Exception {
 		if(message.getPayloadLength()==0){
 			return;
 		}
 		Message msg=new Gson().fromJson(message.getPayload().toString(),Message.class);
 		msg.setDate(new Date());
-		webSession = userSocketSessionMap.get(msg.getTo());
-		List<TextMessage> msgList = new ArrayList<TextMessage>();
-		TextMessage txtMsg = new TextMessage(new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().toJson(msg));
-		msgList.add(txtMsg);
-		
-		if (webSession != null && webSession.isOpen()) {//用户在线
-			SendToUser sendMsg = new SendToUser(msgList,webSession);
-			sendMsg.start();
-		}else{//用户不在线，保到离线消息列表
-			List<TextMessage> offLineList = mesMap.get(msg.getTo());
-			if(offLineList==null){
-				offLineList = new ArrayList<TextMessage>();
+		String[] to = msg.getTo().split(";");
+		for(int i=0;i<to.length;i++){
+			webSession = userSocketSessionMap.get(to[i]);
+			List<TextMessage> msgList = new ArrayList<TextMessage>();
+			TextMessage txtMsg = new TextMessage(new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().toJson(msg));
+			msgList.add(txtMsg);
+			
+			if (webSession != null && webSession.isOpen()) {//用户在线
+				SendToUser sendMsg = new SendToUser(msgList,webSession);
+				sendMsg.start();
+			}else{//用户不在线，保到离线消息列表
+				List<TextMessage> offLineList = mesMap.get(to[i]);
+				if(offLineList==null){
+					offLineList = new ArrayList<TextMessage>();
+				}
+				offLineList.add(txtMsg);
+				//把接收方用户id及消息加入到离线列表
+				mesMap.put(to[i], msgList);
 			}
-			offLineList.add(txtMsg);
-			//把接收方用户id及消息加入到离线列表
-			mesMap.put(msg.getTo(), msgList);
 		}
 	}
 

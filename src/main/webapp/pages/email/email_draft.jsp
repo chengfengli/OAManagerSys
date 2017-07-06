@@ -20,11 +20,11 @@
 		<!-- 搜索栏 -->
 		<table id="querybar">
 			<tr>
-				<td class="title">发件人</td>
-				<td><input type="text" name="sender" id="sender" class="liger-textbox" /></td>
+				<td class="title">收件人</td>
+				<td><input type="text" id="sender" class="liger-textbox" /></td>
 				<td class="title">时间</td>
 				<td><input type="text" name="time" id="time" /></td>
-				<td class="title"><input type="button" value="查询" class="liger-button" /></td>
+				<td class="title"><input id="select" type="button" value="查询" class="liger-button" /></td>
 			</tr>
 		</table>
 		<!-- 邮件列表 -->

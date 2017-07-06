@@ -19,6 +19,11 @@ public class UserService {
 		emp.setPassword(Md5.md5(emp.getPassword()));
 		return userDao.getAllEmp(emp);
 	}
+	
+	public List<Emp> getEmpById(String id){
+		String[] ids = id.split(";");
+		return userDao.getEmpById(ids);
+	}
 	/**
 	 * 添加员工
 	 * @param emp

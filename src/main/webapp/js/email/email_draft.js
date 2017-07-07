@@ -75,7 +75,7 @@ $(function(){
 		checkbox: true,
         columns: [
 	        { display: 'id', name: 'id',hide : true, },
-	        { display: '收件人', name: 'acceptUser', width: "9%" },
+	        { display: '收件人', name: 'acceptName', width: "9%" },
 	        { display: '抄送', name: 'copyer', width:"10%" },
 	        { display: '主题', name: 'title', width:"50%" },
 	        { display: '时间', name: 'createTime', width:"30%", }
@@ -85,6 +85,21 @@ $(function(){
 	});
 	
 	/*搜索*/
-	
+	$("#select").click(function(){
+		var sender = $("#sender").val();
+		var sendTime = $("#time").val();
+		grid.setOptions({
+            parms : {
+            	acceptName : sender,  
+            	sendTime : sendTime
+            } 
+		});  
+		grid.loadData(true);
+	});
+	$(document).keypress(function(e) {
+		if (e.keyCode == 13) {
+			$("#select").click();
+		}
+	})
 });
 

@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.oamanagersys.model.department.entity.Dep;
+import com.oamanagersys.model.department.entity.Position;
 import com.oamanagersys.model.department.service.DepService;
+import com.oamanagersys.model.department.service.PostService;
 import com.oamanagersys.model.user.entity.Emp;
 import com.oamanagersys.model.user.service.UserService;
 import com.oamanagersys.util.response.Message;
@@ -38,7 +40,8 @@ public class EmpController {
 	private DepService depService;
 	@Autowired
 	private UserService userService;
-	
+	@Autowired
+	private PostService postService;
 	/**
 	 * 添加员工页面
 	 * @return
@@ -193,6 +196,21 @@ public class EmpController {
 				msg.isSuccess = true;
 				req.getSession().setAttribute("userId", emp.getId());
 				req.getSession().setAttribute("user", list.get(0));
+				//用户角色
+				List<Position> positions = postService.getPsotById(list.get(0).getPositionId());
+				String currentPositionCode = positions.get(0).getPositionCode();
+				//是否是管理员
+				boolean isAdmin = false;
+				for(int i=0;i<positions.size();i++){
+					if("ADMIN".equals(positions.get(i).getPositionCode())){
+						isAdmin = true;
+					}
+				}
+				if(isAdmin){
+					msg.strMessage = "ADMIN";
+				}else{
+					msg.strMessage = currentPositionCode;
+				}
 			}else{
 				msg.isSuccess = false;
 				msg.strMessage = "账号密码错误";

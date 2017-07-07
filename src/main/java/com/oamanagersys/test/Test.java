@@ -1,5 +1,10 @@
 package com.oamanagersys.test;
 
+import java.sql.Timestamp;
+import java.text.DecimalFormat;
+import java.util.Date;
+import java.util.UUID;
+
 import com.oamanagersys.util.format.DateFormat;
 import com.oamanagersys.util.md5.Md5;
 
@@ -10,6 +15,7 @@ import com.oamanagersys.util.md5.Md5;
  */
 public class Test {
 	public static void main(String[] args) {
-		System.out.println(DateFormat.newDateString());
+		 UUID uuid = UUID.randomUUID();
+	     System.out.println(new Date().getTime());
 	}
 }

@@ -32,8 +32,8 @@ public class PostService {
 	 * @return
 	 */
 	public List<Position> getPsotById(String positionId){
-		positionId = positionId.replaceAll(";", ",");
-		List<Position> list  = postDao.getPsotById(positionId);
+		String[] positionIds = positionId.split(";");
+		List<Position> list  = postDao.getPsotById(positionIds);
 		return list;
 	}
 	

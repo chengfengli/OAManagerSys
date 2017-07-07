@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oamanagersys.model.file.dao.FileDao">
+	<resultMap id="fileResultMap" type="com.oamanagersys.model.file.entity.FileEntity">
+		<id column="empNo" property="id" />
+		<result column="password" property="password" />
+		<result column="depId" property="depId" />
+		<result column="positionId" property="positionId" />
+		<result column="entryTime" property="entryTime" />
+		<result column="probationPeriod" property="probationPeriod" />
+		<result column="name" property="name" />
+		<result column="formal" property="formal" />
+		<result column="onJob" property="onJob" />
+		<result column="createTime" property="createTime" />
+		<result column="createUser" property="createUser" />
+		<result column="lastUpdateTime" property="lastUpdateTime" />
+		<result column="updateUser" property="updateUser" />
+	</resultMap>
+	
+	
+	<select id="getAllEmp" resultMap="empResultMap" parameterType="com.oamanagersys.model.user.entity.Emp">
+		select * from emp,position,dep where emp.depId = dep.depId and position.positionId = emp.positionId
+		<if test="id != 0">
+			and empNo = #{id}
+		</if>
+		<if test="password != null and password != ''">
+			and password = #{password}
+		</if>
+		<if test="name != null and name != ''">
+			and name like concat(concat('%',#{name}),'%')
+		</if>
+		<if test="entryTime != null and entryTime != ''">
+			and entryTime >= #{entryTime}
+		</if>
+		<if test="probationPeriod != 0">
+			and probationPeriod = #{probationPeriod}
+		</if>
+	</select>
+	
+	<select id="getEmpById" resultMap="empResultMap">
+		select * from emp where empNo in
+		<foreach collection="array" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</select>
+	
+	<insert id="addEmp" parameterType="com.oamanagersys.model.user.entity.Emp">
+		INSERT INTO emp(password,depId,positionId,createTime,createUser,probationPeriod,entryTime,name,formal,onJob)
+		VALUES (#{password},#{depId},#{positionId},#{createTime},#{createUser},#{probationPeriod},#{entryTime},#{name},#{formal},#{onJob})
+	</insert>
+	
+	<update id="updateOnJob">
+		UPDATE emp SET onJob = 0 WHERE empNo IN
+		<foreach collection="array" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</update>
+	
+	<update id="updateEmp" parameterType="com.oamanagersys.model.user.entity.Emp">
+		UPDATE emp SET lastUpdateTime = #{lastUpdateTime},updateUser = #{updateUser}
+		<if test="password != null and password != ''">
+			,password = #{password}
+		</if>
+		<if test="name != null and name != ''">
+			,name = #{name}
+		</if>
+		<if test="entryTime != null and entryTime != ''">
+			,entryTime = #{entryTime}
+		</if>
+		<if test="probationPeriod != 0">
+			,probationPeriod = #{probationPeriod}
+		</if>
+		<if test="depId != 0">
+			,depId = #{depId}
+		</if>
+		<if test="positionId != 0">
+			,positionId = #{positionId} 
+		</if> 
+		 WHERE empNo = #{id}
+	</update>
+	
+	<update id="deleteEmp" parameterType="java.lang.Integer">
+		DELETE FROM emp WHERE empNo = #{id}
+	</update>
+</mapper>

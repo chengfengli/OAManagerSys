@@ -8,7 +8,7 @@
 		<%@ include file="/base.jsp" %>
 		<link rel="stylesheet" type="text/css" href="<%=context %>/css/email/email_add.css" />
 		<script>
-			var back = ${back};
+			var backbtn = ${back};
 		</script>
 	</head>
 
@@ -59,13 +59,13 @@
 			<tr>
 				<td valign="top">附件</td>
 				<td>
-					<div id="picker">文件上传</div>
-					<input type="file" multiple="true" id="file" name="file" id="enclosure"/>
-					<ul id="file_list"></ul>
+					<div id="picker">添加文件</div>
+					<ul id="file_list">
+						
+					</ul>
 				</td>
 			</tr>
 		</table>
 	</body>
-	
 	<script src="<%=context %>/js/email/email_add.js"></script>
 </html>

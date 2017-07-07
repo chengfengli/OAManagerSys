@@ -26,22 +26,51 @@ function details(){
 }
 /*删除*/
 function del(){
-	parent.$.ligerDialog.warn('删除!');
+	var rows = grid.getCheckedRows();
+	if (rows && rows.length > 0) {
+		var ids = '';
+		$(rows).each(function() {
+			if(ids == ''){
+				ids+= ''+this.id;
+			}else{
+				ids+= ','+this.id;
+			}
+		});
+		$.ajax({
+			url:path+"/email/delete",
+			type:"post",
+			dataType:"json",
+			data:{ids:ids},
+			success:function(response){
+				if(response.isSuccess){
+					grid.loadData();
+				}
+			},
+			error:function(){
+				parent.$.ligerDialog.error("系统错误!");
+			}
+		});
+	}else{
+		parent.$.ligerDialog.warn("选择要操作的邮件!");
+	}
 }
-/*转发*/
+/*编辑*/
 function edit(){
-	parent.$.ligerDialog.warn('编辑!');
+	var rows = grid.getCheckedRows();
+	if (rows && rows.length == 1) {
+		var ids = [];
+		$(rows).each(function() {
+			ids.push(this.id);
+		});
+		location.href = path+"/email/writerEmail?id="+ids[0];
+	}else{
+		parent.$.ligerDialog.warn("选择一封邮件");
+	}
 }
 $(function(){
 	$("#time").ligerDateEditor();
 	/*工具栏方法*/
 	toolbar();
-	/*初始化邮件列表*/
-	var array = [];
-	for(var i=1;i<=100;i++){
-		array.push({id:i,receiveposition:"张三"+i,status:"已读"+i,subject:"测试"+i,addTime:"2017-02-15 10:24"});
-	}
-	var data={Rows:array};
 	grid=$("#email_list").ligerGrid({
 		checkbox: true,
         columns: [
@@ -60,7 +89,7 @@ $(function(){
 		var sendTime = $("#time").val();
 		grid.setOptions({
             parms : {
-            	sendUser : sendUser,  
+            	sendName : sender,  
             	sendTime : sendTime
             } 
 		});  

@@ -6,7 +6,7 @@ function toolbar() {
 	items.push({text: "发送",icon:'up',click: function () {send()}});
 	items.push({ line:true });
 	items.push({text: "存草稿",icon:'pager',click: function () {draft();}});
-	if(back){
+	if(backbtn){
 		items.push({ line:true });
 		items.push({text: "返回",icon:'back',click: function () {back()}});
 	}
@@ -20,6 +20,8 @@ function back(){
 }
 /*验证、发送*/
 function send(){
+	uploader.upload();
+	return;
 	var account = $("#account").val();
 	var copyer = $("#chaosong").val();
 	var title = $("#title").val();
@@ -42,12 +44,14 @@ function send(){
 		acceptNo:account,
 		copyer:copyer
 	}
+	var wait = parent.$.ligerDialog.waitting('发送中,请稍候...');
 	$.ajax({
 		url:path+"/email/doSend",
 		type:"post",
 		dataType:"json",
 		data:data,
 		success:function(response){
+			waitclose();
 			if(response.isSuccess){
 				parent.$.ligerDialog.success(response.strMessage);
 				send_websocket(response.acceptNo,response.tips);
@@ -56,6 +60,7 @@ function send(){
 			}
 		},
 		error:function(response){
+			waitclose();
 			parent.$.ligerDialog.error("系统错误!");
 		}
 	});
@@ -80,12 +85,14 @@ function draft(){
 		acceptNo:account,
 		copyer:copyer
 	}
+	var wait = parent.$.ligerDialog.waitting('发送中,请稍候...');
 	$.ajax({
 		url:path+"/email/draft",
 		type:"post",
 		dataType:"json",
 		data:data,
 		success:function(response){
+			waitclose();
 			if(response.isSuccess){
 				parent.$.ligerDialog.success(response.strMessage);
 			}else{
@@ -93,6 +100,7 @@ function draft(){
 			}
 		},
 		error:function(response){
+			waitclose();
 			parent.$.ligerDialog.error("系统错误!");
 		}
 	});
@@ -123,7 +131,7 @@ var uploader = WebUploader.create({
     // swf文件路径
     swf:path+'/webuploader/Uploader.swf',
     // 文件接收服务端。
-    server: 'file/upload',
+    server: '/file/upload',
     // 选择文件的按钮。可选。内部根据当前运行是创建，可能是input元素，也可能是flash.
     pick: '#picker',
     // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
@@ -132,13 +140,7 @@ var uploader = WebUploader.create({
 });
 // 当有文件被添加进队列的时候
 uploader.on( 'fileQueued', function( file ) {
-    $("#thelist").append('<div class="item" id="'+file.id+'_item">'+
-				    		'<div class="name" id="'+file.id+'_name">'+file.name+'</div>'+
-				    		'<div class="progressBox">'+
-				    			'<span class="status" id="'+file.id+'_status">等待上传...</span>'+
-				    			'<div  class="progress" id="'+file.id+'_progress"></div>'+
-				    		'</div>'+
-				    	'</div>');
+    $("#file_list").append('<li class="item" id="'+file.id+'_item">'+file.name+'</li>');
 });
 // 文件上传过程中创建进度条实时显示。
 uploader.on( 'uploadProgress', function( file, percentage ) {

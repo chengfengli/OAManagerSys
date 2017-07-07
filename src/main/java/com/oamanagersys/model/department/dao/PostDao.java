@@ -20,7 +20,7 @@ public interface PostDao {
 	 * 通过id获取角色信息
 	 * @return
 	 */
-	public List<Position> getPsotById(String positionId);
+	public List<Position> getPsotById(String[] positionId);
 	/**
 	 * 通过部门获取角色信息
 	 * @param depId

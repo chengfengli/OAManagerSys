@@ -59,9 +59,11 @@
 	
 	<!-- 拦截器 -->
 	<mvc:interceptors>
+		<!-- 1. 判断用户是否登陆拦截器 -->
 		<mvc:interceptor>
+			<!-- 拦截所有 -->
 			<mvc:mapping path="/**"/>
-			<!-- 以下是静态资源 -->
+			<!-- 以下是请求不需要拦截 -->
 			<mvc:exclude-mapping path="/index/**"/>
             <mvc:exclude-mapping path="/icon/**" />
             <mvc:exclude-mapping path="/css/**" />
@@ -71,7 +73,10 @@
             <mvc:exclude-mapping path="/webuploader/**" />
             <mvc:exclude-mapping path="/Source/**" />
             <mvc:exclude-mapping path="/user/code" />
+            <mvc:exclude-mapping path="/user/recode" />
             <mvc:exclude-mapping path="/user/login" />
+            <mvc:exclude-mapping path="/file/**" />
+            <!-- 拦截处理类 -->
 			<bean class="com.oamanagersys.util.interceptor.LoginInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>

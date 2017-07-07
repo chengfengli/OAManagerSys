@@ -131,12 +131,12 @@ $(function(){
 	});
 	
 	$("#select").click(function(){
-		var sendUser = $("#sendUser").val();
+		var sendName = $("#sendName").val();
 		var sendTime = $("#sendTime").val();
 		var acceptStatus = $("#status").val();
 		grid.setOptions({  
             parms : {  
-            	sendUser : sendUser,  
+            	sendName : sendName,  
             	sendTime : sendTime,
             	acceptStatus: acceptStatus
             } 

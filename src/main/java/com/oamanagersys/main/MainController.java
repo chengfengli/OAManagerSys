@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +27,7 @@ public class MainController {
 	@Autowired
 	private PostService postService;
 	@RequestMapping("/toindex")
-	public ModelAndView toIndex(ModelAndView mav,HttpServletRequest request){
+	public ModelAndView toIndex(ModelAndView mav,HttpServletRequest request,String positionCode){
 		Emp user = (Emp)request.getSession().getAttribute("user");
 		if(user==null){
 			mav.setViewName("pages/login/login");
@@ -34,15 +35,7 @@ public class MainController {
 		}
 		//用户角色
 		List<Position> positions = postService.getPsotById(user.getPositionId());
-		//是否是管理员
-		boolean isAdmin = false;
-		for(int i=0;i<positions.size();i++){
-			if("ADMIN".equals(positions.get(i).getPositionCode())){
-				isAdmin = true;
-			}
-		}
-		
-		if(isAdmin){
+		if("ADMIN".equals(positionCode)){//判断是否是管理员
 			//获取顶级菜单
 			List<String> list = AnnotationUtil.getClasses("com.oamanagersys.menu");
 			List<Map<String, String>> result = AnnotationUtil.getClassName(list);
@@ -51,15 +44,19 @@ public class MainController {
 			Map<String,Object> childMap = AnnotationUtil.ReadJsonFile("./WEB-INF/classes/childmenu.properties",request);
 			String str = JSON.toJSONString(childMap);
 			mav.addObject("childMenu", str);
-		}else{
-			String parentMenu = positions.get(0).getParentMenu();
-			String childMenu = positions.get(0).getChildMenu();
-			//当前角色
-			mav.addObject("currentPosition", positions.get(0).getPositionCode());
-			List<Object> list = (List<Object>)JSON.parse(parentMenu);
-			mav.addObject("lists", list);
-			mav.addObject("childMenu", childMenu);
+		}else if(StringUtils.isNotBlank(positionCode)){
+			for(int i=0;i<positions.size();i++){
+				if(positions.get(i).getPositionCode().equals(positionCode)){
+					String parentMenu = positions.get(i).getParentMenu();
+					String childMenu = positions.get(i).getChildMenu();
+					List<Object> list = (List<Object>)JSON.parse(parentMenu);
+					mav.addObject("lists", list);
+					mav.addObject("childMenu", childMenu);
+				}
+			}
 		}
+		//当前角色
+		mav.addObject("currentPosition", positionCode);
 		mav.addObject("positions", positions);
 		mav.setViewName("index");
 		return mav;
@@ -68,31 +65,6 @@ public class MainController {
 	@RequestMapping("/tologin")
 	public ModelAndView toLogin(ModelAndView mav){
 		mav.setViewName("pages/login/login");
-		return mav;
-	}
-	
-	//切换角色
-	@RequestMapping("/switchrole")
-	public ModelAndView switchRole(ModelAndView mav,HttpServletRequest request,String positionCode){
-		Emp user = (Emp)request.getSession().getAttribute("user");
-		if(user==null){
-			mav.setViewName("pages/login/login");
-			return mav;
-		}
-		//用户角色
-		List<Position> positions = postService.getPsotById(user.getPositionId());
-		for(int i=0;i<positions.size();i++){
-			if(positions.get(i).getPositionCode().equals(positionCode)){
-				String parentMenu = positions.get(i).getParentMenu();
-				String childMenu = positions.get(i).getChildMenu();
-				List<Object> list = (List<Object>)JSON.parse(parentMenu);
-				mav.addObject("lists", list);
-				mav.addObject("childMenu", childMenu);
-			}
-		}
-		mav.addObject("positions", positions);
-		mav.addObject("currentPosition", positionCode);
-		mav.setViewName("index");
 		return mav;
 	}
 }

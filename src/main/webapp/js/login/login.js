@@ -87,7 +87,7 @@ $(function() {
 				success : function(result) {
 					manager.close();
 					if (result.isSuccess) {
-						location.href = path + "/index/toindex";
+						location.href = path + "/index/toindex?positionCode="+result.strMessage;
 					} else {
 						if(result.errorType == "passwordError") {
 							$("#id").tip(result.strMessage);
@@ -95,6 +95,7 @@ $(function() {
 							$("#password").tip(result.strMessage);
 						} else if(result.errorType == "codeError"){
 							$("#code").tip(result.strMessage);
+							$("#code_content").click();
 						}
 						
 					}
@@ -104,6 +105,17 @@ $(function() {
 				}
 			})
 		}
+	});
+	
+	$("#code_content").click(function(){
+		$.ajax({
+			url:path + "/user/recode",
+			type:"post",
+			dataType:"json",
+			success:function(result){
+				$("#code_content").css("background","url("+path+"/icon/"+result.strMessage+")");
+			}
+		})
 	});
 	
 	/*自动加载在本机上登录过的并记住密码的账号*/

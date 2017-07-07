@@ -16,7 +16,7 @@ websocket.onopen = function(event) {
 $(function(){
 	$("#role").change(function(){
 		var positionCode = $(this).val();
-		location.href = path+"/index/switchrole?positionCode="+positionCode;
+		location.href = path+"/index/toindex?positionCode="+positionCode;
 	});
 	//退出
 	$("#exit").click(function(){

@@ -16,7 +16,7 @@
 		<table id="querybar">
 			<tr>
 				<td class="title">发件人</td>
-				<td><input type="text" id="sendUser" class="liger-textbox" /></td>
+				<td><input type="text" id="sendName" class="liger-textbox" /></td>
 				<td class="title">状态</td>
 				<td>
 					<select id="status" class="liger-combobox">

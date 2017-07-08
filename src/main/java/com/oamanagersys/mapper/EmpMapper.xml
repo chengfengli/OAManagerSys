@@ -16,7 +16,7 @@
 		<result column="lastUpdateTime" property="lastUpdateTime" />
 		<result column="updateUser" property="updateUser" />
 		<association property="dep" javaType="com.oamanagersys.model.department.entity.Dep" column="depId" resultMap="resultDep"></association>
-		<association property="position" javaType="com.oamanagersys.model.department.entity.Position" column="positionId" resultMap="postResultMap"></association>
+		<collection property="position" ofType="com.oamanagersys.model.department.entity.Position" column="positionId" resultMap="postResultMap"></collection>
 	</resultMap>
 	
 	<resultMap id="resultDep" type="com.oamanagersys.model.department.entity.Dep">

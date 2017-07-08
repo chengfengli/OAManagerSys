@@ -1,6 +1,6 @@
 package com.oamanagersys.model.user.entity;
 
-import java.util.Date;
+import java.util.List;
 
 import com.oamanagersys.model.department.entity.Dep;
 import com.oamanagersys.model.department.entity.Position;
@@ -41,7 +41,7 @@ public class Emp extends BaseEntity {
 	private Dep dep;
 	
 	//职位
-	private Position position;
+	private List<Position> position;
 
 	public String getPassword() {
 		return password;
@@ -115,11 +115,11 @@ public class Emp extends BaseEntity {
 		this.dep = dep;
 	}
 
-	public Position getPosition() {
+	public List<Position> getPosition() {
 		return position;
 	}
 
-	public void setPosition(Position position) {
+	public void setPosition(List<Position> position) {
 		this.position = position;
 	}
 }

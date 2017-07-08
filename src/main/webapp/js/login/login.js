@@ -101,6 +101,7 @@ $(function() {
 					}
 				},
 				error : function(result) {
+					manager.close();
 					parent.$.ligerDialog.success("系统错误!");
 				}
 			})

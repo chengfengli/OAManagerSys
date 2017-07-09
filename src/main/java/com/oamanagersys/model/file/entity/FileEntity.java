@@ -19,8 +19,26 @@ public class FileEntity extends BaseEntity {
 	//文件大小
 	private String fileSize;
 	
-	//文件路径
+	//文件网路路径
 	private String fileUrl;
+	
+	//文件物理路径
+	private String filePath;
+	
+	//文件集id
+	private String fileId;
+
+	public String getFileId() {
+		return fileId;
+	}
+
+	public void setFileId(String fileId) {
+		this.fileId = fileId;
+	}
+
+	public void setFileSize(String fileSize) {
+		this.fileSize = fileSize;
+	}
 
 	public String getFileAlias() {
 		return fileAlias;
@@ -63,6 +81,14 @@ public class FileEntity extends BaseEntity {
 
 	public void setFileUrl(String fileUrl) {
 		this.fileUrl = fileUrl;
+	}
+
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
 	}
 	
 }

@@ -2,21 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.oamanagersys.model.file.dao.FileDao">
 	<resultMap id="fileResultMap" type="com.oamanagersys.model.file.entity.FileEntity">
-		<id column="empNo" property="id" />
-		<result column="password" property="password" />
-		<result column="depId" property="depId" />
-		<result column="positionId" property="positionId" />
-		<result column="entryTime" property="entryTime" />
-		<result column="probationPeriod" property="probationPeriod" />
-		<result column="name" property="name" />
-		<result column="formal" property="formal" />
-		<result column="onJob" property="onJob" />
+		<id column="id" property="id" />
+		<result column="fileAlias" property="fileAlias" />
+		<result column="fileName" property="fileName" />
+		<result column="fileSize" property="fileSize" />
+		<result column="fileUrl" property="fileUrl" />
+		<result column="filePath" property="filePath" />
+		<result column="fileId" property="fileId" />
 		<result column="createTime" property="createTime" />
-		<result column="createUser" property="createUser" />
-		<result column="lastUpdateTime" property="lastUpdateTime" />
-		<result column="updateUser" property="updateUser" />
 	</resultMap>
 	
-	
+	<insert id="insert" parameterType="java.util.List">
+		INSERT INTO files(fileAlias,fileName,fileSize,fileUrl,filePath,fileId,createTime)
+		VALUES
+		<foreach collection="list" item="file" index="index" separator=",">
+		(#{file.fileAlias},#{file.fileName},#{file.fileSize},#{file.fileUrl},#{file.filePath},#{file.fileId},#{file.createTime})
+		</foreach>
+	</insert>
 	
 </mapper>

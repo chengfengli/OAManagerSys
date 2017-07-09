@@ -199,18 +199,7 @@ public class EmpController {
 				//用户角色
 				List<Position> positions = postService.getPsotById(list.get(0).getPositionId());
 				String currentPositionCode = positions.get(0).getPositionCode();
-				//是否是管理员
-				boolean isAdmin = false;
-				for(int i=0;i<positions.size();i++){
-					if("ADMIN".equals(positions.get(i).getPositionCode())){
-						isAdmin = true;
-					}
-				}
-				if(isAdmin){
-					msg.strMessage = "ADMIN";
-				}else{
-					msg.strMessage = currentPositionCode;
-				}
+				msg.strMessage = currentPositionCode;
 			}else{
 				msg.isSuccess = false;
 				msg.strMessage = "账号密码错误";

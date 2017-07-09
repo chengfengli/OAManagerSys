@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.oamanagersys.model.file.service.FileService;
 import com.oamanagersys.util.response.Message;
+import com.oamanagersys.util.server.Server;
 
 @RequestMapping("/file")
 @Controller
@@ -21,8 +22,12 @@ public class FileContriller {
 	@RequestMapping("/upload")
 	@ResponseBody
 	public Message upload(HttpServletRequest request, @RequestParam("file") MultipartFile files[]) {
-        String path = request.getSession().getServletContext().getRealPath("upload");
-        Message message  = fileService.upload(files, path);
+		String folder = "upload";
+		//上传路径
+        String path = request.getSession().getServletContext().getRealPath(folder);
+        //服务器地址
+        String url = Server.getServerUrl(request)+folder;
+        Message message  = fileService.upload(files, path,url);
         return message;
     }
 }

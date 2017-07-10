@@ -67,17 +67,28 @@ function edit(){
 		parent.$.ligerDialog.warn("选择一封邮件");
 	}
 }
+
+/*查看附件*/
+function files(fileId){
+	
+}
 $(function(){
 	$("#time").ligerDateEditor();
 	/*工具栏方法*/
 	toolbar();
 	grid=$("#email_list").ligerGrid({
 		checkbox: true,
+		selectRowButtonOnly:true,
         columns: [
 	        { display: 'id', name: 'id',hide : true, },
-	        { display: '收件人', name: 'acceptName', width: "10%" },
-	        { display: '主题', name: 'title', width:"50%" },
-	        { display: '时间', name: 'sendTime', width:"30%", }
+	        { display: '收件人', name: 'acceptName', width: "10%"},
+	        { display: '主题', name: 'title', width:"50%"},
+	        { display: '时间', name: 'sendTime', width:"30%"},
+	        { display: '附件', name: 'fileId', width:"9%",render:function(row){
+	        	if(row.fileId != null && row.fileId != ''){
+	        		return '<img class="fileId" onclick="files('+row.fileId+')" style="margin-top:6px;" src="/icon/paper.png" />';
+	        	}
+	        }}
         ], pageSize:10,
         url:path+"/email/outboxList",
         width: '100%',height:'99%'

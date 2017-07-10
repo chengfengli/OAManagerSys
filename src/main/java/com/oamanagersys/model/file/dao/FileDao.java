@@ -6,4 +6,6 @@ import com.oamanagersys.model.file.entity.FileEntity;
 
 public interface FileDao {
 	public int insert(List<FileEntity> list);
+	
+	public List<FileEntity> select(FileEntity file);
 }

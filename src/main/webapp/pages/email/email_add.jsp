@@ -60,6 +60,7 @@
 				<td valign="top">附件</td>
 				<td>
 					<div id="picker">添加文件</div>
+					<input type="file" id="file" multiple style="display:none;" />
 					<ul id="file_list">
 						
 					</ul>

@@ -16,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.oamanagersys.model.email.entity.Email;
 import com.oamanagersys.model.email.entity.SearchEmail;
 import com.oamanagersys.model.email.service.EmailService;
+import com.oamanagersys.model.file.entity.FileEntity;
+import com.oamanagersys.model.file.service.FileService;
 import com.oamanagersys.model.user.entity.Emp;
 import com.oamanagersys.model.user.service.UserService;
 import com.oamanagersys.util.response.Message;
@@ -29,6 +31,8 @@ public class EmailController {
 	private UserService userService;
 	@Autowired
 	private EmailService emailService;
+	@Autowired
+	private FileService fielService;
 	/**
 	 * 写邮件
 	 * @return
@@ -103,6 +107,11 @@ public class EmailController {
 		ModelAndView mav = new ModelAndView("pages/email/email_details");
 		List<Email> list = emailService.selectOutbox(searchEmail);
 		if(list.size() > 0){
+			String fileId = list.get(0).getFileId();
+			FileEntity file = new FileEntity();
+			file.setFileId(fileId);
+			List<FileEntity> files = fielService.select(file);
+			list.get(0).setList(files);
 			mav.addObject("email", list.get(0));
 		}
 		return mav;

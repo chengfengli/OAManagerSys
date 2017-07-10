@@ -1,5 +1,18 @@
-﻿var E = window.wangEditor;
+﻿var time = new Date().getTime();
+var E = window.wangEditor;
 var editor = new E('content');
+
+var input = document.getElementById("file");
+var formData=new FormData();
+// 文件域选择文件时, 执行readFile函数
+input.addEventListener('change', readFile, false);
+function readFile() {
+	var file = this.files;
+	for(var i=0;i<file.length;i++){
+			$("#file_list").append('<li class="item">'+file[i].name+'</li>');
+			formData.append("file",file[i]);
+	}
+}
 /*工具栏*/
 function toolbar() {
 	var items = [];
@@ -20,7 +33,23 @@ function back(){
 }
 /*验证、发送*/
 function send(){
-	uploader.upload();
+	var r = $.ajax({
+		url: path+'/file/upload' ,  
+		type: 'post',
+		dataType:"json",
+		data: formData,
+		processData: false,  // 告诉jQuery不要去处理发送的数据
+		contentType: false,  // 告诉jQuery不要去设置Content-Type请求头
+		cache:false,
+		async:false, 
+		success: function (result) {
+			r = result;
+		},
+		error: function (result) {  
+			$.ligerDialog.warn('上传：系统错误');
+		}
+	});
+	console.log(r);
 	return;
 	var account = $("#account").val();
 	var copyer = $("#chaosong").val();
@@ -44,26 +73,50 @@ function send(){
 		acceptNo:account,
 		copyer:copyer
 	}
+	
 	var wait = parent.$.ligerDialog.waitting('发送中,请稍候...');
-	$.ajax({
-		url:path+"/email/doSend",
-		type:"post",
-		dataType:"json",
-		data:data,
-		success:function(response){
-			waitclose();
-			if(response.isSuccess){
-				parent.$.ligerDialog.success(response.strMessage);
-				send_websocket(response.acceptNo,response.tips);
-			}else{
-				parent.$.ligerDialog.error(response.strMessage);
+	var files = $("#file_list li");
+	if(files.length > 0){
+//		$.ajax({
+	//		url:path+"/email/doSend",
+	//		type:"post",
+	//		dataType:"json",
+	//		data:data,
+	//		success:function(response){
+	//			wait.close();
+	//			if(response.isSuccess){
+	//				parent.$.ligerDialog.success(response.strMessage);
+	//				send_websocket(response.acceptNo,response.tips);
+	//			}else{
+	//				parent.$.ligerDialog.error(response.strMessage);
+	//			}
+	//		},
+	//		error:function(response){
+	//			wait.close();
+	//			parent.$.ligerDialog.error("系统错误!");
+	//		}
+	//	});
+	}else{
+		$.ajax({
+			url:path+"/email/doSend",
+			type:"post",
+			dataType:"json",
+			data:data,
+			success:function(response){
+				waitclose();
+				if(response.isSuccess){
+					parent.$.ligerDialog.success(response.strMessage);
+					send_websocket(response.acceptNo,response.tips);
+				}else{
+					parent.$.ligerDialog.error(response.strMessage);
+				}
+			},
+			error:function(response){
+				waitclose();
+				parent.$.ligerDialog.error("系统错误!");
 			}
-		},
-		error:function(response){
-			waitclose();
-			parent.$.ligerDialog.error("系统错误!");
-		}
-	});
+		});
+	}
 }
 /*存草稿*/
 function draft(){
@@ -85,14 +138,13 @@ function draft(){
 		acceptNo:account,
 		copyer:copyer
 	}
-	var wait = parent.$.ligerDialog.waitting('发送中,请稍候...');
 	$.ajax({
 		url:path+"/email/draft",
 		type:"post",
 		dataType:"json",
 		data:data,
 		success:function(response){
-			waitclose();
+			wait.close();
 			if(response.isSuccess){
 				parent.$.ligerDialog.success(response.strMessage);
 			}else{
@@ -100,7 +152,7 @@ function draft(){
 			}
 		},
 		error:function(response){
-			waitclose();
+			wait.close();
 			parent.$.ligerDialog.error("系统错误!");
 		}
 	});
@@ -125,54 +177,20 @@ function add_group_send(userEmail){
 		}
 	}
 }
-/*文件上传*/
-var uploader = WebUploader.create({
-	//chunked: true,
-    // swf文件路径
-    swf:path+'/webuploader/Uploader.swf',
-    // 文件接收服务端。
-    server: '/file/upload',
-    // 选择文件的按钮。可选。内部根据当前运行是创建，可能是input元素，也可能是flash.
-    pick: '#picker',
-    // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
-    resize: false,
-    auto:false
-});
-// 当有文件被添加进队列的时候
-uploader.on( 'fileQueued', function( file ) {
-    $("#file_list").append('<li class="item" id="'+file.id+'_item">'+file.name+'</li>');
-});
-// 文件上传过程中创建进度条实时显示。
-uploader.on( 'uploadProgress', function( file, percentage ) {
-	if(percentage==1){
-		$("#"+file.id+"_status").text('成功');
-	}else{
-		$("#"+file.id+"_status").text('上传中');
-	}
-	$("#"+file.id+"_progress").css( 'width', percentage * 100 + '%' );
-    
-});
-// 文件上到服务器之后响应事件。
-uploader.on( 'uploadAccept', function(data,data1,data2) {
-	console.log(data1);
-});
+
+
 $(function(){
 	toolbar();
 	/*初始化富文本编辑器*/
 	editor.create();
-	/*选择文件后*/
-	$("#file").change(function(){
-		var files = this.files;
-		var li="";
-		for(var i=0;i<files.length;i++){
-			li+="<li>"+files[i].name+"</li>";
-		}
-		$("#file_count").text(files.length+" 个");
-		$("#file_list").html(li);
-	});
+	
 	/*添加收件人*/
 	$(".group_send").click(function(){
 		alert(JSON.stringify($(".group_send")));
+	});
+	
+	$("#picker").click(function(){
+		$("#file").click();
 	});
 });
 

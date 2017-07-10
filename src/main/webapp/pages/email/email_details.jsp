@@ -49,9 +49,9 @@
 				<td valign="top">附件</td>
 				<td>
 					<ul>
-						<li>sdfasdfsadf.jpg&nbsp;&nbsp;<a href="javascript:void(0)">预览</a>&nbsp;<a href="javascript:void(0)">下载</a></li>
-						<li>sdfasdfsadf.jpg&nbsp;&nbsp;<a href="javascript:void(0)">预览</a>&nbsp;<a href="javascript:void(0)">下载</a></li>
-						<li>sdfasdfsadf.jpg&nbsp;&nbsp;<a href="javascript:void(0)">预览</a>&nbsp;<a href="javascript:void(0)">下载</a></li>	
+						<c:forEach items="${email.list }" var="file">
+							<li>${file.fileName }&nbsp;&nbsp;${file.fileSize }&nbsp;&nbsp;<a href="javascript:void(0)">预览</a>&nbsp;<a href="javascript:void(0)">下载</a></li>
+						</c:forEach>
 					</ul>
 				</td>
 			</tr>

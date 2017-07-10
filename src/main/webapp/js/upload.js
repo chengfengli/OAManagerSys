@@ -1,51 +1,42 @@
-﻿var uploader = WebUploader.create({
-	//chunked: true,
-    // swf文件路径
-    swf:path+'/webuploader/Uploader.swf',
-    // 文件接收服务端。
-    server: 'file/upload',
-    // 选择文件的按钮。可选。内部根据当前运行是创建，可能是input元素，也可能是flash.
-    pick: '#picker',
-    // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
-    resize: false,
-    auto:false
-});
-// 当有文件被添加进队列的时候
-uploader.on( 'fileQueued', function( file ) {
-    $("#thelist").append('<div class="item" id="'+file.id+'_item">'+
-				    		'<div class="name" id="'+file.id+'_name">'+file.name+'</div>'+
-				    		'<div class="progressBox">'+
-				    			'<span class="status" id="'+file.id+'_status">等待上传...</span>'+
-				    			'<div  class="progress" id="'+file.id+'_progress"></div>'+
-				    		'</div>'+
-				    	'</div>');
-});
-// 文件上传过程中创建进度条实时显示。
-uploader.on( 'uploadProgress', function( file, percentage ) {
-	if(percentage==1){
-		$("#"+file.id+"_status").text('成功');
-	}else{
-		$("#"+file.id+"_status").text('上传中');
-	}
-	$("#"+file.id+"_progress").css( 'width', percentage * 100 + '%' );
-    
-});
-// 文件上到服务器之后响应事件。
-uploader.on( 'uploadAccept', function(data,data1,data2) {
-	console.log(data1);
-});
-
-function start(){
-	uploader.upload('WU_FILE_0');
+﻿/* 封装ajax函数
+ * @param {string}opt.type http连接的方式，包括POST和GET两种方式
+ * @param {string}opt.url 发送请求的url
+ * @param {boolean}opt.async 是否为异步请求，true为异步的，false为同步的
+ * @param {object}opt.data 发送的参数，格式为对象类型
+ * @param {function}opt.success ajax发送并接收成功调用的回调函数
+ */
+function ligerAjax(opt) {
+	var result=null;
+    opt = opt || {};
+    opt.method = opt.method.toUpperCase() || 'POST';
+    opt.url = opt.url || '';
+    opt.async = opt.async || true;
+    opt.data = opt.data || null;
+    opt.success = opt.success || function () {};
+    var xmlHttp = null;
+    if (XMLHttpRequest) {
+        xmlHttp = new XMLHttpRequest();
+    }
+    else {
+        xmlHttp = new ActiveXObject('Microsoft.XMLHTTP');
+    }var params = [];
+    for (var key in opt.data){
+        params.push(key + '=' + opt.data[key]);
+    }
+    var postData = params.join('&');
+    if (opt.method.toUpperCase() === 'POST') {
+        xmlHttp.open(opt.method, opt.url, opt.async);
+        xmlHttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=utf-8');
+        xmlHttp.send(postData);
+    }else if (opt.method.toUpperCase() === 'GET') {
+        xmlHttp.open(opt.method, opt.url + '?' + postData, opt.async);
+        xmlHttp.send(null);
+    } 
+    xmlHttp.onreadystatechange = function () {
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+            //opt.success(xmlHttp.responseText);
+        	result = xmlHttp.responseText;
+        }
+    };
+    return result;
 }
-
-function stop(){
-	uploader.stop('WU_FILE_0');
-}
-
-function cancel(){
-	//uploader.cancelFile( 'WU_FILE_0' );
-	uploader.removeFile( 'WU_FILE_0',true);
-	$("#WU_FILE_0_item").remove();
-}
-

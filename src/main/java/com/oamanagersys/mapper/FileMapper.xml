@@ -20,4 +20,16 @@
 		</foreach>
 	</insert>
 	
+	<select id="select" parameterType="com.oamanagersys.model.file.entity.FileEntity" resultMap="fileResultMap">
+		SELECT * FROM files WHERE 1 = 1
+		<if test="id != 0">
+			AND id = #{id}
+		</if>
+		<if test="fileName != null and fileName != ''">
+			AND fileName = #{fileName}
+		</if>
+		<if test="fileId != null and fileId != ''">
+			AND fileId = #{fileId}
+		</if>
+	</select>
 </mapper>

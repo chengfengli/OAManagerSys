@@ -5,7 +5,7 @@
 <html>
 	<head>
 		<meta http-equiv="content-type" content="text/html;charset=utf-8">
-		<title>OA管理系统</title>
+		<title>OA</title>
 		<%@ include file="/base.jsp" %>
 		<link rel="stylesheet" type="text/css" href="<%=context %>/css/index.css" />
 		<script>

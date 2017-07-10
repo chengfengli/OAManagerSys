@@ -1,5 +1,8 @@
 package com.oamanagersys.model.email.entity;
 
+import java.util.List;
+
+import com.oamanagersys.model.file.entity.FileEntity;
 import com.oamanagersys.model.user.entity.Emp;
 import com.oamanagersys.util.base.BaseEntity;
 
@@ -44,6 +47,11 @@ public class Email extends BaseEntity {
 	
 	//阅读时间
 	private String readTime;
+	
+	//附件
+	private String fileId;
+	
+	private List<FileEntity> list;
 
 	public String getTitle() {
 		return title;
@@ -139,5 +147,21 @@ public class Email extends BaseEntity {
 
 	public void setAcceptName(String acceptName) {
 		this.acceptName = acceptName;
+	}
+
+	public String getFileId() {
+		return fileId;
+	}
+
+	public void setFileId(String fileId) {
+		this.fileId = fileId;
+	}
+
+	public List<FileEntity> getList() {
+		return list;
+	}
+
+	public void setList(List<FileEntity> list) {
+		this.list = list;
 	}
 }

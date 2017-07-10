@@ -75,4 +75,13 @@ public class FileService {
 	public int insert_file(List<FileEntity> list){
 		return fileDao.insert(list);
 	}
+	/**
+	 * 查询文件
+	 * @param file
+	 * @return
+	 */
+	public List<FileEntity> select(FileEntity file){
+		List<FileEntity> list  = fileDao.select(file);
+		return list;
+	}
 }

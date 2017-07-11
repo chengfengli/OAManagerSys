@@ -94,6 +94,11 @@ public class EmailController {
 			if(StringUtils.isBlank(email.getReadTime())){
 				emailService.updateReaded(Integer.toString(searchEmail.getId()));
 			}
+			String fileId = list.get(0).getFileId();
+			FileEntity file = new FileEntity();
+			file.setFileId(fileId);
+			List<FileEntity> files = fielService.select(file);
+			list.get(0).setList(files);
 			mav.addObject("email", list.get(0));
 		}
 		return mav;
@@ -104,7 +109,7 @@ public class EmailController {
 	 */
 	@RequestMapping("/send_details")
 	public ModelAndView send_detailsEmail(SearchEmail searchEmail,HttpServletRequest request){
-		ModelAndView mav = new ModelAndView("pages/email/email_details");
+		ModelAndView mav = new ModelAndView("pages/email/send_details");
 		List<Email> list = emailService.selectOutbox(searchEmail);
 		if(list.size() > 0){
 			String fileId = list.get(0).getFileId();

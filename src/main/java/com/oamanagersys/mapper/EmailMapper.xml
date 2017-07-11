@@ -29,7 +29,7 @@
 		INSERT INTO email(title,content,boxType,emailStatus,acceptNo,acceptName,sendNo,`delete`,createTime,createUser,sendTime,copyer,readTime,fileId)
 		VALUES
 		<foreach collection="list" item="email" index="index" separator=",">
-		(#{email.title},#{email.content},#{email.boxType},#{email.emailStatus},#{email.acceptNo},#{email.acceptName},#{email.sendNo},#{email.delete},#{email.createTime},#{email.createUser},#{email.sendTime},#{email.copyer},#{email.readTime},#{fileId})
+		(#{email.title},#{email.content},#{email.boxType},#{email.emailStatus},#{email.acceptNo},#{email.acceptName},#{email.sendNo},#{email.delete},#{email.createTime},#{email.createUser},#{email.sendTime},#{email.copyer},#{email.readTime},#{email.fileId})
 		</foreach>
 	</insert>
 

@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta http-equiv="content-type" content="text/html;charset=utf-8">
-		<title>邮件详情</title>
+		<title>邮件详情-发送</title>
 		<%@ include file="/base.jsp" %>
 		<link rel="stylesheet" type="text/css" href="<%=context %>/css/email/email_details.css" />
 		<script>
@@ -16,15 +16,15 @@
 		<div id="toolbar"></div>
 		<table class="email_table">
 			<tr>
-				<td>发送人</td>
+				<td>接收人</td>
 				<td>
-					${email.emp.name }
+					${email.acceptName }
 				</td>
 			</tr>
 			<tr>
 				<td>号码</td>
 				<td>
-					${email.sendNo }
+					${email.acceptNo }
 				</td>
 			</tr>
 			<tr>

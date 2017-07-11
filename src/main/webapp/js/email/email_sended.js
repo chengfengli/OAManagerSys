@@ -6,7 +6,7 @@ function toolbar() {
 	items.push({ line:true });
 	items.push({text: "删除",icon:'delete',click: function () {del();}});
 	items.push({ line:true });
-	items.push({text: "编辑",icon:'edit',click: function () {edit();}});
+	items.push({text: "编辑",icon:'edit',click: function () {edit(path+"/email/writerEmail?type=edit");}});
 	$("#toolbar").ligerToolBar({
 		items: items
 	});
@@ -54,24 +54,8 @@ function del(){
 		parent.$.ligerDialog.warn("选择要操作的邮件!");
 	}
 }
-/*编辑*/
-function edit(){
-	var rows = grid.getCheckedRows();
-	if (rows && rows.length == 1) {
-		var ids = [];
-		$(rows).each(function() {
-			ids.push(this.id);
-		});
-		location.href = path+"/email/writerEmail?id="+ids[0];
-	}else{
-		parent.$.ligerDialog.warn("选择一封邮件");
-	}
-}
 
-/*查看附件*/
-function files(fileId){
-	
-}
+
 $(function(){
 	$("#time").ligerDateEditor();
 	/*工具栏方法*/
@@ -86,7 +70,7 @@ $(function(){
 	        { display: '时间', name: 'sendTime', width:"30%"},
 	        { display: '附件', name: 'fileId', width:"9%",render:function(row){
 	        	if(row.fileId != null && row.fileId != ''){
-	        		return '<img class="fileId" onclick="files('+row.fileId+')" style="margin-top:6px;" src="/icon/paper.png" />';
+	        		return '<img class="fileId" onclick="files('+row.fileId+')" style="margin-top:6px;cursor:pointer;" src="/icon/paper.png" />';
 	        	}
 	        }}
         ], pageSize:10,

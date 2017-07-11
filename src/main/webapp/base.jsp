@@ -16,3 +16,5 @@
 <script src="<%=context %>/Source/lib/ligerUI/js/ligerui.all.js"></script>
 <script src="<%=context %>/wangEditor/dist/js/wangEditor.js"></script>
 <script src="<%=context %>/js/websocket.js"></script>
+<script src="<%=context %>/js/upload.js"></script>
+<script src="<%=context %>/js/commons/list_fun.js"></script>

@@ -2,17 +2,7 @@
 var E = window.wangEditor;
 var editor = new E('content');
 
-var input = document.getElementById("file");
-var formData=new FormData();
-// 文件域选择文件时, 执行readFile函数
-input.addEventListener('change', readFile, false);
-function readFile() {
-	var file = this.files;
-	for(var i=0;i<file.length;i++){
-			$("#file_list").append('<li class="item">'+file[i].name+'</li>');
-			formData.append("file",file[i]);
-	}
-}
+
 /*工具栏*/
 function toolbar() {
 	var items = [];
@@ -33,24 +23,6 @@ function back(){
 }
 /*验证、发送*/
 function send(){
-	var r = $.ajax({
-		url: path+'/file/upload' ,  
-		type: 'post',
-		dataType:"json",
-		data: formData,
-		processData: false,  // 告诉jQuery不要去处理发送的数据
-		contentType: false,  // 告诉jQuery不要去设置Content-Type请求头
-		cache:false,
-		async:false, 
-		success: function (result) {
-			r = result;
-		},
-		error: function (result) {  
-			$.ligerDialog.warn('上传：系统错误');
-		}
-	});
-	console.log(r);
-	return;
 	var account = $("#account").val();
 	var copyer = $("#chaosong").val();
 	var title = $("#title").val();
@@ -77,25 +49,28 @@ function send(){
 	var wait = parent.$.ligerDialog.waitting('发送中,请稍候...');
 	var files = $("#file_list li");
 	if(files.length > 0){
-//		$.ajax({
-	//		url:path+"/email/doSend",
-	//		type:"post",
-	//		dataType:"json",
-	//		data:data,
-	//		success:function(response){
-	//			wait.close();
-	//			if(response.isSuccess){
-	//				parent.$.ligerDialog.success(response.strMessage);
-	//				send_websocket(response.acceptNo,response.tips);
-	//			}else{
-	//				parent.$.ligerDialog.error(response.strMessage);
-	//			}
-	//		},
-	//		error:function(response){
-	//			wait.close();
-	//			parent.$.ligerDialog.error("系统错误!");
-	//		}
-	//	});
+		$.upload(path+"/file/upload",function(result){
+			data.fileId = result.strMessage;
+			$.ajax({
+				url:path+"/email/doSend",
+				type:"post",
+				dataType:"json",
+				data:data,
+				success:function(response){
+					wait.close();
+					if(response.isSuccess){
+						parent.$.ligerDialog.success(response.strMessage);
+						send_websocket(response.acceptNo,response.tips);
+					}else{
+						parent.$.ligerDialog.error(response.strMessage);
+					}
+				},
+				error:function(response){
+					wait.close();
+					parent.$.ligerDialog.error("系统错误!");
+				}
+			});
+		})
 	}else{
 		$.ajax({
 			url:path+"/email/doSend",
@@ -138,24 +113,51 @@ function draft(){
 		acceptNo:account,
 		copyer:copyer
 	}
-	$.ajax({
-		url:path+"/email/draft",
-		type:"post",
-		dataType:"json",
-		data:data,
-		success:function(response){
-			wait.close();
-			if(response.isSuccess){
-				parent.$.ligerDialog.success(response.strMessage);
-			}else{
-				parent.$.ligerDialog.error(response.strMessage);
+	var wait = parent.$.ligerDialog.waitting('保存中,请稍候...');
+	var files = $("#file_list li");
+	if(files.length > 0){
+		$.upload(path+"/file/upload",function(result){
+			data.fileId = result.strMessage;
+			$.ajax({
+				url:path+"/email/draft",
+				type:"post",
+				dataType:"json",
+				data:data,
+				success:function(response){
+					wait.close();
+					if(response.isSuccess){
+						parent.$.ligerDialog.success(response.strMessage);
+						send_websocket(response.acceptNo,response.tips);
+					}else{
+						parent.$.ligerDialog.error(response.strMessage);
+					}
+				},
+				error:function(response){
+					wait.close();
+					parent.$.ligerDialog.error("系统错误!");
+				}
+			});
+		})
+	}else{
+		$.ajax({
+			url:path+"/email/draft",
+			type:"post",
+			dataType:"json",
+			data:data,
+			success:function(response){
+				wait.close();
+				if(response.isSuccess){
+					parent.$.ligerDialog.success(response.strMessage);
+				}else{
+					parent.$.ligerDialog.error(response.strMessage);
+				}
+			},
+			error:function(response){
+				wait.close();
+				parent.$.ligerDialog.error("系统错误!");
 			}
-		},
-		error:function(response){
-			wait.close();
-			parent.$.ligerDialog.error("系统错误!");
-		}
-	});
+		});
+	}
 }
 /*添加接收人*/
 function add_send_user(userEmail){
@@ -180,6 +182,9 @@ function add_group_send(userEmail){
 
 
 $(function(){
+	$("#file").fileListener(function(file){
+		$("#file_list").append('<li class="item">'+file.name+'</li>');
+	});
 	toolbar();
 	/*初始化富文本编辑器*/
 	editor.create();

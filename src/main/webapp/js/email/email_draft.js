@@ -2,7 +2,7 @@
 /*工具栏*/
 function toolbar() {
 	var items = [];
-	items.push({text: "详情",icon:'view',click: function () {details();}});
+	items.push({text: "详情",icon:'view',click: function () {details(path+"/email/send_details");}});
 	items.push({ line:true });
 	items.push({text: "删除",icon:'delete',click: function () {del();}});
 	items.push({ line:true });
@@ -11,19 +11,7 @@ function toolbar() {
 		items: items
 	});
 }
-/*详情*/
-function details(){
-	var rows = grid.getCheckedRows();
-	if (rows && rows.length == 1) {
-		var ids = [];
-		$(rows).each(function() {
-			ids.push(this.id);
-		});
-		location.href = path+"/email/send_details?id="+ids[0];
-	}else{
-		parent.$.ligerDialog.warn("选择一封邮件");
-	}
-}
+
 /*删除*/
 function del(){
 	var rows = grid.getCheckedRows();
@@ -54,19 +42,7 @@ function del(){
 		parent.$.ligerDialog.warn("选择要操作的数据!");
 	}
 }
-/*编辑*/
-function edit(){
-	var rows = grid.getCheckedRows();
-	if (rows && rows.length == 1) {
-		var ids = [];
-		$(rows).each(function() {
-			ids.push(this.id);
-		});
-		location.href = path+"/email/writerEmail?type=edit&id="+ids[0];
-	}else{
-		parent.$.ligerDialog.warn("选择一封邮件");
-	}
-}
+
 $(function(){
 	$("#time").ligerDateEditor();
 	/*工具栏方法*/
@@ -75,10 +51,15 @@ $(function(){
 		checkbox: true,
         columns: [
 	        { display: 'id', name: 'id',hide : true, },
-	        { display: '收件人', name: 'acceptName', width: "9%" },
+	        { display: '收件人', name: 'acceptName', width: "10%" },
 	        { display: '抄送', name: 'copyer', width:"10%" },
 	        { display: '主题', name: 'title', width:"50%" },
-	        { display: '时间', name: 'createTime', width:"30%", }
+	        { display: '时间', name: 'createTime', width:"20%", },
+	        { display: '附件', name: 'fileId', width:"10%",render:function(row){
+	        	if(row.fileId != null && row.fileId != ''){
+	        		return '<img class="fileId" onclick="files('+row.fileId+')" style="margin-top:6px;cursor:pointer;" src="/icon/paper.png" />';
+	        	}
+	        } }
         ], pageSize:10,
         url:path+"/email/drartList",
         width: '100%',height:'99%'

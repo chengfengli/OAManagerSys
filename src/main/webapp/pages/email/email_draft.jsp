@@ -14,7 +14,7 @@
 		</script>
 	</head>
 
-	<body>
+	<body style="overflow-x: hidden;padding-right: 2px;">
 		<!-- 工具栏 -->
 		<div id="toolbar"></div>
 		<!-- 搜索栏 -->

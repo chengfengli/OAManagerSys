@@ -96,7 +96,9 @@ $(function(){
 	        	var list = row.position;
 	        	var positionName = "";
 	        	for(var i in list){
-	        		positionName += list[i].positionName + ";";
+	        		if(list[i].positionName != null && list[i].positionName != ''){
+	        			positionName += list[i].positionName + ";";
+	        		}
 	        	}
 	        	return positionName;
 	        }},

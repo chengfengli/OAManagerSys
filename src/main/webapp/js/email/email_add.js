@@ -39,18 +39,22 @@ function send(){
 		parent.$.ligerDialog.warn('填写内容!');
 		return;
 	}
+	var fileId = $("#fileId").val();
 	var data = {
-		title:title,
-		content:content,
-		acceptNo:account,
-		copyer:copyer
+		title: title,
+		content: content,
+		acceptNo: account,
+		copyer: copyer,
+		fileId: fileId
 	}
 	
 	var wait = parent.$.ligerDialog.waitting('发送中,请稍候...');
 	var files = $("#file_list li");
-	if(files.length > 0){
+	if(files.length > 0 || fileId != ''){
 		$.upload(path+"/file/upload",function(result){
-			data.fileId = result.strMessage;
+			if(fileId == '' ){
+				data.fileId = result.strMessage;
+			}
 			$.ajax({
 				url:path+"/email/doSend",
 				type:"post",
@@ -78,7 +82,7 @@ function send(){
 			dataType:"json",
 			data:data,
 			success:function(response){
-				waitclose();
+				wait.close();
 				if(response.isSuccess){
 					parent.$.ligerDialog.success(response.strMessage);
 					send_websocket(response.acceptNo,response.tips);
@@ -87,7 +91,7 @@ function send(){
 				}
 			},
 			error:function(response){
-				waitclose();
+				wait.close();
 				parent.$.ligerDialog.error("系统错误!");
 			}
 		});
@@ -183,7 +187,12 @@ function add_group_send(userEmail){
 
 $(function(){
 	$("#file").fileListener(function(file){
-		$("#file_list").append('<li class="item">'+file.name+'</li>');
+		$("#file_list").append('<li class="item">'+file.name+'&nbsp;&nbsp;<a class="remove" href="javascript:void(0)" data-id="'+file.id+'">移除</a></li>');
+		$(".remove").on("click",function(){
+			var id = $(this).data("id");
+			$.fileRemove(id);
+			$(this).parent().remove();
+		})
 	});
 	toolbar();
 	/*初始化富文本编辑器*/

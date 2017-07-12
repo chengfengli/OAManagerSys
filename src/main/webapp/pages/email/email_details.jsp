@@ -50,7 +50,7 @@
 				<td>
 					<ul>
 						<c:forEach items="${email.list }" var="file">
-							<li>${file.fileName }&nbsp;&nbsp;${file.fileSize }&nbsp;&nbsp;<a href="javascript:void(0)">预览</a>&nbsp;<a href="javascript:void(0)">下载</a></li>
+							<li>${file.fileName }&nbsp;&nbsp;${file.fileSize }&nbsp;&nbsp;<a href="javascript:void(0)">预览</a>&nbsp;<a class="download" href="javascript:void(0)" data-id="${file.id }">下载</a></li>
 						</c:forEach>
 					</ul>
 				</td>

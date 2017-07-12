@@ -2,9 +2,9 @@
 /*工具栏*/
 function toolbar() {
 	var items = [];
-	items.push({text: "详情",icon:'view',click: function () {details();}});
+	items.push({text: "详情",icon:'view',click: function () {details(path+"/email/details");}});
 	items.push({ line:true });
-	items.push({text: "删除",icon:'delete',click: function () {del();}});
+	items.push({text: "删除",icon:'delete',click: function () {del(path+"/email/delete");}});
 	items.push({ line:true });
 	items.push({text: "转发",icon:'outbox',click: function () {edit(path+"/email/writerEmail?type=forward");}});
 	items.push({ line:true });
@@ -13,62 +13,7 @@ function toolbar() {
 		items: items
 	});
 }
-/*详情*/
-function details(){
-	var rows = grid.getCheckedRows();
-	if (rows && rows.length == 1) {
-		var ids = [];
-		$(rows).each(function() {
-			ids.push(this.id);
-		});
-		location.href = path+"/email/details?id="+ids[0];
-	}else{
-		parent.$.ligerDialog.warn("选择一封邮件");
-	}
-}
-/*删除*/
-function del(){
-	var rows = grid.getCheckedRows();
-	if (rows && rows.length > 0) {
-		var ids = '';
-		$(rows).each(function() {
-			if(ids == ''){
-				ids+= ''+this.id;
-			}else{
-				ids+= ','+this.id;
-			}
-		});
-		$.ajax({
-			url:path+"/email/delete",
-			type:"post",
-			dataType:"json",
-			data:{ids:ids},
-			success:function(response){
-				if(response.isSuccess){
-					grid.loadData();
-				}
-			},
-			error:function(){
-				parent.$.ligerDialog.error("系统错误!");
-			}
-		});
-	}else{
-		parent.$.ligerDialog.warn("选择要操作的数据!");
-	}
-}
-/*转发*/
-function forward(){
-	var rows = grid.getCheckedRows();
-	if (rows && rows.length == 1) {
-		var ids = [];
-		$(rows).each(function() {
-			ids.push(this.id);
-		});
-		location.href = path+"/email/writerEmail?type=forward&id="+ids[0];
-	}else{
-		parent.$.ligerDialog.warn("选择一封邮件");
-	}
-}
+
 /*标记为已读*/
 function signreaded(){
 	var rows = grid.getCheckedRows();
@@ -107,23 +52,7 @@ function signreaded(){
 		parent.$.ligerDialog.warn("选择要操作的数据!");
 	}
 }
-/*查看附件*/
-function files(fileId){
-	parent.$.ligerDialog.open({
-		title : '附件',
-		width : 590,
-		allowClose : false,
-		url : path+"/file/page/list?fileId="+fileId,
-		buttons : [
-		    {
-				text : '关闭',
-				onclick : function(item, dialog) {
-					dialog.close();
-				}
-			}
-		]
-	});
-}
+
 $(function(){
 	$("#sendTime").ligerDateEditor();
 	/*工具栏方法*/
@@ -166,10 +95,5 @@ $(function(){
 		});  
 		grid.loadData(true); 
 	});
-	$(document).keypress(function(e) {
-		if (e.keyCode == 13) {
-			$("#select").click();
-		}
-	})
 });
 

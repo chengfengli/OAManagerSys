@@ -50,6 +50,7 @@ public class EmailService {
 			e.setBoxType(1);
 			e.setCopyer(email.getCopyer());
 			e.setEmailStatus(0);
+			e.setFileId(email.getFileId());
 			list.add(e);
 		}
 		return emailDao.insert(list);

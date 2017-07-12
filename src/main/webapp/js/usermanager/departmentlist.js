@@ -6,7 +6,7 @@ function toolbar() {
 	items.push({ line:true });
 	items.push({text:'编辑',icon:'edit',click: function () {edit()}});
 	items.push({ line:true });
-	items.push({text:'删除',icon:'delete1',click: function () {del()}});
+	items.push({text:'删除',icon:'delete1',click: function () {del(path+"/department/delete")}});
 	$("#toolbar").ligerToolBar({
 		items: items
 	});
@@ -99,39 +99,6 @@ function edit(){
 	}
 }
 
-/*删除*/
-function del(){
-	var rows = grid.getCheckedRows();
-	if (rows && rows.length != 0) {
-		var ids = '';
-		$(rows).each(function() {
-			if(ids == ''){
-				ids += ''+this.id;
-			}else{
-				ids += ','+this.id;
-			}
-		});
-		parent.$.ligerDialog.confirm('确定删除职位？', function (yes) {
-			if(yes){
-				$.ajax({
-					url:path+"/department/delete",
-					type:"post",
-					dataType:"json",
-					data:{id:ids},
-					success:function(response){
-						grid.loadData();
-						parent.$.ligerDialog.success(response.strMessage);
-					},
-					error:function(){
-						parent.$.ligerDialog.error(response.strMessage);
-					}
-				});
-			}
-		});
-	}else{
-		parent.$.ligerDialog.warn("选择要删除的数据!");
-	}
-}
 $(function(){
 	$("#entryTime").ligerDateEditor();
 	/*工具栏方法*/

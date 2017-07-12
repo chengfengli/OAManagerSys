@@ -2,59 +2,15 @@
 /*工具栏*/
 function toolbar() {
 	var items = [];
-	items.push({text: "详情",icon:'view',click: function () {details();}});
+	items.push({text: "详情",icon:'view',click: function () {details(path+"/email/send_details");}});
 	items.push({ line:true });
-	items.push({text: "删除",icon:'delete',click: function () {del();}});
+	items.push({text: "删除",icon:'delete',click: function () {del(path+"/email/delete");}});
 	items.push({ line:true });
 	items.push({text: "编辑",icon:'edit',click: function () {edit(path+"/email/writerEmail?type=edit");}});
 	$("#toolbar").ligerToolBar({
 		items: items
 	});
 }
-/*详情*/
-function details(){
-	var rows = grid.getCheckedRows();
-	if (rows && rows.length == 1) {
-		var ids = [];
-		$(rows).each(function() {
-			ids.push(this.id);
-		});
-		location.href = path+"/email/send_details?id="+ids[0];
-	}else{
-		parent.$.ligerDialog.warn("选择一封邮件");
-	}
-}
-/*删除*/
-function del(){
-	var rows = grid.getCheckedRows();
-	if (rows && rows.length > 0) {
-		var ids = '';
-		$(rows).each(function() {
-			if(ids == ''){
-				ids+= ''+this.id;
-			}else{
-				ids+= ','+this.id;
-			}
-		});
-		$.ajax({
-			url:path+"/email/delete",
-			type:"post",
-			dataType:"json",
-			data:{ids:ids},
-			success:function(response){
-				if(response.isSuccess){
-					grid.loadData();
-				}
-			},
-			error:function(){
-				parent.$.ligerDialog.error("系统错误!");
-			}
-		});
-	}else{
-		parent.$.ligerDialog.warn("选择要操作的邮件!");
-	}
-}
-
 
 $(function(){
 	$("#time").ligerDateEditor();
@@ -90,10 +46,5 @@ $(function(){
 		});  
 		grid.loadData(true); 
 	});
-	$(document).keypress(function(e) {
-		if (e.keyCode == 13) {
-			$("#select").click();
-		}
-	})
 });
 

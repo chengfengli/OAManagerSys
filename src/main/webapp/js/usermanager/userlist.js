@@ -2,13 +2,13 @@
 /*工具栏*/
 function toolbar() {
 	var items = [];
-	items.push({text:'编辑',icon:'edit',click: function () {edit();}});
+	items.push({text:'编辑',icon:'edit',click: function () {edit(path+"/user/adduser?type=edit");}});
 	items.push({ line:true });
 	items.push({text:'基本信息',icon:'information_personal',click: function () {viewInfor();}});
 	items.push({ line:true });
 	items.push({text:'离职',icon:'delete',click: function () {leaveOffice();}});
 	items.push({ line:true });
-	items.push({text:'删除',icon:'delete1',click: function () {del();}});
+	items.push({text:'删除',icon:'delete1',click: function () {del(path+"/user/deleteEmp");}});
 	$("#toolbar").ligerToolBar({
 		items: items
 	});
@@ -37,19 +37,7 @@ function setting(){
 		]
 	});
 }
-/*编辑*/
-function edit(){
-	var rows = grid.getCheckedRows();
-	if (rows && rows.length == 1) {
-		var ids = [];
-		$(rows).each(function() {
-			ids.push(this.id);
-		});
-		location.href = path+"/user/adduser?id="+ids[0];
-	}else{
-		parent.$.ligerDialog.warn("选择要操作的数据!");
-	}
-}
+
 /*基本信息*/
 function viewInfor(){
 	var rows = grid.getCheckedRows();
@@ -92,31 +80,7 @@ function leaveOffice(){
 		parent.$.ligerDialog.warn("选择要操作的数据!");
 	}
 }
-/*删除*/
-function del(){
-	var rows = grid.getCheckedRows();
-	if (rows && rows.length > 0) {
-		var ids = [];
-		$(rows).each(function() {
-			ids.push(this.id);
-		});
-		$.ajax({
-			url:path+"/user/deleteEmp",
-			type:"post",
-			dataType:"json",
-			data:{id:ids[0]},
-			success:function(response){
-				parent.$.ligerDialog.success(response.strMessage);
-				grid.loadData();
-			},
-			error:function(){
-				parent.$.ligerDialog.error("系统错误!");
-			}
-		});
-	}else{
-		parent.$.ligerDialog.warn("选择要操作的数据!");
-	}
-}
+
 $(function(){
 	$("#entryTime").ligerDateEditor();
 	/*工具栏方法*/
@@ -128,7 +92,14 @@ $(function(){
 	        { display: '工号', name: 'id', width: "10%" },
 	        { display: '姓名', name: 'name', width:"10%" },
 	        { display: '部门', name: 'dep.depName', width:"10%"},
-	        { display: '职位', name: 'position.positionName', width:"10%"},
+	        { display: '职位', name: 'position.positionName', width:"10%",render:function(row){
+	        	var list = row.position;
+	        	var positionName = "";
+	        	for(var i in list){
+	        		positionName += list[i].positionName + ";";
+	        	}
+	        	return positionName;
+	        }},
 	        { display: '入职时间', name: 'entryTime', width:"15%"},
 	        { display: '试用期', name: 'probationPeriod', width:"15%",render:function(row){
 	        		var str = '';

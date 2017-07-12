@@ -1,8 +1,14 @@
+body{
+	overflow-x:hidden;
+	padding-right:2px;
+}
 #querybar{
 	position: absolute;
     z-index: 10;
     top: 0;
     right: 50px;
+    font-size:12px;
+    line-height:22px;
 }
 .title{
 	padding:0 10px;

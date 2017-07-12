@@ -21,5 +21,6 @@
 #contacts_lsit li img,.depName{float:right;}
 .depName{margin-right: 20px;}
 #content{height:345px;}
+#picker{font-size: 12px;height: 23px;overflow: hidden;line-height: 23px;cursor: pointer;position: relative;text-align: center;border: solid 1px #A3C0E8;color: #333333;background: #E0EDFF url(/Source/lib/ligerUI/skins/Aqua/images/controls/button-bg.gif) repeat-x center;}
 input[type=file]{display:none;}
 #file_list li{padding:3px;}

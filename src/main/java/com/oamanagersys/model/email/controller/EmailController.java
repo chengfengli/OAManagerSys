@@ -40,7 +40,7 @@ public class EmailController {
 	@RequestMapping("/writerEmail")
 	public ModelAndView writerEmail(SearchEmail searchEmail,String type,HttpServletRequest request){
 		ModelAndView mav = new ModelAndView("pages/email/email_add");
-		List<Emp> list = userService.getAllEmp(new Emp());
+		List<Emp> list = userService.getEmp(new Emp());
 		mav.addObject("back", false);
 		if(searchEmail.getId()!=0){
 			List<Email> email_list = emailService.selectInbox(searchEmail);

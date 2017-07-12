@@ -122,9 +122,9 @@ public class PostController {
 	 */
 	@RequestMapping("/delete")
 	@ResponseBody
-	public Message deletePost(String id,HttpServletRequest request){
+	public Message deletePost(String ids,HttpServletRequest request){
 		Message message = new Message();
-		int count = postService.delete(id);
+		int count = postService.delete(ids);
 		if(count > 0){
 			message.isSuccess=true;
 			message.strMessage="删除成功!";

@@ -15,6 +15,7 @@ public class UserService {
 	@Autowired
 	private UserDao userDao;
 	
+	/*级联查询*/
 	public List<Emp> getAllEmp(Emp emp){
 		emp.setPassword(Md5.md5(emp.getPassword()));
 		return userDao.getAllEmp(emp);
@@ -23,6 +24,12 @@ public class UserService {
 	public List<Emp> getEmpById(String id){
 		String[] ids = id.split(";");
 		return userDao.getEmpById(ids);
+	}
+	
+	/*非级联*/
+	public List<Emp> getEmp(Emp emp){
+		emp.setPassword(Md5.md5(emp.getPassword()));
+		return userDao.getEmp(emp);
 	}
 	/**
 	 * 添加员工

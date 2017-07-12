@@ -25,10 +25,7 @@
 		<if test="id != 0">
 			AND id = #{id}
 		</if>
-		<if test="fileName != null and fileName != ''">
-			AND fileName = #{fileName}
-		</if>
-		<if test="fileId != null and fileId != ''">
+		<if test="id == 0">
 			AND fileId = #{fileId}
 		</if>
 	</select>

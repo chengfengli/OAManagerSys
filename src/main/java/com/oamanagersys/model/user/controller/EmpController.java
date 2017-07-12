@@ -191,15 +191,17 @@ public class EmpController {
 			msg.strMessage = "验证码错误";
 			msg.errorType = "codeError";
 		}else{
-			List<Emp> list = userService.getAllEmp(emp);
+			List<Emp> list = userService.getEmp(emp);
 			if(list.size()!=0){
 				msg.isSuccess = true;
 				req.getSession().setAttribute("userId", emp.getId());
 				req.getSession().setAttribute("user", list.get(0));
 				//用户角色
 				List<Position> positions = postService.getPsotById(list.get(0).getPositionId());
-				String currentPositionCode = positions.get(0).getPositionCode();
-				msg.strMessage = currentPositionCode;
+				if(positions.size() > 0){
+					String currentPositionCode = positions.get(0).getPositionCode();
+					msg.strMessage = currentPositionCode;
+				}
 			}else{
 				msg.isSuccess = false;
 				msg.strMessage = "账号密码错误";

@@ -6,7 +6,7 @@ function toolbar() {
 	items.push({ line:true });
 	items.push({text:'编辑',icon:'edit',click: function () {edit()}});
 	items.push({ line:true });
-	items.push({text:'删除',icon:'delete1',click: function () {del()}});
+	items.push({text:'删除',icon:'delete1',click: function () {del(path+"/post/delete")}});
 	$("#toolbar").ligerToolBar({
 		items: items
 	});
@@ -101,39 +101,6 @@ function edit(){
 	}
 }
 
-/*删除*/
-function del(){
-	var rows = grid.getCheckedRows();
-	if (rows && rows.length != 0) {
-		var ids = '';
-		$(rows).each(function() {
-			if(ids == ''){
-				ids+= ''+this.id;
-			}else{
-				ids+= ','+this.id;
-			}
-		});
-		parent.$.ligerDialog.confirm('确定删除职位？', function (yes) {
-			if(yes){
-				$.ajax({
-					url:path+"/post/delete",
-					type:"post",
-					dataType:"json",
-					data:{id:ids},
-					success:function(response){
-						parent.$.ligerDialog.success(response.strMessage);
-						grid.loadData();
-					},
-					error:function(){
-						parent.$.ligerDialog.error("系统错误!");
-					}
-				});
-			}
-		});
-	}else{
-		parent.$.ligerDialog.warn("选择要删除的数据!");
-	}
-}
 $(function(){
 	$("#entryTime").ligerDateEditor();
 	/*工具栏方法*/
@@ -150,7 +117,7 @@ $(function(){
 	        { display: '创建时间', name: 'createTime', width:"15%"},
 	        { display: '创建人', name: 'create.name', width:"15%"}
         ], pageSize:10,
-        width: '100%',height:'99%'
+        width: '100%',height:'100%'
 	});
 	
 	/*搜索*/

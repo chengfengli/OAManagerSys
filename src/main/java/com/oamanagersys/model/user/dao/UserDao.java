@@ -9,6 +9,8 @@ public interface UserDao {
 	
 	public List<Emp> getEmpById(String[] ids);
 	
+	public List<Emp> getEmp(Emp emp);
+	
 	public int addEmp(Emp emp);
 	
 	public int updateOnJob(String[] array);

@@ -88,6 +88,7 @@ $(function(){
 	grid = $("#list").ligerGrid({
 		url:path+"/user/getallemp",
 		checkbox: true,
+		selectRowButtonOnly:true,
         columns: [
 	        { display: '工号', name: 'id', width: "10%" },
 	        { display: '姓名', name: 'name', width:"10%" },

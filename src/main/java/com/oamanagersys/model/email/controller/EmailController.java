@@ -137,7 +137,6 @@ public class EmailController {
 		String name ="";
 		for(int i =0;i<emps.size();i++){
 			name += emps.get(i).getName()+";";
-			
 		}
 		email.setAcceptName(name);
 		int count  = emailService.send(email);

@@ -109,6 +109,7 @@ $(function(){
 	grid = $("#list").ligerGrid({
 		url:path+"/post/getpost",
 		checkbox: true,
+		selectRowButtonOnly:true,
         columns: [
 	        { display: 'id', name: 'id',hide : true, },
 	        { display: '编码', name: 'positionCode', width: "10%" },

@@ -21,11 +21,9 @@ html,body,#email_table{
 #email_table td:nth-child(1){text-align:right;min-width:100px;}
 
 #contacts_lsit{max-height:460px;overflow-y:auto;}
-#contacts_lsit li{min-width:150px;padding:3px 10px;cursor:pointer;}
+#contacts_lsit li{padding:3px 10px;cursor:pointer;}
 #contacts_lsit li:hover{background-color:#AECAF0;}
 #contacts_lsit li img{float:right;}
 #content{height:345px;}
-.shortNo{
-	margin-left:10px;
-}
+.shortNo{margin-left:10px;}
 

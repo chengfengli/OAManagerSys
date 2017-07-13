@@ -106,6 +106,7 @@ $(function(){
 	grid = $("#list").ligerGrid({
 		url:path+"/department/deplist",
 		checkbox: true,
+		selectRowButtonOnly:true,
         columns: [
 	        { display: 'id', name: 'id',hide : true, },
 	        { display: '编码', name: 'depCode', width: "15%" },

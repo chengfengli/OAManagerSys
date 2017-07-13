@@ -1,4 +1,7 @@
-﻿/*工具栏*/
+﻿/*初始化富文本编辑器*/
+var editor = new wangEditor('content');
+editor.create();
+/*工具栏*/
 function toolbar() {
 	var items = [];
 	items.push({text: "发送",icon: 'up',click: function () {send()}});
@@ -11,15 +14,39 @@ function toolbar() {
 /*验证、发送*/
 function send(){
 	var account = $("#account").val();
-	var subject = $("#subject").val();
-	if(account.trim()==""){
-		parent.$.ligerDialog.warn('填写收件人!');
+	var content = editor.$txt.html();
+	if(account == "" || account.trim()==""){
+		parent.$.ligerDialog.warn('填写收信人!');
 		return;
 	}
-	if(subject.trim()==""){
-		parent.$.ligerDialog.warn('填写主题!');
+	if(content == "" ||content.trim()==""){
+		parent.$.ligerDialog.warn('填写消息内容!');
 		return;
 	}
+	var data = {
+			content: content,
+			acceptNo: account
+		}
+	var wait = parent.$.ligerDialog.waitting('发送中,请稍候...');
+	$.ajax({
+		url:path+"/interiormsg/sendMsg",
+		type:"post",
+		dataType:"json",
+		data:data,
+		success:function(response){
+			wait.close();
+			if(response.isSuccess){
+				parent.$.ligerDialog.success(response.strMessage);
+				send_websocket(response.acceptNo,response.tips);
+			}else{
+				parent.$.ligerDialog.error(response.strMessage);
+			}
+		},
+		error:function(response){
+			wait.close();
+			parent.$.ligerDialog.error("系统错误!");
+		}
+	});
 }
 /*添加接收人*/
 function add_send_user(userEmail){
@@ -29,14 +56,10 @@ function add_send_user(userEmail){
 		if($("#account").val().indexOf(userEmail)==-1){
 			$("#account").val($("#account").val()+";"+userEmail);
 		}
-		
 	}
 }
 
 $(function(){
 	toolbar();
-	/*初始化富文本编辑器*/
-	var editor = new wangEditor('content');
-	editor.create();
 });
 

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oamanagersys.model.interiormsg.dao.MsgDao">
+	<resultMap id="msgResultMap" type="com.oamanagersys.model.interiormsg.entity.MsgEntity">
+		<id column="id" property="id" />
+		<result column="content" property="content" />
+		<result column="boxType" property="boxType" />
+		<result column="readStatus" property="readStatus" />
+		<result column="acceptNo" property="acceptNo" />
+		<result column="acceptName" property="acceptName" />
+		<result column="sendNo" property="sendNo" />
+		<result column="delete" property="delete" />
+		<result column="createTime" property="createTime" />
+		<result column="createUser" property="createUser" />
+		<result column="sendTime" property="sendTime" />
+		<result column="readTime" property="readTime" />
+		<association property="emp" javaType="com.oamanagersys.model.user.entity.Emp" column="empId" resultMap="empResult"></association>
+	</resultMap>
+	
+	<resultMap id="empResult" type="com.oamanagersys.model.user.entity.Emp">
+		<id column="empId" property="id" />
+		<result column="name" property="name" />
+	</resultMap>
+	
+	<insert id="insert" parameterType="java.util.List">
+		INSERT INTO interiormsg(content,boxType,readStatus,acceptNo,acceptName,sendNo,`delete`,createTime,createUser,sendTime,,readTime)
+		VALUES
+		<foreach collection="list" item="msg" index="index" separator=",">
+		(#{msg.content},#{msg.boxType},#{msg.readStatus},#{msg.acceptNo},#{msg.acceptName},#{msg.sendNo},#{msg.delete},#{msg.createTime},#{msg.createUser},#{msg.sendTime},#{msg.readTime})
+		</foreach>
+	</insert>
+
+</mapper>

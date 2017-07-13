@@ -18,7 +18,7 @@
 			<tr>
 				<td id="receive">收件人</td>
 				<td>
-					<input type="text" id="account" class="liger-textbox" />
+					<input type="text" id="account" value="${email.acceptNo }" class="liger-textbox" />
 				</td>
 				<td rowspan="5" valign="top" style="width:150px;">
 					<div id="accordion1" class="l-accordion-panel" ligeruiid="accordion1"> 
@@ -41,7 +41,7 @@
 			<tr>
 				<td>抄送</td>
 				<td>
-					<input type="text" id="chaosong" class="liger-textbox" />
+					<input type="text" id="chaosong" value="${email.copyer }" class="liger-textbox" />
 				</td>
 			</tr>
 			<tr>

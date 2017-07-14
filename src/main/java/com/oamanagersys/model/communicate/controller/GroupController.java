@@ -1,8 +1,16 @@
 package com.oamanagersys.model.communicate.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.oamanagersys.model.communicate.entity.Group;
+import com.oamanagersys.model.communicate.service.GroupService;
+import com.oamanagersys.util.response.Message;
 
 /**
  * 
@@ -13,6 +21,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/group")
 public class GroupController {
+	Message message = new Message();
+	@Autowired
+	private GroupService groupService;
 	/**
 	 * 联系人列表页面
 	 * @return
@@ -23,7 +34,7 @@ public class GroupController {
 	}
 	
 	/**
-	 * 已发送短息页面
+	 * 添加组页面
 	 * @return
 	 */
 	@RequestMapping("/addgroup")
@@ -31,5 +42,15 @@ public class GroupController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("pages/communicate/addgroup");
 		return mav;
+	}
+	
+	/**
+	 * 添加组
+	 * @return
+	 */
+	@RequestMapping("/save")
+	@ResponseBody
+	public Message saveGroupPage(Group group,HttpServletRequest request){
+		return groupService.insert(group, request);
 	}
 }

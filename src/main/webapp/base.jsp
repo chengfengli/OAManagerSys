@@ -8,6 +8,7 @@
 <script>
 	var url = '<%=basePath%>';
 	var path = '<%=context %>';
+	var backbtn = '${edit}';
 </script>
 <link rel="stylesheet" type="text/css" href="<%=context %>/wangEditor/dist/css/wangEditor.min.css">
 <link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/ligerui-icons.css" />

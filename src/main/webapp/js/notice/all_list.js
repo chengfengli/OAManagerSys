@@ -10,40 +10,6 @@ function toolbar() {
 		items: items
 	});
 }
-/*详情*/
-function details(){
-	var manager = $("#list").ligerGetGridManager();
-	var rows = manager.getCheckedRows();
-	if (rows && rows.length == 1) {
-		var ids = [];
-		$(rows).each(function() {
-			ids.push(this.id);
-		});
-		parent.$.ligerDialog.warn(ids[0]);
-		return;
-		$.ligerDialog.open({
-					title : '消息详情',
-					width : 900,
-					height : 500,
-					allowClose : false,
-					url : '${_ctx}/bap/message/detailedMessage?url=replyPage&messageId='+ ids[0],
-					buttons : [ {
-						text : '返回',
-						onclick : function(item, dialog) {
-							dialog.close();
-						}
-					} ]
-				});
-	}
-}
-/*删除*/
-function del(){
-	parent.$.ligerDialog.warn('删除!');
-}
-/*转发*/
-function edit(){
-	parent.$.ligerDialog.warn('编辑!');
-}
 $(function(){
 	/*工具栏方法*/
 	toolbar();

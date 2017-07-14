@@ -10,28 +10,7 @@ function toolbar() {
 		items: items
 	});
 }
-/*详情*/
-function details(){
-	location.href=path+"/email/details";
-	return;
-	var manager = $("#list").ligerGetGridManager();
-	var rows = manager.getCheckedRows();
-	if (rows && rows.length == 1) {
-		var ids = [];
-		$(rows).each(function() {
-			ids.push(this.id);
-		});
-		parent.$.ligerDialog.warn(ids[0]);
-	}
-}
-/*删除*/
-function del(){
-	parent.$.ligerDialog.warn('删除!');
-}
-/*转发*/
-function edit(){
-	parent.$.ligerDialog.warn('编辑!');
-}
+
 $(function(){
 	/*工具栏方法*/
 	toolbar();

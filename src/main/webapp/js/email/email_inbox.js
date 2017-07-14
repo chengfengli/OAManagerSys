@@ -8,49 +8,10 @@ function toolbar() {
 	items.push({ line:true });
 	items.push({text: "转发",icon:'outbox',click: function () {edit(path+"/email/writerEmail?type=forward");}});
 	items.push({ line:true });
-	items.push({text: "标记为已读",icon:'ok',click: function () {signreaded();}});
+	items.push({text: "标记为已读",icon:'ok',click: function () {signreaded(path+"/email/readed");}});
 	$("#toolbar").ligerToolBar({
 		items: items
 	});
-}
-
-/*标记为已读*/
-function signreaded(){
-	var rows = grid.getCheckedRows();
-	if (rows && rows.length > 0) {
-		var ids = '';
-		var emailStatus = [];
-		$(rows).each(function() {
-			emailStatus.push(this.emailStatus);
-			if(ids == ''){
-				ids+= ''+this.id;
-			}else{
-				ids+= ','+this.id;
-			}
-		});
-		for(var i in emailStatus){
-			if(emailStatus[i] == 1){
-				parent.$.ligerDialog.warn("数据中包含了已读邮件!");
-				return;
-			}
-		}
-		$.ajax({
-			url:path+"/email/readed",
-			type:"post",
-			dataType:"json",
-			data:{ids:ids},
-			success:function(response){
-				if(response.isSuccess){
-					grid.loadData();
-				}
-			},
-			error:function(){
-				parent.$.ligerDialog.error("系统错误!");
-			}
-		});
-	}else{
-		parent.$.ligerDialog.warn("选择要操作的数据!");
-	}
 }
 
 $(function(){

@@ -6,13 +6,21 @@ function toolbar() {
 	var items = [];
 	items.push({text: "发送",icon: 'up',click: function () {send()}});
 	items.push({ line:true });
-	items.push({text: "存草稿",icon: 'pager',click: function () {}});
+	items.push({text: "存草稿",icon: 'pager',click: function () {draft()}});
+	if(backbtn == 'true'){
+		items.push({ line:true });
+		items.push({text: "返回",icon:'back',click: function () {history.go(-1);}});
+	}
 	$("#toolbar").ligerToolBar({
 		items: items
 	});
 }
 /*验证、发送*/
 function send(){
+	var id = $("#id").val();
+	if(id==""){
+		id=0;
+	}
 	var account = $("#account").val();
 	var content = editor.$txt.html();
 	if(account == "" || account.trim()==""){
@@ -38,6 +46,41 @@ function send(){
 			if(response.isSuccess){
 				parent.$.ligerDialog.success(response.strMessage);
 				send_websocket(response.acceptNo,response.tips);
+			}else{
+				parent.$.ligerDialog.error(response.strMessage);
+			}
+		},
+		error:function(response){
+			wait.close();
+			parent.$.ligerDialog.error("系统错误!");
+		}
+	});
+}
+
+/*草稿*/
+function draft(){
+	var id = $("#id").val();
+	var account = $("#account").val();
+	var content = editor.$txt.html();
+	if(content == "" ||content.trim()==""){
+		parent.$.ligerDialog.warn('填写消息内容!');
+		return;
+	}
+	var data = {
+			id: id,
+			content: content,
+			acceptNo: account
+		}
+	var wait = parent.$.ligerDialog.waitting('保存中,请稍候...');
+	$.ajax({
+		url:path+"/interiormsg/draft",
+		type:"post",
+		dataType:"json",
+		data:data,
+		success:function(response){
+			wait.close();
+			if(response.isSuccess){
+				parent.$.ligerDialog.success(response.strMessage);
 			}else{
 				parent.$.ligerDialog.error(response.strMessage);
 			}

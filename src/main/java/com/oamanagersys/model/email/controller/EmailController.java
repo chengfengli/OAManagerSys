@@ -201,7 +201,7 @@ public class EmailController {
 	 */
 	@RequestMapping("/readed")
 	@ResponseBody
-	public Message readed(String ids,HttpServletRequest request){
+	public Message readed(String ids){
 		int count = emailService.updateReaded(ids);
 		if(count > 0){
 			message.isSuccess = true;

@@ -60,6 +60,44 @@ function del(url){
 		parent.$.ligerDialog.warn("选择要操作的数据!");
 	}
 }
+/*标记为已读*/
+function signreaded(url){
+	var rows = grid.getCheckedRows();
+	if (rows && rows.length > 0) {
+		var ids = '';
+		var status = [];
+		$(rows).each(function() {
+			status.push(this.emailStatus);
+			if(ids == ''){
+				ids+= ''+this.id;
+			}else{
+				ids+= ','+this.id;
+			}
+		});
+		for(var i in status){
+			if(status[i] == 1){
+				parent.$.ligerDialog.warn("数据中包含了已读邮件!");
+				return;
+			}
+		}
+		$.ajax({
+			url:url,
+			type:"post",
+			dataType:"json",
+			data:{ids:ids},
+			success:function(response){
+				if(response.isSuccess){
+					grid.loadData();
+				}
+			},
+			error:function(){
+				parent.$.ligerDialog.error("系统错误!");
+			}
+		});
+	}else{
+		parent.$.ligerDialog.warn("选择要操作的数据!");
+	}
+}
 //搜索回车键
 $(document).keypress(function(e) {
 	if (e.keyCode == 13) {

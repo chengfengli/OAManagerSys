@@ -15,7 +15,8 @@
 			<tr>
 				<td id="receive">接收人</td>
 				<td>
-					<input type="text" name="account" id="account" placeholder="输入接收人的内部短号" class="liger-textbox" />
+					<input type="hidden" id="id" value="${msg.id }" />
+					<input type="text" name="account" id="account" value="${msg.acceptNo }" placeholder="输入接收人的内部短号" class="liger-textbox" />
 				</td>
 				<td rowspan="5" valign="top" style="width:150px;">
 					<div id="accordion1" class="l-accordion-panel" ligeruiid="accordion1"> 
@@ -38,7 +39,7 @@
 			<tr>
 				<td valign="top">内容</td>
 				<td valign="top">
-					<textarea name="content" id="content" class="l-textarea"></textarea>
+					<textarea id="content" class="l-textarea">${msg.content }</textarea>
 				</td>
 			</tr>
 		</table>

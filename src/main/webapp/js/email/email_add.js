@@ -11,16 +11,13 @@ function toolbar() {
 	items.push({text: "存草稿",icon:'pager',click: function () {draft();}});
 	if(backbtn){
 		items.push({ line:true });
-		items.push({text: "返回",icon:'back',click: function () {back()}});
+		items.push({text: "返回",icon:'back',click: function () {history.go(-1);}});
 	}
 	$("#toolbar").ligerToolBar({
 		items: items
 	});
 }
-/*返回*/
-function back(){
-	history.go(-1);
-}
+
 /*验证、发送*/
 function send(){
 	var account = $("#account").val();

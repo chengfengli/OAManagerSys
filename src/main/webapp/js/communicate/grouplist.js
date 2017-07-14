@@ -8,7 +8,7 @@ function toolbar() {
 		items: items
 	});
 }
-/*新建日志*/
+/*新建组*/
 function add(){
 	parent.$.ligerDialog.open({
 		title : '新建分组',
@@ -20,7 +20,26 @@ function add(){
 		    {
 				text : '保存',
 				onclick : function(item, dialog) {
-					dialog.close();
+					var data = dialog.frame.data();
+					console.log(data);
+					$.ajax({
+						url:path+"/group/save",
+						type:"post",
+						dataType:"json",
+						data:data,
+						success:function(result){
+							if(result.isSuccess){
+								dialog.close();
+								grid.loadData();
+							}else{
+								parent.$.ligerDialog.warn(result.strMessage);
+							}
+						},
+						error:function(result){
+							parent.$.ligerDialog.error("系统异常");
+						}
+						
+					});
 				}
 		    },
 		    {

@@ -14,14 +14,14 @@
 			<tr>
 				<td>编码</td>
 				<td>
-					<input type="hidden" id="id" value="" />
-					<input type="text" id="groupCode"  class="liger-textbox" />
+					<input type="hidden" id="id" value="${group.id }" />
+					<input type="text" id="groupCode" value="${group.groupCode }"  class="liger-textbox" />
 				</td>
 			</tr>
 			<tr>
 				<td>组名</td>
 				<td>
-					<input type="text" id="groupName"  class="liger-textbox" />
+					<input type="text" id="groupName" value="${group.groupName }" class="liger-textbox" />
 				</td>
 			</tr>
 		</table>

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,9 +43,17 @@ public class GroupController {
 	 * @return
 	 */
 	@RequestMapping("/addgroup")
-	public ModelAndView addGroupPage(){
+	public ModelAndView addGroupPage(String id){
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("pages/communicate/addgroup");
+		if(StringUtils.isNotBlank(id)){
+			Group group = new Group();
+			group.setId(Integer.parseInt(id));
+			List<Group> list = groupService.select(group);
+			if(list.size() > 0){
+				mav.addObject("group", list.get(0));
+			}
+		}
 		return mav;
 	}
 	

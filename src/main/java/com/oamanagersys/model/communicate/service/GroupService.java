@@ -43,9 +43,14 @@ public class GroupService {
 			message.strMessage = "组名不能为空";
 			return message;
 		}
-		group.setCreateTime(DateFormat.newDateString());
-		group.setCreateUser(emp.getId());
-		int count = groupDao.insert(group);
+		int count = 0;
+		if(group.getId() != 0){
+			count = groupDao.update(group);
+		}else{
+			group.setCreateTime(DateFormat.newDateString());
+			group.setCreateUser(emp.getId());
+			count = groupDao.insert(group);
+		}
 		if(count > 0){
 			message.isSuccess = true;
 		}else{
@@ -67,4 +72,6 @@ public class GroupService {
 		String[] ids = id.split(",");
 		return groupDao.delete(ids);
 	}
+	
+	
 }

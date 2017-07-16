@@ -44,4 +44,9 @@
 		</foreach>
 	</delete>
 	
+	<update id="update" parameterType="com.oamanagersys.model.communicate.entity.Group">
+		update `group` set groupCode = #{groupCode},groupName = #{groupName},lastUpdateTime = #{lastUpdateTime},updateUser = #{updateUser}
+		where groupId = #{id}
+	</update>
+	
 </mapper>

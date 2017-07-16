@@ -17,12 +17,11 @@ function add(){
 		height : 170,
 		allowClose : false,
 		url : path+'/group/addgroup',
-		buttons : [ 
+		buttons : [
 		    {
 				text : '保存',
 				onclick : function(item, dialog) {
 					var data = dialog.frame.data();
-					console.log(data);
 					$.ajax({
 						url:path+"/group/save",
 						type:"post",
@@ -51,6 +50,57 @@ function add(){
 			}
 		]
 	});
+}
+/*新建组*/
+function edit(){
+	var rows = grid.getCheckedRows();
+	if (rows && rows.length == 1) {
+		var ids = [];
+		$(rows).each(function() {
+			ids.push(this.id);
+		});
+		parent.$.ligerDialog.open({
+			title : '编辑分组',
+			width :350,
+			height : 170,
+			allowClose : false,
+			url : path+'/group/addgroup?id='+ids[0],
+			buttons : [
+			           {
+			        	   text : '保存',
+			        	   onclick : function(item, dialog) {
+			        		   var data = dialog.frame.data();
+			        		   $.ajax({
+			        			   url:path+"/group/save",
+			        			   type:"post",
+			        			   dataType:"json",
+			        			   data:data,
+			        			   success:function(result){
+			        				   if(result.isSuccess){
+			        					   dialog.close();
+			        					   grid.loadData();
+			        				   }else{
+			        					   parent.$.ligerDialog.warn(result.strMessage);
+			        				   }
+			        			   },
+			        			   error:function(result){
+			        				   parent.$.ligerDialog.error("系统异常");
+			        			   }
+			        			   
+			        		   });
+			        	   }
+			           },
+			           {
+			        	   text : '返回',
+			        	   onclick : function(item, dialog) {
+			        		   dialog.close();
+			        	   }
+			           }
+			           ]
+		});
+	}else{
+		parent.$.ligerDialog.warn("选择一条数据");
+	}
 }
 
 $(function(){

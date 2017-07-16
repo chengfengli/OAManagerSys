@@ -14,4 +14,6 @@ public interface GroupDao {
 	public int insert(Group group);
 	
 	public List<Group> select(Group group);
+	
+	public int delete(String[] id);
 }

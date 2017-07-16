@@ -9,7 +9,7 @@ function edit(url){
 		});
 		location.href = url+"&id="+ids[0];
 	}else{
-		parent.$.ligerDialog.warn("选择一封邮件");
+		parent.$.ligerDialog.warn("选择一条数据");
 	}
 }
 /*详情*/
@@ -22,7 +22,7 @@ function details(url){
 		});
 		location.href = url+"?id="+ids[0];
 	}else{
-		parent.$.ligerDialog.warn("选择一封邮件");
+		parent.$.ligerDialog.warn("选择一条数据");
 	}
 }
 /*删除*/
@@ -76,7 +76,7 @@ function signreaded(url){
 		});
 		for(var i in status){
 			if(status[i] == 1){
-				parent.$.ligerDialog.warn("数据中包含了已读邮件!");
+				parent.$.ligerDialog.warn("数据中包含了已读数据!");
 				return;
 			}
 		}

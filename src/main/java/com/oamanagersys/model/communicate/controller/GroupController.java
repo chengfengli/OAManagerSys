@@ -1,5 +1,9 @@
 package com.oamanagersys.model.communicate.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +56,26 @@ public class GroupController {
 	@ResponseBody
 	public Message saveGroupPage(Group group,HttpServletRequest request){
 		return groupService.insert(group, request);
+	}
+	
+	@RequestMapping("/list")
+	@ResponseBody
+	public Map<String,List<Group>> groupList(Group group){
+		List<Group> list = groupService.select(group);
+		Map<String,List<Group>> map = new HashMap<String,List<Group>>();
+		map.put("Rows", list);
+		return map;
+	}
+	
+	@RequestMapping("/delete")
+	@ResponseBody
+	public Message deleteGroup(String ids){
+		int count = groupService.delete(ids);
+		if(count > 0){
+			message.isSuccess = true;
+		}else{
+			message.strMessage = "删除失败";
+		}
+		return message;
 	}
 }

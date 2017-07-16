@@ -18,7 +18,7 @@ public class Group extends BaseEntity{
 	}
 
 	public void setGroupCode(String groupCode) {
-		this.groupCode = groupCode;
+		this.groupCode = groupCode.toUpperCase();
 	}
 
 	public String getGroupName() {

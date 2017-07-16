@@ -1,21 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.oamanagersys.model.interiormsg.dao.MsgDao">
-	<resultMap id="msgResultMap" type="com.oamanagersys.model.interiormsg.entity.MsgEntity">
-		<id column="id" property="id" />
-		<result column="content" property="content" />
-		<result column="boxType" property="boxType" />
-		<result column="readStatus" property="readStatus" />
-		<result column="acceptNo" property="acceptNo" />
-		<result column="acceptName" property="acceptName" />
-		<result column="sendNo" property="sendNo" />
-		<result column="delete" property="delete" />
+<mapper namespace="com.oamanagersys.model.communicate.dao.GroupDao">
+	<resultMap id="groupResultMap" type="com.oamanagersys.model.communicate.entity.Group">
+		<id column="groupId" property="id" />
+		<result column="groupCode" property="groupCode" />
+		<result column="groupName" property="groupName" />
 		<result column="createTime" property="createTime" />
 		<result column="createUser" property="createUser" />
-		<result column="sendTime" property="sendTime" />
-		<result column="readTime" property="readTime" />
 		<result column="lastUpdateTime" property="lastUpdateTime" />
-		<association property="emp" javaType="com.oamanagersys.model.user.entity.Emp" column="empId" resultMap="empResult"></association>
+		<result column="updateUser" property="updateUser" />
+		<association property="create" javaType="com.oamanagersys.model.user.entity.Emp" column="empId" resultMap="empResult"></association>
 	</resultMap>
 	
 	<resultMap id="empResult" type="com.oamanagersys.model.user.entity.Emp">
@@ -23,72 +17,31 @@
 		<result column="name" property="name" />
 	</resultMap>
 	
-	<insert id="insert" parameterType="java.util.List">
-		INSERT INTO interiormsg(content,boxType,readStatus,acceptNo,acceptName,sendNo,`delete`,createTime,createUser,sendTime,readTime)
-		VALUES
-		<foreach collection="list" item="msg" index="index" separator=",">
-		(#{msg.content},#{msg.boxType},#{msg.readStatus},#{msg.acceptNo},#{msg.acceptName},#{msg.sendNo},#{msg.delete},#{msg.createTime},#{msg.createUser},#{msg.sendTime},#{msg.readTime})
-		</foreach>
+	<insert id="insert" parameterType="com.oamanagersys.model.communicate.entity.Group">
+		INSERT INTO `group`(groupCode,groupName,createTime,createUser)
+		VALUES (#{groupCode},#{groupName},#{createTime},#{createUser})
 	</insert>
 	
-	<select id="select_sendlist" resultMap="msgResultMap" parameterType="com.oamanagersys.model.interiormsg.entity.SearchMsg">
-		SELECT * FROM interiormsg LEFT JOIN emp ON interiormsg.sendNo = emp.empNo WHERE `delete` = 1 and boxType = 2
-		<if test="sendNo != 0">
-			and sendNo = #{sendNo}
+	<select id="select" resultMap="groupResultMap" parameterType="com.oamanagersys.model.communicate.entity.Group">
+		SELECT * FROM `group` LEFT JOIN emp ON group.createUser = emp.empNo WHERE 1 = 1
+		<if test="id != 0">
+			and groupId = #{id}
 		</if>
-		<if test="empName != null and empName != ''">
-			and acceptName like concat(concat('%',#{empName}),'%')
+		<if test="groupCode != null and groupCode != ''">
+			and groupCode = #{groupCode}
 		</if>
-		<if test="time != null and time != ''">
-			and sendTime >= #{time}
+		<if test="groupName != null and groupName != ''">
+			and groupName like concat(concat('%',#{groupName}),'%')
 		</if>
-	</select>
-	
-	<select id="select_acceptlist" resultMap="msgResultMap" parameterType="com.oamanagersys.model.interiormsg.entity.SearchMsg">
-		SELECT * FROM interiormsg LEFT JOIN emp ON interiormsg.sendNo = emp.empNo WHERE `delete` = 1 and boxType = 1
-		<if test="acceptNo != null and acceptNo != ''">
-			and acceptNo = #{acceptNo}
-		</if>
-		<if test="empName != null and empName != ''">
-			and acceptName like concat(concat('%',#{empName}),'%')
-		</if>
-		<if test="time != null and time != ''">
-			and sendTime >= #{time}
+		<if test="createTime != null and createTime != ''">
+			and createTime >= #{createTime}
 		</if>
 	</select>
-	
-	<select id="select_draftlist" resultMap="msgResultMap" parameterType="com.oamanagersys.model.interiormsg.entity.SearchMsg">
-		SELECT * FROM interiormsg LEFT JOIN emp ON interiormsg.sendNo = emp.empNo WHERE `delete` = 1 and boxType = 0
-		<if test="sendNo != 0">
-			and sendNo = #{sendNo}
-		</if>
-		<if test="empName != null and empName != ''">
-			and acceptName like concat(concat('%',#{empName}),'%')
-		</if>
-		<if test="time != null and time != ''">
-			and sendTime >= #{time}
-		</if>
-	</select>
-	
-	<select id="selectById" parameterType="java.lang.Integer" resultMap="msgResultMap">
-		SELECT * FROM interiormsg LEFT JOIN emp ON interiormsg.sendNo = emp.empNo WHERE id = #{id}
-	</select>
-
-	<update id="delete">
-		update interiormsg set `delete` = 0 where id in
+	<delete id="delete">
+		delete from  `group` where groupId in
 		<foreach collection="array" item="id" open="(" separator="," close=")">
 			#{id}
 		</foreach>
-	</update>
+	</delete>
 	
-	<update id="update_read">
-		update interiormsg set readStatus = 1,readTime = CURDATE() where id in
-		<foreach collection="array" item="id" open="(" separator="," close=")">
-			#{id}
-		</foreach>
-	</update>
-	
-	<update id="update_msg" parameterType="com.oamanagersys.model.interiormsg.entity.MsgEntity">
-		update interiormsg set acceptNo = #{acceptNo},acceptName = #{acceptName},content = #{content},lastUpdateTime = CURDATE() where id = #{id}
-	</update>
 </mapper>

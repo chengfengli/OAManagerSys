@@ -1,5 +1,7 @@
 package com.oamanagersys.model.communicate.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
@@ -23,7 +25,12 @@ public class GroupService {
 	Message message = new Message();
 	@Autowired
 	private GroupDao groupDao;
-	
+	/**
+	 * 保存分组
+	 * @param group
+	 * @param request
+	 * @return
+	 */
 	public Message insert(Group group,HttpServletRequest request){
 		Emp emp = (Emp)request.getSession().getAttribute("user");
 		if(StringUtils.isBlank(group.getGroupCode())){
@@ -46,5 +53,18 @@ public class GroupService {
 			message.strMessage = "保存失败";
 		}
 		return message;
+	}
+	/**
+	 * 查询所有分组
+	 * @param group
+	 * @return
+	 */
+	public List<Group> select(Group group){
+		return groupDao.select(group);
+	}
+	
+	public int delete(String id){
+		String[] ids = id.split(",");
+		return groupDao.delete(ids);
 	}
 }

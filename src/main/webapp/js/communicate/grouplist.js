@@ -126,5 +126,15 @@ $(function(){
         url:path + "/group/list",
         width: '100%',height:'99%'
 	});
+	
+	$("#select").click(function(){
+		grid.setOptions({  
+            parms : {  
+            	groupName: $("#groupName").val(),
+				createTime: $("#startTime").val()
+            } 
+		});  
+		grid.loadData(true);
+	});
 });
 

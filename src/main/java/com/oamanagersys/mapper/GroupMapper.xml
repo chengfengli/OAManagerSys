@@ -34,7 +34,7 @@
 			and groupName like concat(concat('%',#{groupName}),'%')
 		</if>
 		<if test="createTime != null and createTime != ''">
-			and createTime >= #{createTime}
+			and `group`.createTime >= #{createTime}
 		</if>
 	</select>
 	<delete id="delete">

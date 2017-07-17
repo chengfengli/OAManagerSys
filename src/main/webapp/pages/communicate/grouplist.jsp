@@ -15,11 +15,11 @@
 		<table id="querybar">
 			<tr>
 				<td class="title">组名</td>
-				<td><input type="text" name="name" id="name" class="liger-textbox" /></td>
+				<td><input type="text" id="groupName" class="liger-textbox" /></td>
 				<td class="title">创建时间</td>
-				<td><input type="text" name="startTime" id="startTime" placeholder="开始时间" /></td>
-				<td class="title"><input type="text" name="endTime" id="endTime" placeholder="结束时间" /></td>
-				<td><input type="button" value="查询" class="liger-button" /></td>
+				<td><input type="text" id="startTime" /></td>
+				<!-- <td class="title"><input type="text" id="endTime" placeholder="结束时间" /></td> -->
+				<td><input type="button" id="select" value="查询" class="liger-button" /></td>
 			</tr>
 		</table>
 		<!-- 列表 -->

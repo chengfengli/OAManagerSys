@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oamanagersys.model.communicate.dao.LinkManDao">
+	<resultMap id="linkManResultMap" type="com.oamanagersys.model.communicate.entity.LinkMan">
+		<id column="linkManId" property="id" />
+		<result column="name" property="name" />
+		<result column="address" property="address" />
+		<result column="mobile" property="mobile" />
+		<result column="telephone" property="telephone" />
+		<result column="email" property="email" />
+		<result column="qq" property="qq" />
+		<result column="other" property="other" />
+		<result column="groupId" property="groupId" />
+		<result column="createTime" property="createTime" />
+		<result column="createUser" property="createUser" />
+		<association property="group" javaType="com.oamanagersys.model.communicate.entity.Group" column="groupId" resultMap="groupResultMap"></association>
+		<association property="create" javaType="com.oamanagersys.model.user.entity.Emp" column="empId" resultMap="empResult"></association>
+	</resultMap>
+	
+	<resultMap id="groupResultMap" type="com.oamanagersys.model.communicate.entity.Group">
+		<id column="groupId" property="id" />
+		<result column="groupCode" property="groupCode" />
+		<result column="groupName" property="groupName" />
+	</resultMap>
+	
+	<resultMap id="empResult" type="com.oamanagersys.model.user.entity.Emp">
+		<id column="empId" property="id" />
+		<result column="name" property="name" />
+	</resultMap>
+	
+	<insert id="insert" parameterType="com.oamanagersys.model.communicate.entity.LinkMan">
+		INSERT INTO `linkman`(name,address,mobile,telephone,email,qq,other,groupId,createTime,createUser)
+		VALUES (#{name},#{address},#{mobile},#{telephone},#{email},#{qq},#{other},#{groupId},#{createTime},#{createUser})
+	</insert>
+	
+	<select id="select" resultMap="linkManResultMap" parameterType="com.oamanagersys.model.communicate.entity.LinkMan">
+		SELECT * FROM `linkman`LEFT JOIN `group`
+		ON `linkman`.groupId = `group`.groupId
+		ON `linkman` LEFT JOIN emp 
+		ON `linkman`.createUser = emp.empNo WHERE 1 = 1
+		<if test="id != 0">
+			and linkManId = #{id}
+		</if>
+		<if test="name != null and name != ''">
+			and `linkman`.name like concat(concat('%',#{name}),'%')
+		</if>
+		<if test="groupId != 0">
+			and `linkman`.groupId = #{groupId}
+		</if>
+	</select>
+	
+	<delete id="delete">
+		delete from  `linkman` where linkManId in
+		<foreach collection="array" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<update id="update" parameterType="com.oamanagersys.model.communicate.entity.LinkMan">
+		update `linkman` set name = #{name},address = #{address},mobile = #{mobile},telephone = #{telephone},email = #{email},qq = #{qq},other = #{other},groupId = #{groupId}
+		where groupId = #{id}
+	</update>
+</mapper>

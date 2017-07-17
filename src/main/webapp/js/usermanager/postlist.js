@@ -128,7 +128,7 @@ $(function(){
 		grid.setOptions({  
             parms : {  
             	depId : department,
-            	positionName : post  
+            	positionName : post
             } 
 		});  
 		grid.loadData(true); 

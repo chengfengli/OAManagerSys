@@ -45,6 +45,8 @@ public class GroupService {
 		}
 		int count = 0;
 		if(group.getId() != 0){
+			group.setLastUpdateTime(DateFormat.newDateString());
+			group.setUpdateUser(emp.getId());
 			count = groupDao.update(group);
 		}else{
 			group.setCreateTime(DateFormat.newDateString());

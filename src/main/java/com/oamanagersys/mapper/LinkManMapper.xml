@@ -36,7 +36,7 @@
 	<select id="select" resultMap="linkManResultMap" parameterType="com.oamanagersys.model.communicate.entity.LinkMan">
 		SELECT * FROM `linkman`LEFT JOIN `group`
 		ON `linkman`.groupId = `group`.groupId
-		ON `linkman` LEFT JOIN emp 
+		LEFT JOIN emp 
 		ON `linkman`.createUser = emp.empNo WHERE 1 = 1
 		<if test="id != 0">
 			and linkManId = #{id}

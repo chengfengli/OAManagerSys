@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.oamanagersys.model.communicate.entity.Group;
 import com.oamanagersys.model.communicate.entity.LinkMan;
+import com.oamanagersys.model.communicate.service.GroupService;
 import com.oamanagersys.model.communicate.service.LinkManService;
 import com.oamanagersys.util.response.Message;
 
@@ -28,6 +30,8 @@ public class LinkManController {
 	Message message = new Message();
 	@Autowired
 	private LinkManService linkManService;
+	@Autowired
+	private GroupService groupService;
 	/**
 	 * 联系人列表页面
 	 * @return
@@ -45,6 +49,7 @@ public class LinkManController {
 	public ModelAndView addLinkManPage(LinkMan linkMan,HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("pages/communicate/addlinkman");
+		List<Group> groups = groupService.select(new Group());
 		if(linkMan.getId() != 0){
 			List<LinkMan> list = linkManService.select(linkMan);
 			if(list.size() > 0){
@@ -53,6 +58,7 @@ public class LinkManController {
 		}else{
 			
 		}
+		mav.addObject("groups", groups);
 		return mav;
 	}
 	

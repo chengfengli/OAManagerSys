@@ -38,7 +38,6 @@ function add(){
 						error:function(result){
 							parent.$.ligerDialog.error("系统异常");
 						}
-						
 					});
 				}
 		    },

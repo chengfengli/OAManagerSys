@@ -38,9 +38,11 @@ public class LinkManService {
 		if(StringUtils.isBlank(linkMan.getName())){
 			message.isSuccess = false;
 			message.strMessage = "联系人名字不能为空";
+			return message;
 		}else if(linkMan.getGroupId() == 0){
 			message.isSuccess = false;
 			message.strMessage = "选择一个分组";
+			return message;
 		}else if(linkMan.getId() == 0){
 			linkMan.setCreateTime(DateFormat.newDateString());
 			linkMan.setCreateUser(emp.getId());

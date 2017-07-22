@@ -37,8 +37,11 @@ public class LinkManController {
 	 * @return
 	 */
 	@RequestMapping("/linkmanlist")
-	public String linkManListPage(){
-		return "pages/communicate/linkmanlist";
+	public ModelAndView linkManListPage(){
+		ModelAndView mav = new ModelAndView("pages/communicate/linkmanlist");
+		List<Group> groups = groupService.select(new Group());
+		mav.addObject("groups", groups);
+		return mav;
 	}
 	
 	/**
@@ -47,8 +50,7 @@ public class LinkManController {
 	 */
 	@RequestMapping("/addlinkman")
 	public ModelAndView addLinkManPage(LinkMan linkMan,HttpServletRequest request){
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("pages/communicate/addlinkman");
+		ModelAndView mav = new ModelAndView("pages/communicate/addlinkman");
 		List<Group> groups = groupService.select(new Group());
 		if(linkMan.getId() != 0){
 			List<LinkMan> list = linkManService.select(linkMan);

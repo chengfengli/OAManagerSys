@@ -4,7 +4,7 @@ function toolbar() {
 	var items = [];
 	items.push({text:'添加',icon:'add',click: function () {add();}});
 	items.push({text:'编辑',icon:'edit',click: function () {edit();}});
-	items.push({text:'删除',icon:'delete',click: function () {del();}});
+	items.push({text:'删除',icon:'delete',click: function () {del(path+"/linkman/delete");}});
 	$("#toolbar").ligerToolBar({
 		items: items
 	});
@@ -100,10 +100,6 @@ function edit(){
 		parent.$.ligerDialog.warn("选择一条数据");
 	}
 }
-/*删除*/
-function del(){
-	parent.$.ligerDialog.warn('删除!');
-}
 $(function(){
 	/*工具栏方法*/
 	toolbar();
@@ -123,6 +119,15 @@ $(function(){
         ], pageSize:10,
         url:path+"/linkman/list",
         width: '100%',height:'99%'
+	});
+	$("#select").click(function(){
+		grid.setOptions({  
+            parms : {  
+            	name: $("#name").val(),
+            	groupId: $("#group").val()
+            } 
+		});  
+		grid.loadData(true);
 	});
 });
 

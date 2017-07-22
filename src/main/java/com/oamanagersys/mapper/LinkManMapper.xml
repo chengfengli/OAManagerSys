@@ -58,6 +58,6 @@
 	
 	<update id="update" parameterType="com.oamanagersys.model.communicate.entity.LinkMan">
 		update `linkman` set name = #{name},address = #{address},mobile = #{mobile},telephone = #{telephone},email = #{email},qq = #{qq},other = #{other},groupId = #{groupId}
-		where groupId = #{id}
+		where linkManId = #{id}
 	</update>
 </mapper>

@@ -17,8 +17,5 @@
 }
 $(function(){
 	$("#group").ligerComboBox({width:300});
-	if(groupId != ''){
-		$("#group").val(groupId);
-	}
 });
 

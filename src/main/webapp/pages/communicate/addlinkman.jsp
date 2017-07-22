@@ -7,9 +7,6 @@
 		<title>请假登记</title>
 		<%@ include file="/base.jsp" %>
 		<link rel="stylesheet" type="text/css" href="<%=context %>/css/communicate/addlinkman.css" />
-		<script>
-			var groupId = '${linkMan.groupId }'
-		</script>
 	</head>
 
 	<body>
@@ -25,23 +22,36 @@
 				<td>分组</td>
 				<td>
 					<select id="group" class="liger-combobox">
-						<option value="0" selected="selected">请选择</option>
-						<c:forEach items="${groups }" var="group">
-							<option value="${group.id }">${group.groupName }</option>
-						</c:forEach>
+						<c:if test="${linkMan == null || linkMan == '' }">
+							<option value="0" selected="selected">---请选择---</option>
+							<c:forEach items="${groups }" var="group">
+								<option value="${group.id }">${group.groupName }</option>
+							</c:forEach>
+						</c:if>
+						<c:if test="${linkMan != null && linkMan != '' }">
+							<option value="0">---请选择---</option>
+							<c:forEach items="${groups }" var="group">
+								<c:if test="${group.id == linkMan.groupId }">
+									<option value="${group.id }" selected="selected">${group.groupName }</option>
+								</c:if>
+								<c:if test="${group.id != linkMan.groupId }">
+									<option value="${group.id }">${group.groupName }</option>
+								</c:if>
+							</c:forEach>
+						</c:if>
 					</select>
 				</td>
 			</tr>
 			<tr>
 				<td valign="top">住址</td>
 				<td valign="top">
-					<textarea id="address" value="${linkMan.address }" class="l-textarea"></textarea>
+					<textarea id="address" class="l-textarea">${linkMan.address }</textarea>
 				</td>
 			</tr>
 			<tr>
 				<td>手机</td>
 				<td>
-					<input type="text"   id="mobile" class="liger-textbox" />
+					<input type="text"  value="${linkMan.mobile }" id="mobile" class="liger-textbox" />
 				</td>
 			</tr>
 			<tr>

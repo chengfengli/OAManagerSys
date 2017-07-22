@@ -68,10 +68,10 @@ public class LinkManService {
 		String[] ids = id.split(",");
 		int count  = linkManDao.delete(ids);
 		if(count > 0){
+			message.isSuccess = true;
+		}else{
 			message.isSuccess = false;
 			message.strMessage = "删除失败";
-		}else{
-			message.isSuccess = true;
 		}
 		return message;
 	}

@@ -1,7 +1,5 @@
 package com.oamanagersys.model.user.entity;
 
-import java.util.Date;
-
 import com.oamanagersys.util.base.BaseEntity;
 
 /**

@@ -26,6 +26,7 @@ import com.oamanagersys.util.annotation.AnnotationUtil;
 public class MainController {
 	@Autowired
 	private PostService postService;
+	@SuppressWarnings("unchecked")
 	@RequestMapping("/toindex")
 	public ModelAndView toIndex(ModelAndView mav,HttpServletRequest request,String positionCode){
 		Emp user = (Emp)request.getSession().getAttribute("user");

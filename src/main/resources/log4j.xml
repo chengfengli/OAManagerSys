@@ -10,7 +10,6 @@
         </layout>  
     </appender>  
   
-    <!-- Mybatis and SQL -->  
     <logger name="org.apache.ibatis" additivity="true">  
         <level value="DEBUG"/>  
         <appender-ref ref="consoleAppender"/>  

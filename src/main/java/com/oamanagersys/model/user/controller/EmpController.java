@@ -113,6 +113,7 @@ public class EmpController {
 	 * @param request
 	 * @return
 	 */
+	@SuppressWarnings("rawtypes")
 	@RequestMapping("/loginout")
 	public ModelAndView loginOut(HttpServletRequest request){
 		Enumeration em = request.getSession().getAttributeNames();

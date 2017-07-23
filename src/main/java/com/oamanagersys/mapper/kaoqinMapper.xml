@@ -26,7 +26,7 @@
 	
 	<insert id="signIn" parameterType="com.oamanagersys.model.kaoqin.entity.Kaoqin">
 		INSERT INTO `kaoqin`(empNo,yearMonth,`day`,weekDay,signInTime,signOutTime,standardWorkTime,actualWorkTime,overTimeLong,lateTimeLong,leaveEarlyTimeLong,`status`)
-		VALUES (10001, '2017-07', '2017-07-23 14:35', '日', '14:35', null, 8, 0.0, 0.0, 2.5, 0.0, 'K')
+		VALUES (#{empNo}, #{yearMonth}, #{day}, #{weekDay}, #{signInTime}, #{signOutTime}, #{standardWorkTime}, #{actualWorkTime}, #{overTimeLong}, #{lateTimeLong}, #{leaveEarlyTimeLong}, #{status})
 	</insert>
 	
 	<update id="signOut" parameterType="com.oamanagersys.model.kaoqin.entity.Kaoqin">
@@ -35,7 +35,16 @@
 	</update>
 	
 	<select id="list" resultMap="kaoqinResultMap" parameterType="com.oamanagersys.model.kaoqin.entity.SearchKaoqin">
-		SELECT * FROM `kaoqin` WHERE empNo=#{empNo} AND yearMonth=#{yearMonth}
+		SELECT * FROM `kaoqin` WHERE 1=1 AND yearMonth=#{yearMonth}
+		<if test="empNo!=0">
+			AND empNo=#{empNo}
+		</if>
+		<if test="yearMonth!=null and yearMonth!=''">
+			AND empNo=#{empNo}
+		</if>
+		<if test="day!=null and day!=''">
+			AND day=#{day}
+		</if>
 	</select>
 	
 </mapper>

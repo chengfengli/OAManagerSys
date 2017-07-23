@@ -34,7 +34,7 @@ public class Kaoqin {
 	private String signOutTime;
 	
 	//标准工时
-	private int standardWorkTime;
+	private int standardWorkTime=8;
 	
 	//实际工时
 	private double actualWorkTime;

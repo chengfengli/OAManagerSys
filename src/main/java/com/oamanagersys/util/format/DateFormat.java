@@ -47,8 +47,8 @@ public class DateFormat {
 	 * @return
 	 */
 	public static String getTime(){
-		SimpleDateFormat sdf=new SimpleDateFormat("HH:mm"); 
-		String str = sdf.format(new Date());
+		String str = newDateString();
+		str = str.substring(str.indexOf(" ")+1);
 		return str;
 	}
 	/**

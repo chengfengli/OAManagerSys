@@ -87,19 +87,29 @@ public class KaoqinService {
 		return message;
 	}
 	
+	/**
+	 * 签退
+	 * @param request
+	 * @return
+	 */
 	public Message signOut(HttpServletRequest request){
+		SearchKaoqin search = new SearchKaoqin();
 		//规定下班时间
 		long workEnd = DateFormat.stringToDate(DateFormat.nowDateString()+" 18:00").getTime();
-		Kaoqin kaoqin = new Kaoqin();
 		int empNo = (int)request.getSession().getAttribute("userId");
-		kaoqin.setEmpNo(empNo);
-		kaoqin.setDay(DateFormat.nowDateString());
+		search.setEmpNo(empNo);
+		search.setDay(DateFormat.nowDateString());
+		//当天已签到考勤
+		Kaoqin kaoqin = getKaoqin(search);
 		kaoqin.setSignOutTime(DateFormat.getTime());
 		//实际下班时间
 		long setSignOutTime = DateFormat.stringToDate(DateFormat.nowDateString()+" "+DateFormat.getTime()).getTime();
 		//时间差
 		long compare = (workEnd - setSignOutTime)/1000/60;
-		if(compare < 0){
+		//实际工作时间
+		double actualWorkTime = actualWorkTimeCount(kaoqin.getDay(),kaoqin.getSignInTime(),kaoqin.getSignOutTime());
+		kaoqin.setActualWorkTime(actualWorkTime);
+		if(compare < 0){//正常
 			kaoqin.setStatus("N");
 			double over_time = (workEnd - setSignOutTime)/1000/60;
 			double overTime = over_time/60;
@@ -124,6 +134,7 @@ public class KaoqinService {
 		}else{
 			kaoqin.setStatus("K");
 			kaoqin.setLeaveEarlyTimeLong(2.5);
+			kaoqin.setActualWorkTime(0);
 		}
 		int count = kaoqinDao.signOut(kaoqin);
 		if(count>0){
@@ -149,5 +160,39 @@ public class KaoqinService {
 			search.setMonth(DateFormat.getYearAndMonth());
 		}
 		return kaoqinDao.list(search);
+	}
+	
+	/**
+	 * 某天的考勤
+	 * @param search
+	 * @return
+	 */
+	public Kaoqin getKaoqin(SearchKaoqin search){
+		List<Kaoqin> list = kaoqinDao.list(search);
+		if(list.size() > 0){
+			return list.get(0);
+		}else{
+			return null;
+		}
+	}
+	/**
+	 * 计算实际工作时长
+	 * @param day日期
+	 * @param signInTime签到时间
+	 * @param signOutTime签退时间
+	 * @return
+	 */
+	public double actualWorkTimeCount(String day,String signInTime,String signOutTime){
+		String signInDateTimeStr = day+" "+signInTime;
+		String singOutDateTimeStr = day+" "+signOutTime;
+		long signInDateTime = DateFormat.stringToDate(signInDateTimeStr).getTime();
+		long singOutDateTime = DateFormat.stringToDate(singOutDateTimeStr).getTime();
+		double actualWorkTimeHours = (singOutDateTime-signInDateTime)/1000/60/60;
+		int actualWorkTimeHours_Int = (int)actualWorkTimeHours;
+		if((actualWorkTimeHours-actualWorkTimeHours_Int)>=0.5){
+			return actualWorkTimeHours_Int+0.5;
+		}else{
+			return actualWorkTimeHours_Int;
+		}
 	}
 }

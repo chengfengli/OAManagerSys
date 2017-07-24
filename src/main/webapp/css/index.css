@@ -17,12 +17,15 @@
 #skinSelect {margin-right: 6px;}
 #marquee{
 	position: absolute;
-    width: 77%;
+    width: 67%;
     top: 0;
-    left: 120px;
+    left: 250px;
     height: 26px;
     color:#fff;
 }
 #exit{
 	margin-left:10px;
+}
+#dateTime{
+	margin-left: 20px;
 }

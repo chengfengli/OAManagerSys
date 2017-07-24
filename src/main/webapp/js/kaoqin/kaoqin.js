@@ -10,7 +10,7 @@ function toolbar() {
 	});
 }
 
-/*签到*/
+/*签到签退*/
 function signin(url){
 	$.ajax({
 		url:path+url,
@@ -27,6 +27,10 @@ function signin(url){
 	});
 }
 $(function(){
+	$("#month").ligerDateEditor({
+		format: "yyyy-MM",
+		labelAlign: 'center',
+	});
 	/*工具栏方法*/
 	toolbar();
 	grid = $("#list").ligerGrid({
@@ -50,12 +54,27 @@ $(function(){
 	        		return "<span style='color:red;'>早退</span>";
 	        	}else if(row.status=="K"){
 	        		return "<span style='color:red;'>旷工</span>";
+	        	}else if(row.status=="CZ"){
+	        		return "<span style='color:red;'>迟到·早退</span>";
+	        	}else if(row.status=="L"){
+	        		return "<span style='color:orange;'>请假</span>";
 	        	}
 	        }},
-	        { display: '缺勤描述', name: 'describe', width:"27%", }
-        ], pageSize:31,
+	        { display: '描述', name: 'describe', width:"27%", }
+        ],
+        pageSize:31,
+        pageSizeOptions:[10,15,31],
         url:path+"/kaoqin/list",
         width: '100%',height:'99%'
+	});
+	$("#select").click(function(){
+		var yearMonth = $("#month").val();
+		grid.setOptions({  
+            parms : {  
+            	yearMonth : yearMonth
+            } 
+		});  
+		grid.loadData(true);
 	});
 });
 

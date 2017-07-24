@@ -31,7 +31,7 @@ public class MainController {
 	public ModelAndView toIndex(ModelAndView mav,HttpServletRequest request,String positionCode){
 		Emp user = (Emp)request.getSession().getAttribute("user");
 		if(user==null){
-			mav.setViewName("pages/login/login");
+			mav.setViewName("pages/login/login_failure");
 			return mav;
 		}
 		//用户角色
@@ -56,7 +56,7 @@ public class MainController {
 				}
 			}
 		}
-		//当前角色
+		//当前角色login_failure
 		mav.addObject("currentPosition", positionCode);
 		mav.addObject("positions", positions);
 		mav.setViewName("index");

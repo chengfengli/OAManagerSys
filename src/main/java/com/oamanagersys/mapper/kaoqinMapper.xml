@@ -35,12 +35,12 @@
 	</update>
 	
 	<select id="list" resultMap="kaoqinResultMap" parameterType="com.oamanagersys.model.kaoqin.entity.SearchKaoqin">
-		SELECT * FROM `kaoqin` WHERE 1=1 AND yearMonth=#{yearMonth}
+		SELECT * FROM `kaoqin` WHERE 1=1
 		<if test="empNo!=0">
 			AND empNo=#{empNo}
 		</if>
 		<if test="yearMonth!=null and yearMonth!=''">
-			AND empNo=#{empNo}
+			AND yearMonth=#{yearMonth}
 		</if>
 		<if test="day!=null and day!=''">
 			AND day=#{day}

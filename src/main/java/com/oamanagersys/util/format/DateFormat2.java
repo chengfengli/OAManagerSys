@@ -8,14 +8,28 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
-public class DateFormat {
+/**
+ * 时间转换工具类
+ * @author	李明
+ * @tel		17310545652
+ * @createtime	2017年7月24日 下午4:55:10
+ */
+public class DateFormat2 {
+	/**
+	 * Date转string yyyy-MM-dd HH:mm
+	 * @param date
+	 * @return
+	 */
 	public static String dateToString(Date date){
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm"); 
 		String str = sdf.format(date);
 		return str;
 	}
-	
+	/**
+	 * 字符串转Date
+	 * @param date
+	 * @return
+	 */
 	public static Date stringToDate(String date){
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm"); 
 		Date str = null;
@@ -30,10 +44,9 @@ public class DateFormat {
 	 * 当前日期时间yyyy-MM-dd HH:mm
 	 * @return
 	 */
-	public static String newDateString(){
+	public static String nowDateTimeString(){
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm"); 
-		String str = sdf.format(new Date());
-		return str;
+		return sdf.format(getNetworkDate());
 	}
 	
 	/**
@@ -42,8 +55,7 @@ public class DateFormat {
 	 */
 	public static String nowDateString(){
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd"); 
-		String str = sdf.format(new Date());
-		return str;
+		return sdf.format(getNetworkDate());
 	}
 	
 	/**
@@ -51,16 +63,15 @@ public class DateFormat {
 	 * @return
 	 */
 	public static String getTime(){
-		String str = newDateString();
-		str = str.substring(str.indexOf(" ")+1);
-		return str;
+		SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+		return dateFormat.format(getNetworkDate());
 	}
 	/**
 	 * 时间戳
 	 * @return
 	 */
 	public static String dateTime(){
-		Date date = new Date();
+		Date date = getNetworkDate();
 		long time = date.getTime();
 		return Long.toString(time);
 	}
@@ -70,10 +81,8 @@ public class DateFormat {
 	 * @return
 	 */
 	public static String getYearAndMonth(){
-		Calendar cal = Calendar.getInstance();
-		String year = Integer.toString(cal.get(Calendar.YEAR));
-		String month = String.format("%02d", cal.get(Calendar.MONTH) + 1);
-		return year+"-"+month;
+		SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM");
+		return dateFormat.format(getNetworkDate());
 	}
 	
 	/**
@@ -107,7 +116,6 @@ public class DateFormat {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return null;
     }
 }

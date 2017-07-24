@@ -66,6 +66,6 @@
 	</servlet-mapping>
 
 	<welcome-file-list>
-		<welcome-file>/wecome.jsp</welcome-file>
+		<welcome-file>/pages/login/login_failure.jsp</welcome-file>
 	</welcome-file-list>
 </web-app>

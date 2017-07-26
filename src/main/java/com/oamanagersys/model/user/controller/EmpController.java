@@ -304,9 +304,9 @@ public class EmpController {
 	 */
 	@RequestMapping("/deleteEmp")
 	@ResponseBody
-	public Message deleteEmp(int id,HttpServletRequest req){
+	public Message deleteEmp(String ids,HttpServletRequest req){
 		Message message = new Message();
-		int count = userService.deleteEmp(id);
+		int count = userService.deleteEmp(ids);
 		if(count>0){
 			message.isSuccess = true;
 			message.strMessage = "删除成功!";

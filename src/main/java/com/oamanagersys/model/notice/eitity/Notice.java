@@ -9,5 +9,5 @@ import com.oamanagersys.util.base.BaseEntity;
  * @createtime	2017年5月4日 下午2:25:13
  */
 public class Notice extends BaseEntity {
-
+	
 }

@@ -45,7 +45,6 @@ function del(url){
 					dataType:"json",
 					data:{ids:ids},
 					success:function(response){
-						debugger
 						if(response.isSuccess){
 							grid.loadData();
 						}

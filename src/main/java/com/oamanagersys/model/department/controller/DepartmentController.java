@@ -102,8 +102,8 @@ public class DepartmentController {
 	 */
 	@RequestMapping("/delete")
 	@ResponseBody
-	public Message deleteDep(String id,HttpServletRequest request){
-		int count = depService.deleteDep(id);
+	public Message deleteDep(String ids,HttpServletRequest request){
+		int count = depService.deleteDep(ids);
 		Message message = new Message();
 		if(count > 0){
 			message.isSuccess = true;

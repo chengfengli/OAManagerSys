@@ -60,6 +60,9 @@ function send(){
 /*草稿*/
 function draft(){
 	var id = $("#id").val();
+	if(id == ''){
+		id=0;
+	}
 	var account = $("#account").val();
 	var content = editor.$txt.html();
 	if(content == "" ||content.trim()==""){
@@ -67,7 +70,6 @@ function draft(){
 		return;
 	}
 	var data = {
-			id: id,
 			content: content,
 			acceptNo: account
 		}

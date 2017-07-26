@@ -105,16 +105,7 @@ $(function(){
 	        }},
 	        { display: '入职时间', name: 'entryTime', width:"15%"},
 	        { display: '试用期', name: 'probationPeriod', width:"15%",render:function(row){
-	        		var str = '';
-	        		if(row.probationPeriod == 1){
-	        			str = '一个月';
-	        		}else if(row.probationPeriod == 2){
-	        			str = '二个月';
-	        		}
-	        		else if(row.probationPeriod == 3){
-	        			str = '三个月';
-	        		}
-	        		return str;
+	        		return row.probationPeriod+"个月";
 	        	}
 	        },
 	        { display: '是否转正', name: 'formal', width:"10%",render:function(row){

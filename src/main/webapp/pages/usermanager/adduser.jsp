@@ -53,7 +53,7 @@
 				<td>职位</td>
 				<td>
 					<input type="hidden" value="${emp.positionId }" id="positionId" />
-					<input type="text" id="position" />
+					<input type="text" id="position"/>
 				</td>
 			</tr>
 			<tr>

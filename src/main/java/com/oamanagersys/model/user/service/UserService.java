@@ -65,8 +65,9 @@ public class UserService {
 	 * @param id 员工工号
 	 * @return
 	 */
-	public int deleteEmp(int id){
-		return userDao.deleteEmp(id);
+	public int deleteEmp(String id){
+		String[] ids = id.split(",");
+		return userDao.deleteEmp(ids);
 	}
 	
 }

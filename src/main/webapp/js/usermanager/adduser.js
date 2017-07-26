@@ -4,9 +4,7 @@ function toolbar() {
 	var items = [];
 	items.push({text:'保存',icon:'save',click: function () {save()}});
 	items.push({ line:true });
-	items.push({text:'重置',icon:'reset',click: function () {}});
-	items.push({ line:true });
-	items.push({text:'返回',icon:'back',click: function () {back();}});
+	items.push({text:'重置',icon:'reset',click: function () {reset()}});
 	$("#toolbar").ligerToolBar({
 		items: items
 	});
@@ -36,16 +34,34 @@ function save(){
 			parent.$.ligerDialog.error("系统错误!");
 		}
 	});
-	
 }
-/*返回*/
-function back(){
-	history.go(-1);
+
+function reset(){
+	$("input").val('');
+	$("select").val("0");
+	$("#position").ligerComboBox({
+		url:path+"/post/getpostbydepid",
+		valueField : 'id',
+		textField: 'positionName',
+		isMultiSelect:true,
+		isShowCheckBox:true,
+		width:300,
+		parms:{depId:0}
+	});
 }
 $(function(){
 	toolbar();
 	$("#entryTime").ligerDateEditor({width:300 });
 	$("#department,#probationPeriod").ligerComboBox({width:300});
+	$("#position").ligerComboBox({
+		url:path+"/post/getpostbydepid",
+		valueField : 'id',
+		textField: 'positionName',
+		isMultiSelect:true,
+		isShowCheckBox:true,
+		width:300,
+		parms:{depId:0}
+	});
 	/*选择部门后*/
 	$("#department").change(function(){
 		var depId = $(this).val();

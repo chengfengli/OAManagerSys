@@ -17,5 +17,5 @@ public interface UserDao {
 	
 	public int updateEmp(Emp emp);
 	
-	public int deleteEmp(int id);
+	public int deleteEmp(String[] ids);
 }

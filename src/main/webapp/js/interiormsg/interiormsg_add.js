@@ -64,15 +64,16 @@ function draft(){
 		id=0;
 	}
 	var account = $("#account").val();
+	var text = editor.$txt.formatText();
 	var content = editor.$txt.html();
-	if(content == "" ||content.trim()==""){
+	if(text == "" ||text.trim()==""){
 		parent.$.ligerDialog.warn('填写消息内容!');
 		return;
 	}
 	var data = {
-			content: content,
-			acceptNo: account
-		}
+		content: content,
+		acceptNo: account
+	}
 	var wait = parent.$.ligerDialog.waitting('保存中,请稍候...');
 	$.ajax({
 		url:path+"/interiormsg/draft",

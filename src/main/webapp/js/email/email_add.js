@@ -24,6 +24,7 @@ function send(){
 	var copyer = $("#chaosong").val();
 	var title = $("#title").val();
 	var content = editor.$txt.html();
+	var text = editor.$txt.formatText();
 	if(account=="" || account.trim()==""){
 		parent.$.ligerDialog.warn('填写收件人!');
 		return;
@@ -32,7 +33,7 @@ function send(){
 		parent.$.ligerDialog.warn('填写主题!');
 		return;
 	}
-	if(content == "" || content.trim() == ""){
+	if(text == "" || text.trim() == ""){
 		parent.$.ligerDialog.warn('填写内容!');
 		return;
 	}

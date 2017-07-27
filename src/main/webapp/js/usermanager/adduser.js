@@ -28,7 +28,11 @@ function save(){
 		dataType:"json",
 		data:params,
 		success:function(response){
-			parent.$.ligerDialog.success(response.strMessage);
+			if(parent.$.ligerDialog.isSuccess){
+				parent.$.ligerDialog.success(response.strMessage);
+			}else{
+				parent.$.ligerDialog.warn(response.strMessage);
+			}
 		},
 		error:function(){
 			parent.$.ligerDialog.error("系统错误!");

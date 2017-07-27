@@ -5,9 +5,9 @@ function toolbar(view) {
 		items.push({text:'保存',icon:'save',click: function () {save();}});
 		items.push({ line:true });
 		items.push({text:'重置',icon:'reset',click: function () {reset();}});
+	}else{
+		items.push({text:'返回',icon:'reset',click: function () {goBack();}});
 	}
-	items.push({ line:true });
-	items.push({text:'返回',icon:'reset',click: function () {goBack();}});
 	$("#toolbar").ligerToolBar({
 		items: items
 	});
@@ -52,7 +52,8 @@ function save(){
 
 /*重置*/
 function reset(){
-	
+	$("input[name=name],input[name=address],input[name=birthday],input[name=age],input[name=idCardNo],input[name=education],input[name=graduationSchool],input[name=major],input[name=height],input[name=maritalStatus],input[name=mobilePhone],input[name=email],input[name=weight],textarea").val('');
+	$("select").val("0");
 }
 
 function goBack(){

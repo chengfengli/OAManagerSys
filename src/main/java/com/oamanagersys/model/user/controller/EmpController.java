@@ -12,6 +12,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -255,23 +256,34 @@ public class EmpController {
 	@RequestMapping("/edit")
 	@ResponseBody
 	public Message editEmp(Emp emp,HttpServletRequest req){
-		Emp currentEmp = (Emp)req.getSession().getAttribute("user");
 		Message message = new Message();
-		int count = 0;
-		//如果员工编号存在，则修改，否则新增
-		if(emp.getId() != 0){
-			emp.setCreateUser(currentEmp.getId());
-			count = userService.updateEmp(emp);
-		}else{
-			emp.setUpdateUser(currentEmp.getId());
-			count = userService.addEmp(emp);
-		}
-		if(count>0){
-			message.isSuccess = true;
-			message.strMessage = "保存成功!";
-		}else{
+		if(StringUtils.isBlank(emp.getName())){
 			message.isSuccess = false;
-			message.strMessage = "保存失败!";
+			message.strMessage = "姓名不能为空!";
+		}else if(StringUtils.isBlank(emp.getEntryTime())){
+			message.isSuccess = false;
+			message.strMessage = "入职时间不能为空!";
+		}else if(emp.getDepId() == 0){
+			message.isSuccess = false;
+			message.strMessage = "请选择部门!";
+		}else{
+			Emp currentEmp = (Emp)req.getSession().getAttribute("user");
+			int count = 0;
+			//如果员工编号存在，则修改，否则新增
+			if(emp.getId() != 0){
+				emp.setCreateUser(currentEmp.getId());
+				count = userService.updateEmp(emp);
+			}else{
+				emp.setUpdateUser(currentEmp.getId());
+				count = userService.addEmp(emp);
+			}
+			if(count>0){
+				message.isSuccess = true;
+				message.strMessage = "保存成功!";
+			}else{
+				message.isSuccess = false;
+				message.strMessage = "保存失败!";
+			}
 		}
 		return message;
 	}

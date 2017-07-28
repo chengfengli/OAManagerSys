@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oamanagersys.model.notice.dao.NoticeDao">
+	<resultMap id="noticeMap" type="com.oamanagersys.model.notice.entity.Notice">
+		<id column="noticeId" property="id" />
+		<result column="title" property="title" />
+		<result column="format" property="format" />
+		<result column="typeId" property="typeId" />
+		<result column="content" property="content" />
+		<result column="status" property="status" />
+		<result column="createTime" property="createTime" />
+		<result column="createUser" property="createUser" />
+		<association property="type" javaType="com.oamanagersys.model.notice.entity.NoticeType" column="typeId" resultMap="noticeTypeMap"></association>
+		<association property="create" javaType="com.oamanagersys.model.user.entity.Emp" column="createUser" resultMap="empMap"></association>
+	</resultMap>
+	
+	<resultMap type="com.oamanagersys.model.notice.entity.NoticeType" id="noticeTypeMap">
+	    <result property="typeName" column="typeName" />
+	</resultMap>
+	<resultMap type="com.oamanagersys.model.user.entity.Emp" id="empMap">
+	    <result property="name" column="name" />
+	</resultMap>
+	
+	
+</mapper>

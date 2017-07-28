@@ -1,4 +1,4 @@
-package com.oamanagersys.model.notice.eitity;
+package com.oamanagersys.model.notice.entity;
 
 import com.oamanagersys.util.base.BaseEntity;
 
@@ -10,16 +10,18 @@ import com.oamanagersys.util.base.BaseEntity;
  */
 public class NoticeType extends BaseEntity{
 	//类型编码
-	public String typeCode;
+	private String typeCode;
 	//类型名称
-	public String typeName;
+	private String typeName;
+	//描述
+	private String describe;
 
 	public String getTypeCode() {
 		return typeCode;
 	}
 
 	public void setTypeCode(String typeCode) {
-		this.typeCode = typeCode;
+		this.typeCode = typeCode.toUpperCase();
 	}
 
 	public String getTypeName() {
@@ -28,5 +30,13 @@ public class NoticeType extends BaseEntity{
 
 	public void setTypeName(String typeName) {
 		this.typeName = typeName;
+	}
+
+	public String getDescribe() {
+		return describe;
+	}
+
+	public void setDescribe(String describe) {
+		this.describe = describe;
 	}
 }

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oamanagersys.model.notice.dao.NoticeTypeDao">
+	<resultMap id="noticeTypeMap" type="com.oamanagersys.model.notice.entity.NoticeType">
+		<id column="id" property="id" />
+		<result column="typeCode" property="typeCode" />
+		<result column="typeName" property="typeName" />
+		<result column="describe" property="describe" />
+		<result column="createTime" property="createTime" />
+		<result column="createUser" property="createUser" />
+		<result column="lastUpdateTime" property="lastUpdateTime" />
+		<result column="updateUser" property="updateUser" />
+		<association property="create" javaType="com.oamanagersys.model.user.entity.Emp" column="createUser" resultMap="empMap"></association>
+		<association property="update" javaType="com.oamanagersys.model.user.entity.Emp" column="updateUser" resultMap="empMap"></association>
+	</resultMap>
+	<resultMap type="com.oamanagersys.model.user.entity.Emp" id="empMap">
+	    <result property="name" column="name" />
+	</resultMap>
+	
+	<insert id="insert" parameterType="com.oamanagersys.model.notice.entity.NoticeType">
+		INSERT INTO noticetype(typeCode,typeName,createTime,createUser,`describe`)
+		VALUES(#{typeCode},#{typeName},#{createTime},#{createUser},#{describe})
+	</insert>
+	
+	<select id="select" resultMap="noticeTypeMap" parameterType="com.oamanagersys.model.notice.entity.NoticeType">
+		SELECT * FROM noticetype 
+		LEFT JOIN emp c ON noticetype.createUser = c.empNo 
+		LEFT JOIN emp u ON noticetype.updateUser = u.empNo
+		WHERE 1 = 1
+		<if test="typeName != null and typeName != ''">
+			AND typeName like concat(concat('%',#{typeName}),'%')
+		</if>
+		<if test="createTime != null and createTime != ''">
+			AND createTime = #{createTime}
+		</if>
+		<if test="id != 0">
+			AND id = #{id}
+		</if>
+	</select>
+	
+	<update id="update" parameterType="com.oamanagersys.model.notice.entity.NoticeType">
+		UPDATE noticetype SET typeCode=#{typeCode},typeName=#{typeName},lastUpdateTime=#{lastUpdateTime},updateUser=#{updateUser},`describe`=#{describe}
+		WHERE id=#{id}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM noticetype WHERE id in
+		<foreach collection="array" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+	
+</mapper>

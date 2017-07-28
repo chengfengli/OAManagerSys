@@ -75,7 +75,7 @@ public class FileContriller {
 	}
 	
 	/**
-	 * 上传附件
+	 * 下载附件
 	 * @param request
 	 * @param files
 	 * @return
@@ -90,13 +90,11 @@ public class FileContriller {
 			}
 			//获得请求文件名  
 			String filename = file.getFileAlias();  
-			System.out.println(filename);  
 			  
 			//设置文件MIME类型  
 			response.setContentType(request.getServletContext().getMimeType(filename));  
 			//设置Content-Disposition  
 			response.setHeader("Content-Disposition", "attachment;filename="+filename);  
-			//读取目标文件，通过response将目标文件写到客户端  
 			//获取目标文件的绝对路径  
 			String fullFileName = file.getFilePath();
 			//读取文件  

@@ -25,7 +25,7 @@ public class Notice extends BaseEntity {
 	private String content;
 	
 	//状态
-	private int status;
+	private String status;
 
 	public String getTitle() {
 		return title;
@@ -67,11 +67,11 @@ public class Notice extends BaseEntity {
 		this.content = content;
 	}
 
-	public int getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 }

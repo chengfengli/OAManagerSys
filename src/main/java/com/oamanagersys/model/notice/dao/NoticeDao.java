@@ -1,9 +1,5 @@
 package com.oamanagersys.model.notice.dao;
 
-import java.util.List;
-
-import com.oamanagersys.model.notice.entity.NoticeType;
-
 /**
  * 
  * @author	李明

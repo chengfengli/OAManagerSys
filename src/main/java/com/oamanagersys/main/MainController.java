@@ -14,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.fastjson.JSON;
 import com.oamanagersys.model.department.entity.Position;
 import com.oamanagersys.model.department.service.PostService;
+import com.oamanagersys.model.notice.entity.Notice;
+import com.oamanagersys.model.notice.service.NoticeService;
 import com.oamanagersys.model.user.entity.Emp;
 import com.oamanagersys.util.annotation.AnnotationUtil;
 /**
@@ -26,6 +28,8 @@ import com.oamanagersys.util.annotation.AnnotationUtil;
 public class MainController {
 	@Autowired
 	private PostService postService;
+	@Autowired
+	private NoticeService noticeService;
 	@SuppressWarnings("unchecked")
 	@RequestMapping("/toindex")
 	public ModelAndView toIndex(ModelAndView mav,HttpServletRequest request,String positionCode){
@@ -56,9 +60,12 @@ public class MainController {
 				}
 			}
 		}
-		//当前角色login_failure
+		//最新发布的公告
+		Notice notice = noticeService.selectNewNotice();
+		//当前角色
 		mav.addObject("currentPosition", positionCode);
 		mav.addObject("positions", positions);
+		mav.addObject("notice", notice);
 		mav.setViewName("index");
 		return mav;
 	}

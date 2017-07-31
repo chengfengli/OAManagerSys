@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,11 +25,13 @@ public class FileService {
 	 * @param url 服务器地址
 	 * @return
 	 */
-	public Message upload(MultipartFile files[],String path,String url){
+	public Message upload(MultipartFile files[],String path,String url,String fileId){
 		Message massage = new Message();
 		List<FileEntity> list = new ArrayList<FileEntity>();
 		try {
-			String fileId = DateFormat.dateTime();
+			if(StringUtils.isBlank(fileId)){
+				fileId = DateFormat.dateTime();
+			}
 			for(int i=0;i<files.length;i++){
 				MultipartFile file = files[i];
 				String fileName = file.getOriginalFilename();
@@ -49,7 +52,7 @@ public class FileService {
 				fileEntity.setFileUrl(url+"/"+fileEntity.getFileAlias());
 				fileEntity.setFilePath(targetFile.toString());
 				fileEntity.setFileId(fileId);
-				fileEntity.setCreateTime(DateFormat.newDateString());
+				fileEntity.setCreateTime(DateFormat.nowDateString());
 				list.add(fileEntity);
 			}
 			int count = insert_file(list);

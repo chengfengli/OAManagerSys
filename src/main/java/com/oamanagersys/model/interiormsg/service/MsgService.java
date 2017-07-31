@@ -32,11 +32,11 @@ public class MsgService {
 	 */
 	public int sendMsg(MsgEntity msg,HttpServletRequest request){
 		Emp emp = (Emp)request.getSession().getAttribute("user");
-		msg.setCreateTime(DateFormat.newDateString());
+		msg.setCreateTime(DateFormat.nowDateString());
 		msg.setCreateUser(emp.getId());
 		//设置类型为草稿
 		msg.setBoxType(2);
-		msg.setSendTime(DateFormat.newDateString());
+		msg.setSendTime(DateFormat.nowDateString());
 		msg.setSendNo(emp.getId());
 		
 		List<MsgEntity> list = new ArrayList<MsgEntity>();
@@ -74,7 +74,7 @@ public class MsgService {
 			count = msgDao.update_msg(msg);
 		}else{
 			Emp emp = (Emp)request.getSession().getAttribute("user");
-			msg.setCreateTime(DateFormat.newDateString());
+			msg.setCreateTime(DateFormat.nowDateString());
 			msg.setCreateUser(emp.getId());
 			msg.setSendNo(emp.getId());
 			//设置类型为草稿

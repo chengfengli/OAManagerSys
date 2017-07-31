@@ -96,6 +96,18 @@ public class DepartmentController {
 	}
 	
 	/**
+	 * 获取部门
+	 * @param dep
+	 * @return
+	 */
+	@RequestMapping("/deplist2")
+	@ResponseBody
+	public List<Dep> depList2(Dep dep){
+		List<Dep> list = depService.getDep(dep);
+		return list;
+	}
+	
+	/**
 	 * 删除部门
 	 * @param id
 	 * @return

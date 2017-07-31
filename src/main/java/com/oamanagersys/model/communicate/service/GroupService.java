@@ -45,11 +45,11 @@ public class GroupService {
 		}
 		int count = 0;
 		if(group.getId() != 0){
-			group.setLastUpdateTime(DateFormat.newDateString());
+			group.setLastUpdateTime(DateFormat.nowDateString());
 			group.setUpdateUser(emp.getId());
 			count = groupDao.update(group);
 		}else{
-			group.setCreateTime(DateFormat.newDateString());
+			group.setCreateTime(DateFormat.nowDateString());
 			group.setCreateUser(emp.getId());
 			count = groupDao.insert(group);
 		}

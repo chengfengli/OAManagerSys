@@ -1,70 +1,42 @@
-﻿/*工具栏*/
+﻿var grid;
+/*工具栏*/
 function toolbar() {
 	var items = [];
-	items.push({text: "详情",icon:'view',click: function () {details();}});
+	items.push({text: "详情",icon:'view',click: function () {details(path+"/notice/details")}});
 	items.push({ line:true });
-	items.push({text: "删除",icon:'delete',click: function () {del();}});
+	items.push({text: "删除",icon:'delete',click: function () {logic_delete(path+"/notice/logic_delete")}});
 	items.push({ line:true });
-	items.push({text: "编辑",icon:'edit',click: function () {forward();}});
+	items.push({text: "标记为已读",icon:'ok',click: function () {signreaded(path+"/notice/readed");}});
 	$("#toolbar").ligerToolBar({
 		items: items
 	});
 }
-/*详情*/
-function details(){
-	var manager = $("#list").ligerGetGridManager();
-	var rows = manager.getCheckedRows();
-	if (rows && rows.length == 1) {
-		var ids = [];
-		$(rows).each(function() {
-			ids.push(this.id);
-		});
-		parent.$.ligerDialog.warn(ids[0]);
-		return;
-		$.ligerDialog.open({
-					title : '消息详情',
-					width : 900,
-					height : 500,
-					allowClose : false,
-					url : '${_ctx}/bap/message/detailedMessage?url=replyPage&messageId='+ ids[0],
-					buttons : [ {
-						text : '返回',
-						onclick : function(item, dialog) {
-							dialog.close();
-						}
-					} ]
-				});
-	}
-}
-/*删除*/
-function del(){
-	parent.$.ligerDialog.warn('删除!');
-}
-/*转发*/
-function edit(){
-	parent.$.ligerDialog.warn('编辑!');
-}
 $(function(){
 	/*工具栏方法*/
 	toolbar();
-	/*初始化邮件列表*/
-	var array = [];
-	for(var i=1;i<=100;i++){
-		array.push({id:i,title:"张三"+i,format:'MHT格式',type:'aadfa',content:"短信内容"+i,issueTime:"2017-02-15 10:24"});
-	}
-	var data={Rows:array};
-	$("#list").ligerGrid({
+	grid = $("#list").ligerGrid({
 		checkbox: true,
+		selectRowButtonOnly:true,
         columns: [
 	        { display: 'id', name: 'id',hide : true, },
-	        { display: '标题', name: 'title', width: "10%" },
-	        { display: '格式', name: 'format', width: "10%" },
-	        { display: '类型', name: 'type', width:"10%", },
-	        { display: '内容', name: 'content', width:"50%", },
-	        { display: '发布日期', name: 'issueTime', width:"19%", }
+	        { display: '标题', name: 'title', width: "20%"},
+	        { display: '格式', name: 'format', width: "10%",render:function(row){
+	        	if(row.format == "common"){
+	        		return "普通";
+	        	}else{
+	        		return "MHT";
+	        	}
+	        }},
+	        { display: '类型', name: 'type.typeName', width:"10%"},
+	        { display: '发布日期', name: 'createTime', width:"19%"},
+	        { display: '附件', name: 'fileId', width:"19%",render:function(row){
+	        	if(row.fileId != null && row.fileId != ''){
+	        		return '<img class="fileId" onclick="files('+row.fileId+')" style="margin-top:6px;cursor:pointer;" src="/icon/paper.png" />';
+	        	}
+	        }}
         ], pageSize:10,
-        data:data,
+        url:path+"/notice/not_read_list",
         width: '100%',height:'99%'
 	});
-});
+})
 

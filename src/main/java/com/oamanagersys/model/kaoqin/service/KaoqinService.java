@@ -53,7 +53,7 @@ public class KaoqinService {
 		if(list.size() == 0){
 			Kaoqin kaoqin = new Kaoqin();
 			kaoqin.setEmpNo(empNo);
-			kaoqin.setDay(DateFormat.newDateString());
+			kaoqin.setDay(DateFormat.nowDateString());
 			kaoqin.setWeekDay(DateFormat.getWeekDay());
 			kaoqin.setMonth(DateFormat.getYearAndMonth());
 			kaoqin.setSignInTime(DateFormat.getTime());

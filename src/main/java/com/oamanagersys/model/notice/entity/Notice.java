@@ -1,5 +1,9 @@
 package com.oamanagersys.model.notice.entity;
 
+import java.util.List;
+
+import com.oamanagersys.model.department.entity.Dep;
+import com.oamanagersys.model.file.entity.FileEntity;
 import com.oamanagersys.util.base.BaseEntity;
 
 /**
@@ -12,7 +16,7 @@ public class Notice extends BaseEntity {
 	//标题
 	private String title;
 	
-	//格式
+	//格式：普通
 	private String format;
 	
 	//类型
@@ -24,8 +28,25 @@ public class Notice extends BaseEntity {
 	//内容
 	private String content;
 	
-	//状态
+	//状态：存在用户的编号，表示该用户已读，否则未读
 	private String status;
+	
+	//部门id
+	private String depId;
+	
+	//部门
+	private List<Dep> depList;
+	
+	//附件
+	private String fileId;
+	
+	private List<FileEntity> list;
+	
+	//删除
+	private String deletes;
+	
+	//已查看过的人
+	private String reader;
 
 	public String getTitle() {
 		return title;
@@ -73,5 +94,53 @@ public class Notice extends BaseEntity {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getFileId() {
+		return fileId;
+	}
+
+	public void setFileId(String fileId) {
+		this.fileId = fileId;
+	}
+
+	public List<FileEntity> getList() {
+		return list;
+	}
+
+	public void setList(List<FileEntity> list) {
+		this.list = list;
+	}
+
+	public String getDepId() {
+		return depId;
+	}
+
+	public void setDepId(String depId) {
+		this.depId = depId;
+	}
+
+	public List<Dep> getDepList() {
+		return depList;
+	}
+
+	public void setDepList(List<Dep> depList) {
+		this.depList = depList;
+	}
+
+	public String getDeletes() {
+		return deletes;
+	}
+
+	public void setDeletes(String deletes) {
+		this.deletes = deletes;
+	}
+
+	public String getReader() {
+		return reader;
+	}
+
+	public void setReader(String reader) {
+		this.reader = reader;
 	}
 }

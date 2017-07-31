@@ -1,11 +1,11 @@
 #table{margin-top:0px;width:800px;}
 #table td{padding:3px 10px;}
-#table td input{
-	width:300px;
-}
+#table td input{width:300px;}
 #table td:nth-child(1){text-align:right;min-width:100px;}
-#content{
-	height:300px;
-}
+#content{height:300px;}
+#picker{font-size: 12px;height: 23px;overflow: hidden;line-height: 23px;cursor: pointer;position: relative;text-align: center;border: solid 1px #A3C0E8;color: #333333;background: #E0EDFF url(/Source/lib/ligerUI/skins/Aqua/images/controls/button-bg.gif) repeat-x center;}
 input[type=file]{display:none;}
 #file_list li{padding:3px;}
+.none{
+	display:none;
+}

@@ -18,7 +18,7 @@
 		<div id="topmenu" class="l-topmenu">
 			<div class="l-topmenu-logo">OA管理系统<span id="dateTime"></span></div>
 			<div id="marquee">
-				<marquee id="marqueetxt" width="100%" height="26">指整个Marquee对齐方式</marquee>
+				<marquee id="marqueetxt" width="100%" height="26">${notice.title }</marquee>
 			</div>
 			<div class="l-topmenu-welcome">
 				<label>角色</label>

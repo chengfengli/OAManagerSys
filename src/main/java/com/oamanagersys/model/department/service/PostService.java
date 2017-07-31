@@ -52,7 +52,7 @@ public class PostService {
 	 * @return
 	 */
 	public int insert(Position position){
-		position.setCreateTime(DateFormat.newDateString());
+		position.setCreateTime(DateFormat.nowDateString());
 		return postDao.insert(position);
 	}
 	
@@ -62,7 +62,7 @@ public class PostService {
 	 * @return
 	 */
 	public int update(Position position){
-		position.setLastUpdateTime(DateFormat.newDateString());
+		position.setLastUpdateTime(DateFormat.nowDateString());
 		return postDao.update(position);
 	}
 	

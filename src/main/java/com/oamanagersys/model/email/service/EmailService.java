@@ -27,9 +27,9 @@ public class EmailService {
 	 * @return
 	 */
 	public int send(Email email){
-		email.setCreateTime(DateFormat.newDateString());
+		email.setCreateTime(DateFormat.nowDateString());
 		//发送状态为已发送
-		email.setSendTime(DateFormat.newDateString());
+		email.setSendTime(DateFormat.nowDateString());
 		email.setBoxType(2);
 		List<Email> list = new ArrayList<Email>();
 		list.add(email);
@@ -62,7 +62,7 @@ public class EmailService {
 	 * @return
 	 */
 	public int draft(Email email){
-		email.setCreateTime(DateFormat.newDateString());
+		email.setCreateTime(DateFormat.nowDateString());
 		//邮件状态为草稿
 		email.setBoxType(0);
 		List<Email> list = new ArrayList<Email>();

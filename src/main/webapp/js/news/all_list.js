@@ -1,4 +1,5 @@
-﻿/*工具栏*/
+﻿var grid;
+/*工具栏*/
 function toolbar() {
 	var items = [];
 	items.push({text: "详情",icon:'view',click: function () {details();}});
@@ -54,16 +55,16 @@ $(function(){
 		array.push({id:i,title:"张三"+i,format:'MHT格式',type:'aadfa',content:"短信内容"+i,issueUser:"张三",issueTime:"2017-02-15 10:24",status:"未读"});
 	}
 	var data={Rows:array};
-	$("#list").ligerGrid({
+	grid = $("#list").ligerGrid({
 		checkbox: true,
         columns: [
 	        { display: 'id', name: 'id',hide : true, },
 	        { display: '标题', name: 'title', width: "10%" },
 	        { display: '格式', name: 'format', width: "8%" },
 	        { display: '类型', name: 'type', width:"8%", },
-	        { display: '内容', name: 'content', width:"38javascript:void(0);%", },
-	        { display: '发布人', name: 'issueUser', width:"8%", },
-	        { display: '发布日期', name: 'issueTime', width:"19%", },
+	        { display: '内容', name: 'content', width:"38%", },
+	        { display: '发布人', name: 'create.name', width:"8%", },
+	        { display: '发布日期', name: 'createTime', width:"19%", },
 	        { display: '装态', name: 'status', width:"8%", }
         ], pageSize:10,
         data:data,

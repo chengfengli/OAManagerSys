@@ -3812,116 +3812,116 @@ _e(function (E, $) {
             selected: '.selected'
         },
         bold: {
-            normal: '<a href="#" tabindex="-1"><i style="background:url(../icon/bold.png);"></i></a>',
+            normal: '<a href="#" tabindex="-1"><i style="background:url(/icon/bold.png);"></i></a>',
             selected: '.selected'
         },
         underline: {
-            normal: '<a href="#" tabindex="-1"><i style="background:url(../icon/underline.png);"></i></a>',
+            normal: '<a href="#" tabindex="-1"><i style="background:url(/icon/underline.png);"></i></a>',
             selected: '.selected'
         },
         italic: {
-            normal: '<a href="#" tabindex="-1"><i style="background:url(../icon/italic.png);"></i></a>',
+            normal: '<a href="#" tabindex="-1"><i style="background:url(/icon/italic.png);"></i></a>',
             selected: '.selected'
         },
         forecolor: {
-            normal: '<a href="#" tabindex="-1"><i style="background:url(../icon/fontcolor.png);"></i></a>',
+            normal: '<a href="#" tabindex="-1"><i style="background:url(/icon/fontcolor.png);"></i></a>',
             selected: '.selected'
         },
         bgcolor: {
-            normal: '<a href="#" tabindex="-1"><i style="background:url(../icon/fontbackcolor.png);"></i></a>',
+            normal: '<a href="#" tabindex="-1"><i style="background:url(/icon/fontbackcolor.png);"></i></a>',
             selected: '.selected'
         },
         strikethrough: {
-            normal: '<a href="#" tabindex="-1"><i style="background:url(../icon/pencil.png);"></i></a>',
+            normal: '<a href="#" tabindex="-1"><i style="background:url(/icon/pencil.png);"></i></a>',
             selected: '.selected'
         },
         eraser: {
-            normal: '<a href="#" tabindex="-1"><i style="background:url(../icon/eraser.png);"></i></a>',
+            normal: '<a href="#" tabindex="-1"><i style="background:url(/icon/eraser.png);"></i></a>',
             selected: '.selected'
         },
         quote: {
-            normal: '<a href="#" tabindex="-1"><i style="background:url(../icon/quote.png);"></i></a>',
+            normal: '<a href="#" tabindex="-1"><i style="background:url(/icon/quote.png);"></i></a>',
             selected: '.selected'
         },
         source: {
-            normal: '<a href="#" tabindex="-1"><i style="background:url(../icon/html.png);"></i></a>',
+            normal: '<a href="#" tabindex="-1"><i style="background:url(/icon/html.png);"></i></a>',
             selected: '.selected'
         },
         fontfamily: {
-            normal: '<a href="#" tabindex="-1"><i style="background:url(../icon/fontstyle.png);"></i></a>',
+            normal: '<a href="#" tabindex="-1"><i style="background:url(/icon/fontstyle.png);"></i></a>',
             selected: '.selected'
         },
         fontsize: {
-            normal: '<a href="#" tabindex="-1"><i style="background:url(../icon/fontsize.png);"></i></a>',
+            normal: '<a href="#" tabindex="-1"><i style="background:url(/icon/fontsize.png);"></i></a>',
             selected: '.selected'
         },
         head: {
-            normal: '<a href="#" tabindex="-1"><i style="background:url(../icon/header.png);"></i></a>',
+            normal: '<a href="#" tabindex="-1"><i style="background:url(/icon/header.png);"></i></a>',
             selected: '.selected'
         },
         orderlist: {
-            normal: '<a href="#" tabindex="-1"><i style="background:url(../icon/List_Ordered.png);"></i></a>',
+            normal: '<a href="#" tabindex="-1"><i style="background:url(/icon/List_Ordered.png);"></i></a>',
             selected: '.selected'
         },
         unorderlist: {
-            normal: '<a href="#" tabindex="-1"><i style="background:url(../icon/List_Unordered.png);"></i></a>',
+            normal: '<a href="#" tabindex="-1"><i style="background:url(/icon/List_Unordered.png);"></i></a>',
             selected: '.selected'
         },
         alignleft: {
-            normal: '<a href="#" tabindex="-1"><i style="background:url(../icon/leftalign.png);"></i></a>',
+            normal: '<a href="#" tabindex="-1"><i style="background:url(/icon/leftalign.png);"></i></a>',
             selected: '.selected'
         },
         aligncenter: {
-            normal: '<a href="#" tabindex="-1"><i style="background:url(../icon/centeralign.png);"></i></a>',
+            normal: '<a href="#" tabindex="-1"><i style="background:url(/icon/centeralign.png);"></i></a>',
             selected: '.selected'
         },
         alignright: {
-            normal: '<a href="#" tabindex="-1"><i style="background:url(../icon/rightalign.png);"></i></a>',
+            normal: '<a href="#" tabindex="-1"><i style="background:url(/icon/rightalign.png);"></i></a>',
             selected: '.selected'
         },
         link: {
-            normal: '<a href="#" tabindex="-1"><i style="background:url(../icon/link.png);"></i></a>',
+            normal: '<a href="#" tabindex="-1"><i style="background:url(/icon/link.png);"></i></a>',
             selected: '.selected'
         },
         unlink: {
-            normal: '<a href="#" tabindex="-1"><i style="background:url(../icon/brokenlink.png);"></i></a>',
+            normal: '<a href="#" tabindex="-1"><i style="background:url(/icon/brokenlink.png);"></i></a>',
             selected: '.selected'
         },
         table: {
-            normal: '<a href="#" tabindex="-1"><i style="background:url(../icon/table.png);"></i></a>',
+            normal: '<a href="#" tabindex="-1"><i style="background:url(/icon/table.png);"></i></a>',
             selected: '.selected'
         },
         emotion: {
-            normal: '<a href="#" tabindex="-1"><i style="background:url(../icon/biggrin.png);"></i></a>',
+            normal: '<a href="#" tabindex="-1"><i style="background:url(/icon/biggrin.png);"></i></a>',
             selected: '.selected'
         },
         img: {
-            normal: '<a href="#" tabindex="-1"><i style="background:url(../icon/picture.png);"></i></a>',
+            normal: '<a href="#" tabindex="-1"><i style="background:url(/icon/picture.png);"></i></a>',
             selected: '.selected'
         },
         video: {
-            normal: '<a href="#" tabindex="-1"><i style="background:url(../icon/video.png);"></i></a>',
+            normal: '<a href="#" tabindex="-1"><i style="background:url(/icon/video.png);"></i></a>',
             selected: '.selected'
         },
         location: {
-            normal: '<a href="#" tabindex="-1"><i style="background:url(../icon/location.png) no-repeat center;"></i></a>',
+            normal: '<a href="#" tabindex="-1"><i style="background:url(/icon/location.png) no-repeat center;"></i></a>',
             selected: '.selected'
         },
         insertcode: {
-            normal: '<a href="#" tabindex="-1"><i style="background:url(../icon/termina.png);"></i></a>',
+            normal: '<a href="#" tabindex="-1"><i style="background:url(/icon/termina.png);"></i></a>',
             selected: '.selected'
         },
         undo: {
-            normal: '<a href="#" tabindex="-1"><i style="background:url(../icon/leftreturn.png);"></i></a>',
+            normal: '<a href="#" tabindex="-1"><i style="background:url(/icon/leftreturn.png);"></i></a>',
             selected: '.selected'
         },
         redo: {
-            normal: '<a href="#" tabindex="-1"><i style="background:url(../icon/rightretrun.png);"></i></a>',
+            normal: '<a href="#" tabindex="-1"><i style="background:url(/icon/rightretrun.png);"></i></a>',
             selected: '.selected'
         },
         fullscreen: {
-            normal: '<a href="#" tabindex="-1"><i style="background:url(../icon/fullscreen.png);background-size:16px 16px;"></i></a>',
-            selected: '<a href="#" tabindex="-1" class="selected"><i style="background:url(../icon/smallscreen.png);background-size:16px 16px;"></i></a>'
+            normal: '<a href="#" tabindex="-1"><i style="background:url(/icon/fullscreen.png);background-size:16px 16px;"></i></a>',
+            selected: '<a href="#" tabindex="-1" class="selected"><i style="background:url(/icon/smallscreen.png);background-size:16px 16px;"></i></a>'
         }
      };
      

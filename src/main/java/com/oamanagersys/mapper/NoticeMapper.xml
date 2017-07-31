@@ -8,6 +8,10 @@
 		<result column="typeId" property="typeId" />
 		<result column="content" property="content" />
 		<result column="status" property="status" />
+		<result column="fileId" property="fileId" />
+		<result column="depId" property="depId" />
+		<result column="deletes" property="deletes" />
+		<result column="reader" property="reader" />
 		<result column="createTime" property="createTime" />
 		<result column="createUser" property="createUser" />
 		<association property="type" javaType="com.oamanagersys.model.notice.entity.NoticeType" column="typeId" resultMap="noticeTypeMap"></association>
@@ -21,5 +25,97 @@
 	    <result property="name" column="name" />
 	</resultMap>
 	
+	<insert id="insert" parameterType="com.oamanagersys.model.notice.entity.Notice">
+		INSERT INTO notice(title,format,typeId,content,`status`,fileId,depId,createTime,createUser,deletes,reader)
+		VALUES(#{title},#{format},#{typeId},#{content},#{status},#{fileId},#{depId},#{createTime},#{createUser},#{deletes},#{reader})
+	</insert>
 	
+	<!-- 所有-->
+	<select id="select_all" resultMap="noticeMap">
+		SELECT * FROM notice LEFT JOIN noticetype ON notice.typeId = noticetype.id WHERE 1 = 1
+		<if test="status != null and status != ''">
+			AND `status` like concat(concat('%',#{status}),'%')
+		</if>
+		<if test="createTime != null and createTime != ''">
+			AND createTime = #{createTime}
+		</if>
+		<if test="format != 'all' and format != null">
+			AND format = #{format}
+		</if>
+		<if test="typeId != 0">
+			AND typeId = #{typeId}
+		</if>
+		<if test="title != null and title != ''">
+			AND `title` like concat(concat('%',#{title}),'%')
+		</if>
+		<if test="id != 0">
+			AND `noticeId` = #{id}
+		</if>
+	</select>
+	
+	<!-- 查询用户所能看到的所有公告 -->
+	<select id="select_read" resultMap="noticeMap" parameterType="com.oamanagersys.model.notice.entity.SearchNotice">
+		SELECT * FROM (SELECT * FROM notice WHERE typeId !=5 OR depId like concat(concat('%',#{depId}),'%')) AS notice LEFT JOIN noticetype ON notice.typeId = noticetype.id
+		WHERE deletes not like concat(concat('%',#{userId}),'%')
+		<if test="format != 'all' and format != null">
+			AND format = #{format}
+		</if>
+		<if test="typeId != 0">
+			AND typeId = #{typeId}
+		</if>
+		<if test="id != 0">
+			AND `noticeId` = #{id}
+		</if>
+	</select>
+	
+	<!-- 查询用户所能看到的未读公告 -->
+	<select id="select_not_read" resultMap="noticeMap">
+		SELECT * FROM (SELECT * FROM notice WHERE typeId !=5 OR depId like concat(concat('%',#{depId}),'%')) AS notice LEFT JOIN noticetype ON notice.typeId = noticetype.id
+		WHERE deletes not like concat(concat('%',#{userId}),'%') AND reader not like concat(concat('%',#{userId}),'%')
+		<if test="format != 'all' and format != null">
+			AND format = #{format}
+		</if>
+		<if test="typeId != 0">
+			AND typeId = #{typeId}
+		</if>
+		<if test="id != 0">
+			AND `noticeId` = #{id}
+		</if>
+	</select>
+	
+	<!-- 标记为 已读-->
+	<update id="update">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">  
+	        UPDATE notice
+	        <set>
+	        	<if test="item.createUser != 0">
+		          `reader` = CONCAT(`reader`,#{item.createUser,jdbcType=VARCHAR})
+	        	</if>
+	        </set>  
+	        WHERE noticeId = ${item.id}
+        </foreach>
+	</update>
+	
+	<!-- 逻辑删除-->
+	<update id="logic_delete">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">  
+	        UPDATE notice
+	        <set>
+	          `deletes` = CONCAT(`deletes`,#{item.createUser,jdbcType=VARCHAR})
+	        </set>  
+	        WHERE noticeId = ${item.id}
+        </foreach>
+	</update>
+	
+	<!-- 获取最新的公告 -->
+	<select id="selectNewNotice" resultType="com.oamanagersys.model.notice.entity.Notice">
+		SELECT * FROM notice WHERE createTime = (SELECT MAX(createTime) FROM notice)  LIMIT 0,1
+	</select>
+	
+	<delete id="delete">
+		DELETE FROM notice WHERE noticeId in
+		<foreach collection="array" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
 </mapper>

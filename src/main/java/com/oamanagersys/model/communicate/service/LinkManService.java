@@ -44,7 +44,7 @@ public class LinkManService {
 			message.strMessage = "选择一个分组";
 			return message;
 		}else if(linkMan.getId() == 0){
-			linkMan.setCreateTime(DateFormat.newDateString());
+			linkMan.setCreateTime(DateFormat.nowDateString());
 			linkMan.setCreateUser(emp.getId());
 			count = linkManDao.insert(linkMan);
 		}else if(linkMan.getId() != 0){

@@ -1,5 +1,4 @@
-﻿var time = new Date().getTime();
-var E = window.wangEditor;
+﻿var E = window.wangEditor;
 var editor = new E('content');
 
 
@@ -49,7 +48,7 @@ function send(){
 	var wait = parent.$.ligerDialog.waitting('发送中,请稍候...');
 	var files = $("#file_list li");
 	if(files.length > 0 || fileId != ''){
-		$.upload(path+"/file/upload",function(result){
+		$.upload(path+"/file/upload?fileId="+fileId,function(result){
 			if(fileId == '' ){
 				data.fileId = result.strMessage;
 			}

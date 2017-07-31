@@ -23,7 +23,7 @@ public class InformationService {
 	 * @return
 	 */
 	public int insertInfor(Information infor){
-		infor.setCreateTime(DateFormat.newDateString());
+		infor.setCreateTime(DateFormat.nowDateString());
 		int count = inforDao.insterInfor(infor);
 		return count;
 	}
@@ -44,7 +44,7 @@ public class InformationService {
 	 * @return
 	 */
 	public int updateInfor(Information infor){
-		infor.setLastUpdateTime(DateFormat.newDateString());
+		infor.setLastUpdateTime(DateFormat.nowDateString());
 		return inforDao.updateInfor(infor);
 	}
 	

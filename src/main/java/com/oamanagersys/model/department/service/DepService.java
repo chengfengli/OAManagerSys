@@ -34,7 +34,7 @@ public class DepService {
 	 * @return
 	 */
 	public int addDep(Dep dep){
-		dep.setCreateTime(DateFormat.newDateString());
+		dep.setCreateTime(DateFormat.nowDateString());
 		int count  = depDao.addDep(dep);
 		return count;
 	}
@@ -44,7 +44,7 @@ public class DepService {
 	 * @return
 	 */
 	public int updateDep(Dep dep){
-		dep.setLastUpdateTime(DateFormat.newDateString());
+		dep.setLastUpdateTime(DateFormat.nowDateString());
 		int count  = depDao.updateDep(dep);
 		return count;
 	}

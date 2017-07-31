@@ -38,7 +38,7 @@ public class UserService {
 	 */
 	public int addEmp(Emp emp){
 		emp.setPassword(Md5.md5("123456"));
-		emp.setCreateTime(DateFormat.newDateString());
+		emp.setCreateTime(DateFormat.nowDateString());
 		emp.setOnJob(1);
 		return userDao.addEmp(emp);
 	}

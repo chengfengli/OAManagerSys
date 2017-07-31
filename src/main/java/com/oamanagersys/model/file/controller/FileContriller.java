@@ -45,7 +45,8 @@ public class FileContriller {
         String path = request.getSession().getServletContext().getRealPath(folder);
         //服务器地址
         String url = Server.getServerUrl(request)+folder;
-        Message message  = fileService.upload(files, path,url);
+        String fileId = request.getParameter("fileId");
+        Message message  = fileService.upload(files, path,url,fileId);
         return message;
     }
 	

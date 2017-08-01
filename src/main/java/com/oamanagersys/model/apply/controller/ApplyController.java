@@ -11,9 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.oamanagersys.model.apply.entity.Apply;
+import com.oamanagersys.model.apply.entity.ApplyType;
 import com.oamanagersys.model.apply.service.ApplyService;
+import com.oamanagersys.model.apply.service.ApplyTypeService;
 import com.oamanagersys.util.response.Message;
 
 /**
@@ -28,9 +31,34 @@ public class ApplyController {
 	Message message = new Message();
 	@Autowired
 	private ApplyService applyService;
+	@Autowired
+	private ApplyTypeService applyTypeService;
+	/**
+	 * 申请登记列表页面
+	 * @return
+	 */
+	@RequestMapping("/page/applylist")
+	public ModelAndView GooutListPage(){
+		ModelAndView mav = new ModelAndView("pages/kaoqin/applylist");
+		List<ApplyType> list = applyTypeService.list();
+		mav.addObject("list", list);
+		return mav;
+	}
 	
 	/**
-	 * 申请
+	 * 申请页面
+	 * @return
+	 */
+	@RequestMapping("/page/apply")
+	public ModelAndView applyPage(){
+		ModelAndView mav = new ModelAndView("pages/kaoqin/apply");
+		List<ApplyType> list = applyTypeService.list();
+		mav.addObject("list", list);
+		return mav;
+	}
+	
+	/**
+	 * 发起申请
 	 * @param apply
 	 * @param request
 	 * @return
@@ -58,11 +86,11 @@ public class ApplyController {
 		return message;
 	}
 	
-	@RequestMapping("outlist")
+	@RequestMapping("applylist")
 	@ResponseBody
-	public Map<String,List<Apply>> outlist(Apply apply){
+	public Map<String,List<Apply>> applylist(Apply apply){
 		Map<String,List<Apply>> map = new HashMap<String,List<Apply>>();
-		List<Apply> list = applyService.outlist(apply);
+		List<Apply> list = applyService.applylist(apply);
 		map.put("Rows", list);
 		return map;
 	}

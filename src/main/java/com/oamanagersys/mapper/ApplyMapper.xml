@@ -38,14 +38,14 @@
 	<select id="select" resultMap="applyMap" parameterType="com.oamanagersys.model.apply.entity.Apply">
 		SELECT * FROM apply LEFT JOIN apply_type ON apply.typeCode = apply_type.typeCode
 		LEFT JOIN emp ON apply.approver =emp.empNo WHERE 1 = 1
-		<if test="typeCode != null and typeCode != ''">
+		<if test="typeCode != 'all'">
 			AND apply.typeCode = #{typeCode}
 		</if>
 		<if test="startTime != null and startTime != ''">
 			AND startTime >= #{startTime}
 		</if>
 		<if test="endTime != null and endTime != ''">
-			AND endTime >= #{endTime}
+			AND endTime &lt;= #{endTime}
 		</if>
 		<if test="approver != 0">
 			AND approver = #{approver}

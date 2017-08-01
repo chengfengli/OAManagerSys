@@ -24,7 +24,6 @@ $(function(){
 	$("#endTime").ligerDateEditor({ showTime: true,labelAlign: 'left',width:300 ,onChangeDate:function(value){
 		setlongHours();
 	}});
-	$("#approver,.typeCode").ligerComboBox({width:300});
-	
+	$("#approver,#typeCode").ligerComboBox({width:300});
 });
 

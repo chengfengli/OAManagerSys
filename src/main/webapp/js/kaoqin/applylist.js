@@ -1,7 +1,8 @@
-﻿/*工具栏*/
+﻿var grid;
+/*工具栏*/
 function toolbar() {
 	var items = [];
-	items.push({text: "外出",icon:'add',click: function () {leave();}});
+	items.push({text: "申请",icon:'add',click: function () {leave();}});
 	items.push({ line:true });
 	items.push({text: "销假",icon:'delete',click: function () {}});
 	items.push({ line:true });
@@ -14,11 +15,11 @@ function toolbar() {
 /*请假*/
 function leave(){
 	parent.$.ligerDialog.open({
-		title : '申请外出',
+		title : '发起申请',
 		width : 450,
-		height : 400,
+		height : 430,
 		allowClose : false,
-		url : path+'/goout/goout',
+		url : path+'/apply/page/apply',
 		buttons : [
 		    {
 				text : '申请',
@@ -57,28 +58,43 @@ $(function(){
 	$("#startTime,#endTime").ligerDateEditor();
 	/*工具栏方法*/
 	toolbar();
-	$("#list").ligerGrid({
+	grid = $("#list").ligerGrid({
 		checkbox: true,
 		selectRowButtonOnly:true,
         columns: [
 	        { display: 'id', name: 'id',hide : true, },
+	        { display: '申请类型', name: 'applyType.typeName', width: "5%" },
 	        { display: '开始时间', name: 'startTime', width: "15%" },
 	        { display: '结束时间', name: 'endTime', width: "15%" },
 	        { display: '时长', name: 'longHours', width:"5%", },
+	        { display: '出差地点', name: 'address', width:"15%", },
 	        { display: '外出事由', name: 'reason', width:"34%", },
-	        { display: '审批人', name: 'approverEmp.name', width:"10%", },
-	        { display: '状态', width:"10%",render:function(row){
+	        { display: '审批人', name: 'approverEmp.name', width:"5%", },
+	        { display: '状态', width:"5%",render:function(row){
 	        	if(row.status=="w"){
-	        		return "待审";
+	        		return "<span style='color:orange;'>待审</span>";
 	        	}else if(row.status=="a"){
-	        		return "同意";
+	        		return "<span style='color:green;'>同意</span>";
 	        	}else if(row.status=="d"){
-	        		return "拒绝";
+	        		return "<span style='color:red;'>拒绝</span>";
 	        	}
 	        }}
         ], pageSize:10,
-        url:path+"/apply/outlist",
+        url:path+"/apply/applylist",
         width: '100%',height:'99%'
+	});
+	$("#select").click(function(){
+		var typeCode = $("#typeCode").val();
+		var startTime = $("#startTime").val();
+		var endTime = $("#endTime").val()+" 59:59:59";
+		grid.setOptions({  
+            parms : {  
+            	typeCode : typeCode,
+            	startTime : startTime,
+            	endTime : endTime
+            } 
+		});  
+		grid.loadData(true);
 	});
 });
 

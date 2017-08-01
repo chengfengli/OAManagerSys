@@ -69,13 +69,16 @@ $(function(){
 	var data={Rows:array};
 	$("#list").ligerGrid({
 		checkbox: true,
+		selectRowButtonOnly:true,
         columns: [
 	        { display: 'id', name: 'id',hide : true, },
 	        { display: '申请人', name: 'applyName', width: "10%" },
-	        { display: '事由', name: 'reason', width: "50%" },
+	        { display: '类型', name: 'type.typeName', width: "10%" },
+	        { display: '事由', name: 'reason', width: "40%" },
 	        { display: '开始时间', name: 'startTime', width:"10%", },
 	        { display: '结束时间', name: 'endTime', width:"10%", },
-	        { display: '状态', name: 'status', width:"10%", }
+	        { display: '状态', name: 'status', width:"9%", },
+	        { display: '审核意见', name: 'status', width:"10%", }
         ], pageSize:10,
         data:data,
         width: '100%',height:'99%'

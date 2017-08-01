@@ -155,3 +155,18 @@ function download(id){
 	location.href = path+"/file/download?id="+id;
 }
 
+//计算时间差
+function dateCount(startTime,endTime){
+	var dateS = new Date(Date.parse(startTime.replace(/-/g,  "/")));
+	var dateE = new Date(Date.parse(endTime.replace(/-/g,  "/")));
+	//小时
+	var h = (dateE - dateS)/1000/60/60;
+	var h_i = parseInt(h);
+	if((h-h_i) > 0.5){
+		h=h_i+0.5;
+	}else{
+		h = h_i;
+	}
+	return h;
+}
+

@@ -57,6 +57,9 @@
 		<property name="maxInMemorySize" value="40960"/>
 	</bean>
 	
+	<!-- 服务器启动完成之后执行 -->
+	<bean id="beanDefineConfigue" class="com.oamanagersys.webfinishlistener.BeanDefineConfigue"></bean>
+	 
 	<!-- 拦截器 -->
 	<mvc:interceptors>
 		<!-- 1. 判断用户是否登陆拦截器 -->

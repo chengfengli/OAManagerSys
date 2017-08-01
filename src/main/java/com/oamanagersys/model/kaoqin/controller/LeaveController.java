@@ -1,8 +1,14 @@
 package com.oamanagersys.model.kaoqin.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.oamanagersys.model.apply.dao.ApplyTypeDao;
+import com.oamanagersys.model.apply.entity.ApplyType;
 
 /**
  * 
@@ -13,14 +19,15 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/leave")
 public class LeaveController {
+	@Autowired
+	private ApplyTypeDao applyTypeDao;
 	/**
 	 * 请假登记列表页面
 	 * @return
 	 */
 	@RequestMapping("/leavelist")
 	public ModelAndView LeaveListPage(){
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("pages/kaoqin/leavelist");
+		ModelAndView mav = new ModelAndView("pages/kaoqin/leavelist");
 		return mav;
 	}
 	
@@ -30,8 +37,9 @@ public class LeaveController {
 	 */
 	@RequestMapping("/leave")
 	public ModelAndView LeavePage(){
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("pages/kaoqin/leave");
+		ModelAndView mav = new ModelAndView("pages/kaoqin/leave");
+		List<ApplyType> list = applyTypeDao.select(new ApplyType());
+		mav.addObject("types", list);
 		return mav;
 	}
 }

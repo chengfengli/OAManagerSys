@@ -19,11 +19,28 @@ function leave(){
 		height : 400,
 		allowClose : false,
 		url : path+'/goout/goout',
-		buttons : [ 
+		buttons : [
 		    {
 				text : '申请',
 				onclick : function(item, dialog) {
-					dialog.close();
+					var data = dialog.frame.data();
+					$.ajax({
+						url:path+"/apply/apply",
+						type:"post",
+						dataType:"json",
+						data:data,
+						success:function(result){
+							if(result.isSuccess){
+								parent.$.ligerDialog.success(result.strMessage);
+								dialog.close();
+							}else{
+								parent.$.ligerDialog.warn(result.strMessage);
+							}
+						},
+						error:function(){
+							parent.$.ligerDialog.error("系统异常");
+						}
+					});
 				}
 		    },
 		    {
@@ -40,33 +57,27 @@ $(function(){
 	$("#startTime,#endTime").ligerDateEditor();
 	/*工具栏方法*/
 	toolbar();
-	/*初始数据*/
-	var array = [];
-	for(var i=1;i<=100;i++){
-		array.push({
-			id:i,
-			startTime:"2017-05-15 09:00",
-			endTime:"2017-05-15 18:00",
-			longHours:8,
-			leaveType:"事假",
-			reason:"山东人大大大",
-			approve:"张三",
-			status:"同意"
-		});
-	}
-	var data={Rows:array};
 	$("#list").ligerGrid({
 		checkbox: true,
+		selectRowButtonOnly:true,
         columns: [
 	        { display: 'id', name: 'id',hide : true, },
 	        { display: '开始时间', name: 'startTime', width: "15%" },
 	        { display: '结束时间', name: 'endTime', width: "15%" },
 	        { display: '时长', name: 'longHours', width:"5%", },
 	        { display: '外出事由', name: 'reason', width:"34%", },
-	        { display: '审批人', name: 'approve', width:"10%", },
-	        { display: '状态', name: 'status', width:"10%", }
+	        { display: '审批人', name: 'approverEmp.name', width:"10%", },
+	        { display: '状态', width:"10%",render:function(row){
+	        	if(row.status=="w"){
+	        		return "待审";
+	        	}else if(row.status=="a"){
+	        		return "同意";
+	        	}else if(row.status=="d"){
+	        		return "拒绝";
+	        	}
+	        }}
         ], pageSize:10,
-        data:data,
+        url:path+"/apply/outlist",
         width: '100%',height:'99%'
 	});
 });

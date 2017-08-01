@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oamanagersys.model.apply.dao.ApplyTypeDao">
+	<resultMap id="applyTypeMap" type="com.oamanagersys.model.apply.entity.ApplyType">
+		<id column="id" property="id" />
+		<result column="typeCode" property="typeCode" />
+		<result column="typeName" property="typeName" />
+	</resultMap>
+	
+	<insert id="insert" parameterType="java.util.List">
+		INSERT INTO apply_type(typeCode,typeName)
+		VALUES
+		<foreach collection="list" item="applyType" index="index" separator=",">
+		(#{applyType.typeCode},#{applyType.typeName})
+		</foreach>
+	</insert>
+	
+	<select id="select" resultMap="applyTypeMap" parameterType="com.oamanagersys.model.apply.entity.ApplyType">
+		SELECT * FROM apply_type WHERE 1 = 1
+		<if test="typeName != null and typeName != ''">
+			AND typeName like concat(concat('%',#{typeName}),'%')
+		</if>
+		<if test="typeCode != null and typeCode != ''">
+			AND typeCode = #{typeCode}
+		</if>
+		<if test="id != 0">
+			AND id = #{id}
+		</if>
+	</select>
+	
+	<delete id="delete">
+		DELETE FROM apply_type
+	</delete>
+	
+</mapper>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oamanagersys.model.apply.dao.ApplyDao">
+
+	<resultMap id="applyMap" type="com.oamanagersys.model.apply.entity.Apply">
+		<id column="id" property="id" />
+		<result column="empNo" property="createUser" />
+		<result column="typeCode" property="typeCode" />
+		<result column="startTime" property="startTime" />
+		<result column="endTime" property="endTime" />
+		<result column="longHours" property="longHours" />
+		<result column="reason" property="reason" />
+		<result column="approver" property="approver" />
+		<result column="approvalTime" property="approvalTime" />
+		<result column="createTime" property="createTime" />
+		<result column="status" property="status" />
+		<result column="address" property="address" />
+		<result column="opinion" property="opinion" />
+		<association property="applyType" javaType="com.oamanagersys.model.apply.entity.ApplyType" column="typeCode" resultMap="applyTypeMap"></association>
+		<association property="approverEmp" javaType="com.oamanagersys.model.user.entity.Emp" column="empId" resultMap="resultEmp"></association>
+	</resultMap>
+
+	<resultMap id="applyTypeMap" type="com.oamanagersys.model.apply.entity.ApplyType">
+		<result column="typeCode" property="typeCode" />
+		<result column="typeName" property="typeName" />
+	</resultMap>
+	
+	<resultMap id="resultEmp" type="com.oamanagersys.model.user.entity.Emp">
+		<id column="empId" property="id" />
+		<result column="name" property="name" />
+	</resultMap>
+	
+	<insert id="insert_apply" parameterType="java.util.List">
+		INSERT INTO apply(empNo,typeCode,startTime,endTime,longHours,reason,approver,createTime,`status`,address)
+		VALUES (#{createUser},#{typeCode},#{startTime},#{endTime},#{longHours},#{reason},#{approver},#{createTime},#{status},#{address})
+	</insert>
+	
+	<select id="select" resultMap="applyMap" parameterType="com.oamanagersys.model.apply.entity.Apply">
+		SELECT * FROM apply LEFT JOIN apply_type ON apply.typeCode = apply_type.typeCode
+		LEFT JOIN emp ON apply.approver =emp.empNo WHERE 1 = 1
+		<if test="typeCode != null and typeCode != ''">
+			AND apply.typeCode = #{typeCode}
+		</if>
+		<if test="startTime != null and startTime != ''">
+			AND startTime >= #{startTime}
+		</if>
+		<if test="endTime != null and endTime != ''">
+			AND endTime >= #{endTime}
+		</if>
+		<if test="approver != 0">
+			AND approver = #{approver}
+		</if>
+	</select>
+	
+</mapper>

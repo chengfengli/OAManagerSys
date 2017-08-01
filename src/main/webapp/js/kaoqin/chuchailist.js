@@ -23,7 +23,24 @@ function chuchai(){
 		    {
 				text : '申请',
 				onclick : function(item, dialog) {
-					dialog.close();
+					var data = dialog.frame.data();
+					$.ajax({
+						url:path+"/apply/apply",
+						type:"post",
+						dataType:"json",
+						data:data,
+						success:function(result){
+							if(result.isSuccess){
+								parent.$.ligerDialog.success(result.strMessage);
+								dialog.close();
+							}else{
+								parent.$.ligerDialog.warn(result.strMessage);
+							}
+						},
+						error:function(){
+							parent.$.ligerDialog.error("系统异常");
+						}
+					});
 				}
 		    },
 		    {
@@ -57,6 +74,7 @@ $(function(){
 	var data={Rows:array};
 	$("#list").ligerGrid({
 		checkbox: true,
+		selectRowButtonOnly:true,
         columns: [
 	        { display: 'id', name: 'id',hide : true, },
 	        { display: '开始时间', name: 'startTime', width: "15%" },

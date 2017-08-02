@@ -1,6 +1,0 @@
-body{overflow:hidden;}
-#table{margin:10px auto;}
-#table td{padding:5px 10px;}
-#table td:nth-child(1){text-align:right;}
-#reason{min-height:150px;max-height:150px;min-width:300px;max-width:300px;}
-#address{min-width:300px;max-width:300px;}

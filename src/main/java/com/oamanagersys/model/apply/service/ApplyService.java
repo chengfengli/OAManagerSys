@@ -46,19 +46,7 @@ public class ApplyService {
 	 * @param apply
 	 * @return
 	 */
-	public List<Apply> outlist(Apply apply){
-		apply.setTypeCode("out");
-		List<Apply> list = applyDao.select(apply);
-		return list;
-	}
-	
-	/**
-	 * 获取请假数据
-	 * @param apply
-	 * @return
-	 */
-	public List<Apply> leavelist(Apply apply){
-		apply.setTypeCode("out");
+	public List<Apply> applylist(Apply apply){
 		List<Apply> list = applyDao.select(apply);
 		return list;
 	}

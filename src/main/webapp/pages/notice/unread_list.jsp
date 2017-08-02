@@ -18,20 +18,21 @@
 				<td class="title">格式</td>
 				<td>
 					<select id="format" name="format" class="liger-combobox">
-						<option value="common" selected="selected">普通</option>
+						<option value="all" selected="selected">所有</option>
+						<option value="common">普通</option>
 						<option value="MHT">MHT</option>
 					</select>
 				</td>
 				<td class="title">类型</td>
 				<td>
-					<select id="type" name="type" class="liger-combobox">
-						<option value="common" selected="selected">类型一</option>
-						<option value="MHT">类型二</option>
-						<option value="MHT">类型三</option>
-						<option value="MHT">类型四</option>
+					<select id="type" class="liger-combobox">
+						<option value="0" selected="selected">所有</option>
+						<c:forEach items="${noticeTypes }" var="noticeType">
+							<option value="${noticeType.id}">${noticeType.typeName}</option>
+						</c:forEach>
 					</select>
 				</td>
-				<td class="title"><input type="button" value="查询" class="liger-button" /></td>
+				<td class="title"><input id="select" type="button" value="查询" class="liger-button" /></td>
 			</tr>
 		</table>
 		<!-- 已发邮件列表 -->

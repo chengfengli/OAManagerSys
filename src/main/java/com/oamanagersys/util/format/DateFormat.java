@@ -127,4 +127,16 @@ public class DateFormat {
         }
         return null;
     }
+	
+	/**
+	 * 格式化时间字符串
+	 * @param str
+	 * @param f
+	 * @return
+	 */
+	public static String format(String str,String f){
+		SimpleDateFormat sdf=new SimpleDateFormat(f);
+		Date date = stringToDate(str);
+		return sdf.format(date);
+	}
 }

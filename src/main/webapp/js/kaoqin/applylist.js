@@ -7,6 +7,8 @@ function toolbar() {
 	items.push({text: "销假",icon:'delete',click: function () {}});
 	items.push({ line:true });
 	items.push({text: "撤销",icon:'candle',click: function () {}});
+	items.push({ line:true });
+	items.push({text: "详情",icon:'view',click: function () {details(path+"/apply/page/details")}});
 	$("#toolbar").ligerToolBar({
 		items: items
 	});
@@ -32,6 +34,7 @@ function leave(){
 						data:data,
 						success:function(result){
 							if(result.isSuccess){
+								grid.loadData();
 								parent.$.ligerDialog.success(result.strMessage);
 								dialog.close();
 							}else{
@@ -86,7 +89,10 @@ $(function(){
 	$("#select").click(function(){
 		var typeCode = $("#typeCode").val();
 		var startTime = $("#startTime").val();
-		var endTime = $("#endTime").val()+" 59:59:59";
+		var endTime = $("#endTime").val();
+		if(endTime != ''){
+			endTime+=" 59:59:59";
+		}
 		grid.setOptions({  
             parms : {  
             	typeCode : typeCode,

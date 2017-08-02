@@ -94,4 +94,18 @@ public class ApplyController {
 		map.put("Rows", list);
 		return map;
 	}
+	
+	/**
+	 * 申请详情
+	 * @return
+	 */
+	@RequestMapping("/page/details")
+	public ModelAndView applyDetails(Apply apply){
+		ModelAndView mav = new ModelAndView("pages/kaoqin/details");
+		List<Apply> list = applyService.applylist(apply);
+		if(list.size()>0){
+			mav.addObject("apply", list.get(0));
+		}
+		return mav;
+	}
 }

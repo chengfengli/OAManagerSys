@@ -25,5 +25,15 @@ $(function(){
 		setlongHours();
 	}});
 	$("#approver,#typeCode").ligerComboBox({width:300});
+	$("#typeCode").change(function(){
+		var value = $(this).val()
+		if(value=='evection'){
+			$("#address_tr").removeClass("none");
+			$("#address").val('');
+		}else{
+			$("#address_tr").addClass("none");
+			$("#address").val('————');
+		}
+	});
 });
 

@@ -1,7 +1,8 @@
-﻿/*工具栏*/
+﻿var grid;
+/*工具栏*/
 function toolbar() {
 	var items = [];
-	items.push({text: "详情",icon:'view',click: function () {details();}});
+	items.push({text: "详情",icon:'view',click: function () {details(path+"/apply/page/details")}});
 	items.push({ line:true });
 	items.push({text: "同意",icon:'ok',click: function () {ok();}});
 	items.push({ line:true });
@@ -10,53 +11,83 @@ function toolbar() {
 		items: items
 	});
 }
-/*详情*/
-function details(){
-	var manager = $("#list").ligerGetGridManager();
-	var rows = manager.getCheckedRows();
-	if (rows && rows.length == 1) {
-		var ids = [];
-		$(rows).each(function() {
-			ids.push(this.id);
-		});
-		parent.$.ligerDialog.warn(ids[0]);
-		return;
-		$.ligerDialog.open({
-					title : '消息详情',
-					width : 900,
-					height : 500,
-					allowClose : false,
-					url : '${_ctx}/bap/message/detailedMessage?url=replyPage&messageId='+ ids[0],
-					buttons : [ 
-					    {
-							text : '同意',
-							onclick : function(item, dialog) {
-								dialog.close();
-							}
-						},
-						{
-							text : '拒绝',
-							onclick : function(item, dialog) {
-								dialog.close();
-							}
-						},
-						{
-							text : '关闭',
-							onclick : function(item, dialog) {
-								dialog.close();
-							}
-						}
-					  ]
-				});
-	}
-}
 /*同意*/
 function ok(){
-	parent.$.ligerDialog.warn('删除!');
+	var rows = grid.getCheckedRows();
+	if (rows && rows.length > 0){
+		for(var i in rows){
+			if(rows[i].status=="a" || rows[i].status=="d"){
+				parent.$.ligerDialog.warn("包含了已审申请");
+				return;
+			}
+		}
+		parent.$.ligerDialog.prompt('审核意见',true, function (yes,value) {
+			if(yes){
+				var ids = '';
+				$(rows).each(function() {
+					if(ids == ''){
+						ids+= ''+this.id;
+					}else{
+						ids+= ','+this.id;
+					}
+				});
+				$.ajax({
+					url:path+"/notice/appro_agree",
+					type:"POST",
+					dataType:"json",
+					data:{ids:ids,opinion:value},
+					success:function(result){
+						if(result.isSuccess){
+							grid.loadData();
+						}else{
+							parent.$.ligerDialog.warn(result.strMessage);
+						}
+					}
+				});
+			}
+		});
+	}else{
+		parent.$.ligerDialog.warn("请选择要审核的申请");
+	}
 }
 /*拒绝*/
 function delete1(){
-	parent.$.ligerDialog.warn('拒绝!');
+	var rows = grid.getCheckedRows();
+	if (rows && rows.length > 0){
+		for(var i in rows){
+			if(rows[i].status=="a" || rows[i].status=="d"){
+				parent.$.ligerDialog.warn("包含了已审申请");
+				return;
+			}
+		}
+		parent.$.ligerDialog.prompt('拒绝理由',true, function (yes,value) {
+			if(yes){
+				var ids = '';
+				$(rows).each(function() {
+					if(ids == ''){
+						ids+= ''+this.id;
+					}else{
+						ids+= ','+this.id;
+					}
+				});
+				$.ajax({
+					url:path+"/notice/appro_disagree",
+					type:"POST",
+					dataType:"json",
+					data:{ids:ids,opinion:value},
+					success:function(result){
+						if(result.isSuccess){
+							grid.loadData();
+						}else{
+							parent.$.ligerDialog.warn(result.strMessage);
+						}
+					}
+				});
+			}
+		});
+	}else{
+		parent.$.ligerDialog.warn("请选择要审核的申请");
+	}
 }
 $(function(){
 	/*工具栏方法*/
@@ -67,20 +98,28 @@ $(function(){
 		array.push({id:i,applyName:"张三"+i,reason:'阿达啊饿啊啊',startTime:'2017-05-01',endTime:"2017-05-02",status:"待审"});
 	}
 	var data={Rows:array};
-	$("#list").ligerGrid({
+	grid = $("#list").ligerGrid({
 		checkbox: true,
 		selectRowButtonOnly:true,
         columns: [
-	        { display: 'id', name: 'id',hide : true, },
-	        { display: '申请人', name: 'applyName', width: "10%" },
-	        { display: '类型', name: 'type.typeName', width: "10%" },
-	        { display: '事由', name: 'reason', width: "40%" },
-	        { display: '开始时间', name: 'startTime', width:"10%", },
-	        { display: '结束时间', name: 'endTime', width:"10%", },
-	        { display: '状态', name: 'status', width:"9%", },
-	        { display: '审核意见', name: 'status', width:"10%", }
+	        { display: 'id', name: 'id',hide : true},
+	        { display: '申请人', name: 'create.name', width: "5%"},
+	        { display: '类型', name: 'applyType.typeName', width: "5%"},
+	        { display: '事由', name: 'reason', width: "39%" },
+	        { display: '开始时间', name: 'startTime', width:"15%"},
+	        { display: '结束时间', name: 'endTime', width:"15%"},
+	        { display: '状态', width:"5%",render:function(row){
+	        	if(row.status=="w"){
+	        		return "<span style='color:orange;'>待审</span>";
+	        	}else if(row.status=="a"){
+	        		return "<span style='color:green;'>同意</span>";
+	        	}else if(row.status=="d"){
+	        		return "<span style='color:red;'>拒绝</span>";
+	        	}
+	        }},
+	        { display: '审核意见', name: 'opinion', width:"15%"}
         ], pageSize:10,
-        data:data,
+        url:path+"/notice/careful_list",
         width: '100%',height:'99%'
 	});
 });

@@ -24,4 +24,11 @@ public interface ApplyDao {
 	 * @return
 	 */
 	List<Apply> select(Apply apply);
+	
+	/**
+	 * 审核
+	 * @param apply
+	 * @return
+	 */
+	int update_appro(List<Apply> apply);
 }

@@ -37,7 +37,7 @@
 			AND `status` like concat(concat('%',#{status}),'%')
 		</if>
 		<if test="createTime != null and createTime != ''">
-			AND createTime = #{createTime}
+			AND notice.createTime = #{createTime}
 		</if>
 		<if test="format != 'all' and format != null">
 			AND format = #{format}

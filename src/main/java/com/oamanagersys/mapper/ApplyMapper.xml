@@ -18,6 +18,7 @@
 		<result column="opinion" property="opinion" />
 		<association property="applyType" javaType="com.oamanagersys.model.apply.entity.ApplyType" column="typeCode" resultMap="applyTypeMap"></association>
 		<association property="approverEmp" javaType="com.oamanagersys.model.user.entity.Emp" column="empId" resultMap="resultEmp"></association>
+		<association property="create" javaType="com.oamanagersys.model.user.entity.Emp" column="empId" resultMap="resultEmp"></association>
 	</resultMap>
 
 	<resultMap id="applyTypeMap" type="com.oamanagersys.model.apply.entity.ApplyType">
@@ -37,8 +38,8 @@
 	
 	<select id="select" resultMap="applyMap" parameterType="com.oamanagersys.model.apply.entity.Apply">
 		SELECT * FROM apply LEFT JOIN apply_type ON apply.typeCode = apply_type.typeCode
-		LEFT JOIN emp ON apply.approver =emp.empNo WHERE 1 = 1
-		<if test="typeCode != 'all'">
+		LEFT JOIN emp as emp1 ON apply.approver =emp1.empNo LEFT JOIN emp as emp2 ON apply.empNo =emp2.empNo WHERE 1 = 1
+		<if test="typeCode != 'all' and typeCode != null">
 			AND apply.typeCode = #{typeCode}
 		</if>
 		<if test="startTime != null and startTime != ''">
@@ -50,6 +51,16 @@
 		<if test="approver != 0">
 			AND approver = #{approver}
 		</if>
+		<if test="id != 0">
+			AND apply.id = ${id}
+		</if>
 	</select>
+	<!-- 审核 -->
+	<update id="update_appro" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">  
+	        UPDATE apply SET status=#{item.status},opinion=#{item.opinion}
+	        WHERE id = ${item.id}
+        </foreach>
+	</update>
 	
 </mapper>

@@ -1,7 +1,6 @@
 package com.oamanagersys.util.base;
 
 import com.oamanagersys.model.user.entity.Emp;
-import com.oamanagersys.util.format.DateFormat;
 
 /**
  * 基类
@@ -11,7 +10,7 @@ import com.oamanagersys.util.format.DateFormat;
  */
 public class BaseEntity {
 	private int id;
-	private String createTime = DateFormat.nowDateTimeString();
+	private String createTime;
 	private int createUser;
 	private String lastUpdateTime;
 	private int updateUser;

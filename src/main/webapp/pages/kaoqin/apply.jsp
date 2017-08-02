@@ -24,7 +24,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>外出时长</td>
+				<td>时长</td>
 				<td>
 					<span id="longHours">0</span>小时
 				</td>
@@ -40,7 +40,7 @@
 					</select>
 				</td>
 			</tr>
-			<tr>
+			<tr id="address_tr" class="none">
 				<td>出差地点</td>
 				<td>
 					<input type="text" id="address"  class="liger-textbox" />
@@ -56,7 +56,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td valign="top">外出原因</td>
+				<td valign="top">事由</td>
 				<td valign="top">
 					<textarea id="reason" class="l-textarea"></textarea>
 				</td>

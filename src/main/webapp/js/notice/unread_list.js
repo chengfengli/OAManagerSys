@@ -38,5 +38,17 @@ $(function(){
         url:path+"/notice/not_read_list",
         width: '100%',height:'99%'
 	});
+	/*搜索*/
+	$("#select").click(function(){
+		var format = $("#format").val();
+		var type = $("#type").val();
+		grid.setOptions({
+            parms : {
+            	format : format,  
+            	typeId : type
+            } 
+		});  
+		grid.loadData(true);
+	});
 })
 

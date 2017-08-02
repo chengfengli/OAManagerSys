@@ -2,6 +2,7 @@ package com.oamanagersys.model.apply.entity;
 
 import com.oamanagersys.model.user.entity.Emp;
 import com.oamanagersys.util.base.BaseEntity;
+import com.oamanagersys.util.format.DateFormat;
 
 /**
  * 申请实体类
@@ -43,7 +44,7 @@ public class Apply extends BaseEntity{
 	private String status;
 	
 	//审核意见
-	private String oponion;
+	private String opinion;
 
 	public String getTypeCode() {
 		return typeCode;
@@ -66,6 +67,7 @@ public class Apply extends BaseEntity{
 	}
 
 	public void setStartTime(String startTime) {
+		startTime = DateFormat.format(startTime, "yyyy-MM-dd HH:mm");
 		this.startTime = startTime;
 	}
 
@@ -74,6 +76,7 @@ public class Apply extends BaseEntity{
 	}
 
 	public void setEndTime(String endTime) {
+		endTime = DateFormat.format(endTime, "yyyy-MM-dd HH:mm");
 		this.endTime = endTime;
 	}
 
@@ -125,12 +128,12 @@ public class Apply extends BaseEntity{
 		this.status = status;
 	}
 
-	public String getOponion() {
-		return oponion;
+	public String getOpinion() {
+		return opinion;
 	}
 
-	public void setOponion(String oponion) {
-		this.oponion = oponion;
+	public void setOpinion(String opinion) {
+		this.opinion = opinion;
 	}
 
 	public Emp getApproverEmp() {

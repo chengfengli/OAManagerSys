@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.oamanagersys.model.apply.entity.Apply;
+import com.oamanagersys.model.apply.service.ApplyService;
 import com.oamanagersys.model.file.entity.FileEntity;
 import com.oamanagersys.model.file.service.FileService;
 import com.oamanagersys.model.notice.entity.Notice;
@@ -33,6 +35,8 @@ public class NoticeController {
 	private NoticeTypeService noticeTypeService;
 	@Autowired
 	private FileService fileService;
+	@Autowired
+	private ApplyService applyService;
 	
 	/**
 	 * 所有通知页面：用户
@@ -66,8 +70,9 @@ public class NoticeController {
 	 */
 	@RequestMapping("/page/unread_list")
 	public ModelAndView sendedMsgPage(){
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("pages/notice/unread_list");
+		ModelAndView mav = new ModelAndView("pages/notice/unread_list");
+		List<NoticeType> list = noticeTypeService.select(new NoticeType());
+		mav.addObject("noticeTypes", list);
 		return mav;
 	}
 	
@@ -92,6 +97,56 @@ public class NoticeController {
 	@RequestMapping("/page/careful_list")
 	public String carefulMsgPage(){
 		return "pages/notice/careful_list";
+	}
+	
+	/**
+	 * 待审核申请
+	 * @param notice
+	 * @return
+	 */
+	@RequestMapping("/careful_list")
+	@ResponseBody
+	public Map<String,List<Apply>> careful_list(Apply apply,HttpServletRequest request){
+		int userId = (int)request.getSession().getAttribute("userId");
+		apply.setApprover(userId);
+		List<Apply> list = applyService.applylist(apply);
+		Map<String,List<Apply>> map = new HashMap<String,List<Apply>>();
+		map.put("Rows", list);
+		return map;
+	}
+	
+	/**
+	 * 审核:同意
+	 * @return
+	 */
+	@RequestMapping("/appro_agree")
+	@ResponseBody
+	public Message agree(String ids,Apply apply){
+		if(StringUtils.isBlank(ids)){
+			message.strMessage = "请选择要审核的申请";
+		}else{
+			apply.setStatus("a");
+			message = applyService.update_appro(ids, apply);
+		}
+		return message;
+	}
+	
+	/**
+	 * 审核:拒绝
+	 * @return
+	 */
+	@RequestMapping("/appro_disagree")
+	@ResponseBody
+	public Message disagree(String ids,Apply apply){
+		if(StringUtils.isBlank(ids)){
+			message.strMessage = "请选择要审核的申请";
+		}else if(StringUtils.isBlank(apply.getOpinion())){
+			message.strMessage = "请填写拒绝理由";
+		}else{
+			apply.setStatus("d");
+			message = applyService.update_appro(ids, apply);
+		}
+		return message;
 	}
 	
 	/**

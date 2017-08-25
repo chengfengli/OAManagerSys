@@ -43,7 +43,7 @@ public class KaoqinService {
 	 */
 	public Message signIn(HttpServletRequest request){
 		SearchKaoqin search = new SearchKaoqin();
-		int empNo = (int)request.getSession().getAttribute("userId");
+		int empNo = (Integer) request.getSession().getAttribute("userId");
 		search.setEmpNo(empNo);
 		if(StringUtils.isBlank(search.getMonth())){
 			search.setMonth(DateFormat.getYearAndMonth());
@@ -124,7 +124,7 @@ public class KaoqinService {
 	 */
 	public Message signOut(HttpServletRequest request){
 		SearchKaoqin search = new SearchKaoqin();
-		int empNo = (int)request.getSession().getAttribute("userId");
+		int empNo = (Integer) request.getSession().getAttribute("userId");
 		search.setEmpNo(empNo);
 		search.setDay(DateFormat.nowDateString());
 		//实际下班时间
@@ -204,7 +204,7 @@ public class KaoqinService {
 	 * @return
 	 */
 	public List<Kaoqin> list(SearchKaoqin search,HttpServletRequest request){
-		int empNo = (int)request.getSession().getAttribute("userId");
+		int empNo = (Integer) request.getSession().getAttribute("userId");
 		search.setEmpNo(empNo);
 		if(StringUtils.isBlank(search.getMonth())){
 			search.setMonth(DateFormat.getYearAndMonth());

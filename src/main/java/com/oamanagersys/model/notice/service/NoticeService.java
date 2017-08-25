@@ -29,7 +29,7 @@ public class NoticeService {
 	 * @return
 	 */
 	public Message save(Notice notice,HttpServletRequest request){
-		int userId = (int)request.getSession().getAttribute("userId");
+		int userId = (Integer) request.getSession().getAttribute("userId");
 		notice.setCreateTime(DateFormat.getDateTimeString());
 		notice.setCreateUser(userId);
 		notice.setDeletes("");
@@ -97,7 +97,7 @@ public class NoticeService {
 	 */
 	public Message update(String ids,HttpServletRequest request){
 		String[] id = ids.split(",");
-		int userId = (int)request.getSession().getAttribute("userId");
+		int userId = (Integer) request.getSession().getAttribute("userId");
 		List<Notice> list = new ArrayList<Notice>();
 		for(int i=0;i<id.length;i++){
 			Notice ncotice = new Notice();
@@ -140,7 +140,7 @@ public class NoticeService {
 	 * @return
 	 */
 	public Message logic_delete(String ids, HttpServletRequest request) {
-		int userId = (int)request.getSession().getAttribute("userId");
+		int userId = (Integer) request.getSession().getAttribute("userId");
 		String[] id = ids.split(",");
 		List<Notice> list = new ArrayList<Notice>();
 		for(int i=0;i<id.length;i++){

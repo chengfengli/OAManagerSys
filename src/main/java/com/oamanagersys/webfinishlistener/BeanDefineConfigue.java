@@ -28,7 +28,6 @@ public class BeanDefineConfigue implements ApplicationListener<ContextRefreshedE
 	@Autowired
 	private ApplyTypeDao applyTypeDao;
 	@SuppressWarnings("rawtypes")
-	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		try {
 			int delete = applyTypeDao.delete();

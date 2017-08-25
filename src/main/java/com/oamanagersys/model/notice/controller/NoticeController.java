@@ -107,7 +107,7 @@ public class NoticeController {
 	@RequestMapping("/careful_list")
 	@ResponseBody
 	public Map<String,List<Apply>> careful_list(Apply apply,HttpServletRequest request){
-		int userId = (int)request.getSession().getAttribute("userId");
+		int userId = (Integer) request.getSession().getAttribute("userId");
 		apply.setApprover(userId);
 		List<Apply> list = applyService.applylist(apply);
 		Map<String,List<Apply>> map = new HashMap<String,List<Apply>>();

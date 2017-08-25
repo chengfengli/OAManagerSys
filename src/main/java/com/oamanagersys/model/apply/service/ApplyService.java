@@ -30,7 +30,8 @@ public class ApplyService {
 	 * @return
 	 */
 	public Message apply(Apply apply,HttpServletRequest request){
-		int userId = (int)request.getSession().getAttribute("userId");
+		
+		int userId = (Integer) request.getSession().getAttribute("userId");
 		apply.setCreateUser(userId);
 		apply.setStatus("w");
 		int count = applyDao.insert_apply(apply);

@@ -24,7 +24,7 @@ public class NoticeTypeService {
 	 * @return
 	 */
 	public Message save(NoticeType noticeType,HttpServletRequest request){
-		int userId = (int)request.getSession().getAttribute("userId");
+		int userId = (Integer) request.getSession().getAttribute("userId");
 		int count = 0;
 		if(noticeType.getId() == 0){
 			noticeType.setCreateUser(userId);

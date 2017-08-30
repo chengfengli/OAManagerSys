@@ -1,6 +1,7 @@
 ﻿$(function() {
 	$("#portalMain").ligerPortal({
-		columns : [{
+		columns : [
+		{
 			width : 500,
 			panels : [ {
 				title : '账号信息',

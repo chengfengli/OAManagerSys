@@ -1,19 +1,27 @@
 package com.oamanagersys.model.kaoqin.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.oamanagersys.model.kaoqin.dao.KaoqinDao;
 import com.oamanagersys.model.kaoqin.entity.Kaoqin;
 import com.oamanagersys.model.kaoqin.entity.SearchKaoqin;
+import com.oamanagersys.util.excel.POIUtil;
 import com.oamanagersys.util.format.DateFormat;
 import com.oamanagersys.util.response.Message;
+
 
 /**
  * 
@@ -292,5 +300,46 @@ public class KaoqinService {
 			}
 		}
 		return result;
+	}
+	
+	/**
+	 * 导入考勤
+	 * @param filepath 考勤数据文件
+	 * @return
+	 */
+	public Message importKaoqin(MultipartFile file){
+		List<Kaoqin> list = new ArrayList<Kaoqin>();
+		Message msg  = new Message();
+		try {
+			//获取Excel文件对象
+			Workbook book = POIUtil.getWorkBook(file);
+			//获取文件指定的工作表
+			Sheet sheet = book.getSheetAt(0);
+            //获得当前sheet的开始行
+            int firstRowNum  = sheet.getFirstRowNum();
+            //获得当前sheet的结束行
+            int lastRowNum = sheet.getLastRowNum();
+            //循环除了第一行的所有行
+            for(int rowNum = firstRowNum+1;rowNum <= lastRowNum;rowNum++){
+                //获得当前行
+                Row row = sheet.getRow(rowNum);
+                if(row == null){
+                    continue;
+                }
+                Kaoqin kaoqin = new Kaoqin();
+                //工号
+                kaoqin.setEmpNo(Integer.parseInt(POIUtil.getCellValue(row.getCell(0))));
+                //日期
+                kaoqin.setDay(POIUtil.getCellValue(row.getCell(2)));
+                //上班时间
+                kaoqin.setSignInTime(POIUtil.getCellValue(row.getCell(3)));
+                //下班时间
+                kaoqin.setSignOutTime(POIUtil.getCellValue(row.getCell(4)));
+                list.add(kaoqin);  
+            }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return msg;
 	}
 }

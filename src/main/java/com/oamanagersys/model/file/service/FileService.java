@@ -54,6 +54,7 @@ public class FileService {
 				fileEntity.setFileId(fileId);
 				fileEntity.setCreateTime(DateFormat.nowDateString());
 				list.add(fileEntity);
+				massage.errorType = targetFile.toString();
 			}
 			int count = insert_file(list);
 			if(count > 0){

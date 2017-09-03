@@ -5,7 +5,7 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<title>登录</title>
+		<title>登录</title>
 		<link rel="stylesheet" type="text/css" href="<%=context %>/Source/lib/ligerUI/skins/Aqua/css/ligerui-all.css" />
 		<link rel="stylesheet" href="<%=context %>/css/login/login.css" />
 		<!-- <link rel="icon" href="img/yun.png" type="image/x-icon"/> -->

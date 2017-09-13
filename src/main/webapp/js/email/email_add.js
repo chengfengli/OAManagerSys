@@ -193,6 +193,8 @@ $(function(){
 	});
 	toolbar();
 	/*初始化富文本编辑器*/
+	var properties = editor.config.uploadImgShowBase64;
+	editor.config.uploadImgUrl = path+'/file/upload';
 	editor.create();
 	
 	/*添加收件人*/

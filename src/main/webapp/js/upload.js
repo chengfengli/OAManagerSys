@@ -4,11 +4,11 @@ var fileArray = [];
 	$.fn.fileListener=function(fun){
 		var selector = this.selector.substring(1);
 		var input = document.getElementById(selector);
-		formData=new FormData();
 		// 文件域选择文件时, 执行readFile函数
 		input.addEventListener('change', readFile, false);
 		function readFile() {
 			var file = this.files;
+			debugger
 			for(var i=0;i<file.length;i++){
 				var time = Math.floor(Math.random()*new Date().getTime()*100000);
 					file[i].id=time;
@@ -29,6 +29,7 @@ var fileArray = [];
 	}
 	//上传方法
 	$.upload = function(url,fun){
+		formData=new FormData();
 		for(var i in fileArray){
 			formData.append("file",fileArray[i]);
 		}
